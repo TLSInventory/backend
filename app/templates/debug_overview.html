@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Debug overview</title>
+</head>
+<body>
+
+DB helpers
+<ul>
+    <li><a href="{{ url_for('apiDebug.debug_db_initialize_from_file') }}">debug_db_initialize_from_file</a></li>
+    <li><a href="{{ url_for('apiDebug.debug_db_get_all') }}">debug_db_get_all</a></li>
+    <li><a href="{{ url_for('apiDebug.debug_db_backdate_last_enqued') }}">debug_db_backdate_last_enqued</a></li>
+    <li><a href="{{ url_for('apiDebug.debug_domain_to_target_string', domain=domain) }}">debug_domain_to_target_string</a></li>
+</ul>
+
+Direct scans
+<ul>
+    <li><a href="{{ url_for('apiDebug.debug_dns_resolve_domain', domain=domain) }}">debug_dns_resolve_domain</a></li>
+    <li><a href="{{ url_for('apiDebug.debug_ct_get_subdomains', domain=domain) }}">debug_ct_get_subdomains</a></li>
+    <li><a href="{{ url_for('apiDebug.debug_sslyze_get_direct_scan', domain=domain) }}">debug_sslyze_get_direct_scan</a></li>
+    <li><a href="{{ url_for('otherRoutes.debug_batch_direct_scan_html') }}">debug_batch_direct_scan_html</a></li>
+</ul>
+
+Endpoints
+<ul>
+    <li><a href="{{ url_for('apiV1.api_get_next_targets_batch') }}">api_get_next_targets_batch</a></li>
+</ul>
+
+
+</body>
+</html>

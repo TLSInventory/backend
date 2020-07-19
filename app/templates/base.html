@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>{{ title }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Load required Bootstrap and BootstrapVue CSS -->
+        <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.css" />
+        <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+
+        <!-- Load polyfills to support older browsers -->
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script>
+
+
+        <!-- development version, includes helpful console warnings. todo: replace -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+        <!-- Load Vue followed by BootstrapVue -->
+        <!-- <script src="https://unpkg.com/vue@latest/dist/vue.min.js"></script> -->
+        <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+
+        <!-- Load the following for BootstrapVueIcons support -->
+        <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.js"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous">
+
+    </head>
+    <body>
+        <div>
+            Menu:
+            <a href="{{ url_for('otherRoutes.index') }}">Homepage</a>
+            <i class="fas fa-biohazard"></i>
+            <span class="fas fa-camera"></span>
+        </div>
+        <div>
+            <h1>Title: {{ title }}</h1>
+        </div>
+        {% block content %}{% endblock %}
+
+        <div>
+          <b-img src="https://picsum.photos/1024/400/?image=41" fluid alt="Responsive image"></b-img>
+        </div>
+
+    </body>
+</html>

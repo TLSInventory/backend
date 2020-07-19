@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for it in test_arg %}
+        <p>{{ it.title }}: {{ it.content }}</p>
+    {% endfor %}
+{% endblock %}
