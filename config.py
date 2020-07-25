@@ -121,6 +121,9 @@ class NotificationsConfig(object):
     start_sending_notifications_x_days_before_expiration = 1000  # this is currently here before better scheduler is implemented
     default_pre_expiration_periods_in_days = os.environ.get("NOTIFICATIONS_X_DAYS_BEFORE_EXPIRATION", "1,7,14")
 
+    # How old scan results should be turned to notifications and check if they were already sent and if not, send now.
+    how_long_to_retry_sending_notifications = int(os.environ.get("NOTIFICATIONS_RETRY_FOR_X_MINUTES", str(60)))  # minutes
+
 
 class SlackConfig(object):
     client_id = os.environ.get("SLACK_CLIENT_ID")
