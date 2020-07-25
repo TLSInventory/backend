@@ -1,14 +1,14 @@
 FROM ubuntu:18.04
 
-MAINTAINER Ondrej Borysek "bakalarka@borysek.net"
+MAINTAINER Ondrej Borysek "tlsinventory@borysek.net"
 
 RUN apt-get update -y && \
     apt-get install -y python3.7 python3.7-dev python3-pip git openssh-server cron
 
 # Invalidate cache from this point onwards when integration branch HEAD changes.
-ADD https://api.github.com/repos/BorysekOndrej/bakalarka3/git/refs/heads/integration branch_version.json
+ADD https://api.github.com/repos/TLSInventory/backend/git/refs/heads/integration branch_version.json
 
-RUN git clone https://github.com/BorysekOndrej/bakalarka3.git /app/bakalarka3
+RUN git clone https://github.com/TLSInventory/backend.git /app/bakalarka3
 
 WORKDIR /app/bakalarka3
 
