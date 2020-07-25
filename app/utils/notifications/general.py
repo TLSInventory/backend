@@ -43,7 +43,9 @@ def get_scan_data_for_notifications_scheduler(limit_to_following_target_ids: Opt
         .query(db_models.ScanOrder,
                db_models.Target,
                db_models.LastScan,
-               db_models.ScanResults) \
+               db_models.ScanResults,
+               db_models.ScanResultsSimplified) \
+        .outerjoin(db_models.ScanResultsSimplified, db_models.ScanResults.id == db_models.ScanResultsSimplified.id) \
         .filter(db_models.ScanOrder.active == True) \
         .filter(db_models.ScanOrder.target_id == db_models.Target.id) \
         .filter(db_models.LastScan.target_id == db_models.Target.id) \

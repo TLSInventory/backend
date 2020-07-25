@@ -1,5 +1,5 @@
 import datetime
-from typing import Dict, Tuple, Set, List
+from typing import Dict, Tuple, Set, List, Optional
 from loguru import logger
 
 import app.db_models as db_models
@@ -125,18 +125,24 @@ class NotificationTypeExpiration(object):
 
     def craft_plain_text(self):
         # fallback when more specific function for channel is not available
-        # todo: actual plaintext
-        return self.event_id_generator()
+
+        target: db_models.Target = self.single_res.Target
+        scan_result_simplified: Optional[db_models.ScanResultsSimplified] = self.single_res.ScanResultsSimplified
+        crafted_text = f'{target.human_readable_form()} expired/will expire ' \
+            f'{db_models.timestamp_to_datetime(scan_result_simplified.notAfter)}'
+
+        return crafted_text
 
     def craft_slacks(self) -> List[SlackNotification]:
         channel_preferences = self.notification_preferences.get("slack")
         notifications_to_send = []
+        crafted_text = self.craft_plain_text()
 
         for single_slack_connection in channel_preferences:
             res = SlackNotification()
             res.event_id = self.event_id_generator()
             res.connection_id = single_slack_connection["id"]
-            res.text = self.craft_plain_text()
+            res.text = crafted_text
             notifications_to_send.append(res)
 
         return notifications_to_send

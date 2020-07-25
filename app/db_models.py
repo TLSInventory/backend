@@ -128,6 +128,19 @@ class Target(Base, UniqueModel):
     def __repr__(self):
         return f"{self.hostname}#{self.port}@{self.ip_address}?{self.protocol}"
 
+    def human_readable_form(self):
+        protocol_plain_name = self.protocol.name
+        answer = f'{self.hostname}'
+        if self.port != 443:
+            answer += f':{self.port}'
+        if self.ip_address:
+            answer += f' with IP address {self.ip_address}'
+        if protocol_plain_name != 'HTTPS':
+            answer += f' and protocol {protocol_plain_name}'
+        else:
+            answer = 'https://' + answer
+        return answer
+
     @classmethod
     def from_repr_to_transient(cls, str_repr):
         hostname_port, ip_address_tls_protocol = str_repr.split("@")
