@@ -301,6 +301,8 @@ class ScanResultsSimplifiedSchema(SQLAlchemyAutoSchema):
 
     @staticmethod
     def get_verified_chains(obj):
+        if obj is None:
+            return []  # todo: there was a problem here. Check if it can be solved on lower level.
         return get_array_reschemed(db_models.CertificateChain, CertificateChainSchema,
                                    obj.verified_certificate_chains_lists_ids)
 
