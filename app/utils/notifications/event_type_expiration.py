@@ -31,37 +31,44 @@ class NotificationTypeExpiration(object):
         expiration_by_target_id = {}
 
         for single_res in main_data:
-            key = single_res.Target.id
-            val = single_res.ScanResults.certificate_information.received_certificate_chain_list.not_after()
-            expiration_by_target_id[key] = val
+            try:
+                key = single_res.Target.id
+                val = single_res.ScanResults.certificate_information.received_certificate_chain_list.not_after()
+                expiration_by_target_id[key] = val
+            except AttributeError as e:
+                logger.info(f"NotificationTypeExpiration: Handled AttributeError, most likely due to failed scan. Target id: {key}")
 
         scan_order_ids_expired = set()
         scan_order_ids_nearing_expiration = set()
 
         for single_res in main_data:
-            scan_order_id = single_res.ScanOrder.id
-            target_id = single_res.ScanOrder.target_id
+            try:
+                scan_order_id = single_res.ScanOrder.id
+                target_id = single_res.ScanOrder.target_id
 
-            expires = expiration_by_target_id[target_id]
-            notification_settings = notification_preferences_by_scan_order_id[scan_order_id]
+                expires = expiration_by_target_id[target_id]
+                notification_settings = notification_preferences_by_scan_order_id[scan_order_id]
 
-            # todo: make filtering based on notification settings. Currently notifying about 1 day expire only
-            if expires < datetime.datetime.now():
-                scan_order_ids_expired.add(single_res.ScanOrder.id)
-                continue
-            if expires > datetime.datetime.now() + datetime.timedelta(
-                    days=NotificationsConfig.start_sending_notifications_x_days_before_expiration):
-                continue
+                # todo: make filtering based on notification settings. Currently notifying about 1 day expire only
+                if expires < datetime.datetime.now():
+                    scan_order_ids_expired.add(single_res.ScanOrder.id)
+                    continue
+                if expires > datetime.datetime.now() + datetime.timedelta(
+                        days=NotificationsConfig.start_sending_notifications_x_days_before_expiration):
+                    continue
 
-            notifications_x_days_before_expiration \
-                = extract_and_parse_notifications_x_days_before_expiration(notification_settings)
+                notifications_x_days_before_expiration \
+                    = extract_and_parse_notifications_x_days_before_expiration(notification_settings)
 
-            certificate_chain = single_res.LastScan.result.certificate_information.received_certificate_chain_list
-            not_after = certificate_chain.not_after()
-            days_remaining = (not_after - datetime.datetime.now()).days
+                certificate_chain = single_res.LastScan.result.certificate_information.received_certificate_chain_list
+                not_after = certificate_chain.not_after()
+                days_remaining = (not_after - datetime.datetime.now()).days
 
-            if days_remaining in notifications_x_days_before_expiration:
-                scan_order_ids_nearing_expiration.add(single_res.ScanOrder.id)
+                if days_remaining in notifications_x_days_before_expiration:
+                    scan_order_ids_nearing_expiration.add(single_res.ScanOrder.id)
+
+            except KeyError as e:
+                logger.info(f"NotificationTypeExpiration: Handled KeyError, most likely due to failed scan.")
 
         logger.info(f"scan_order_ids_expired orders ids: {scan_order_ids_expired}")
         logger.info(f"scan_order_ids_nearing_expiration ids: {scan_order_ids_nearing_expiration}")

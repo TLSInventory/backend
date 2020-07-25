@@ -57,7 +57,7 @@ def get_scan_data_for_notifications_scheduler(limit_to_following_target_ids: Opt
     return res_all_active
 
 
-def schedule_notifications(limit_to_following_target_ids: Optional[List[int]] = None):
+def schedule_notifications(limit_to_following_target_ids: Optional[List[int]] = None) -> int:
     # Param limit_to_following_targets is used when we want to imediately send notifications on completed scan.
 
     main_data: Tuple[db_models.ScanOrder, db_models.Target, db_models.LastScan, db_models.ScanResults]\
@@ -87,9 +87,11 @@ def make_dict_notification_settings_by_scan_order_id(main_data):
     return notification_settings_by_scan_order_id
 
 
-def send_notifications(planned_notifications: Optional[List[Notification]] = None):
+def send_notifications(planned_notifications: Optional[List[Notification]] = None) -> int:
+    count_succesfully_sent_notifications = 0
     if planned_notifications is None:
         planned_notifications = []
+        return count_succesfully_sent_notifications
     for x in planned_notifications:
         log_dict = {
             "sent_notification_id": x.notification_id(),
@@ -99,7 +101,8 @@ def send_notifications(planned_notifications: Optional[List[Notification]] = Non
         if res is None:
             if notifications_send.send_single_notification(x):
                 res = db_utils.get_or_create_by_unique(db_models.SentNotificationsLog, log_dict)
+                count_succesfully_sent_notifications += 1
             else:
                 logger.warning("Sending of notification failed.")
-
+    return count_succesfully_sent_notifications
 
