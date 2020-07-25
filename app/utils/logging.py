@@ -1,3 +1,4 @@
+import functools
 import logging
 from loguru import logger
 from config import LogConfig
@@ -8,7 +9,16 @@ from config import LogConfig
 logger.add(LogConfig.log_folder + "{time}.log",
            backtrace=True, diagnose=True, level='DEBUG',
            compression='gz', rotation="00:00", retention="35 days")
-logger.info('New instance of app.')
+
+
+@functools.lru_cache(maxsize=1)
+def get_version_from_file():
+    with open("version.txt", "r") as f:
+        version_txt: str = f.read()
+        return version_txt
+
+
+logger.info(f'New instance of app. Version {get_version_from_file()}')
 
 logging.getLogger('flask_cors').level = LogConfig.cors_level
 
