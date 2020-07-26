@@ -78,7 +78,7 @@ def sslyze_enqueue_waiting_scans():
 
 
 def get_last_scan_and_result(target_id: int, user_id: int) -> Optional[
-    Tuple[db_models.LastScan, db_models.ScanResults]]:
+        Tuple[db_models.LastScan, db_models.ScanResults]]:
     if not can_user_get_target_definition_by_id(target_id, user_id):
         return None
 
@@ -86,7 +86,7 @@ def get_last_scan_and_result(target_id: int, user_id: int) -> Optional[
         .query(db_models.LastScan, db_models.ScanResults) \
         .filter(db_models.LastScan.target_id == target_id) \
         .filter(db_models.LastScan.result_id == db_models.ScanResults.id) \
-        .one()
+        .first()
 
     return scan_result
 

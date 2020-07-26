@@ -242,12 +242,14 @@ def api_sslyze_scan_targets():
 def api_get_result_for_target(target_id):
     user_id = authentication_utils.get_user_id_from_current_jwt()
 
-    last_scan, scan_result = actions.get_last_scan_and_result(target_id, user_id)
+    res_or_none = actions.get_last_scan_and_result(target_id, user_id)
+    if res_or_none is None:
+        return "Target either doesn't exist or the current user doesn't have permission to view it.", 401
+
+    last_scan, scan_result = res_or_none
+
     last_scan: db_models.LastScan
     scan_result: db_models.ScanResults
-
-    if scan_result is None:
-        return "Target either doesn't exist or the current user doesn't have permission to view it.", 401
 
     last_scanned = last_scan.last_scanned
     last_scanned_datetime = db_models.timestamp_to_datetime(last_scanned)
