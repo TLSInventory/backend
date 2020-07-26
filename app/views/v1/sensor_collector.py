@@ -7,7 +7,7 @@ from sqlalchemy.orm.exc import NoResultFound
 
 import app.object_models as object_models
 import app.utils.notifications.general as notifications_general
-from config import SensorCollector, NotificationsConfig
+from config import SensorCollector, NotificationsConfig, SslyzeConfig
 
 from . import bp
 
@@ -28,11 +28,6 @@ def api_get_next_targets_batch():
 
 
 @bp.route('/sslyze_scan_due_targets', methods=['GET'])
-@flask_jwt_extended.jwt_required
-def api_sslyze_scan_due_targets():
-    return actions.sslyze_enqueue_waiting_scans()
-
-
 @bp.route('/sslyze_scan_due_targets/<string:sensor_key>', methods=['GET'])
 def api_sslyze_scan_due_targets_via_sensor_key(sensor_key=None):
     valid_access = False
@@ -45,7 +40,24 @@ def api_sslyze_scan_due_targets_via_sensor_key(sensor_key=None):
             f'Request to scan due targets: unauthorized: key: {sensor_key}, IP: {request.remote_addr}')
         return 'Access only allowed with valid SENSOR_COLLECTOR_KEY or from localhost', 401
 
-    return actions.sslyze_enqueue_waiting_scans()
+    return actions.sslyze_enqueue_waiting_scans_single_batch()
+
+
+@bp.route('/sslyze_scan_due_targets_multiple_batches', methods=['GET'])
+@bp.route('/sslyze_scan_due_targets_multiple_batches/<string:sensor_key>', methods=['GET'])
+def api_sslyze_scan_due_targets_multiple_batches_via_sensor_key(sensor_key=None):
+    valid_access = False
+    if SensorCollector.KEY and sensor_key:
+        valid_access = SensorCollector.KEY == sensor_key
+    if SensorCollector.KEY_SKIP_FOR_LOCALHOST and request.remote_addr == '127.0.0.1':
+        valid_access = True
+    if not valid_access:
+        logger.warning(
+            f'Request to scan due targets: unauthorized: key: {sensor_key}, IP: {request.remote_addr}')
+        return 'Access only allowed with valid SENSOR_COLLECTOR_KEY or from localhost', 401
+
+    return actions.sslyze_enqueue_waiting_scans_multiple_batches(
+        SslyzeConfig.number_of_batches_per_request_for_multiple_batches)
 
 
 @bp.route('/sslyze_enqueue_now/<int:target_id>', methods=['GET'])

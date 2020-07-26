@@ -63,7 +63,37 @@ def sslyze_scan(twe: List[object_models.TargetWithExtra], save_result=True) -> D
     return answer
 
 
-def sslyze_enqueue_waiting_scans():
+# def sslyze_enqueue_waiting_scans_multiple_batches(n_batches):
+#     answers = []
+#     for i in range(n_batches):
+#         single_answer = sslyze_enqueue_waiting_scans_single_batch()
+#         answers.append(single_answer)
+#     final_answer = {
+#         'results_attached': False,
+#         'backgroud_job_id': [],  # todo: this is not type correct
+#         'results': [],
+#         'empty_job': True
+#     }
+#     for x in answers:
+#         if x.get('results_attached'):
+#             final_answer['results_attached'] = True
+#         if x.get('backgroud_job_id'):
+#             final_answer['backgroud_job_id'].append(x['backgroud_job_id'])
+#         if x.get('results'):
+#             final_answer['results'].extend(x['results'])
+#     if len(final_answer['results']) or len(final_answer['backgroud_job_id']):
+#         final_answer['empty_job'] = False
+#
+#     return final_answer
+
+def sslyze_enqueue_waiting_scans_multiple_batches(n_batches):
+    # todo: this has different interface from sslyze_enqueue_waiting_scans_single_batch. Unify it.
+    for i in range(n_batches):
+        sslyze_enqueue_waiting_scans_single_batch()
+    return f' {n_batches} batches enqueued or scanned'
+
+
+def sslyze_enqueue_waiting_scans_single_batch():
     if SensorCollector.GET_WORK_OVER_HTTP:
         # todo: get from collector
         logger.error("sslyze_enqueue_waiting_scans called with SensorCollector.GET_WORK_OVER_HTTP enabled. This is currently not implemented.")

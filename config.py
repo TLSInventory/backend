@@ -111,6 +111,7 @@ class SslyzeConfig(object):
 
     save_results_also_to_tmp_files = False
     soft_fail_on_result_parse_fail = True
+    number_of_batches_per_request_for_multiple_batches = int(os.environ.get('NUMBER_OF_BATCHES', str(10)))
 
 
 class CacheConfig(object):
