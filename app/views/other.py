@@ -5,21 +5,13 @@ from flask import render_template
 
 
 @bp.route('/')
-@bp.route('/index')
-def index():
-    # test_arg = [{"title": "title1", "content": "content1"}, {"title": "title2", "content": "content2"}]
-    test_arg = []
-    return render_template('index.html', title='Test index page', test_arg=test_arg)
+def site_base_url():
+    return "This endpoint should be used only for URL crafting, not actually retrieved."
 
 
 @bp.route('/dashboard')
 def dashboard_index():
     return render_template('index.html', title='Dashboard', test_arg=[])
-
-
-@bp.route('/dashboard/login')
-def dashboard_login():
-    return render_template('index.html', title='Dashboard login', test_arg=[])
 
 
 @bp.route('/debug/html/batch_direct_scan')

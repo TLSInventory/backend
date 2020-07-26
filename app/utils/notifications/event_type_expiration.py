@@ -1,8 +1,11 @@
 import datetime
 from typing import Dict, Tuple, Set, List, Optional
+
+import flask
 from loguru import logger
 
 import app.db_models as db_models
+import app.utils.http_request_util
 from app.utils.notifications.connection_types import Notification, SlackNotification, MailNotification
 from app.utils.notifications.event_types import EventType
 from config import NotificationsConfig
@@ -98,39 +101,43 @@ class NotificationTypeExpiration(object):
     def event_id_generator(self):
         return f'{self.scan_order.id};{self.event_type};{self.certificate_chain.id};{self.days_remaining}'
 
+    def __craft_expiration_text(self):
+        days_remaining = self.days_remaining
+
+        if self.event_type == EventType.ClosingExpiration:
+            return f"will expire in {days_remaining} days"
+        else:
+            return f"expired {abs(days_remaining)} days ago"
+
     def craft_mails(self) -> List[MailNotification]:
         email_preferences = self.notification_preferences.get("email")
         notifications_to_send = []
+        crafted_text = self.craft_plain_text()
+
         for single_mail_connection in email_preferences:
-
-            scan_order: db_models.ScanOrder = self.single_res.ScanOrder
-
-            target = scan_order.target
-            days_remaining = self.days_remaining
+            target: db_models.Target = self.single_res.Target
 
             res = MailNotification()
             res.event_id = self.event_id_generator()
             res.recipient_email = single_mail_connection["email"]
 
-            if self.event_type.ClosingExpiration:
-                res.subject = f"Certificate expiration notification ({target}) - {days_remaining} days remaining"
-            else:
-                res.subject = f"Certificate expiration notification ({target}) - Expired days {days_remaining} ago"
+            res.subject = f"Certificate expiration notification ({target}) - certificate {self.__craft_expiration_text()}"
 
-            # todo: use flask templating
-            res.text = res.subject  # todo
+            res.text = crafted_text  # todo: use flask templating
             notifications_to_send.append(res)
 
         return notifications_to_send
 
     def craft_plain_text(self):
         # fallback when more specific function for channel is not available
-
         target: db_models.Target = self.single_res.Target
-        scan_result_simplified: Optional[db_models.ScanResultsSimplified] = self.single_res.ScanResultsSimplified
-        crafted_text = f'{target.human_readable_form()} expired/will expire ' \
-            f'{db_models.timestamp_to_datetime(scan_result_simplified.notAfter)}'
 
+        scan_result_simplified: Optional[db_models.ScanResultsSimplified] = self.single_res.ScanResultsSimplified
+
+        crafted_text = f'{target.human_readable_form()} uses certificate which should not be used after ' \
+            f'{db_models.timestamp_to_datetime(scan_result_simplified.notAfter)}.\n' \
+            f'The certificate {self.__craft_expiration_text()}\n'\
+            f'More information available at {app.utils.http_request_util.get_web_ui_address()}#/listTargets/{target.id}'
         return crafted_text
 
     def craft_slacks(self) -> List[SlackNotification]:

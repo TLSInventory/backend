@@ -11,6 +11,9 @@ class ServerLocation(object):
     SERVER_NAME = os.environ.get('SERVER_NAME', None)
     PREFERRED_URL_SCHEME = os.environ.get('PREFERRED_URL_SCHEME', 'http')
 
+    # The following can be None if the API and Web are on the same domain.
+    WEB_FULL_URL = os.environ.get('WEB_FULL_URL', None)  # 'http://example.com'
+
     address = os.environ.get('SERVER_LISTEN_ON_IP', '0.0.0.0')
     port = os.environ.get('SERVER_LISTEN_ON_PORT', 5000)
 

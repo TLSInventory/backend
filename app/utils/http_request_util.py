@@ -1,3 +1,4 @@
+import flask
 from flask import request
 from flask_limiter import Limiter
 
@@ -45,3 +46,9 @@ limiter = Limiter(default_limits=[], key_func=rate_limit_key)
 
 # todo: consider whether JSON endpoints should receive JSON response
 # todo: consider scenario when attacker creates multiple accounts and uses JWT enabled endpoints for DDOS
+
+
+def get_web_ui_address():
+    if config.ServerLocation.WEB_FULL_URL:
+        return config.ServerLocation.WEB_FULL_URL
+    return flask.url_for("otherRoutes.site_base_url", _external=True)  # this is fallback
