@@ -205,8 +205,12 @@ def send_mail_validation(user_id: int, single_email: str):
                                                       )
     validation_url = flask.url_for("apiDebug.mail_validate", db_code=db_code, _external=True)
 
+    msg = 'Your email was used with TLSInventory app.' \
+          'If you want to receive notifications to this email please click the following link.\n' \
+          f'{validation_url}'
+
     notifications_send.email_send_msg(single_email,
-                                      validation_url,
+                                      msg,
                                       "Please validate your email for TLSInventory")
 
     return True

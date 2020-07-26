@@ -3,6 +3,7 @@ import random
 import jsons
 from typing import Tuple
 
+import app.utils.notifications.user_preferences
 import app.utils.randomCodes as randomCodes
 
 from config import FlaskConfig, DebugConfig
@@ -98,8 +99,15 @@ def api_register():
     schema = db_schemas.UserSchema(session=db_models.db)
     new_user = schema.load(data)  # this wouldn't work straight away, for example password_hash wouldn't work
 
+    mail_obj = db_models.MailConnections()
+    mail_obj.email = new_user.email
+    mail_obj.user = new_user
+
     db_models.db.session.add(new_user)
+    db_models.db.session.add(mail_obj)
     db_models.db.session.commit()
+
+    app.utils.notifications.user_preferences.send_mail_validation(new_user.id, new_user.email)
 
     return jsonify({"msg": "ok"}), 200
 
