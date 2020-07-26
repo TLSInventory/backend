@@ -144,7 +144,7 @@ class MailConfig(object):
 
     username = os.environ.get('MAIL_USERNAME') or "lorem"
     password = os.environ.get('MAIL_PASSWORD') or "ipsum"
-    sender_email = os.environ.get('MAIL_SENDER_EMAIL') or username
+    sender_email = f"TLSInventory <{os.environ.get('MAIL_SENDER_EMAIL', username)}>"
 
     hostname = os.environ.get('MAIL_HOSTNAME') or "127.0.0.1"   # will be overwriten if you use gmail
     port = int(os.environ.get('MAIL_PORT', str(25)))            # will be overwriten if you use gmail
