@@ -209,7 +209,10 @@ class LastScan(Base, UniqueModel):  # this might not have to be in DB, it might 
     def create_if_not_existent(cls, target_id):
         try:
             rand_time_offset = random.randrange(0, SchedulerConfig.max_first_scan_delay)
-            enqueue_time = datetime.datetime.now() - datetime.timedelta(seconds=rand_time_offset)
+            enqueue_time = datetime.datetime.now()\
+                           - datetime.timedelta(seconds=SchedulerConfig.enqueue_min_time) \
+                           + datetime.timedelta(seconds=rand_time_offset)
+
             # res = LastScan(id=target_id, last_enqueued=int(enqueue_time.timestamp()))
             res = LastScan(target_id=target_id, last_enqueued=datetime_to_timestamp(enqueue_time))
             db.session.add(res)
