@@ -8,9 +8,11 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class ServerLocation(object):
+    SERVER_NAME = os.environ.get('SERVER_NAME', None)
+    PREFERRED_URL_SCHEME = os.environ.get('PREFERRED_URL_SCHEME', 'http')
+
     address = os.environ.get('SERVER_LISTEN_ON_IP', '0.0.0.0')
     port = os.environ.get('SERVER_LISTEN_ON_PORT', 5000)
-    PUBLIC_URL = os.environ.get('SERVER_PUBLIC_URL', 'http://example.com')
 
     # The correct determination of client IP is important for rate limiting of non-authenticated endpoints.
     # Remember that HTTP headers might be spoofed, unless nginx proxy whitelists origins.
@@ -26,6 +28,9 @@ class LogConfig(object):
 
 
 class FlaskConfig(object):
+    SERVER_NAME = ServerLocation.SERVER_NAME
+    PREFERRED_URL_SCHEME = ServerLocation.PREFERRED_URL_SCHEME
+
     START_FLASK = bool(os.environ.get("START_FLASK", False))
     SECRET_KEY = os.environ.get('SECRET_KEY', os.urandom(16))  # warning: autogenerating SECRET_KEY will change session on each flask restart
 
@@ -130,9 +135,6 @@ class SlackConfig(object):
     client_id = os.environ.get("SLACK_CLIENT_ID")
     client_secret = os.environ.get("SLACK_CLIENT_SECRET")
     oauth_scope = os.environ.get("SLACK_BOT_SCOPE", "incoming-webhook")
-
-    local_post_install_url = os.environ.get("SLACK_POST_INSTALL_URL", f'{ServerLocation.PUBLIC_URL}/api/v1/slack/auth_callback')
-    slack_endpoint_url = f"https://slack.com/oauth/v2/authorize?scope={ oauth_scope }&client_id={ client_id }&redirect_uri={ local_post_install_url }"
 
     check_refresh_cookie_on_callback_endpoint = os.environ.get("SLACK_CHECK_REFRESH_COOKIE_ON_RETURN", False)  # can user verify slack from different device than on which he started from?
 

@@ -1,3 +1,4 @@
+import flask
 from slack import WebClient
 
 import app.db_models as db_models
@@ -6,6 +7,14 @@ import app.utils.db.advanced as db_utils_advanced
 
 from config import SlackConfig
 from loguru import logger
+
+
+def callback_url():
+    return flask.url_for("apiV1.slack_oauth_callback", _external=True)
+
+
+def slack_endpoint_url():
+    return f"https://slack.com/oauth/v2/authorize?scope={SlackConfig.oauth_scope}&client_id={SlackConfig.client_id}&redirect_uri={callback_url()}"
 
 
 # todo: consider reworking code validation to not use official Slack library, because it's currently the only use-case
@@ -20,7 +29,7 @@ def validate_code_and_save(auth_code, user_id) -> bool:
         client_id=SlackConfig.client_id,
         client_secret=SlackConfig.client_secret,
         code=auth_code,
-        redirect_uri=SlackConfig.local_post_install_url
+        redirect_uri=callback_url()
     )
     if response.data["ok"]:
         save_slack_config(response.data, user_id)

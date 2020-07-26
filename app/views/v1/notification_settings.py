@@ -30,7 +30,8 @@ def slack_url_to_oauth():
     db_code = randomCodes.create_and_save_random_code(activity=randomCodes.ActivityType.SLACK,
                                                       user_id=user_id,
                                                       expire_in_n_minutes=10)
-    url = f'{SlackConfig.slack_endpoint_url}&state={db_code}'
+    import app.utils.notifications.slack_add_connection
+    url = f'{app.utils.notifications.slack_add_connection.slack_endpoint_url()}&state={db_code}'
     return url, 200
 
 

@@ -311,7 +311,8 @@ def test_mail1():
 def slack_pre_install():
     # This function is adopted from Slack documentation.
 
-    return f'<a href="{SlackConfig.slack_endpoint_url}">Add to Slack</a>'
+    import app.utils.notifications.slack_add_connection
+    return f'<a href="{app.utils.notifications.slack_add_connection.slack_endpoint_url()}">Add to Slack</a>'
 
 
 @bp.route("/slack/test_auth_to_db", methods=["GET"])
