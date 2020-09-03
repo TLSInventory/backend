@@ -99,6 +99,8 @@ class NotificationTypeExpiration(object):
         return notifications_to_send
 
     def event_id_generator(self):
+        if self.event_type == EventType.AlreadyExpired:
+            return f'{self.scan_order.id};{self.event_type};{self.certificate_chain.id};expired'
         return f'{self.scan_order.id};{self.event_type};{self.certificate_chain.id};{self.days_remaining}'
 
     def __craft_expiration_text(self):
