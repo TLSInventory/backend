@@ -19,7 +19,7 @@ configparser==5.0.0
 confuse==1.0.0
 contextvars==2.4
 coverage==5.0.4
-cryptography==2.9
+cryptography==3.2
 dataclasses==0.6
 DataProperty==0.47.0
 dnspython==1.15.0
