@@ -1,7 +1,7 @@
 import pytest
-import os
 import string
 import random
+from flask import url_for
 
 # basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -31,11 +31,10 @@ def app():
 class TestSuite:
 
     def test_myview(self):
-        # assert self.client.get(url_for('myview')).status_code == 200
-        assert self.client.get('/api/debug/connecting_ip').status_code == 200
-        pass
+        url = url_for("apiDebug.debug_connecting_ip")
+        # url = '/api/debug/connecting_ip'
+        assert self.client.get(url).status_code == 200
 
 
 # app_inst = app_test_instance()
-# TestSuite().test_myview()
 
