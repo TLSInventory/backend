@@ -41,7 +41,9 @@ class FlaskConfig(object):
 
     # SQLAlchemy
     # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + '../db/test.db' + "?check_same_thread = False" if DEBUG else ""
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + basedir + '/db/test.db' # + "?check_same_thread = False" if DEBUG else ""
+
+    __DEFAULT_SQLALCHEMY_DATABASE_URI = basedir + '/db/test.db'  # + "?check_same_thread = False" if DEBUG else ""
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + (os.environ.get('SQLALCHEMY_DATABASE_URI') or __DEFAULT_SQLALCHEMY_DATABASE_URI)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ECHO = False
 
