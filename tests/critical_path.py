@@ -1,6 +1,6 @@
 import json
 
-import conftest
+import tests.conftest
 import pytest
 from flask import url_for
 

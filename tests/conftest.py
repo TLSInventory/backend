@@ -11,7 +11,8 @@ import os
 # os.environ['SQLALCHEMY_DATABASE_URI'] = '/mnt/c/Github/tlsinventory/backend' + '/db/auto_tests.db'
 # from app import create_app
 
-from app import create_app
+# from ../app import create_app
+import app as app2
 
 
 @pytest.fixture
@@ -24,7 +25,7 @@ def app():
     db_filename = '/mnt/c/Github/tlsinventory/backend' + f'/tmp/tests_{db_random}.db'
     config.FlaskConfig.SQLALCHEMY_DATABASE_URI = 'sqlite:///' + db_filename
 
-    app = create_app()
+    app = app2.create_app()
     # app.run(host='127.0.0.1', port=5042)
 
     yield app
