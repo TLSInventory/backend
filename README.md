@@ -11,3 +11,7 @@ For information how to deploy this application check the [Docker repository](htt
 
 Exactly Python 3.7.x is required until I upgrade to SSLyze 3.*
 Python packages are listed in file `requirements.txt`.
+
+Todo: add version support indicator
+Todo: add test status indicator
+Todo: add coverage indicator
