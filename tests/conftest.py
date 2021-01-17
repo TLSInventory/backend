@@ -3,6 +3,7 @@ import string
 import random
 from flask import url_for
 import os
+import tempfile
 
 # basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -22,7 +23,7 @@ def app():
     db_random = ''.join(random.choices(string.ascii_letters + string.digits, k=16))
 
     # todo: maybe use in-memory DB
-    db_filename = '/mnt/c/Github/tlsinventory/backend' + f'/tmp/tests_{db_random}.db'
+    db_handle, db_filename = tempfile.mkstemp()
     config.FlaskConfig.SQLALCHEMY_DATABASE_URI = 'sqlite:///' + db_filename
 
     app = app2.create_app()
@@ -31,7 +32,9 @@ def app():
     yield app
 
     if True:
-        os.remove(db_filename)
+        # os.remove(db_filename)
+        os.close(db_handle)
+        os.unlink(db_filename)
 
 
 @pytest.mark.usefixtures('client_class')
