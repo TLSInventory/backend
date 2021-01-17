@@ -2,6 +2,7 @@ import pytest
 import string
 import random
 from flask import url_for
+import os
 
 # basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -17,14 +18,19 @@ from app import create_app
 def app():
     import config
 
-    db_random = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+    db_random = ''.join(random.choices(string.ascii_letters + string.digits, k=16))
+
+    # todo: maybe use in-memory DB
     db_filename = '/mnt/c/Github/tlsinventory/backend' + f'/tmp/tests_{db_random}.db'
     config.FlaskConfig.SQLALCHEMY_DATABASE_URI = 'sqlite:///' + db_filename
 
     app = create_app()
     # app.run(host='127.0.0.1', port=5042)
 
-    return app
+    yield app
+
+    if True:
+        os.remove(db_filename)
 
 
 @pytest.mark.usefixtures('client_class')
