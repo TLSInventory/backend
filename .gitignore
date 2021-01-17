@@ -8,6 +8,7 @@ test.json
 /.venv37/
 /.venv38/
 /.venvLinux/
+.run/
 
 # Created by https://www.gitignore.io/api/git,pycharm,visualstudio,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=git,pycharm,visualstudio,visualstudiocode
