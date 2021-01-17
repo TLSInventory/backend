@@ -1,4 +1,4 @@
-name: Python package
+name: requirements-and-pytest
 
 on: [push]
 
