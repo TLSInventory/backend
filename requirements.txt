@@ -63,7 +63,7 @@ pshtt
 publicsuffix
 py3dns
 pycparser
-PyJWT
+PyJWT==1.7.1
 pyOpenSSL
 pyrsistent
 pyspf
