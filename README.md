@@ -1,5 +1,8 @@
 # TLSInventory - backend
 
+![Tests: master](https://img.shields.io/github/workflow/status/TLSInventory/backend/requirements-and-pytest/master)
+
+
 This is backend of application [TLSInventory](https://github.com/TLSInventory).
 
 This section serves as the main API server and also contains all the scanners.
@@ -11,3 +14,12 @@ For information how to deploy this application check the [Docker repository](htt
 
 Exactly Python 3.7.x is required until I upgrade to SSLyze 3.*
 Python packages are listed in file `requirements.txt`.
+
+
+#### Integration branch
+
+![Tests: integration](https://img.shields.io/github/workflow/status/TLSInventory/backend/requirements-and-pytest/integration)
+
+Todo: add version support indicator
+Todo: add test status indicator
+Todo: add coverage indicator
