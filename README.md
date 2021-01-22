@@ -1,7 +1,7 @@
 # TLSInventory - backend
 
 ![Tests: master](https://img.shields.io/github/workflow/status/TLSInventory/backend/requirements-and-pytest/master)
-
+[![codecov](https://codecov.io/gh/TLSInventory/backend/branch/master/graph/badge.svg?token=6VJCYR33LN)](https://codecov.io/gh/TLSInventory/backend)
 
 This is backend of application [TLSInventory](https://github.com/TLSInventory).
 
@@ -19,7 +19,7 @@ Python packages are listed in file `requirements.txt`.
 #### Integration branch
 
 ![Tests: integration](https://img.shields.io/github/workflow/status/TLSInventory/backend/requirements-and-pytest/integration)
+[![codecov](https://codecov.io/gh/TLSInventory/backend/branch/integration/graph/badge.svg?token=6VJCYR33LN)](https://codecov.io/gh/TLSInventory/backend)
 
 Todo: add version support indicator
 Todo: add test status indicator
-Todo: add coverage indicator
