@@ -2,6 +2,7 @@
 
 ![Tests: master](https://img.shields.io/github/workflow/status/TLSInventory/backend/requirements-and-pytest/master)
 [![codecov](https://codecov.io/gh/TLSInventory/backend/branch/master/graph/badge.svg?token=6VJCYR33LN)](https://codecov.io/gh/TLSInventory/backend)
+![Python versions](https://img.shields.io/badge/Python%20versions-3.7-green)
 
 This is backend of application [TLSInventory](https://github.com/TLSInventory).
 
