@@ -180,6 +180,8 @@ def api_enable_target_scan(target_id: int):
 def api_get_user_targets():
     user_id = authentication_utils.get_user_id_from_current_jwt()
 
+    # todo: the following search only looks at targets, which have scan result. This might be considered a bug. Fix?
+
     res = db_models.db.session \
         .query(db_models.ScanOrder, db_models.Target, db_models.LastScan, db_models.ScanResults,
                db_models.ScanResultsSimplified) \

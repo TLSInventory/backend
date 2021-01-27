@@ -5,9 +5,8 @@ on: [push, pull_request_target]
 
 jobs:
   build-and-test:
-    name: Build and Test (Python ${{ matrix.python-version }})
-    runs-on: ubuntu-latest
-    
+    name: Build and Test (Python ${{ matrix.python-version }} on ${{ matrix.os }})
+   
     # always run on push events, but only run on pull_request_target event when pull request pulls from fork repository
     # for pull requests within the same repository, the pull event is sufficient
     if: >
@@ -17,7 +16,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-latest]
         python-version: [3.7]
+
+    runs-on: ${{ matrix.os }}
     
     env:
       OS: ${{ matrix.os }}
