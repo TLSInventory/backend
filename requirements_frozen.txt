@@ -1,5 +1,5 @@
 aiocontextvars==0.2.2
-aiohttp==3.7.3
+aiohttp==3.7.4
 alembic==1.4.3
 APScheduler==3.6.3
 arrow==0.17.0
