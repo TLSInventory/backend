@@ -40,12 +40,12 @@ class TimeHelper:
     def offset_time(self, td: timedelta):
         self.__mocked_time += td
 
-    def time(self):
+    def time(self) -> datetime:
         if self.mock():
             return self.__mocked_time
         return datetime.now()
 
-    def timestamp(self):
+    def timestamp(self) -> int:
         return datetime_to_timestamp(self.time())
 
 
