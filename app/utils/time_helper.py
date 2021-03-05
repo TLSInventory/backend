@@ -46,7 +46,7 @@ class TimeHelper:
         return datetime.now()
 
     def timestamp(self):
-        datetime_to_timestamp(self.time())
+        return datetime_to_timestamp(self.time())
 
 
 time_source = TimeHelper()
