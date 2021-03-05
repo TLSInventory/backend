@@ -1,6 +1,7 @@
 import pytest
 from datetime import datetime, timedelta
 from app.utils.time_helper import time_source
+from flask import url_for
 
 class TestSuiteTimeHelper:
     ALLOWED_TIME_DIFF = timedelta(seconds=1)
@@ -49,3 +50,24 @@ class TestSuiteTimeHelper:
             mock_time = datetime.fromtimestamp(i)
             time_source.set_time(mock_time)
             assert time_source.timestamp() == i
+
+
+@pytest.mark.usefixtures('client_class')
+class TestSuiteTimeHelperThroughAPI:
+    MAX_EXPECTED_TEST_DURATION = 60*60  # seconds
+
+    def url_current_timestamp(self):
+        return url_for("apiDebug.current_timestamp")
+
+    def test_current_timestamp_through_api(self):
+        res  = self.client.get(self.url_current_timestamp())
+        assert res.status_code == 200
+        assert int(res.data) < self.MAX_EXPECTED_TEST_DURATION  # pytest sets time to UNIX 0
+
+        mock_time = datetime.fromtimestamp(self.MAX_EXPECTED_TEST_DURATION + 100)
+        time_source.mock(True)
+        time_source.set_time(mock_time)
+        res = self.client.get(self.url_current_timestamp())
+        assert res.status_code == 200
+        assert int(res.data) == self.MAX_EXPECTED_TEST_DURATION + 100
+
