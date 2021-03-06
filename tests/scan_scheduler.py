@@ -43,7 +43,7 @@ class TestSuiteScanScheduler:
 
         time_source.offset_time(timedelta(seconds=SchedulerConfig.max_first_scan_delay + 10))
 
-        assert self.client.get(url_for("apiV1.api_sslyze_scan_due_targets_via_sensor_key")).status_code == 200
+        assert self.client.get(url_for("apiV1.api_get_next_targets_batch")).status_code == 200
 
 
 
