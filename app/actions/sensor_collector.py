@@ -16,7 +16,7 @@ def sslyze_save_scan_results_from_obj(obj_to_save: object_models.ScanResultRespo
 
     if config.SensorCollector.SEND_RESULTS_OVER_HTTP:
         if comes_from_http:
-            logger.error("Received sslyze scan results to insert but SensorCollector.SEND_RESULTS_OVER_HTTP is enabled here.\n"
+            logger.error("SL0002 Received sslyze scan results to insert but SensorCollector.SEND_RESULTS_OVER_HTTP is enabled here.\n"
                          "Canceling outbound request, forwarding is not implemented as prevention of endless cycle.")
         else:
             # todo: do it through app context if it's not sending to collector
@@ -38,7 +38,7 @@ def sslyze_save_scan_results_from_obj(obj_to_save: object_models.ScanResultRespo
                 import app.utils.sslyze.parse_result as sslyze_parse_result
                 scan_result = sslyze_parse_result.insert_scan_result_into_db(single_result)
             except Exception as e:
-                logger.warning("Failed inserting or parsing scan result. Skipping it.")
+                logger.warning("SL0003 Failed inserting or parsing scan result. Skipping it.")
                 logger.exception(e)
                 if not config.SslyzeConfig.soft_fail_on_result_parse_fail:
                     raise

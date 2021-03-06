@@ -88,7 +88,7 @@ def merge_dict_by_strategy(more_general: dict, more_specific: dict) -> dict:
     if preference_merge_strategy == "more_specific_only":
         return more_specific
 
-    logger.warning("Unknown preference_merge_strategy. Overriding to classic.")
+    logger.warning("PF0001 Unknown preference_merge_strategy. Overriding to classic.")
     return {**more_general, **more_specific}
 
 
@@ -111,7 +111,7 @@ def load_preferences_from_string(pref: str) -> NotificationPreferences:
     try:
         pref_obj: NotificationPreferences = jsons.loads(pref, NotificationPreferences)
     except Exception as e:
-        logger.warning(f'Invalid notification pref: {e}. Returning empty.')
+        logger.warning(f'PF0002 Invalid notification pref: {e}. Returning empty.')
         return NotificationPreferences()
 
     for single_channel_name in CONNECTION_DB_MODELS_TYPES:

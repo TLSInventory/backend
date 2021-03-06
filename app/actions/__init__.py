@@ -73,7 +73,7 @@ def sslyze_enqueue_waiting_scans_multiple_batches(n_batches):
 def sslyze_enqueue_waiting_scans_single_batch():
     if SensorCollector.GET_WORK_OVER_HTTP:
         # todo: get from collector
-        logger.error("sslyze_enqueue_waiting_scans called with SensorCollector.GET_WORK_OVER_HTTP enabled. This is currently not implemented.")
+        logger.error("SL0001 sslyze_enqueue_waiting_scans called with SensorCollector.GET_WORK_OVER_HTTP enabled. This is currently not implemented.")
         return  # todo: return
 
     twe = scan_scheduler.get_batch_to_scan()

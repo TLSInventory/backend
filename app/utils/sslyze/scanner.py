@@ -69,7 +69,7 @@ def scan_result_to_dicts(scan_result):
 
 
 def scan(targets: List[object_models.TargetWithExtra], command_names: Optional[str] = None) -> List[ScanResult]:
-    logger.info(f"New scan initiated with sslyze version {sslyze_version} for target {targets}")
+    logger.info(f"SC0002 New scan initiated with sslyze version {sslyze_version} for target {targets}")
 
     if command_names is None:
         commands = scan_commands.from_names_to_scan_commands(SslyzeConfig.limit_scan_to_scan_commands_names)
@@ -89,13 +89,13 @@ def scan(targets: List[object_models.TargetWithExtra], command_names: Optional[s
 
             server_info = server_tester.perform(network_timeout=connectivity_timeout)
         except ServerConnectivityError as e:
-            error_msg = f"Cannot establish connectivity to target {target} with error {e}"
+            error_msg = f"NT0001 Cannot establish connectivity to target {target} with error {e}"
             logger.warning(error_msg)
             domain_result.msg += error_msg + '\n'
             domain_results.append(domain_result)
             continue
         except Exception as e:
-            error_msg = f"Unknown exception in establishing connection to target {target} with error {e}"
+            error_msg = f"NT0002 Unknown exception in establishing connection to target {target} with error {e}"
             logger.warning(error_msg)
             domain_result.msg += error_msg + '\n'
             domain_results.append(domain_result)
@@ -130,7 +130,7 @@ def scan(targets: List[object_models.TargetWithExtra], command_names: Optional[s
             scan_command_title = scan_result.scan_command.get_title()
 
             if isinstance(scan_result, PluginRaisedExceptionScanResult):
-                error_msg = f"Scan command failed: {target}, {scan_result.as_text()}"
+                error_msg = f"SC0003 Scan command failed: {target}, {scan_result.as_text()}"
                 domain_result.msg += error_msg + '\n'
                 logger.warning(error_msg)
                 continue

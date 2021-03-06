@@ -37,7 +37,7 @@ def api_sslyze_scan_due_targets_via_sensor_key(sensor_key=None):
         valid_access = True
     if not valid_access:
         logger.warning(
-            f'Request to scan due targets: unauthorized: key: {sensor_key}, IP: {request.remote_addr}')
+            f'SC0005 Request to scan due targets: unauthorized: key: {sensor_key}, IP: {request.remote_addr}')
         return 'Access only allowed with valid SENSOR_COLLECTOR_KEY or from localhost', 401
 
     return actions.sslyze_enqueue_waiting_scans_single_batch()
@@ -53,7 +53,7 @@ def api_sslyze_scan_due_targets_multiple_batches_via_sensor_key(sensor_key=None)
         valid_access = True
     if not valid_access:
         logger.warning(
-            f'Request to scan due targets: unauthorized: key: {sensor_key}, IP: {request.remote_addr}')
+            f'SC0005 Request to scan due targets: unauthorized: key: {sensor_key}, IP: {request.remote_addr}')
         return 'Access only allowed with valid SENSOR_COLLECTOR_KEY or from localhost', 401
 
     return actions.sslyze_enqueue_waiting_scans_multiple_batches(
@@ -88,7 +88,7 @@ def api_sslyze_import_scan_results(sensor_key=None):
         valid_access = True
     if not valid_access:
         logger.warning(
-            f'Request to import scan results: unauthorized: key: {sensor_key}, IP: {request.remote_addr}')
+            f'SC0006 Request to import scan results: unauthorized: key: {sensor_key}, IP: {request.remote_addr}')
         return 'Access only allowed with valid SENSOR_COLLECTOR_KEY or from localhost', 401
 
     data = jsons.load(request.json, object_models.ScanResultResponse)
@@ -107,7 +107,7 @@ def api_send_notifications_for_period(sensor_key=None):
         valid_access = True
     if not valid_access:
         logger.warning(
-            f'Request to send notifications: unauthorized: key: {sensor_key}, IP: {request.remote_addr}')
+            f'NT0008 Request to send notifications: unauthorized: key: {sensor_key}, IP: {request.remote_addr}')
         return 'Access only allowed with valid SENSOR_COLLECTOR_KEY or from localhost', 401
 
     timestamp_start_from = db_models.datetime_to_timestamp(

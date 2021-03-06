@@ -1,0 +1,107 @@
+~ SSLYZE ~
+SL0001 sslyze_enqueue_waiting_scans called with SensorCollector.GET_WORK_OVER_HTTP enabled /backend/app/actions/__init__.py
+SL0002 Received sslyze scan results to insert but SensorCollector.SEND_RESULTS_OVER_HTTP is enabled /backend/app/actions/sensor_collector.py
+SL0003 Failed inserting or parsing scan result /backend/app/actions/sensor_collector.py
+SL0004 The number of SSLyze plugins does not match the number of hardcoded scan commands /backend/app/utils/sslyze/scan_commands.py
+SL0005 Unknown SSLyze Scan Command /backend/app/utils/sslyze/scan_commands.py
+
+
+~ DATABASE ~
+DB0001 Delete failed for model
+    /backend/app/utils/db/advanced.py
+DB0002 This function should no longer be used anywhere
+    /backend/app/utils/db/basic.py
+DB0003 get_or_create_or_update_by_unique received kwargs with invalid vars
+    /backend/app/utils/db/basic.py
+DB0004 get_or_create_or_update_by_unique received kwargs including id
+    /backend/app/utils/db/basic.py
+DB0005 IntegrityError on inserting object (possible duplicity)
+    /backend/app/utils/sslyze/parse_result.py
+DB0006 Error inserting Scan result to DB
+    /backend/app/utils/sslyze/parse_result.py
+DB0007 Before DB create
+    /backend/app/__init__.py
+DB0008 After DB create
+    /backend/app/__init__.py
+DB0009 Delete of record in table with noUpdate
+    /backend/app/db_models.py
+
+
+~ NOTIFICATIONS ~
+NT0001 Error adding new emails for target 
+    /backend/app/utils/notifications/actions.py
+    /backend/app/views/v1/misc.py
+NT0002 Handled AttributeError, most likely due to failed scanner
+    /backend/app/utils/notifications/event_type_expiration.py
+NT0003 Handled KeyError, most likely due to failed scan
+    /backend/app/utils/notifications/event_type_expiration.py
+NT0004 scan_order_ids_expired orders ids
+    /backend/app/utils/notifications/event_type_expiration.py
+NT0005 scan_order_ids_nearing_expiration ids
+    /backend/app/utils/notifications/event_type_expiration.py
+NT0006 Sending of notification failed
+    /backend/app/utils/notifications/general.py
+NT0007 Notification not send, because MailConfig is disabled
+    /backend/app/utils/notifications/send.py
+NT0008 Request to send notifications: unauthorized: key
+    /backend/app/views/v1/sensor_collector.py
+
+~ SLACK ~
+SC0001 response.data NOK /backend/app/utils/notifications/slack_add_connection.py
+
+~ USER PREFERENCES ~
+XX0001 XX0001 Unknown preference_merge_strategy. Overriding to classic. /backend/app/utils/notifications/user_preferences.py
+PF0002 Invalid notification pref /backend/app/utils/notifications/user_preferences.py
+
+~ REDIS ~
+RD0001 The background_redis static string is not equal to the expected one /backend/app/utils/sslyze/background_redis.py
+
+~ PARSING ~
+PS0001 parse_cipher_suite: probably not implemented parsing /backend/app/utils/sslyze/parse_result.py
+
+~ SCANNING ~
+SC0001 Scan result for a target which doesn't have Last Scan record
+    /backend/app/utils/sslyze/parse_result.py
+SC0002 New scan initiated with sslyze version X for target Y
+    /backend/app/utils/sslyze/scanner.py
+SC0003 Scan command failed
+    /backend/app/utils/sslyze/scanner.py
+SC0004 Simplifing scan result
+    /backend/app/utils/sslyze/scanner.py
+SC0005 Request to scan due targets: unauthorized: key
+    /backend/app/views/v1/sensor_collector.py
+SC0006 Request to import scan results: unauthorized: key
+    /backend/app/views/v1/sensor_collector.py
+SC0007 Failed creating last_scan with error
+    /backend/app/db_models.py
+SC0008 Updating minimal scan order for target_id
+    /backend/app/scan_scheduler.py
+SC0009 Get due targets (first scan)
+    /backend/app/scan_scheduler.py
+SC0010 Get due targets (rescan)
+    /backend/app/scan_scheduler.py
+SC0011 STH got enqueued twice for the same scan batch
+    /backend/app/scan_scheduler.py
+    
+~ NETWORK ~
+NT0001 Cannot establish connectivity to target /backend/app/utils/sslyze/scanner.py
+NT0002 Unknown exception in establishing connection to target /backend/app/utils/sslyze/scanner.py
+
+~ JWT ~
+JW0001 JWT_SECRET_KEY is too short /backend/app/utils/authentication_utils.py
+JW0002 Using different algorithm for JWT than HS512 /backend/app/utils/authentication_utils.py
+
+~ DOMAINS ~
+DN0001 Crt.sh is disabled in the config file /backend/app/utils/ct_search.py
+DN0002 Request for quick/basic search failed /backend/app/utils/ct_search.py
+DN0003 200 OK but no data from crt.sh /backend/app/utils/ct_search.py
+DN0004 DNS resolution failed /backend/app/utils/dns_utils.py
+
+~ LOGGER ~
+LG0001 New instance of app /backend/app/utils/logging.py
+
+~ WITHOUT MESSAGE ~
+EX0001 /backend/app/views/debug/misc.py
+EX0002 /backend/app/views/v1/auth.py
+
+

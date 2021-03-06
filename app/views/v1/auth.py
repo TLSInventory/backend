@@ -94,7 +94,7 @@ def api_register():
     data["password_hash"] = authentication_utils.generate_password_hash(data["password"])
     data.pop("password")
     data["main_api_key"] = "API-546654-" + str(random.randrange(10000))  # todo
-    logger.warning(data)
+    logger.warning("EX0002 {data}")
 
     schema = db_schemas.UserSchema(session=db_models.db)
     new_user = schema.load(data)  # this wouldn't work straight away, for example password_hash wouldn't work

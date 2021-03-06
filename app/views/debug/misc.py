@@ -284,7 +284,7 @@ def test_recalculate_simplified_all():
             test_recalculate_simplified(x)
             suc += 1
         except Exception as e:
-            logger.exception(e)
+            logger.exception(f"EX0001 {e}")
 
     return jsonify({'successfully': suc, 'all': len(res)}), 200
 

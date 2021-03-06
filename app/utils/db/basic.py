@@ -70,10 +70,10 @@ def get_search_by(model: app.db.Model, kwargs: dict) -> Tuple[dict, dict]:
     kwargs = dict_filter_to_class_variables(model, kwargs)
     if len(kwargs) != len(kwargs_original):
         logger.debug(
-            f"get_or_create_or_update_by_unique received kwargs with invalid vars for the {model}, removed vars were {(set(kwargs_original) - set(kwargs))}")
+            f"DB0003 get_or_create_or_update_by_unique received kwargs with invalid vars for the {model}, removed vars were {(set(kwargs_original) - set(kwargs))}")
     if kwargs.get("id", None):
         logger.warning(
-            f"get_or_create_or_update_by_unique received kwargs including id for model {model}. Removing.")
+            f"DB0004 get_or_create_or_update_by_unique received kwargs including id for model {model}. Removing.")
 
     search_by = kwargs
     if hasattr(model, '__uniqueColumns__'):

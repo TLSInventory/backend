@@ -475,5 +475,10 @@ healthchecksdb
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
 
-# End of https://www.gitignore.io/api/git,pycharm,visualstudio,visualstudiocode
-test1.py
+# Martin
+
+parser.py
+test_log.csv
+test_log.log
+notes.txt
+.python-version

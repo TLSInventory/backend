@@ -33,7 +33,7 @@ def from_names_to_scan_commands(csv_command_names: str) -> list:
         plugins_repository = PluginsRepository()
         commands = plugins_repository.get_available_commands()
         if len(commands) != len(KNOWN_SCAN_COMMANDS):
-            logger.warning("The number of SSLyze plugins does not match the number of hardcoded scan commands.")
+            logger.warning("SL0004 The number of SSLyze plugins does not match the number of hardcoded scan commands.")
 
     if csv_command_names == "DONT_LIMIT":
         return list(KNOWN_SCAN_COMMANDS.values())
@@ -44,6 +44,6 @@ def from_names_to_scan_commands(csv_command_names: str) -> list:
         if cmd_name in KNOWN_SCAN_COMMANDS:
             answer.append(KNOWN_SCAN_COMMANDS[cmd_name])
         else:
-            logger.warning("Unknown SSLyze Scan Command")
+            logger.warning("SL0005 Unknown SSLyze Scan Command")
     return answer
 

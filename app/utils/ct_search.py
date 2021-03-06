@@ -19,7 +19,7 @@ print(get_subdomains_from_ct("borysek.eu"))
 def get_subdomains_from_ct(domain: str) -> List[str]:
     # This is wrapper for future expansion
     if not ImportConfig.crt_sh:
-        logger.info("Crt.sh is disabled in the config file")
+        logger.info("DN0001 Crt.sh is disabled in the config file")
         return []
     resp = crt_sh(domain)
     identities_and_ids = get_identities_and_ids(resp)
@@ -39,7 +39,7 @@ def crt_sh(domain) -> Dict:
 
     if req.status_code != 200:
         logger.error("""
-        Request for quick/basic search failed.
+        DN0002 Request for quick/basic search failed.
         Possible problems: network issues or too many certs match pattern.
         """)
 
@@ -48,7 +48,7 @@ def crt_sh(domain) -> Dict:
 
     data = json.loads(req.text)
     if data is None or len(data) == 0:
-        logger.warning("200 OK but no data from crt.sh. Possibly no certificates or failed parsing?")
+        logger.warning("DN0003 200 OK but no data from crt.sh. Possibly no certificates or failed parsing?")
         return {}
 
     if ImportConfig.crt_sh_debug:

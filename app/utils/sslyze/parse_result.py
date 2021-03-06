@@ -29,7 +29,7 @@ def try_to_add(obj):
         app.db.add(obj)
         app.db.commit()
     except IntegrityError as _:
-        logger.error("IntegrityError on inserting object (possible duplicity): " + str(obj))
+        logger.error("DB0005 IntegrityError on inserting object (possible duplicity): " + str(obj))
         app.db.rollback()
 
 
@@ -71,7 +71,7 @@ def parse_cipher_suite(scan_result, plugin_title):
             assert single_cipher is not None
             if len(current_plugin_fields) == 0:
                 # todo: handling of errored_cipher_list
-                logger.warning(f'parse_cipher_suite: probably not implemented parsing for {plugin_field}')
+                logger.warning(f'PS0001 parse_cipher_suite: probably not implemented parsing for {plugin_field}')
                 continue
             param_order = current_plugin_fields["expected_fields"]
 
@@ -378,7 +378,7 @@ def insert_scan_result_into_db(scan_result_orig: dict) -> app.db_models.ScanResu
         db_utils_advanced.generic_get_create_edit_from_transient(db_schemas.ScanResultsForeignKeysOnlySchema, obj)  # todo: general
 
     if res is None:
-        logger.warning("Error inserting Scan result to DB. Aborting.")
+        logger.warning("DB0006 Error inserting Scan result to DB. Aborting.")
         return
 
     scanresult_id = res.id
@@ -437,7 +437,7 @@ def update_references_to_scan_result_single_target(target_id: int, scanresult_id
                                                              {'target_id': target_id},
                                                              get_only=True)
     if ls is None:
-        logger.error(f"Scan result for a target which doesn't have Last Scan record. {target_id}")
+        logger.error(f"SC0001 Scan result for a target which doesn't have Last Scan record. {target_id}")
         return
     ls.last_scanned = db_models.datetime_to_timestamp(datetime.datetime.now())
     ls.result_id = scanresult_id

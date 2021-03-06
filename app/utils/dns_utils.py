@@ -28,7 +28,7 @@ def get_ips_for_domain(domain: str) -> List[str]:
                 # print(domain, type_of_record, sr)
                 all_answers.add((type_of_record, sr.to_text()))
         except Exception as e:
-            logger.warning(f"DNS resolution failed for domain {domain} with error {e}")
+            logger.warning(f"DN0004 DNS resolution failed for domain {domain} with error {e}")
 
     try:
         return list(random.sample(all_answers, DnsConfig.max_records_per_resolve))
