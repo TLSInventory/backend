@@ -1,5 +1,4 @@
 import copy
-import datetime
 import json
 import random
 from typing import List
@@ -30,6 +29,7 @@ import app.actions as actions
 import app.actions.sensor_collector as sensor_collector
 import app.views.v1.notification_settings as slack_url_to_oauth
 import app.utils.randomCodes as randomCodes
+from app.utils.time_helper import time_source, datetime_to_timestamp, timestamp_to_datetime
 from config import SlackConfig
 
 
@@ -216,7 +216,7 @@ def api_get_user_targets():
 
                 if scan_result_simplified:
                     if isinstance(single_res.ScanResultsSimplified.notAfter, int):
-                        obj["expires"] = str(datetime.datetime.fromtimestamp(single_res.ScanResultsSimplified.notAfter))
+                        obj["expires"] = str(timestamp_to_datetime(single_res.ScanResultsSimplified.notAfter))
                     obj["grade"] = single_res.ScanResultsSimplified.grade
                     obj["grade_reasons"] = single_res.ScanResultsSimplified.grade_reasons
                     continue
@@ -254,7 +254,7 @@ def api_get_result_for_target(target_id):
     scan_result: db_models.ScanResults
 
     last_scanned = last_scan.last_scanned
-    last_scanned_datetime = db_models.timestamp_to_datetime(last_scanned)
+    last_scanned_datetime = timestamp_to_datetime(last_scanned)
 
     scan_result_str = db_schemas.ScanResultsSchema().dumps(scan_result)
 
@@ -273,7 +273,7 @@ def api_get_basic_cert_info_for_target(target_id):
     if scan_result is None:
         return "Target either doesn't exist or the current user doesn't have permission to view it.", 401
 
-    last_scanned_datetime = db_models.timestamp_to_datetime(last_scan.last_scanned)
+    last_scanned_datetime = timestamp_to_datetime(last_scan.last_scanned)
     cert_info = scan_result.certificate_information
     verified_chain = cert_info.verified_certificate_chain_list
     certificates_in_chain: List[db_models.Certificate] = db_models.Certificate.select_from_list(verified_chain.chain)

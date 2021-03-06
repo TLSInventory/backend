@@ -20,6 +20,7 @@ import app.utils.randomCodes as randomCodes
 import app.db_models as db_models
 import app.utils.authentication_utils as authentication_utils
 import app.actions as actions
+from app.utils.time_helper import time_source, datetime_to_timestamp
 
 
 @bp.route("/slack/begin_auth", methods=["GET"])
@@ -149,7 +150,7 @@ def api_resend_validation_email():
         .filter(db_models.TmpRandomCodes.user_id == user_id) \
         .filter(db_models.TmpRandomCodes.activity == randomCodes.ActivityType.MAIL_VALIDATION.name) \
         .filter(db_models.TmpRandomCodes.timestamp >
-                db_models.datetime_to_timestamp(datetime.datetime.now() - datetime.timedelta(minutes=1))) \
+                datetime_to_timestamp(time_source.time() - datetime.timedelta(minutes=1))) \
         .all()
 
     if res is not None:

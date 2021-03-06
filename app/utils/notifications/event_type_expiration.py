@@ -9,6 +9,7 @@ import app.utils.http_request_util
 from app.utils.notifications.connection_types import Notification, SlackNotification, MailNotification
 from app.utils.notifications.event_types import EventType
 from config import NotificationsConfig
+from app.utils.time_helper import time_source, datetime_to_timestamp, timestamp_to_datetime
 
 
 class NotificationTypeExpiration(object):
@@ -18,7 +19,7 @@ class NotificationTypeExpiration(object):
 
         self.scan_order = single_res.ScanOrder
         self.certificate_chain = single_res.LastScan.result.certificate_information.received_certificate_chain_list
-        self.days_remaining = (self.certificate_chain.not_after() - datetime.datetime.now()).days
+        self.days_remaining = (self.certificate_chain.not_after() - time_source.time()).days
         self.event_type = EventType.ClosingExpiration if self.days_remaining >= 0 else EventType.AlreadyExpired
 
     @staticmethod
@@ -53,10 +54,10 @@ class NotificationTypeExpiration(object):
                 notification_settings = notification_preferences_by_scan_order_id[scan_order_id]
 
                 # todo: make filtering based on notification settings. Currently notifying about 1 day expire only
-                if expires < datetime.datetime.now():
+                if expires < time_source.time():
                     scan_order_ids_expired.add(single_res.ScanOrder.id)
                     continue
-                if expires > datetime.datetime.now() + datetime.timedelta(
+                if expires > time_source.time() + datetime.timedelta(
                         days=NotificationsConfig.start_sending_notifications_x_days_before_expiration):
                     continue
 
@@ -65,7 +66,7 @@ class NotificationTypeExpiration(object):
 
                 certificate_chain = single_res.LastScan.result.certificate_information.received_certificate_chain_list
                 not_after = certificate_chain.not_after()
-                days_remaining = (not_after - datetime.datetime.now()).days
+                days_remaining = (not_after - time_source.time()).days
 
                 if days_remaining in notifications_x_days_before_expiration:
                     scan_order_ids_nearing_expiration.add(single_res.ScanOrder.id)
@@ -137,7 +138,7 @@ class NotificationTypeExpiration(object):
         scan_result_simplified: Optional[db_models.ScanResultsSimplified] = self.single_res.ScanResultsSimplified
 
         crafted_text = f'{target.human_readable_form()} uses certificate which should not be used after ' \
-            f'{db_models.timestamp_to_datetime(scan_result_simplified.notAfter)}.\n' \
+            f'{timestamp_to_datetime(scan_result_simplified.notAfter)}.\n' \
             f'The certificate {self.__craft_expiration_text()}\n'\
             f'More information available at {app.utils.http_request_util.get_web_ui_address()}#/listTargets/{target.id}'
         return crafted_text

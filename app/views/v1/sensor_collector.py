@@ -20,6 +20,7 @@ import app.scan_scheduler as scan_scheduler
 import app.db_models as db_models
 import app.actions as actions
 import app.actions.sensor_collector as sensor_collector
+from app.utils.time_helper import time_source, datetime_to_timestamp
 
 
 @bp.route('/get_next_targets_batch')
@@ -110,8 +111,8 @@ def api_send_notifications_for_period(sensor_key=None):
             f'NT0008 Request to send notifications: unauthorized: key: {sensor_key}, IP: {request.remote_addr}')
         return 'Access only allowed with valid SENSOR_COLLECTOR_KEY or from localhost', 401
 
-    timestamp_start_from = db_models.datetime_to_timestamp(
-        datetime.datetime.now() -
+    timestamp_start_from = datetime_to_timestamp(
+        time_source.time() -
         datetime.timedelta(minutes=NotificationsConfig.how_long_to_retry_sending_notifications)
     )
 

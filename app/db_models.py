@@ -12,6 +12,7 @@ from typing import Optional
 import app
 import app.utils.db.basic as db_utils
 from sslyze.ssl_settings import TlsWrappedProtocolEnum
+from app.utils.time_helper import time_source, datetime_to_timestamp
 
 from config import SchedulerConfig
 
@@ -34,16 +35,6 @@ class NumericTimestamp(TypeDecorator):
     #
     # def process_result_value(self, value, dialect):
     #     return datetime.datetime.utcfromtimestamp(value)  # todo: timezone?
-
-
-def datetime_to_timestamp(x: datetime.datetime) -> int:
-    if x is None:
-        return None
-    return int(x.timestamp())
-
-
-def timestamp_to_datetime(x: int) -> datetime.datetime:
-    return datetime.datetime.utcfromtimestamp(x)
 
 
 class UniqueModel(object):
@@ -210,7 +201,7 @@ class LastScan(Base, UniqueModel):  # this might not have to be in DB, it might 
     def create_if_not_existent(cls, target_id):
         try:
             rand_time_offset = random.randrange(0, SchedulerConfig.max_first_scan_delay)
-            enqueue_time = datetime.datetime.now()\
+            enqueue_time = time_source.time()\
                            - datetime.timedelta(seconds=SchedulerConfig.enqueue_min_time) \
                            + datetime.timedelta(seconds=rand_time_offset)
 
@@ -734,7 +725,7 @@ class ScanResultsHistory(Base, UniqueModel):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    timestamp = db.Column(NumericTimestamp, default=datetime_to_timestamp(datetime.datetime.now()))
+    timestamp = db.Column(NumericTimestamp, default=time_source.timestamp())
 
     target_id = db.Column(db.Integer, db.ForeignKey('targets.id'), nullable=False)
     target = db.relationship("Target")
@@ -750,7 +741,7 @@ class SentNotificationsLog(Base, UniqueModel):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    timestamp = db.Column(NumericTimestamp, default=datetime_to_timestamp(datetime.datetime.now()))
+    timestamp = db.Column(NumericTimestamp, default=time_source.timestamp())
 
     sent_notification_id = db.Column(db.String, nullable=False)
     channel = db.Column(db.String, nullable=False)
@@ -834,7 +825,7 @@ class TmpRandomCodes(Base, UniqueModel):
     __table_args__ = (db.UniqueConstraint(*__uniqueColumns__, name=f'_uq_{__tablename__}'),)
 
     id = db.Column(db.Integer, primary_key=True)
-    timestamp = db.Column(NumericTimestamp, default=datetime_to_timestamp(datetime.datetime.now()))
+    timestamp = db.Column(NumericTimestamp, default=time_source.timestamp())
     expires = db.Column(NumericTimestamp)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

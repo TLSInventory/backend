@@ -10,23 +10,24 @@ from config import SchedulerConfig
 import app.utils.db.basic as db_utils
 import app.utils.dns_utils as dns_utils
 import app.object_models as object_models
+from app.utils.time_helper import time_source, datetime_to_timestamp
 
 db = app.db
 
 
 def default_current_time(query_compare_time=None):
     if query_compare_time is None:
-        query_compare_time = datetime.datetime.now()
+        query_compare_time = time_source.time()
     return query_compare_time
 
 
 def offset_time_back_from_now(n_secs):
-    return datetime.datetime.now() - datetime.timedelta(seconds=n_secs)
+    return time_source.time() - datetime.timedelta(seconds=n_secs)
 
 
 def default_enqueued_offseted_timestamp():
     offseted_datetime = offset_time_back_from_now(SchedulerConfig.enqueue_min_time)
-    return db_models.datetime_to_timestamp(offseted_datetime)
+    return datetime_to_timestamp(offseted_datetime)
 
 
 def update_scan_order_minimal_for_target(target_id: int) -> Optional[int]:
@@ -64,7 +65,7 @@ def qry_first_scan():
 
 
 def qry_rescan(query_compare_time=None):
-    query_compare_time = db_models.datetime_to_timestamp(default_current_time(query_compare_time))
+    query_compare_time = datetime_to_timestamp(default_current_time(query_compare_time))
     return qry_scan_base() \
         .filter(db_models.LastScan.last_scanned + db_models.ScanOrderMinimal.periodicity < query_compare_time) \
         .order_by((db_models.LastScan.last_enqueued).desc()) # todo: check the sum is working
@@ -96,7 +97,7 @@ def mark_enqueued_targets(target_ids, time=None):
     if not target_ids:
         return
     if time is None:
-        time = db_models.datetime_to_timestamp(default_current_time(time))
+        time = datetime_to_timestamp(default_current_time(time))
     db.session.query(db_models.LastScan)\
         .filter(db_models.LastScan.id.in_(tuple(target_ids)))\
         .update({db_models.LastScan.last_enqueued: time}, synchronize_session='fetch')
@@ -107,7 +108,7 @@ def mark_scanned_targets(target_ids: List[int], time=None):
     if not target_ids:
         return
     if time is None:
-        time = db_models.datetime_to_timestamp(default_current_time(time))
+        time = datetime_to_timestamp(default_current_time(time))
     db.session.query(db_models.LastScan)\
         .filter(db_models.LastScan.id.in_(tuple(target_ids)))\
         .update({db_models.LastScan.last_scanned: time}, synchronize_session='fetch')
@@ -115,7 +116,7 @@ def mark_scanned_targets(target_ids: List[int], time=None):
 
 
 def backdate_enqueued_targets():
-    query_compare_time = db_models.datetime_to_timestamp(default_enqueued_offseted_timestamp())
+    query_compare_time = datetime_to_timestamp(default_enqueued_offseted_timestamp())
     res = db.session.query(db_models.LastScan.id) \
         .filter(db_models.ScanOrderMinimal.id == db_models.LastScan.id) \
         .filter(db_models.LastScan.last_enqueued > query_compare_time) \
