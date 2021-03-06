@@ -1,37 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@thekensr 
-TLSInventory
-/
-backend
-1
-1
-0
-Code
-Issues
-1
-Pull requests
-3
-Actions
-Projects
-Wiki
-Security
-Insights
-backend/.gitignore
-@BorysekOndrej
-BorysekOndrej Add basic test framework, GitHub action to auto-run tests, requiremen…
-…
-Latest commit e6c7d01 on 18 Jan
- History
- 1 contributor
-479 lines (383 sloc)  8.31 KB
-  
 # Custom
 
 test.json
@@ -508,21 +474,6 @@ healthchecksdb
 
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
-
-# End of https://www.gitignore.io/api/git,pycharm,visualstudio,visualstudiocode
-test1.py
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
 
 # Martin
 
