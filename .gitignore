@@ -481,3 +481,4 @@ parser.py
 test_log.csv
 test_log.log
 notes.txt
+.python-version
