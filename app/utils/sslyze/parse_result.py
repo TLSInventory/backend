@@ -20,6 +20,7 @@ import app.utils.certificate as certificate
 import app.utils.db.basic as db_utils
 import app.utils.db.advanced as db_utils_advanced
 import app.utils.files as files
+from app.utils.time_helper import time_source, datetime_to_timestamp
 
 still_to_parse_test = True
 
@@ -422,13 +423,12 @@ def update_references_to_scan_result_single_target(target_id: int, scanresult_id
     db_utils_advanced.generic_get_create_edit_from_data(db_schemas.ScanResultsHistorySchema,
                                                         {'target_id': target_id,
                                                          'scanresult_id': scanresult_id,
-                                                         'timestamp': db_models.datetime_to_timestamp(
-                                                             datetime.datetime.now())
+                                                         'timestamp': time_source.timestamp(),
                                                          })
 
     # ls = db_utils_advanced.generic_get_create_edit_from_data(db_schemas.LastScanSchema,
     #                                                          {'target_id': target_id,
-    #                                                           'last_scanned': db_models.datetime_to_timestamp(datetime.datetime.now()),
+    #                                                           'last_scanned': time_source.timestamp(),
     #                                                           'scanresult_id': scanresult_id,
     #                                                           # 'last_enqueued': # previous value
     #                                                           })
@@ -439,6 +439,6 @@ def update_references_to_scan_result_single_target(target_id: int, scanresult_id
     if ls is None:
         logger.error(f"Scan result for a target which doesn't have Last Scan record. {target_id}")
         return
-    ls.last_scanned = db_models.datetime_to_timestamp(datetime.datetime.now())
+    ls.last_scanned = time_source.timestamp()
     ls.result_id = scanresult_id
     db_utils_advanced.generic_get_create_edit_from_transient(db_schemas.LastScanSchema, ls)

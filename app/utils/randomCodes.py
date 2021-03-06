@@ -5,6 +5,7 @@ import random
 from typing import Union, Tuple
 
 import app.db_models as db_models
+from app.utils.time_helper import time_source, datetime_to_timestamp
 
 
 class ActivityType(Enum):
@@ -24,7 +25,7 @@ def create_and_save_random_code(activity: ActivityType, user_id: int, expire_in_
     res = db_models.TmpRandomCodes()
     res.user_id = user_id
     res.activity = activity.name
-    res.expires = db_models.datetime_to_timestamp(datetime.datetime.now() + datetime.timedelta(minutes=expire_in_n_minutes))
+    res.expires = datetime_to_timestamp(time_source.time() + datetime.timedelta(minutes=expire_in_n_minutes))
     res.code = gen_random_code()
     res.params = params
     db_models.db.session.add(res)
@@ -38,7 +39,7 @@ def validate_code(db_code: str, activity: ActivityType, user_id=None)\
         .query(db_models.TmpRandomCodes) \
         .filter(db_models.TmpRandomCodes.code == db_code) \
         .filter(db_models.TmpRandomCodes.activity == activity.name) \
-        .filter(db_models.TmpRandomCodes.expires >= db_models.datetime_to_timestamp(datetime.datetime.now()))
+        .filter(db_models.TmpRandomCodes.expires >= time_source.timestamp())
 
     if user_id:
         query = query.\

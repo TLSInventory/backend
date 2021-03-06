@@ -31,6 +31,7 @@ import app.utils.extract_test as extract_test
 import app.utils.authentication_utils as authentication_utils
 import app.utils.normalize_jsons as normalize_jsons
 import app.object_models as object_models
+from app.utils.time_helper import time_source, datetime_to_timestamp
 
 
 @bp.route('/sslyze_get_direct_scan/<string:domain>')
@@ -134,7 +135,7 @@ def scenario1():
 
         db_models.ScanOrder.from_kwargs({"target_id": 1, "user_id": 1, "periodicity": 60})
 
-        # date_offseted = datetime.datetime.now() - datetime.timedelta(days=10)
+        # date_offseted = time_source.time() - datetime.timedelta(days=10)
         # db.session.query(db_models.LastScan) \
         #     .update({db_models.LastScan.last_enqueued: date_offseted}, synchronize_session='fetch')
 

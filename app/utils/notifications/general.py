@@ -9,6 +9,7 @@ import app.utils.db.basic as db_utils
 from app.utils.notifications.user_preferences import get_effective_active_notification_settings
 from app.utils.notifications.connection_types import Notification
 from app.utils.notifications.event_type_expiration import NotificationTypeExpiration
+from app.utils.time_helper import time_source, datetime_to_timestamp
 
 # def get_res_old_and_new(changed_targets):
 #     # todo: this might not work, it's not finished.
@@ -21,7 +22,7 @@ from app.utils.notifications.event_type_expiration import NotificationTypeExpira
 #         .filter(db_models.ScanOrder.target_id.in_(changed_targets)) \
 #         .all()
 #
-#     minimum_wait_time = db_models.datetime_to_timestamp(datetime.datetime.now() - datetime.timedelta(minutes=5))
+#     minimum_wait_time = datetime_to_timestamp(time_source.time() - datetime.timedelta(minutes=5))
 #
 #     res_old = db_models.db.session \
 #         .query(db_models.ScanOrder, db_models.Target, db_models.ScanResults) \

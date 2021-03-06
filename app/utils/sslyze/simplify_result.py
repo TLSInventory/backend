@@ -4,6 +4,7 @@ import app.db_models as db_models
 import app.utils.db.basic as db_utils
 from loguru import logger
 import app.utils.sslyze.grade_scan_result as grade_scan_result
+from app.utils.time_helper import time_source, datetime_to_timestamp
 
 
 def count_after_split_of_param_if_not_none(x: Optional[object], param_name: str) -> Optional[int]:
@@ -46,8 +47,8 @@ def sslyze_result_simplify(scan_result: db_models.ScanResults) -> db_models.Scan
         chain_for_dates = verified_chain_list if verified_chain_list else received_chain_list
 
         if chain_for_dates:
-            simple.notAfter = db_models.datetime_to_timestamp(chain_for_dates.not_after())
-            simple.notBefore = db_models.datetime_to_timestamp(chain_for_dates.not_before())
+            simple.notAfter = datetime_to_timestamp(chain_for_dates.not_after())
+            simple.notBefore = datetime_to_timestamp(chain_for_dates.not_before())
 
     simple.sslv2_working_ciphers_count = count_after_split_of_param_if_not_none(scan_result.sslv2, "accepted_cipher_list")
     simple.sslv3_working_ciphers_count = count_after_split_of_param_if_not_none(scan_result.sslv3, "accepted_cipher_list")

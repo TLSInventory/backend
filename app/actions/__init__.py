@@ -7,6 +7,7 @@ from app import db_models, db_schemas, logger
 import app.object_models as object_models
 import app.utils.sslyze.scanner as sslyze_scanner
 import app.utils.sslyze.parse_result as sslyze_parse_result
+from app.utils.time_helper import time_source, datetime_to_timestamp
 
 from . import sensor_collector
 
@@ -99,9 +100,9 @@ def get_last_scan_and_result(target_id: int, user_id: int) -> Optional[
 
 
 def get_scan_history(user_id: int, x_days: int = 30):  # -> Optional[Tuple[db_models.LastScan, db_models.ScanResults]]:
-    today = datetime.datetime.now()
+    today = time_source.time()
     start = today - datetime.timedelta(days=x_days)
-    start_timestamp = db_models.datetime_to_timestamp(start)
+    start_timestamp = datetime_to_timestamp(start)
 
     res = db_models.db.session \
         .query(db_models.ScanOrder, db_models.Target, db_models.ScanResultsHistory, db_models.ScanResultsSimplified) \
