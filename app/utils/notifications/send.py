@@ -45,7 +45,7 @@ def slack_send_msg_via_webhook(webhook: str, msg: str):
 
 def email_send_msg(to: str, msg: str, subject="Notification from TLSInventory"):
     if not MailConfig.enabled:
-        logger.info("Notification not send, because MailConfig is disabled.")
+        logger.info("NT0007 Notification not send, because MailConfig is disabled.")
         return None
 
     if MailConfig.use_gmail:

@@ -68,9 +68,9 @@ def create_app():
             app_new.config.from_object(rq_dashboard.default_settings)
             app_new.register_blueprint(rq_dashboard.blueprint, url_prefix='/debug/rq_dashboard/')
 
-        logger.info("Before DB create")
+        logger.info("DB0007 Before DB create")
         db.create_all()
-        logger.info("After DB create")
+        logger.info("DB0008 After DB create")
 
         return app_new
 

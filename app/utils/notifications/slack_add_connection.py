@@ -34,7 +34,7 @@ def validate_code_and_save(auth_code, user_id) -> bool:
     if response.data["ok"]:
         save_slack_config(response.data, user_id)
     else:
-        logger.warning(response.data)
+        logger.warning(f"SC0001 response.data: {response.data}")
     logger.debug((response.data, response.status_code))
     return response.data["ok"]
 

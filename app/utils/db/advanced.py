@@ -37,6 +37,6 @@ def generic_delete_from_data(schema: db_schemas.SQLAlchemyAutoSchema, data: dict
         app.db.session.delete(res)
         app.db.session.commit()
     except Exception as e:
-        logger.warning(f'Delete failed for model {res}')
+        logger.warning(f'DB0001 Delete failed for model {res}')
         return False
     return True

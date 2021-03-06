@@ -95,7 +95,7 @@ def additional_channel_email_actions(email_pref: dict, user_id: int) -> bool:
             new_emails_ids_to_force_enable = [x.id for x in new_mails_or_exception_msg]
             email_pref.force_enabled_ids.extend(new_emails_ids_to_force_enable)
         except Exception as e:
-            logger.error(f"Error adding new emails for target: {e}")
+            logger.error(f"NT0001 Error adding new emails for target: {e}")
             return False
 
     return True

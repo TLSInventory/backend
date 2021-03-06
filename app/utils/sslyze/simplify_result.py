@@ -18,7 +18,7 @@ def sslyze_result_simplify(scan_result: db_models.ScanResults) -> db_models.Scan
     simple.scanresult_id = scan_result.id
 
     if not scan_result.certificate_information:
-        logger.info(f"Simplifing scan result ({scan_result.id}) which doesn't have certificate_information")
+        logger.info(f"SC0004 Simplifing scan result ({scan_result.id}) which doesn't have certificate_information")
     else:
         simple.received_certificate_chain_list_id = scan_result.certificate_information.received_certificate_chain_list_id
 

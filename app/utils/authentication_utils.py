@@ -16,11 +16,11 @@ def check_if_jwt_secret_key_is_too_short(sigkill_on_problem=True):
     if config.FlaskConfig.JWT_ALGORITHM == "HS512":
         min_chars = 90
         if config.FlaskConfig.JWT_SECRET_KEY is None or len(config.FlaskConfig.JWT_SECRET_KEY) < min_chars:
-            logger.exception(f"JWT_SECRET_KEY is shorter than {min_chars}. Long enough key is needed for security reasons.")
+            logger.exception(f"JW0001 JWT_SECRET_KEY is shorter than {min_chars}. Long enough key is needed for security reasons.")
             if sigkill_on_problem:
                 os.kill(os.getpid(), 9)  # sigkill
     else:
-        logger.warning("Using different algorithm for JWT than HS512."
+        logger.warning("JW0002 Using different algorithm for JWT than HS512."
                        "Check for min key length for sufficient entropy is not implemented here.")
 
 

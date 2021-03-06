@@ -78,16 +78,17 @@ def receive_before_update(mapper, connection, target):
     # Respect the restrictions made by SQLAlchemy. Check before any modifications to DB.
     # This does not solve the update for ScanOrderMinimal.
     if hasattr(target, '__noUpdate__'):
-        logger.error(f"Delete of record in table with noUpdate: {type(target)}")
+        logger.error(f"DB0009 Delete of record in table with noUpdate: {type(target)}")
 
-
+# duplicate function
+"""
 @event.listens_for(Base, 'before_delete', propagate=True)
 def receive_before_delete(mapper, connection, target):
     # Respect the restrictions made by SQLAlchemy. Check before any modifications to DB.
     # This does not solve the update for ScanOrderMinimal.
     if hasattr(target, '__noUpdate__'):
         logger.error(f"Delete of record in table with noUpdate: {type(target)}")
-
+"""
 
 # ----------- Users -----------
 
@@ -219,7 +220,7 @@ class LastScan(Base, UniqueModel):  # this might not have to be in DB, it might 
             db.session.commit()
         except Exception as e:
             db.session.rollback()
-            logger.warning(f"Failed creating last_scan with error {e}")
+            logger.warning(f"SC0007 Failed creating last_scan with error {e}")
             pass
 
 

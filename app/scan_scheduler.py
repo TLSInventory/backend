@@ -30,7 +30,7 @@ def default_enqueued_offseted_timestamp():
 
 
 def update_scan_order_minimal_for_target(target_id: int) -> Optional[int]:
-    logger.info(f"Updating minimal scan order for target_id: {target_id}")
+    logger.info(f"SC0008 Updating minimal scan order for target_id: {target_id}")
     res = db.session.query(func.min(db_models.ScanOrder.periodicity)) \
         .filter(db_models.ScanOrder.target_id == target_id) \
         .filter(db_models.ScanOrder.active == True) \
@@ -86,8 +86,8 @@ def get_due_targets(limit_n=SchedulerConfig.batch_increments):
     if remains_empty_in_batch > 0:
         res_rescan = qry_rescan().limit(remains_empty_in_batch).all()
 
-    logger.debug(f"Get due targets (first scan) of {len(res_first_scan)} elements with limit {limit_n}: {res_first_scan}")
-    logger.debug(f"Get due targets (rescan) of {len(res_rescan)} elements with limit {remains_empty_in_batch}: {res_rescan}")
+    logger.debug(f"SC0009 Get due targets (first scan) of {len(res_first_scan)} elements with limit {limit_n}: {res_first_scan}")
+    logger.debug(f"SC0010 Get due targets (rescan) of {len(res_rescan)} elements with limit {remains_empty_in_batch}: {res_rescan}")
 
     return [x[0] for x in (res_first_scan + res_rescan)]
 
@@ -193,7 +193,7 @@ def deduplicate_scan_orders(targets_e: List[object_models.TargetWithExtra]):
             unique_targets_repr.add(repr(x.target_definition))
             unique_targets.append(x)
         else:
-            logger.warning(f'{repr(x.target_definition)} got enqueued twice for the same scan batch.')
+            logger.warning(f'SC0011 {repr(x.target_definition)} got enqueued twice for the same scan batch.')
 
     targets_e = unique_targets
     logger.info(f"Batch (size {len(targets_e)} with soft max {SchedulerConfig.batch_size}): {targets_e}")

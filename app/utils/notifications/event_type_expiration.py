@@ -39,7 +39,7 @@ class NotificationTypeExpiration(object):
                 val = single_res.ScanResults.certificate_information.received_certificate_chain_list.not_after()
                 expiration_by_target_id[key] = val
             except AttributeError as e:
-                logger.info(f"NotificationTypeExpiration: Handled AttributeError, most likely due to failed scan. Target id: {key}")
+                logger.info(f"NT0002 NotificationTypeExpiration: Handled AttributeError, most likely due to failed scan. Target id: {key}")
 
         scan_order_ids_expired = set()
         scan_order_ids_nearing_expiration = set()
@@ -71,10 +71,10 @@ class NotificationTypeExpiration(object):
                     scan_order_ids_nearing_expiration.add(single_res.ScanOrder.id)
 
             except KeyError as e:
-                logger.info(f"NotificationTypeExpiration: Handled KeyError, most likely due to failed scan.")
+                logger.info(f"NT0003 NotificationTypeExpiration: Handled KeyError, most likely due to failed scan.")
 
-        logger.info(f"scan_order_ids_expired orders ids: {scan_order_ids_expired}")
-        logger.info(f"scan_order_ids_nearing_expiration ids: {scan_order_ids_nearing_expiration}")
+        logger.info(f"NT0004 scan_order_ids_expired orders ids: {scan_order_ids_expired}")
+        logger.info(f"NT0005 scan_order_ids_nearing_expiration ids: {scan_order_ids_nearing_expiration}")
 
         return scan_order_ids_expired, scan_order_ids_nearing_expiration
 

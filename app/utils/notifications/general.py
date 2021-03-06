@@ -105,6 +105,6 @@ def send_notifications(planned_notifications: Optional[List[Notification]] = Non
                 res = db_utils.get_or_create_by_unique(db_models.SentNotificationsLog, log_dict)
                 count_succesfully_sent_notifications += 1
             else:
-                logger.warning("Sending of notification failed.")
+                logger.warning("NT0006 Sending of notification failed.")
     return count_succesfully_sent_notifications
 

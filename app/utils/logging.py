@@ -18,7 +18,7 @@ def get_version_from_file():
         return version_txt
 
 
-logger.info(f'New instance of app. Version {get_version_from_file()}')
+logger.info(f'LG0001 New instance of app. Version {get_version_from_file()}')
 
 logging.getLogger('flask_cors').level = LogConfig.cors_level
 
