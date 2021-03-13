@@ -1,0 +1,3905 @@
+{
+  "success": false,
+  "target": "borysek.eu:443@None",
+  "server_info": {
+    "hostname": "borysek.eu",
+    "port": 443,
+    "ip_address": "104.27.132.102",
+    "tls_wrapped_protocol": "PLAIN_TLS",
+    "tls_server_name_indication": "borysek.eu",
+    "xmpp_to_hostname": null,
+    "client_auth_credentials": null,
+    "http_tunneling_settings": null,
+    "highest_ssl_version_supported": "TLSV1_3",
+    "openssl_cipher_string_supported": "TLS_AES_256_GCM_SHA384",
+    "client_auth_requirement": "DISABLED"
+  },
+  "results": {
+    "TLS 1.2 Session Resumption Support": {
+      "attempted_resumptions_nb": 5,
+      "successful_resumptions_nb": 5,
+      "errored_resumptions_list": [],
+      "failed_resumptions_nb": 0,
+      "is_ticket_resumption_supported": true,
+      "ticket_resumption_failed_reason": null,
+      "ticket_resumption_error": null
+    },
+    "OpenSSL Heartbleed": {
+      "is_vulnerable_to_heartbleed": false
+    },
+    "Session Renegotiation": {
+      "accepts_client_renegotiation": false,
+      "supports_secure_renegotiation": true
+    },
+    "TLS 1.3 Early Data": {
+      "is_early_data_supported": false
+    },
+    "Deflate Compression": {
+      "compression_name": null
+    },
+    "HTTP Security Headers": {
+      "strict_transport_security_header": null,
+      "public_key_pins_header": null,
+      "public_key_pins_report_only_header": null,
+      "expect_ct_header": {
+        "max_age": 604800,
+        "report_uri": null,
+        "enforce": false
+      },
+      "verified_certificate_chain": [
+        {
+          "as_pem": "-----BEGIN CERTIFICATE-----\nMIIE4zCCBImgAwIBAgIQCHfsVTf9BrUvH8uVnuIv8TAKBggqhkjOPQQDAjBvMQsw\nCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28x\nGTAXBgNVBAoTEENsb3VkRmxhcmUsIEluYy4xIDAeBgNVBAMTF0Nsb3VkRmxhcmUg\nSW5jIEVDQyBDQS0yMB4XDTIwMDEzMDAwMDAwMFoXDTIwMTAwOTEyMDAwMFowbTEL\nMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2Nv\nMRkwFwYDVQQKExBDbG91ZGZsYXJlLCBJbmMuMR4wHAYDVQQDExVzbmkuY2xvdWRm\nbGFyZXNzbC5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASe8WZxKR+W4Rng\nSdm9YK+P21ARfqFz8pdW2kx90f5CWPNIBgjhepWj86YvLFaZnpskqMTGzOKb533R\n1IMTYmtbo4IDBzCCAwMwHwYDVR0jBBgwFoAUPnQtH89FdQR+P8Cihz5MQ4NRE8Yw\nHQYDVR0OBBYEFE0Olba6PZvLYPk7SQ6oAy+FTGirMDoGA1UdEQQzMDGCDCouYm9y\neXNlay5ldYIVc25pLmNsb3VkZmxhcmVzc2wuY29tggpib3J5c2VrLmV1MA4GA1Ud\nDwEB/wQEAwIHgDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIweQYDVR0f\nBHIwcDA2oDSgMoYwaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0Nsb3VkRmxhcmVJ\nbmNFQ0NDQTIuY3JsMDagNKAyhjBodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vQ2xv\ndWRGbGFyZUluY0VDQ0NBMi5jcmwwTAYDVR0gBEUwQzA3BglghkgBhv1sAQEwKjAo\nBggrBgEFBQcCARYcaHR0cHM6Ly93d3cuZGlnaWNlcnQuY29tL0NQUzAIBgZngQwB\nAgIwdgYIKwYBBQUHAQEEajBoMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdp\nY2VydC5jb20wQAYIKwYBBQUHMAKGNGh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNv\nbS9DbG91ZEZsYXJlSW5jRUNDQ0EtMi5jcnQwDAYDVR0TAQH/BAIwADCCAQUGCisG\nAQQB1nkCBAIEgfYEgfMA8QB3ALvZ37wfinG1k5Qjl6qSe0c4V5UKq1LoGpCWZDaO\nHtGFAAABb/R9TPQAAAQDAEgwRgIhANeUGX2fm+4zDRgKDyDYLEy948PjPDtXMBA3\nZKGPSUU9AiEAqptnsbnM5KZ2bYBxALjnR3k2hazRDVaM06eUiRetK5AAdgBep3P5\n31bA57U2SH3QSeAyepGaDIShEhKEGHWWgXFFWAAAAW/0fUyZAAAEAwBHMEUCIQCW\nuL4l8MMsaNO9o3kl+lxlNakLReJErx1/3aKNLwP/ZQIgWHbqHI+ZcKBAUukz0FEy\nYGS69lB2B/X0A5gQ+bbmQdMwCgYIKoZIzj0EAwIDSAAwRQIhANJhswKqbY1FSsIy\nWcLAvH3c+j18s92/QukBahyMHaBtAiAdbVfUDrIOoXd6j1NaFXK2jGabwjOl2+Km\nwISZkAe6kA==\n-----END CERTIFICATE-----\n",
+          "hpkp_pin": "w3CFyTvRgyoBFemN2XIkI+6fE/dJXG7Rj2YOWpeSv9M=",
+          "subject": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=Cloudflare, Inc., commonName=sni.cloudflaressl.com",
+          "issuer": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=CloudFlare, Inc., commonName=CloudFlare Inc ECC CA-2",
+          "serialNumber": "11256500692832812426706043555859804145",
+          "notBefore": "2020-01-30 00:00:00",
+          "notAfter": "2020-10-09 12:00:00",
+          "signatureAlgorithm": "sha256",
+          "publicKey": {
+            "algorithm": "EllipticCurve",
+            "size": "256",
+            "curve": "secp256r1"
+          },
+          "subjectAlternativeName": {
+            "DNS": [
+              "*.borysek.eu",
+              "sni.cloudflaressl.com",
+              "borysek.eu"
+            ]
+          }
+        },
+        {
+          "as_pem": "-----BEGIN CERTIFICATE-----\nMIIDozCCAougAwIBAgIQD/PmFjmqPRoSZfQfizTltjANBgkqhkiG9w0BAQsFADBa\nMQswCQYDVQQGEwJJRTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJl\nclRydXN0MSIwIAYDVQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTE1\nMTAxNDEyMDAwMFoXDTIwMTAwOTEyMDAwMFowbzELMAkGA1UEBhMCVVMxCzAJBgNV\nBAgTAkNBMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBDbG91ZEZs\nYXJlLCBJbmMuMSAwHgYDVQQDExdDbG91ZEZsYXJlIEluYyBFQ0MgQ0EtMjBZMBMG\nByqGSM49AgEGCCqGSM49AwEHA0IABNFW9Jy25DGg9aRSz+Oaeob/8oayXsy1WcwR\nx07dZP1VnGDjoEvZeFT/SFC6ouGhWHWPx2A3RBZNVZns7tQzeiOjggEZMIIBFTAS\nBgNVHRMBAf8ECDAGAQH/AgEAMA4GA1UdDwEB/wQEAwIBhjA0BggrBgEFBQcBAQQo\nMCYwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTA6BgNVHR8E\nMzAxMC+gLaArhilodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vT21uaXJvb3QyMDI1\nLmNybDA9BgNVHSAENjA0MDIGBFUdIAAwKjAoBggrBgEFBQcCARYcaHR0cHM6Ly93\nd3cuZGlnaWNlcnQuY29tL0NQUzAdBgNVHQ4EFgQUPnQtH89FdQR+P8Cihz5MQ4NR\nE8YwHwYDVR0jBBgwFoAU5Z1ZMIJHWMys+ghUNoZ7OrUETfAwDQYJKoZIhvcNAQEL\nBQADggEBADhfp//8hfJzMuTVo4mZlmCvMsEDs2Xfvh4DyqXthbKPr0uMc48qjKkA\nDgEkF/fsUoV2yOUcecrDF4dQtgQzNp4qnhgXljISr0PMVxje28fYiCWD5coGJTH9\nvV1IO1EB3SwUx8FgUemVAdiyM1YOR2aNbM2v+YXZ6xxHR4g06PD6wqtPaU4JWdRX\nxszByOPmGcFYOFLi4oOF3iI03D+m968kvOBvwKtoLVLHawVXLEIbLUiHAwyQq0hI\nqSi+NIr7uu30YJkdFXgRqtltU39pKLy3ayB2f6BVA3F59WensKAKF1eyAKmtz/9n\njD4m5ackvMJvEOiJxnCl0h+A7Q0/JxM=\n-----END CERTIFICATE-----\n",
+          "hpkp_pin": "3kcNJzkUJ1RqMXJzFX4Zxux5WfETK+uL6Viq9lJNn4o=",
+          "subject": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=CloudFlare, Inc., commonName=CloudFlare Inc ECC CA-2",
+          "issuer": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+          "serialNumber": "21204814788472567899750642361434432950",
+          "notBefore": "2015-10-14 12:00:00",
+          "notAfter": "2020-10-09 12:00:00",
+          "signatureAlgorithm": "sha256",
+          "publicKey": {
+            "algorithm": "EllipticCurve",
+            "size": "256",
+            "curve": "secp256r1"
+          }
+        },
+        {
+          "as_pem": "-----BEGIN CERTIFICATE-----\nMIIDdzCCAl+gAwIBAgIEAgAAuTANBgkqhkiG9w0BAQUFADBaMQswCQYDVQQGEwJJ\nRTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJlclRydXN0MSIwIAYD\nVQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTAwMDUxMjE4NDYwMFoX\nDTI1MDUxMjIzNTkwMFowWjELMAkGA1UEBhMCSUUxEjAQBgNVBAoTCUJhbHRpbW9y\nZTETMBEGA1UECxMKQ3liZXJUcnVzdDEiMCAGA1UEAxMZQmFsdGltb3JlIEN5YmVy\nVHJ1c3QgUm9vdDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKMEuyKr\nmD1X6CZymrV51Cni4eiVgLGw41uOKymaZN+hXe2wCQVt2yguzmKiYv60iNoS6zjr\nIZ3AQSsBUnuId9Mcj8e6uYi1agnnc+gRQKfRzMpijS3ljwumUNKoUMMo6vWrJYeK\nmpYcqWe4PwzV9/lSEy/CG9VwcPCPwBLKBsua4dnKM3p31vjsufFoREJIE9LAwqSu\nXmD+tqYF/LTdB1kC1FkYmGP1pWPgkAx9XbIGevOF6uvUA65ehD5f/xXtabz5OTZy\ndc93Uk3zyZAsuT3lySNTPx8kmCFcB5kpvcY67Oduhjprl3RjM71oGDHweI12v/ye\njl0qhqdNkNwnGjkCAwEAAaNFMEMwHQYDVR0OBBYEFOWdWTCCR1jMrPoIVDaGezq1\nBE3wMBIGA1UdEwEB/wQIMAYBAf8CAQMwDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3\nDQEBBQUAA4IBAQCFDF2O5G9RaEIFoN27TyclhAO992T9Ldcw46QQF+vaKSm2eT92\n9hkTI7gQCvlYpNRhcL0EYWoSihfVCr3FvDB81ukMJY2GQE/szKN+OMY3EU/t3Wgx\njkzSswF07r51XgdIGn9w/xZchMB5hbgF/X++ZRGjD8ACtPhSNzkE1akxehi/oCr0\nEpn3o0WC4zxe9Z2etciefC7IpJ5OCBRLbf1wbWsaY71k5h+3zvDyny67G7fyUIhz\nksLi4xaNmjICq44Y3ekQEe5+NauQrz4wlHrQMz2nZQ/1/I6eYs9HRCwBXbsdtTLS\nR9I4LtD+gdwyah617jzV/OeBHRnDJELqYzmp\n-----END CERTIFICATE-----\n",
+          "hpkp_pin": "Y9mvm0exBk1JoQ57f9Vm28jKo5lFm/woKcVxrYxu80o=",
+          "subject": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+          "issuer": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+          "serialNumber": "33554617",
+          "notBefore": "2000-05-12 18:46:00",
+          "notAfter": "2025-05-12 23:59:00",
+          "signatureAlgorithm": "sha1",
+          "publicKey": {
+            "algorithm": "RSA",
+            "size": "2048",
+            "exponent": "65537"
+          }
+        }
+      ],
+      "is_valid_pin_configured": null,
+      "is_backup_pin_configured": null
+    },
+    "OpenSSL CCS Injection": {
+      "is_vulnerable_to_ccs_injection": false
+    },
+    "TLS 1.2 Session Resumption Rate": {
+      "attempted_resumptions_nb": 100,
+      "successful_resumptions_nb": 99,
+      "errored_resumptions_list": [],
+      "failed_resumptions_nb": 1
+    },
+    "TLSV1_3 Cipher Suites": {
+      "preferred_cipher": {
+        "openssl_name": "TLS_AES_256_GCM_SHA384",
+        "ssl_version": "TLSV1_3",
+        "is_anonymous": false,
+        "key_size": 256,
+        "post_handshake_response": ""
+      },
+      "accepted_cipher_list": [
+        {
+          "openssl_name": "TLS_CHACHA20_POLY1305_SHA256",
+          "ssl_version": "TLSV1_3",
+          "is_anonymous": false,
+          "key_size": 256,
+          "post_handshake_response": ""
+        },
+        {
+          "openssl_name": "TLS_AES_256_GCM_SHA384",
+          "ssl_version": "TLSV1_3",
+          "is_anonymous": false,
+          "key_size": 256,
+          "post_handshake_response": ""
+        },
+        {
+          "openssl_name": "TLS_AES_128_GCM_SHA256",
+          "ssl_version": "TLSV1_3",
+          "is_anonymous": false,
+          "key_size": 128,
+          "post_handshake_response": ""
+        }
+      ],
+      "rejected_cipher_list": [
+        {
+          "openssl_name": "TLS_AES_128_CCM_SHA256",
+          "ssl_version": "TLSV1_3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "TLS_AES_128_CCM_8_SHA256",
+          "ssl_version": "TLSV1_3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        }
+      ],
+      "errored_cipher_list": []
+    },
+    "TLSV1_2 Cipher Suites": {
+      "preferred_cipher": {
+        "openssl_name": "ECDHE-ECDSA-AES128-GCM-SHA256",
+        "ssl_version": "TLSV1_2",
+        "is_anonymous": false,
+        "key_size": 128,
+        "post_handshake_response": ""
+      },
+      "accepted_cipher_list": [
+        {
+          "openssl_name": "ECDHE-ECDSA-CHACHA20-POLY1305",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "key_size": 256,
+          "post_handshake_response": ""
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "key_size": 256,
+          "post_handshake_response": ""
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES256-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "key_size": 256,
+          "post_handshake_response": ""
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES256-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "key_size": 256,
+          "post_handshake_response": ""
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "key_size": 128,
+          "post_handshake_response": ""
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES128-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "key_size": 128,
+          "post_handshake_response": ""
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES128-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "key_size": 128,
+          "post_handshake_response": ""
+        }
+      ],
+      "rejected_cipher_list": [
+        {
+          "openssl_name": "SEED-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "RC4-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "RC4-MD5",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "NULL-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "NULL-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "NULL-MD5",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "IDEA-CBC-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DES-CBC-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "CAMELLIA256-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "CAMELLIA256-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "CAMELLIA128-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "CAMELLIA128-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AES256-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AES256-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AES128-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AES128-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DES-CBC3-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-RC4-MD5",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-RC2-CBC-MD5",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-DES-CBC-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AECDH-RC4-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AECDH-NULL-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AECDH-AES256-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AECDH-AES128-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AECDH-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-RC4-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-NULL-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES256-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES256-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES128-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES128-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-RC4-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-NULL-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES256-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES256-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES128-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES128-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-RC4-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-NULL-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-CHACHA20-POLY1305",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-CAMELLIA256-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-CAMELLIA128-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES256-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES256-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES128-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES128-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-RC4-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-NULL-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-CAMELLIA256-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-CAMELLIA128-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-SEED-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-RC4-MD5",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-DES-CBC-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-CAMELLIA256-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ADH-CAMELLIA256-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-CAMELLIA128-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ADH-CAMELLIA128-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-AES256-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-AES256-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-AES128-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-AES128-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-ADH-RC4-MD5",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-ADH-DES-CBC-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-SEED-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-DES-CBC-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-CAMELLIA256-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-CAMELLIA128-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-AES256-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-AES256-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-AES128-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-AES128-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-SEED-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-DES-CBC-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-CAMELLIA256-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-CAMELLIA128-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-AES256-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-AES256-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-AES128-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-AES128-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-SEED-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EDH-RSA-DES-CBC-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-CHACHA20-POLY1305",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-CAMELLIA256-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-CAMELLIA256-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-CAMELLIA128-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-CAMELLIA128-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES256-CCM",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES256-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES256-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES128-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES128-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EDH-RSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-EDH-RSA-DES-CBC-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-SEED-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EDH-DSS-DES-CBC-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-CAMELLIA256-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-CAMELLIA256-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-CAMELLIA128-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-CAMELLIA128-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES256-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES256-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES128-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES128-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EDH-DSS-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-EDH-DSS-DES-CBC-SHA",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AES256-CCM8",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AES256-CCM",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AES128-CCM8",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AES128-CCM",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES256-CCM8",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES256-CCM",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES128-CCM8",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES128-CCM",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-ARIA256-GCM-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-ARIA128-GCM-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ARIA256-GCM-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ARIA128-GCM-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES256-CCM8",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES128-CCM8",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES128-CCM",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-ARIA256-GCM-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-ARIA128-GCM-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-ARIA256-GCM-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-ARIA128-GCM-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ARIA256-GCM-SHA384",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ARIA128-GCM-SHA256",
+          "ssl_version": "TLSV1_2",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        }
+      ],
+      "errored_cipher_list": []
+    },
+    "Certificate Information": {
+      "received_certificate_chain": [
+        {
+          "as_pem": "-----BEGIN CERTIFICATE-----\nMIIE4zCCBImgAwIBAgIQCHfsVTf9BrUvH8uVnuIv8TAKBggqhkjOPQQDAjBvMQsw\nCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28x\nGTAXBgNVBAoTEENsb3VkRmxhcmUsIEluYy4xIDAeBgNVBAMTF0Nsb3VkRmxhcmUg\nSW5jIEVDQyBDQS0yMB4XDTIwMDEzMDAwMDAwMFoXDTIwMTAwOTEyMDAwMFowbTEL\nMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2Nv\nMRkwFwYDVQQKExBDbG91ZGZsYXJlLCBJbmMuMR4wHAYDVQQDExVzbmkuY2xvdWRm\nbGFyZXNzbC5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASe8WZxKR+W4Rng\nSdm9YK+P21ARfqFz8pdW2kx90f5CWPNIBgjhepWj86YvLFaZnpskqMTGzOKb533R\n1IMTYmtbo4IDBzCCAwMwHwYDVR0jBBgwFoAUPnQtH89FdQR+P8Cihz5MQ4NRE8Yw\nHQYDVR0OBBYEFE0Olba6PZvLYPk7SQ6oAy+FTGirMDoGA1UdEQQzMDGCDCouYm9y\neXNlay5ldYIVc25pLmNsb3VkZmxhcmVzc2wuY29tggpib3J5c2VrLmV1MA4GA1Ud\nDwEB/wQEAwIHgDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIweQYDVR0f\nBHIwcDA2oDSgMoYwaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0Nsb3VkRmxhcmVJ\nbmNFQ0NDQTIuY3JsMDagNKAyhjBodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vQ2xv\ndWRGbGFyZUluY0VDQ0NBMi5jcmwwTAYDVR0gBEUwQzA3BglghkgBhv1sAQEwKjAo\nBggrBgEFBQcCARYcaHR0cHM6Ly93d3cuZGlnaWNlcnQuY29tL0NQUzAIBgZngQwB\nAgIwdgYIKwYBBQUHAQEEajBoMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdp\nY2VydC5jb20wQAYIKwYBBQUHMAKGNGh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNv\nbS9DbG91ZEZsYXJlSW5jRUNDQ0EtMi5jcnQwDAYDVR0TAQH/BAIwADCCAQUGCisG\nAQQB1nkCBAIEgfYEgfMA8QB3ALvZ37wfinG1k5Qjl6qSe0c4V5UKq1LoGpCWZDaO\nHtGFAAABb/R9TPQAAAQDAEgwRgIhANeUGX2fm+4zDRgKDyDYLEy948PjPDtXMBA3\nZKGPSUU9AiEAqptnsbnM5KZ2bYBxALjnR3k2hazRDVaM06eUiRetK5AAdgBep3P5\n31bA57U2SH3QSeAyepGaDIShEhKEGHWWgXFFWAAAAW/0fUyZAAAEAwBHMEUCIQCW\nuL4l8MMsaNO9o3kl+lxlNakLReJErx1/3aKNLwP/ZQIgWHbqHI+ZcKBAUukz0FEy\nYGS69lB2B/X0A5gQ+bbmQdMwCgYIKoZIzj0EAwIDSAAwRQIhANJhswKqbY1FSsIy\nWcLAvH3c+j18s92/QukBahyMHaBtAiAdbVfUDrIOoXd6j1NaFXK2jGabwjOl2+Km\nwISZkAe6kA==\n-----END CERTIFICATE-----\n",
+          "hpkp_pin": "w3CFyTvRgyoBFemN2XIkI+6fE/dJXG7Rj2YOWpeSv9M=",
+          "subject": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=Cloudflare, Inc., commonName=sni.cloudflaressl.com",
+          "issuer": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=CloudFlare, Inc., commonName=CloudFlare Inc ECC CA-2",
+          "serialNumber": "11256500692832812426706043555859804145",
+          "notBefore": "2020-01-30 00:00:00",
+          "notAfter": "2020-10-09 12:00:00",
+          "signatureAlgorithm": "sha256",
+          "publicKey": {
+            "algorithm": "EllipticCurve",
+            "size": "256",
+            "curve": "secp256r1"
+          },
+          "subjectAlternativeName": {
+            "DNS": [
+              "*.borysek.eu",
+              "sni.cloudflaressl.com",
+              "borysek.eu"
+            ]
+          }
+        },
+        {
+          "as_pem": "-----BEGIN CERTIFICATE-----\nMIIDozCCAougAwIBAgIQD/PmFjmqPRoSZfQfizTltjANBgkqhkiG9w0BAQsFADBa\nMQswCQYDVQQGEwJJRTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJl\nclRydXN0MSIwIAYDVQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTE1\nMTAxNDEyMDAwMFoXDTIwMTAwOTEyMDAwMFowbzELMAkGA1UEBhMCVVMxCzAJBgNV\nBAgTAkNBMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBDbG91ZEZs\nYXJlLCBJbmMuMSAwHgYDVQQDExdDbG91ZEZsYXJlIEluYyBFQ0MgQ0EtMjBZMBMG\nByqGSM49AgEGCCqGSM49AwEHA0IABNFW9Jy25DGg9aRSz+Oaeob/8oayXsy1WcwR\nx07dZP1VnGDjoEvZeFT/SFC6ouGhWHWPx2A3RBZNVZns7tQzeiOjggEZMIIBFTAS\nBgNVHRMBAf8ECDAGAQH/AgEAMA4GA1UdDwEB/wQEAwIBhjA0BggrBgEFBQcBAQQo\nMCYwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTA6BgNVHR8E\nMzAxMC+gLaArhilodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vT21uaXJvb3QyMDI1\nLmNybDA9BgNVHSAENjA0MDIGBFUdIAAwKjAoBggrBgEFBQcCARYcaHR0cHM6Ly93\nd3cuZGlnaWNlcnQuY29tL0NQUzAdBgNVHQ4EFgQUPnQtH89FdQR+P8Cihz5MQ4NR\nE8YwHwYDVR0jBBgwFoAU5Z1ZMIJHWMys+ghUNoZ7OrUETfAwDQYJKoZIhvcNAQEL\nBQADggEBADhfp//8hfJzMuTVo4mZlmCvMsEDs2Xfvh4DyqXthbKPr0uMc48qjKkA\nDgEkF/fsUoV2yOUcecrDF4dQtgQzNp4qnhgXljISr0PMVxje28fYiCWD5coGJTH9\nvV1IO1EB3SwUx8FgUemVAdiyM1YOR2aNbM2v+YXZ6xxHR4g06PD6wqtPaU4JWdRX\nxszByOPmGcFYOFLi4oOF3iI03D+m968kvOBvwKtoLVLHawVXLEIbLUiHAwyQq0hI\nqSi+NIr7uu30YJkdFXgRqtltU39pKLy3ayB2f6BVA3F59WensKAKF1eyAKmtz/9n\njD4m5ackvMJvEOiJxnCl0h+A7Q0/JxM=\n-----END CERTIFICATE-----\n",
+          "hpkp_pin": "3kcNJzkUJ1RqMXJzFX4Zxux5WfETK+uL6Viq9lJNn4o=",
+          "subject": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=CloudFlare, Inc., commonName=CloudFlare Inc ECC CA-2",
+          "issuer": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+          "serialNumber": "21204814788472567899750642361434432950",
+          "notBefore": "2015-10-14 12:00:00",
+          "notAfter": "2020-10-09 12:00:00",
+          "signatureAlgorithm": "sha256",
+          "publicKey": {
+            "algorithm": "EllipticCurve",
+            "size": "256",
+            "curve": "secp256r1"
+          }
+        }
+      ],
+      "path_validation_result_list": [
+        {
+          "trust_store": {
+            "path": "f:\\github\\bakalarka\\personal\\coding1\\venv\\lib\\site-packages\\sslyze\\plugins\\utils\\trust_store\\pem_files\\google_aosp.pem",
+            "name": "Android",
+            "version": "9.0.0_r9",
+            "ev_oids": []
+          },
+          "verified_certificate_chain": [
+            {
+              "as_pem": "-----BEGIN CERTIFICATE-----\nMIIE4zCCBImgAwIBAgIQCHfsVTf9BrUvH8uVnuIv8TAKBggqhkjOPQQDAjBvMQsw\nCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28x\nGTAXBgNVBAoTEENsb3VkRmxhcmUsIEluYy4xIDAeBgNVBAMTF0Nsb3VkRmxhcmUg\nSW5jIEVDQyBDQS0yMB4XDTIwMDEzMDAwMDAwMFoXDTIwMTAwOTEyMDAwMFowbTEL\nMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2Nv\nMRkwFwYDVQQKExBDbG91ZGZsYXJlLCBJbmMuMR4wHAYDVQQDExVzbmkuY2xvdWRm\nbGFyZXNzbC5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASe8WZxKR+W4Rng\nSdm9YK+P21ARfqFz8pdW2kx90f5CWPNIBgjhepWj86YvLFaZnpskqMTGzOKb533R\n1IMTYmtbo4IDBzCCAwMwHwYDVR0jBBgwFoAUPnQtH89FdQR+P8Cihz5MQ4NRE8Yw\nHQYDVR0OBBYEFE0Olba6PZvLYPk7SQ6oAy+FTGirMDoGA1UdEQQzMDGCDCouYm9y\neXNlay5ldYIVc25pLmNsb3VkZmxhcmVzc2wuY29tggpib3J5c2VrLmV1MA4GA1Ud\nDwEB/wQEAwIHgDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIweQYDVR0f\nBHIwcDA2oDSgMoYwaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0Nsb3VkRmxhcmVJ\nbmNFQ0NDQTIuY3JsMDagNKAyhjBodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vQ2xv\ndWRGbGFyZUluY0VDQ0NBMi5jcmwwTAYDVR0gBEUwQzA3BglghkgBhv1sAQEwKjAo\nBggrBgEFBQcCARYcaHR0cHM6Ly93d3cuZGlnaWNlcnQuY29tL0NQUzAIBgZngQwB\nAgIwdgYIKwYBBQUHAQEEajBoMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdp\nY2VydC5jb20wQAYIKwYBBQUHMAKGNGh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNv\nbS9DbG91ZEZsYXJlSW5jRUNDQ0EtMi5jcnQwDAYDVR0TAQH/BAIwADCCAQUGCisG\nAQQB1nkCBAIEgfYEgfMA8QB3ALvZ37wfinG1k5Qjl6qSe0c4V5UKq1LoGpCWZDaO\nHtGFAAABb/R9TPQAAAQDAEgwRgIhANeUGX2fm+4zDRgKDyDYLEy948PjPDtXMBA3\nZKGPSUU9AiEAqptnsbnM5KZ2bYBxALjnR3k2hazRDVaM06eUiRetK5AAdgBep3P5\n31bA57U2SH3QSeAyepGaDIShEhKEGHWWgXFFWAAAAW/0fUyZAAAEAwBHMEUCIQCW\nuL4l8MMsaNO9o3kl+lxlNakLReJErx1/3aKNLwP/ZQIgWHbqHI+ZcKBAUukz0FEy\nYGS69lB2B/X0A5gQ+bbmQdMwCgYIKoZIzj0EAwIDSAAwRQIhANJhswKqbY1FSsIy\nWcLAvH3c+j18s92/QukBahyMHaBtAiAdbVfUDrIOoXd6j1NaFXK2jGabwjOl2+Km\nwISZkAe6kA==\n-----END CERTIFICATE-----\n",
+              "hpkp_pin": "w3CFyTvRgyoBFemN2XIkI+6fE/dJXG7Rj2YOWpeSv9M=",
+              "subject": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=Cloudflare, Inc., commonName=sni.cloudflaressl.com",
+              "issuer": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=CloudFlare, Inc., commonName=CloudFlare Inc ECC CA-2",
+              "serialNumber": "11256500692832812426706043555859804145",
+              "notBefore": "2020-01-30 00:00:00",
+              "notAfter": "2020-10-09 12:00:00",
+              "signatureAlgorithm": "sha256",
+              "publicKey": {
+                "algorithm": "EllipticCurve",
+                "size": "256",
+                "curve": "secp256r1"
+              },
+              "subjectAlternativeName": {
+                "DNS": [
+                  "*.borysek.eu",
+                  "sni.cloudflaressl.com",
+                  "borysek.eu"
+                ]
+              }
+            },
+            {
+              "as_pem": "-----BEGIN CERTIFICATE-----\nMIIDozCCAougAwIBAgIQD/PmFjmqPRoSZfQfizTltjANBgkqhkiG9w0BAQsFADBa\nMQswCQYDVQQGEwJJRTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJl\nclRydXN0MSIwIAYDVQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTE1\nMTAxNDEyMDAwMFoXDTIwMTAwOTEyMDAwMFowbzELMAkGA1UEBhMCVVMxCzAJBgNV\nBAgTAkNBMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBDbG91ZEZs\nYXJlLCBJbmMuMSAwHgYDVQQDExdDbG91ZEZsYXJlIEluYyBFQ0MgQ0EtMjBZMBMG\nByqGSM49AgEGCCqGSM49AwEHA0IABNFW9Jy25DGg9aRSz+Oaeob/8oayXsy1WcwR\nx07dZP1VnGDjoEvZeFT/SFC6ouGhWHWPx2A3RBZNVZns7tQzeiOjggEZMIIBFTAS\nBgNVHRMBAf8ECDAGAQH/AgEAMA4GA1UdDwEB/wQEAwIBhjA0BggrBgEFBQcBAQQo\nMCYwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTA6BgNVHR8E\nMzAxMC+gLaArhilodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vT21uaXJvb3QyMDI1\nLmNybDA9BgNVHSAENjA0MDIGBFUdIAAwKjAoBggrBgEFBQcCARYcaHR0cHM6Ly93\nd3cuZGlnaWNlcnQuY29tL0NQUzAdBgNVHQ4EFgQUPnQtH89FdQR+P8Cihz5MQ4NR\nE8YwHwYDVR0jBBgwFoAU5Z1ZMIJHWMys+ghUNoZ7OrUETfAwDQYJKoZIhvcNAQEL\nBQADggEBADhfp//8hfJzMuTVo4mZlmCvMsEDs2Xfvh4DyqXthbKPr0uMc48qjKkA\nDgEkF/fsUoV2yOUcecrDF4dQtgQzNp4qnhgXljISr0PMVxje28fYiCWD5coGJTH9\nvV1IO1EB3SwUx8FgUemVAdiyM1YOR2aNbM2v+YXZ6xxHR4g06PD6wqtPaU4JWdRX\nxszByOPmGcFYOFLi4oOF3iI03D+m968kvOBvwKtoLVLHawVXLEIbLUiHAwyQq0hI\nqSi+NIr7uu30YJkdFXgRqtltU39pKLy3ayB2f6BVA3F59WensKAKF1eyAKmtz/9n\njD4m5ackvMJvEOiJxnCl0h+A7Q0/JxM=\n-----END CERTIFICATE-----\n",
+              "hpkp_pin": "3kcNJzkUJ1RqMXJzFX4Zxux5WfETK+uL6Viq9lJNn4o=",
+              "subject": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=CloudFlare, Inc., commonName=CloudFlare Inc ECC CA-2",
+              "issuer": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+              "serialNumber": "21204814788472567899750642361434432950",
+              "notBefore": "2015-10-14 12:00:00",
+              "notAfter": "2020-10-09 12:00:00",
+              "signatureAlgorithm": "sha256",
+              "publicKey": {
+                "algorithm": "EllipticCurve",
+                "size": "256",
+                "curve": "secp256r1"
+              }
+            },
+            {
+              "as_pem": "-----BEGIN CERTIFICATE-----\nMIIDdzCCAl+gAwIBAgIEAgAAuTANBgkqhkiG9w0BAQUFADBaMQswCQYDVQQGEwJJ\nRTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJlclRydXN0MSIwIAYD\nVQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTAwMDUxMjE4NDYwMFoX\nDTI1MDUxMjIzNTkwMFowWjELMAkGA1UEBhMCSUUxEjAQBgNVBAoTCUJhbHRpbW9y\nZTETMBEGA1UECxMKQ3liZXJUcnVzdDEiMCAGA1UEAxMZQmFsdGltb3JlIEN5YmVy\nVHJ1c3QgUm9vdDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKMEuyKr\nmD1X6CZymrV51Cni4eiVgLGw41uOKymaZN+hXe2wCQVt2yguzmKiYv60iNoS6zjr\nIZ3AQSsBUnuId9Mcj8e6uYi1agnnc+gRQKfRzMpijS3ljwumUNKoUMMo6vWrJYeK\nmpYcqWe4PwzV9/lSEy/CG9VwcPCPwBLKBsua4dnKM3p31vjsufFoREJIE9LAwqSu\nXmD+tqYF/LTdB1kC1FkYmGP1pWPgkAx9XbIGevOF6uvUA65ehD5f/xXtabz5OTZy\ndc93Uk3zyZAsuT3lySNTPx8kmCFcB5kpvcY67Oduhjprl3RjM71oGDHweI12v/ye\njl0qhqdNkNwnGjkCAwEAAaNFMEMwHQYDVR0OBBYEFOWdWTCCR1jMrPoIVDaGezq1\nBE3wMBIGA1UdEwEB/wQIMAYBAf8CAQMwDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3\nDQEBBQUAA4IBAQCFDF2O5G9RaEIFoN27TyclhAO992T9Ldcw46QQF+vaKSm2eT92\n9hkTI7gQCvlYpNRhcL0EYWoSihfVCr3FvDB81ukMJY2GQE/szKN+OMY3EU/t3Wgx\njkzSswF07r51XgdIGn9w/xZchMB5hbgF/X++ZRGjD8ACtPhSNzkE1akxehi/oCr0\nEpn3o0WC4zxe9Z2etciefC7IpJ5OCBRLbf1wbWsaY71k5h+3zvDyny67G7fyUIhz\nksLi4xaNmjICq44Y3ekQEe5+NauQrz4wlHrQMz2nZQ/1/I6eYs9HRCwBXbsdtTLS\nR9I4LtD+gdwyah617jzV/OeBHRnDJELqYzmp\n-----END CERTIFICATE-----\n",
+              "hpkp_pin": "Y9mvm0exBk1JoQ57f9Vm28jKo5lFm/woKcVxrYxu80o=",
+              "subject": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+              "issuer": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+              "serialNumber": "33554617",
+              "notBefore": "2000-05-12 18:46:00",
+              "notAfter": "2025-05-12 23:59:00",
+              "signatureAlgorithm": "sha1",
+              "publicKey": {
+                "algorithm": "RSA",
+                "size": "2048",
+                "exponent": "65537"
+              }
+            }
+          ],
+          "verify_string": "ok"
+        },
+        {
+          "trust_store": {
+            "path": "f:\\github\\bakalarka\\personal\\coding1\\venv\\lib\\site-packages\\sslyze\\plugins\\utils\\trust_store\\pem_files\\apple.pem",
+            "name": "Apple",
+            "version": "iOS 12, macOS 10.14, watchOS 5, and tvOS 12",
+            "ev_oids": []
+          },
+          "verified_certificate_chain": [
+            {
+              "as_pem": "-----BEGIN CERTIFICATE-----\nMIIE4zCCBImgAwIBAgIQCHfsVTf9BrUvH8uVnuIv8TAKBggqhkjOPQQDAjBvMQsw\nCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28x\nGTAXBgNVBAoTEENsb3VkRmxhcmUsIEluYy4xIDAeBgNVBAMTF0Nsb3VkRmxhcmUg\nSW5jIEVDQyBDQS0yMB4XDTIwMDEzMDAwMDAwMFoXDTIwMTAwOTEyMDAwMFowbTEL\nMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2Nv\nMRkwFwYDVQQKExBDbG91ZGZsYXJlLCBJbmMuMR4wHAYDVQQDExVzbmkuY2xvdWRm\nbGFyZXNzbC5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASe8WZxKR+W4Rng\nSdm9YK+P21ARfqFz8pdW2kx90f5CWPNIBgjhepWj86YvLFaZnpskqMTGzOKb533R\n1IMTYmtbo4IDBzCCAwMwHwYDVR0jBBgwFoAUPnQtH89FdQR+P8Cihz5MQ4NRE8Yw\nHQYDVR0OBBYEFE0Olba6PZvLYPk7SQ6oAy+FTGirMDoGA1UdEQQzMDGCDCouYm9y\neXNlay5ldYIVc25pLmNsb3VkZmxhcmVzc2wuY29tggpib3J5c2VrLmV1MA4GA1Ud\nDwEB/wQEAwIHgDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIweQYDVR0f\nBHIwcDA2oDSgMoYwaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0Nsb3VkRmxhcmVJ\nbmNFQ0NDQTIuY3JsMDagNKAyhjBodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vQ2xv\ndWRGbGFyZUluY0VDQ0NBMi5jcmwwTAYDVR0gBEUwQzA3BglghkgBhv1sAQEwKjAo\nBggrBgEFBQcCARYcaHR0cHM6Ly93d3cuZGlnaWNlcnQuY29tL0NQUzAIBgZngQwB\nAgIwdgYIKwYBBQUHAQEEajBoMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdp\nY2VydC5jb20wQAYIKwYBBQUHMAKGNGh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNv\nbS9DbG91ZEZsYXJlSW5jRUNDQ0EtMi5jcnQwDAYDVR0TAQH/BAIwADCCAQUGCisG\nAQQB1nkCBAIEgfYEgfMA8QB3ALvZ37wfinG1k5Qjl6qSe0c4V5UKq1LoGpCWZDaO\nHtGFAAABb/R9TPQAAAQDAEgwRgIhANeUGX2fm+4zDRgKDyDYLEy948PjPDtXMBA3\nZKGPSUU9AiEAqptnsbnM5KZ2bYBxALjnR3k2hazRDVaM06eUiRetK5AAdgBep3P5\n31bA57U2SH3QSeAyepGaDIShEhKEGHWWgXFFWAAAAW/0fUyZAAAEAwBHMEUCIQCW\nuL4l8MMsaNO9o3kl+lxlNakLReJErx1/3aKNLwP/ZQIgWHbqHI+ZcKBAUukz0FEy\nYGS69lB2B/X0A5gQ+bbmQdMwCgYIKoZIzj0EAwIDSAAwRQIhANJhswKqbY1FSsIy\nWcLAvH3c+j18s92/QukBahyMHaBtAiAdbVfUDrIOoXd6j1NaFXK2jGabwjOl2+Km\nwISZkAe6kA==\n-----END CERTIFICATE-----\n",
+              "hpkp_pin": "w3CFyTvRgyoBFemN2XIkI+6fE/dJXG7Rj2YOWpeSv9M=",
+              "subject": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=Cloudflare, Inc., commonName=sni.cloudflaressl.com",
+              "issuer": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=CloudFlare, Inc., commonName=CloudFlare Inc ECC CA-2",
+              "serialNumber": "11256500692832812426706043555859804145",
+              "notBefore": "2020-01-30 00:00:00",
+              "notAfter": "2020-10-09 12:00:00",
+              "signatureAlgorithm": "sha256",
+              "publicKey": {
+                "algorithm": "EllipticCurve",
+                "size": "256",
+                "curve": "secp256r1"
+              },
+              "subjectAlternativeName": {
+                "DNS": [
+                  "*.borysek.eu",
+                  "sni.cloudflaressl.com",
+                  "borysek.eu"
+                ]
+              }
+            },
+            {
+              "as_pem": "-----BEGIN CERTIFICATE-----\nMIIDozCCAougAwIBAgIQD/PmFjmqPRoSZfQfizTltjANBgkqhkiG9w0BAQsFADBa\nMQswCQYDVQQGEwJJRTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJl\nclRydXN0MSIwIAYDVQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTE1\nMTAxNDEyMDAwMFoXDTIwMTAwOTEyMDAwMFowbzELMAkGA1UEBhMCVVMxCzAJBgNV\nBAgTAkNBMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBDbG91ZEZs\nYXJlLCBJbmMuMSAwHgYDVQQDExdDbG91ZEZsYXJlIEluYyBFQ0MgQ0EtMjBZMBMG\nByqGSM49AgEGCCqGSM49AwEHA0IABNFW9Jy25DGg9aRSz+Oaeob/8oayXsy1WcwR\nx07dZP1VnGDjoEvZeFT/SFC6ouGhWHWPx2A3RBZNVZns7tQzeiOjggEZMIIBFTAS\nBgNVHRMBAf8ECDAGAQH/AgEAMA4GA1UdDwEB/wQEAwIBhjA0BggrBgEFBQcBAQQo\nMCYwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTA6BgNVHR8E\nMzAxMC+gLaArhilodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vT21uaXJvb3QyMDI1\nLmNybDA9BgNVHSAENjA0MDIGBFUdIAAwKjAoBggrBgEFBQcCARYcaHR0cHM6Ly93\nd3cuZGlnaWNlcnQuY29tL0NQUzAdBgNVHQ4EFgQUPnQtH89FdQR+P8Cihz5MQ4NR\nE8YwHwYDVR0jBBgwFoAU5Z1ZMIJHWMys+ghUNoZ7OrUETfAwDQYJKoZIhvcNAQEL\nBQADggEBADhfp//8hfJzMuTVo4mZlmCvMsEDs2Xfvh4DyqXthbKPr0uMc48qjKkA\nDgEkF/fsUoV2yOUcecrDF4dQtgQzNp4qnhgXljISr0PMVxje28fYiCWD5coGJTH9\nvV1IO1EB3SwUx8FgUemVAdiyM1YOR2aNbM2v+YXZ6xxHR4g06PD6wqtPaU4JWdRX\nxszByOPmGcFYOFLi4oOF3iI03D+m968kvOBvwKtoLVLHawVXLEIbLUiHAwyQq0hI\nqSi+NIr7uu30YJkdFXgRqtltU39pKLy3ayB2f6BVA3F59WensKAKF1eyAKmtz/9n\njD4m5ackvMJvEOiJxnCl0h+A7Q0/JxM=\n-----END CERTIFICATE-----\n",
+              "hpkp_pin": "3kcNJzkUJ1RqMXJzFX4Zxux5WfETK+uL6Viq9lJNn4o=",
+              "subject": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=CloudFlare, Inc., commonName=CloudFlare Inc ECC CA-2",
+              "issuer": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+              "serialNumber": "21204814788472567899750642361434432950",
+              "notBefore": "2015-10-14 12:00:00",
+              "notAfter": "2020-10-09 12:00:00",
+              "signatureAlgorithm": "sha256",
+              "publicKey": {
+                "algorithm": "EllipticCurve",
+                "size": "256",
+                "curve": "secp256r1"
+              }
+            },
+            {
+              "as_pem": "-----BEGIN CERTIFICATE-----\nMIIDdzCCAl+gAwIBAgIEAgAAuTANBgkqhkiG9w0BAQUFADBaMQswCQYDVQQGEwJJ\nRTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJlclRydXN0MSIwIAYD\nVQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTAwMDUxMjE4NDYwMFoX\nDTI1MDUxMjIzNTkwMFowWjELMAkGA1UEBhMCSUUxEjAQBgNVBAoTCUJhbHRpbW9y\nZTETMBEGA1UECxMKQ3liZXJUcnVzdDEiMCAGA1UEAxMZQmFsdGltb3JlIEN5YmVy\nVHJ1c3QgUm9vdDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKMEuyKr\nmD1X6CZymrV51Cni4eiVgLGw41uOKymaZN+hXe2wCQVt2yguzmKiYv60iNoS6zjr\nIZ3AQSsBUnuId9Mcj8e6uYi1agnnc+gRQKfRzMpijS3ljwumUNKoUMMo6vWrJYeK\nmpYcqWe4PwzV9/lSEy/CG9VwcPCPwBLKBsua4dnKM3p31vjsufFoREJIE9LAwqSu\nXmD+tqYF/LTdB1kC1FkYmGP1pWPgkAx9XbIGevOF6uvUA65ehD5f/xXtabz5OTZy\ndc93Uk3zyZAsuT3lySNTPx8kmCFcB5kpvcY67Oduhjprl3RjM71oGDHweI12v/ye\njl0qhqdNkNwnGjkCAwEAAaNFMEMwHQYDVR0OBBYEFOWdWTCCR1jMrPoIVDaGezq1\nBE3wMBIGA1UdEwEB/wQIMAYBAf8CAQMwDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3\nDQEBBQUAA4IBAQCFDF2O5G9RaEIFoN27TyclhAO992T9Ldcw46QQF+vaKSm2eT92\n9hkTI7gQCvlYpNRhcL0EYWoSihfVCr3FvDB81ukMJY2GQE/szKN+OMY3EU/t3Wgx\njkzSswF07r51XgdIGn9w/xZchMB5hbgF/X++ZRGjD8ACtPhSNzkE1akxehi/oCr0\nEpn3o0WC4zxe9Z2etciefC7IpJ5OCBRLbf1wbWsaY71k5h+3zvDyny67G7fyUIhz\nksLi4xaNmjICq44Y3ekQEe5+NauQrz4wlHrQMz2nZQ/1/I6eYs9HRCwBXbsdtTLS\nR9I4LtD+gdwyah617jzV/OeBHRnDJELqYzmp\n-----END CERTIFICATE-----\n",
+              "hpkp_pin": "Y9mvm0exBk1JoQ57f9Vm28jKo5lFm/woKcVxrYxu80o=",
+              "subject": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+              "issuer": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+              "serialNumber": "33554617",
+              "notBefore": "2000-05-12 18:46:00",
+              "notAfter": "2025-05-12 23:59:00",
+              "signatureAlgorithm": "sha1",
+              "publicKey": {
+                "algorithm": "RSA",
+                "size": "2048",
+                "exponent": "65537"
+              }
+            }
+          ],
+          "verify_string": "ok"
+        },
+        {
+          "trust_store": {
+            "path": "f:\\github\\bakalarka\\personal\\coding1\\venv\\lib\\site-packages\\sslyze\\plugins\\utils\\trust_store\\pem_files\\oracle_java.pem",
+            "name": "Java",
+            "version": "jdk-12.0.1",
+            "ev_oids": []
+          },
+          "verified_certificate_chain": [
+            {
+              "as_pem": "-----BEGIN CERTIFICATE-----\nMIIE4zCCBImgAwIBAgIQCHfsVTf9BrUvH8uVnuIv8TAKBggqhkjOPQQDAjBvMQsw\nCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28x\nGTAXBgNVBAoTEENsb3VkRmxhcmUsIEluYy4xIDAeBgNVBAMTF0Nsb3VkRmxhcmUg\nSW5jIEVDQyBDQS0yMB4XDTIwMDEzMDAwMDAwMFoXDTIwMTAwOTEyMDAwMFowbTEL\nMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2Nv\nMRkwFwYDVQQKExBDbG91ZGZsYXJlLCBJbmMuMR4wHAYDVQQDExVzbmkuY2xvdWRm\nbGFyZXNzbC5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASe8WZxKR+W4Rng\nSdm9YK+P21ARfqFz8pdW2kx90f5CWPNIBgjhepWj86YvLFaZnpskqMTGzOKb533R\n1IMTYmtbo4IDBzCCAwMwHwYDVR0jBBgwFoAUPnQtH89FdQR+P8Cihz5MQ4NRE8Yw\nHQYDVR0OBBYEFE0Olba6PZvLYPk7SQ6oAy+FTGirMDoGA1UdEQQzMDGCDCouYm9y\neXNlay5ldYIVc25pLmNsb3VkZmxhcmVzc2wuY29tggpib3J5c2VrLmV1MA4GA1Ud\nDwEB/wQEAwIHgDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIweQYDVR0f\nBHIwcDA2oDSgMoYwaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0Nsb3VkRmxhcmVJ\nbmNFQ0NDQTIuY3JsMDagNKAyhjBodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vQ2xv\ndWRGbGFyZUluY0VDQ0NBMi5jcmwwTAYDVR0gBEUwQzA3BglghkgBhv1sAQEwKjAo\nBggrBgEFBQcCARYcaHR0cHM6Ly93d3cuZGlnaWNlcnQuY29tL0NQUzAIBgZngQwB\nAgIwdgYIKwYBBQUHAQEEajBoMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdp\nY2VydC5jb20wQAYIKwYBBQUHMAKGNGh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNv\nbS9DbG91ZEZsYXJlSW5jRUNDQ0EtMi5jcnQwDAYDVR0TAQH/BAIwADCCAQUGCisG\nAQQB1nkCBAIEgfYEgfMA8QB3ALvZ37wfinG1k5Qjl6qSe0c4V5UKq1LoGpCWZDaO\nHtGFAAABb/R9TPQAAAQDAEgwRgIhANeUGX2fm+4zDRgKDyDYLEy948PjPDtXMBA3\nZKGPSUU9AiEAqptnsbnM5KZ2bYBxALjnR3k2hazRDVaM06eUiRetK5AAdgBep3P5\n31bA57U2SH3QSeAyepGaDIShEhKEGHWWgXFFWAAAAW/0fUyZAAAEAwBHMEUCIQCW\nuL4l8MMsaNO9o3kl+lxlNakLReJErx1/3aKNLwP/ZQIgWHbqHI+ZcKBAUukz0FEy\nYGS69lB2B/X0A5gQ+bbmQdMwCgYIKoZIzj0EAwIDSAAwRQIhANJhswKqbY1FSsIy\nWcLAvH3c+j18s92/QukBahyMHaBtAiAdbVfUDrIOoXd6j1NaFXK2jGabwjOl2+Km\nwISZkAe6kA==\n-----END CERTIFICATE-----\n",
+              "hpkp_pin": "w3CFyTvRgyoBFemN2XIkI+6fE/dJXG7Rj2YOWpeSv9M=",
+              "subject": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=Cloudflare, Inc., commonName=sni.cloudflaressl.com",
+              "issuer": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=CloudFlare, Inc., commonName=CloudFlare Inc ECC CA-2",
+              "serialNumber": "11256500692832812426706043555859804145",
+              "notBefore": "2020-01-30 00:00:00",
+              "notAfter": "2020-10-09 12:00:00",
+              "signatureAlgorithm": "sha256",
+              "publicKey": {
+                "algorithm": "EllipticCurve",
+                "size": "256",
+                "curve": "secp256r1"
+              },
+              "subjectAlternativeName": {
+                "DNS": [
+                  "*.borysek.eu",
+                  "sni.cloudflaressl.com",
+                  "borysek.eu"
+                ]
+              }
+            },
+            {
+              "as_pem": "-----BEGIN CERTIFICATE-----\nMIIDozCCAougAwIBAgIQD/PmFjmqPRoSZfQfizTltjANBgkqhkiG9w0BAQsFADBa\nMQswCQYDVQQGEwJJRTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJl\nclRydXN0MSIwIAYDVQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTE1\nMTAxNDEyMDAwMFoXDTIwMTAwOTEyMDAwMFowbzELMAkGA1UEBhMCVVMxCzAJBgNV\nBAgTAkNBMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBDbG91ZEZs\nYXJlLCBJbmMuMSAwHgYDVQQDExdDbG91ZEZsYXJlIEluYyBFQ0MgQ0EtMjBZMBMG\nByqGSM49AgEGCCqGSM49AwEHA0IABNFW9Jy25DGg9aRSz+Oaeob/8oayXsy1WcwR\nx07dZP1VnGDjoEvZeFT/SFC6ouGhWHWPx2A3RBZNVZns7tQzeiOjggEZMIIBFTAS\nBgNVHRMBAf8ECDAGAQH/AgEAMA4GA1UdDwEB/wQEAwIBhjA0BggrBgEFBQcBAQQo\nMCYwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTA6BgNVHR8E\nMzAxMC+gLaArhilodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vT21uaXJvb3QyMDI1\nLmNybDA9BgNVHSAENjA0MDIGBFUdIAAwKjAoBggrBgEFBQcCARYcaHR0cHM6Ly93\nd3cuZGlnaWNlcnQuY29tL0NQUzAdBgNVHQ4EFgQUPnQtH89FdQR+P8Cihz5MQ4NR\nE8YwHwYDVR0jBBgwFoAU5Z1ZMIJHWMys+ghUNoZ7OrUETfAwDQYJKoZIhvcNAQEL\nBQADggEBADhfp//8hfJzMuTVo4mZlmCvMsEDs2Xfvh4DyqXthbKPr0uMc48qjKkA\nDgEkF/fsUoV2yOUcecrDF4dQtgQzNp4qnhgXljISr0PMVxje28fYiCWD5coGJTH9\nvV1IO1EB3SwUx8FgUemVAdiyM1YOR2aNbM2v+YXZ6xxHR4g06PD6wqtPaU4JWdRX\nxszByOPmGcFYOFLi4oOF3iI03D+m968kvOBvwKtoLVLHawVXLEIbLUiHAwyQq0hI\nqSi+NIr7uu30YJkdFXgRqtltU39pKLy3ayB2f6BVA3F59WensKAKF1eyAKmtz/9n\njD4m5ackvMJvEOiJxnCl0h+A7Q0/JxM=\n-----END CERTIFICATE-----\n",
+              "hpkp_pin": "3kcNJzkUJ1RqMXJzFX4Zxux5WfETK+uL6Viq9lJNn4o=",
+              "subject": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=CloudFlare, Inc., commonName=CloudFlare Inc ECC CA-2",
+              "issuer": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+              "serialNumber": "21204814788472567899750642361434432950",
+              "notBefore": "2015-10-14 12:00:00",
+              "notAfter": "2020-10-09 12:00:00",
+              "signatureAlgorithm": "sha256",
+              "publicKey": {
+                "algorithm": "EllipticCurve",
+                "size": "256",
+                "curve": "secp256r1"
+              }
+            },
+            {
+              "as_pem": "-----BEGIN CERTIFICATE-----\nMIIDdzCCAl+gAwIBAgIEAgAAuTANBgkqhkiG9w0BAQUFADBaMQswCQYDVQQGEwJJ\nRTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJlclRydXN0MSIwIAYD\nVQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTAwMDUxMjE4NDYwMFoX\nDTI1MDUxMjIzNTkwMFowWjELMAkGA1UEBhMCSUUxEjAQBgNVBAoTCUJhbHRpbW9y\nZTETMBEGA1UECxMKQ3liZXJUcnVzdDEiMCAGA1UEAxMZQmFsdGltb3JlIEN5YmVy\nVHJ1c3QgUm9vdDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKMEuyKr\nmD1X6CZymrV51Cni4eiVgLGw41uOKymaZN+hXe2wCQVt2yguzmKiYv60iNoS6zjr\nIZ3AQSsBUnuId9Mcj8e6uYi1agnnc+gRQKfRzMpijS3ljwumUNKoUMMo6vWrJYeK\nmpYcqWe4PwzV9/lSEy/CG9VwcPCPwBLKBsua4dnKM3p31vjsufFoREJIE9LAwqSu\nXmD+tqYF/LTdB1kC1FkYmGP1pWPgkAx9XbIGevOF6uvUA65ehD5f/xXtabz5OTZy\ndc93Uk3zyZAsuT3lySNTPx8kmCFcB5kpvcY67Oduhjprl3RjM71oGDHweI12v/ye\njl0qhqdNkNwnGjkCAwEAAaNFMEMwHQYDVR0OBBYEFOWdWTCCR1jMrPoIVDaGezq1\nBE3wMBIGA1UdEwEB/wQIMAYBAf8CAQMwDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3\nDQEBBQUAA4IBAQCFDF2O5G9RaEIFoN27TyclhAO992T9Ldcw46QQF+vaKSm2eT92\n9hkTI7gQCvlYpNRhcL0EYWoSihfVCr3FvDB81ukMJY2GQE/szKN+OMY3EU/t3Wgx\njkzSswF07r51XgdIGn9w/xZchMB5hbgF/X++ZRGjD8ACtPhSNzkE1akxehi/oCr0\nEpn3o0WC4zxe9Z2etciefC7IpJ5OCBRLbf1wbWsaY71k5h+3zvDyny67G7fyUIhz\nksLi4xaNmjICq44Y3ekQEe5+NauQrz4wlHrQMz2nZQ/1/I6eYs9HRCwBXbsdtTLS\nR9I4LtD+gdwyah617jzV/OeBHRnDJELqYzmp\n-----END CERTIFICATE-----\n",
+              "hpkp_pin": "Y9mvm0exBk1JoQ57f9Vm28jKo5lFm/woKcVxrYxu80o=",
+              "subject": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+              "issuer": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+              "serialNumber": "33554617",
+              "notBefore": "2000-05-12 18:46:00",
+              "notAfter": "2025-05-12 23:59:00",
+              "signatureAlgorithm": "sha1",
+              "publicKey": {
+                "algorithm": "RSA",
+                "size": "2048",
+                "exponent": "65537"
+              }
+            }
+          ],
+          "verify_string": "ok"
+        },
+        {
+          "trust_store": {
+            "path": "f:\\github\\bakalarka\\personal\\coding1\\venv\\lib\\site-packages\\sslyze\\plugins\\utils\\trust_store\\pem_files\\mozilla_nss.pem",
+            "name": "Mozilla",
+            "version": "2019-03-14",
+            "ev_oids": [
+              "1.2.276.0.44.1.1.1.4",
+              "1.2.392.200091.100.721.1",
+              "1.2.40.0.17.1.22",
+              "1.2.616.1.113527.2.5.1.1",
+              "1.3.159.1.17.1",
+              "1.3.6.1.4.1.13177.10.1.3.10",
+              "1.3.6.1.4.1.14370.1.6",
+              "1.3.6.1.4.1.14777.6.1.1",
+              "1.3.6.1.4.1.14777.6.1.2",
+              "1.3.6.1.4.1.17326.10.14.2.1.2",
+              "1.3.6.1.4.1.17326.10.14.2.2.2",
+              "1.3.6.1.4.1.17326.10.8.12.1.2",
+              "1.3.6.1.4.1.17326.10.8.12.2.2",
+              "1.3.6.1.4.1.22234.2.5.2.3.1",
+              "1.3.6.1.4.1.23223.1.1.1",
+              "1.3.6.1.4.1.29836.1.10",
+              "1.3.6.1.4.1.34697.2.1",
+              "1.3.6.1.4.1.34697.2.2",
+              "1.3.6.1.4.1.34697.2.3",
+              "1.3.6.1.4.1.34697.2.4",
+              "1.3.6.1.4.1.36305.2",
+              "1.3.6.1.4.1.40869.1.1.22.3",
+              "1.3.6.1.4.1.4146.1.1",
+              "1.3.6.1.4.1.4788.2.202.1",
+              "1.3.6.1.4.1.6334.1.100.1",
+              "1.3.6.1.4.1.6449.1.2.1.5.1",
+              "1.3.6.1.4.1.782.1.2.1.8.1",
+              "1.3.6.1.4.1.7879.13.24.1",
+              "1.3.6.1.4.1.8024.0.2.100.1.2",
+              "2.16.156.112554.3",
+              "2.16.528.1.1003.1.2.7",
+              "2.16.578.1.26.1.3.3",
+              "2.16.756.1.83.21.0",
+              "2.16.756.1.89.1.2.1.1",
+              "2.16.792.3.0.3.1.1.5",
+              "2.16.792.3.0.4.1.1.4",
+              "2.16.840.1.113733.1.7.23.6",
+              "2.16.840.1.113733.1.7.48.1",
+              "2.16.840.1.114028.10.1.2",
+              "2.16.840.1.114171.500.9",
+              "2.16.840.1.114404.1.1.2.4.1",
+              "2.16.840.1.114412.2.1",
+              "2.16.840.1.114413.1.7.23.3",
+              "2.16.840.1.114414.1.7.23.3",
+              "2.16.840.1.114414.1.7.24.3"
+            ]
+          },
+          "verified_certificate_chain": [
+            {
+              "as_pem": "-----BEGIN CERTIFICATE-----\nMIIE4zCCBImgAwIBAgIQCHfsVTf9BrUvH8uVnuIv8TAKBggqhkjOPQQDAjBvMQsw\nCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28x\nGTAXBgNVBAoTEENsb3VkRmxhcmUsIEluYy4xIDAeBgNVBAMTF0Nsb3VkRmxhcmUg\nSW5jIEVDQyBDQS0yMB4XDTIwMDEzMDAwMDAwMFoXDTIwMTAwOTEyMDAwMFowbTEL\nMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2Nv\nMRkwFwYDVQQKExBDbG91ZGZsYXJlLCBJbmMuMR4wHAYDVQQDExVzbmkuY2xvdWRm\nbGFyZXNzbC5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASe8WZxKR+W4Rng\nSdm9YK+P21ARfqFz8pdW2kx90f5CWPNIBgjhepWj86YvLFaZnpskqMTGzOKb533R\n1IMTYmtbo4IDBzCCAwMwHwYDVR0jBBgwFoAUPnQtH89FdQR+P8Cihz5MQ4NRE8Yw\nHQYDVR0OBBYEFE0Olba6PZvLYPk7SQ6oAy+FTGirMDoGA1UdEQQzMDGCDCouYm9y\neXNlay5ldYIVc25pLmNsb3VkZmxhcmVzc2wuY29tggpib3J5c2VrLmV1MA4GA1Ud\nDwEB/wQEAwIHgDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIweQYDVR0f\nBHIwcDA2oDSgMoYwaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0Nsb3VkRmxhcmVJ\nbmNFQ0NDQTIuY3JsMDagNKAyhjBodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vQ2xv\ndWRGbGFyZUluY0VDQ0NBMi5jcmwwTAYDVR0gBEUwQzA3BglghkgBhv1sAQEwKjAo\nBggrBgEFBQcCARYcaHR0cHM6Ly93d3cuZGlnaWNlcnQuY29tL0NQUzAIBgZngQwB\nAgIwdgYIKwYBBQUHAQEEajBoMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdp\nY2VydC5jb20wQAYIKwYBBQUHMAKGNGh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNv\nbS9DbG91ZEZsYXJlSW5jRUNDQ0EtMi5jcnQwDAYDVR0TAQH/BAIwADCCAQUGCisG\nAQQB1nkCBAIEgfYEgfMA8QB3ALvZ37wfinG1k5Qjl6qSe0c4V5UKq1LoGpCWZDaO\nHtGFAAABb/R9TPQAAAQDAEgwRgIhANeUGX2fm+4zDRgKDyDYLEy948PjPDtXMBA3\nZKGPSUU9AiEAqptnsbnM5KZ2bYBxALjnR3k2hazRDVaM06eUiRetK5AAdgBep3P5\n31bA57U2SH3QSeAyepGaDIShEhKEGHWWgXFFWAAAAW/0fUyZAAAEAwBHMEUCIQCW\nuL4l8MMsaNO9o3kl+lxlNakLReJErx1/3aKNLwP/ZQIgWHbqHI+ZcKBAUukz0FEy\nYGS69lB2B/X0A5gQ+bbmQdMwCgYIKoZIzj0EAwIDSAAwRQIhANJhswKqbY1FSsIy\nWcLAvH3c+j18s92/QukBahyMHaBtAiAdbVfUDrIOoXd6j1NaFXK2jGabwjOl2+Km\nwISZkAe6kA==\n-----END CERTIFICATE-----\n",
+              "hpkp_pin": "w3CFyTvRgyoBFemN2XIkI+6fE/dJXG7Rj2YOWpeSv9M=",
+              "subject": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=Cloudflare, Inc., commonName=sni.cloudflaressl.com",
+              "issuer": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=CloudFlare, Inc., commonName=CloudFlare Inc ECC CA-2",
+              "serialNumber": "11256500692832812426706043555859804145",
+              "notBefore": "2020-01-30 00:00:00",
+              "notAfter": "2020-10-09 12:00:00",
+              "signatureAlgorithm": "sha256",
+              "publicKey": {
+                "algorithm": "EllipticCurve",
+                "size": "256",
+                "curve": "secp256r1"
+              },
+              "subjectAlternativeName": {
+                "DNS": [
+                  "*.borysek.eu",
+                  "sni.cloudflaressl.com",
+                  "borysek.eu"
+                ]
+              }
+            },
+            {
+              "as_pem": "-----BEGIN CERTIFICATE-----\nMIIDozCCAougAwIBAgIQD/PmFjmqPRoSZfQfizTltjANBgkqhkiG9w0BAQsFADBa\nMQswCQYDVQQGEwJJRTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJl\nclRydXN0MSIwIAYDVQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTE1\nMTAxNDEyMDAwMFoXDTIwMTAwOTEyMDAwMFowbzELMAkGA1UEBhMCVVMxCzAJBgNV\nBAgTAkNBMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBDbG91ZEZs\nYXJlLCBJbmMuMSAwHgYDVQQDExdDbG91ZEZsYXJlIEluYyBFQ0MgQ0EtMjBZMBMG\nByqGSM49AgEGCCqGSM49AwEHA0IABNFW9Jy25DGg9aRSz+Oaeob/8oayXsy1WcwR\nx07dZP1VnGDjoEvZeFT/SFC6ouGhWHWPx2A3RBZNVZns7tQzeiOjggEZMIIBFTAS\nBgNVHRMBAf8ECDAGAQH/AgEAMA4GA1UdDwEB/wQEAwIBhjA0BggrBgEFBQcBAQQo\nMCYwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTA6BgNVHR8E\nMzAxMC+gLaArhilodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vT21uaXJvb3QyMDI1\nLmNybDA9BgNVHSAENjA0MDIGBFUdIAAwKjAoBggrBgEFBQcCARYcaHR0cHM6Ly93\nd3cuZGlnaWNlcnQuY29tL0NQUzAdBgNVHQ4EFgQUPnQtH89FdQR+P8Cihz5MQ4NR\nE8YwHwYDVR0jBBgwFoAU5Z1ZMIJHWMys+ghUNoZ7OrUETfAwDQYJKoZIhvcNAQEL\nBQADggEBADhfp//8hfJzMuTVo4mZlmCvMsEDs2Xfvh4DyqXthbKPr0uMc48qjKkA\nDgEkF/fsUoV2yOUcecrDF4dQtgQzNp4qnhgXljISr0PMVxje28fYiCWD5coGJTH9\nvV1IO1EB3SwUx8FgUemVAdiyM1YOR2aNbM2v+YXZ6xxHR4g06PD6wqtPaU4JWdRX\nxszByOPmGcFYOFLi4oOF3iI03D+m968kvOBvwKtoLVLHawVXLEIbLUiHAwyQq0hI\nqSi+NIr7uu30YJkdFXgRqtltU39pKLy3ayB2f6BVA3F59WensKAKF1eyAKmtz/9n\njD4m5ackvMJvEOiJxnCl0h+A7Q0/JxM=\n-----END CERTIFICATE-----\n",
+              "hpkp_pin": "3kcNJzkUJ1RqMXJzFX4Zxux5WfETK+uL6Viq9lJNn4o=",
+              "subject": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=CloudFlare, Inc., commonName=CloudFlare Inc ECC CA-2",
+              "issuer": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+              "serialNumber": "21204814788472567899750642361434432950",
+              "notBefore": "2015-10-14 12:00:00",
+              "notAfter": "2020-10-09 12:00:00",
+              "signatureAlgorithm": "sha256",
+              "publicKey": {
+                "algorithm": "EllipticCurve",
+                "size": "256",
+                "curve": "secp256r1"
+              }
+            },
+            {
+              "as_pem": "-----BEGIN CERTIFICATE-----\nMIIDdzCCAl+gAwIBAgIEAgAAuTANBgkqhkiG9w0BAQUFADBaMQswCQYDVQQGEwJJ\nRTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJlclRydXN0MSIwIAYD\nVQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTAwMDUxMjE4NDYwMFoX\nDTI1MDUxMjIzNTkwMFowWjELMAkGA1UEBhMCSUUxEjAQBgNVBAoTCUJhbHRpbW9y\nZTETMBEGA1UECxMKQ3liZXJUcnVzdDEiMCAGA1UEAxMZQmFsdGltb3JlIEN5YmVy\nVHJ1c3QgUm9vdDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKMEuyKr\nmD1X6CZymrV51Cni4eiVgLGw41uOKymaZN+hXe2wCQVt2yguzmKiYv60iNoS6zjr\nIZ3AQSsBUnuId9Mcj8e6uYi1agnnc+gRQKfRzMpijS3ljwumUNKoUMMo6vWrJYeK\nmpYcqWe4PwzV9/lSEy/CG9VwcPCPwBLKBsua4dnKM3p31vjsufFoREJIE9LAwqSu\nXmD+tqYF/LTdB1kC1FkYmGP1pWPgkAx9XbIGevOF6uvUA65ehD5f/xXtabz5OTZy\ndc93Uk3zyZAsuT3lySNTPx8kmCFcB5kpvcY67Oduhjprl3RjM71oGDHweI12v/ye\njl0qhqdNkNwnGjkCAwEAAaNFMEMwHQYDVR0OBBYEFOWdWTCCR1jMrPoIVDaGezq1\nBE3wMBIGA1UdEwEB/wQIMAYBAf8CAQMwDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3\nDQEBBQUAA4IBAQCFDF2O5G9RaEIFoN27TyclhAO992T9Ldcw46QQF+vaKSm2eT92\n9hkTI7gQCvlYpNRhcL0EYWoSihfVCr3FvDB81ukMJY2GQE/szKN+OMY3EU/t3Wgx\njkzSswF07r51XgdIGn9w/xZchMB5hbgF/X++ZRGjD8ACtPhSNzkE1akxehi/oCr0\nEpn3o0WC4zxe9Z2etciefC7IpJ5OCBRLbf1wbWsaY71k5h+3zvDyny67G7fyUIhz\nksLi4xaNmjICq44Y3ekQEe5+NauQrz4wlHrQMz2nZQ/1/I6eYs9HRCwBXbsdtTLS\nR9I4LtD+gdwyah617jzV/OeBHRnDJELqYzmp\n-----END CERTIFICATE-----\n",
+              "hpkp_pin": "Y9mvm0exBk1JoQ57f9Vm28jKo5lFm/woKcVxrYxu80o=",
+              "subject": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+              "issuer": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+              "serialNumber": "33554617",
+              "notBefore": "2000-05-12 18:46:00",
+              "notAfter": "2025-05-12 23:59:00",
+              "signatureAlgorithm": "sha1",
+              "publicKey": {
+                "algorithm": "RSA",
+                "size": "2048",
+                "exponent": "65537"
+              }
+            }
+          ],
+          "verify_string": "ok"
+        },
+        {
+          "trust_store": {
+            "path": "f:\\github\\bakalarka\\personal\\coding1\\venv\\lib\\site-packages\\sslyze\\plugins\\utils\\trust_store\\pem_files\\microsoft_windows.pem",
+            "name": "Windows",
+            "version": "2019-05-27",
+            "ev_oids": []
+          },
+          "verified_certificate_chain": [
+            {
+              "as_pem": "-----BEGIN CERTIFICATE-----\nMIIE4zCCBImgAwIBAgIQCHfsVTf9BrUvH8uVnuIv8TAKBggqhkjOPQQDAjBvMQsw\nCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28x\nGTAXBgNVBAoTEENsb3VkRmxhcmUsIEluYy4xIDAeBgNVBAMTF0Nsb3VkRmxhcmUg\nSW5jIEVDQyBDQS0yMB4XDTIwMDEzMDAwMDAwMFoXDTIwMTAwOTEyMDAwMFowbTEL\nMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2Nv\nMRkwFwYDVQQKExBDbG91ZGZsYXJlLCBJbmMuMR4wHAYDVQQDExVzbmkuY2xvdWRm\nbGFyZXNzbC5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASe8WZxKR+W4Rng\nSdm9YK+P21ARfqFz8pdW2kx90f5CWPNIBgjhepWj86YvLFaZnpskqMTGzOKb533R\n1IMTYmtbo4IDBzCCAwMwHwYDVR0jBBgwFoAUPnQtH89FdQR+P8Cihz5MQ4NRE8Yw\nHQYDVR0OBBYEFE0Olba6PZvLYPk7SQ6oAy+FTGirMDoGA1UdEQQzMDGCDCouYm9y\neXNlay5ldYIVc25pLmNsb3VkZmxhcmVzc2wuY29tggpib3J5c2VrLmV1MA4GA1Ud\nDwEB/wQEAwIHgDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIweQYDVR0f\nBHIwcDA2oDSgMoYwaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0Nsb3VkRmxhcmVJ\nbmNFQ0NDQTIuY3JsMDagNKAyhjBodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vQ2xv\ndWRGbGFyZUluY0VDQ0NBMi5jcmwwTAYDVR0gBEUwQzA3BglghkgBhv1sAQEwKjAo\nBggrBgEFBQcCARYcaHR0cHM6Ly93d3cuZGlnaWNlcnQuY29tL0NQUzAIBgZngQwB\nAgIwdgYIKwYBBQUHAQEEajBoMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdp\nY2VydC5jb20wQAYIKwYBBQUHMAKGNGh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNv\nbS9DbG91ZEZsYXJlSW5jRUNDQ0EtMi5jcnQwDAYDVR0TAQH/BAIwADCCAQUGCisG\nAQQB1nkCBAIEgfYEgfMA8QB3ALvZ37wfinG1k5Qjl6qSe0c4V5UKq1LoGpCWZDaO\nHtGFAAABb/R9TPQAAAQDAEgwRgIhANeUGX2fm+4zDRgKDyDYLEy948PjPDtXMBA3\nZKGPSUU9AiEAqptnsbnM5KZ2bYBxALjnR3k2hazRDVaM06eUiRetK5AAdgBep3P5\n31bA57U2SH3QSeAyepGaDIShEhKEGHWWgXFFWAAAAW/0fUyZAAAEAwBHMEUCIQCW\nuL4l8MMsaNO9o3kl+lxlNakLReJErx1/3aKNLwP/ZQIgWHbqHI+ZcKBAUukz0FEy\nYGS69lB2B/X0A5gQ+bbmQdMwCgYIKoZIzj0EAwIDSAAwRQIhANJhswKqbY1FSsIy\nWcLAvH3c+j18s92/QukBahyMHaBtAiAdbVfUDrIOoXd6j1NaFXK2jGabwjOl2+Km\nwISZkAe6kA==\n-----END CERTIFICATE-----\n",
+              "hpkp_pin": "w3CFyTvRgyoBFemN2XIkI+6fE/dJXG7Rj2YOWpeSv9M=",
+              "subject": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=Cloudflare, Inc., commonName=sni.cloudflaressl.com",
+              "issuer": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=CloudFlare, Inc., commonName=CloudFlare Inc ECC CA-2",
+              "serialNumber": "11256500692832812426706043555859804145",
+              "notBefore": "2020-01-30 00:00:00",
+              "notAfter": "2020-10-09 12:00:00",
+              "signatureAlgorithm": "sha256",
+              "publicKey": {
+                "algorithm": "EllipticCurve",
+                "size": "256",
+                "curve": "secp256r1"
+              },
+              "subjectAlternativeName": {
+                "DNS": [
+                  "*.borysek.eu",
+                  "sni.cloudflaressl.com",
+                  "borysek.eu"
+                ]
+              }
+            },
+            {
+              "as_pem": "-----BEGIN CERTIFICATE-----\nMIIDozCCAougAwIBAgIQD/PmFjmqPRoSZfQfizTltjANBgkqhkiG9w0BAQsFADBa\nMQswCQYDVQQGEwJJRTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJl\nclRydXN0MSIwIAYDVQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTE1\nMTAxNDEyMDAwMFoXDTIwMTAwOTEyMDAwMFowbzELMAkGA1UEBhMCVVMxCzAJBgNV\nBAgTAkNBMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBDbG91ZEZs\nYXJlLCBJbmMuMSAwHgYDVQQDExdDbG91ZEZsYXJlIEluYyBFQ0MgQ0EtMjBZMBMG\nByqGSM49AgEGCCqGSM49AwEHA0IABNFW9Jy25DGg9aRSz+Oaeob/8oayXsy1WcwR\nx07dZP1VnGDjoEvZeFT/SFC6ouGhWHWPx2A3RBZNVZns7tQzeiOjggEZMIIBFTAS\nBgNVHRMBAf8ECDAGAQH/AgEAMA4GA1UdDwEB/wQEAwIBhjA0BggrBgEFBQcBAQQo\nMCYwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTA6BgNVHR8E\nMzAxMC+gLaArhilodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vT21uaXJvb3QyMDI1\nLmNybDA9BgNVHSAENjA0MDIGBFUdIAAwKjAoBggrBgEFBQcCARYcaHR0cHM6Ly93\nd3cuZGlnaWNlcnQuY29tL0NQUzAdBgNVHQ4EFgQUPnQtH89FdQR+P8Cihz5MQ4NR\nE8YwHwYDVR0jBBgwFoAU5Z1ZMIJHWMys+ghUNoZ7OrUETfAwDQYJKoZIhvcNAQEL\nBQADggEBADhfp//8hfJzMuTVo4mZlmCvMsEDs2Xfvh4DyqXthbKPr0uMc48qjKkA\nDgEkF/fsUoV2yOUcecrDF4dQtgQzNp4qnhgXljISr0PMVxje28fYiCWD5coGJTH9\nvV1IO1EB3SwUx8FgUemVAdiyM1YOR2aNbM2v+YXZ6xxHR4g06PD6wqtPaU4JWdRX\nxszByOPmGcFYOFLi4oOF3iI03D+m968kvOBvwKtoLVLHawVXLEIbLUiHAwyQq0hI\nqSi+NIr7uu30YJkdFXgRqtltU39pKLy3ayB2f6BVA3F59WensKAKF1eyAKmtz/9n\njD4m5ackvMJvEOiJxnCl0h+A7Q0/JxM=\n-----END CERTIFICATE-----\n",
+              "hpkp_pin": "3kcNJzkUJ1RqMXJzFX4Zxux5WfETK+uL6Viq9lJNn4o=",
+              "subject": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=CloudFlare, Inc., commonName=CloudFlare Inc ECC CA-2",
+              "issuer": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+              "serialNumber": "21204814788472567899750642361434432950",
+              "notBefore": "2015-10-14 12:00:00",
+              "notAfter": "2020-10-09 12:00:00",
+              "signatureAlgorithm": "sha256",
+              "publicKey": {
+                "algorithm": "EllipticCurve",
+                "size": "256",
+                "curve": "secp256r1"
+              }
+            },
+            {
+              "as_pem": "-----BEGIN CERTIFICATE-----\nMIIDdzCCAl+gAwIBAgIEAgAAuTANBgkqhkiG9w0BAQUFADBaMQswCQYDVQQGEwJJ\nRTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJlclRydXN0MSIwIAYD\nVQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTAwMDUxMjE4NDYwMFoX\nDTI1MDUxMjIzNTkwMFowWjELMAkGA1UEBhMCSUUxEjAQBgNVBAoTCUJhbHRpbW9y\nZTETMBEGA1UECxMKQ3liZXJUcnVzdDEiMCAGA1UEAxMZQmFsdGltb3JlIEN5YmVy\nVHJ1c3QgUm9vdDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKMEuyKr\nmD1X6CZymrV51Cni4eiVgLGw41uOKymaZN+hXe2wCQVt2yguzmKiYv60iNoS6zjr\nIZ3AQSsBUnuId9Mcj8e6uYi1agnnc+gRQKfRzMpijS3ljwumUNKoUMMo6vWrJYeK\nmpYcqWe4PwzV9/lSEy/CG9VwcPCPwBLKBsua4dnKM3p31vjsufFoREJIE9LAwqSu\nXmD+tqYF/LTdB1kC1FkYmGP1pWPgkAx9XbIGevOF6uvUA65ehD5f/xXtabz5OTZy\ndc93Uk3zyZAsuT3lySNTPx8kmCFcB5kpvcY67Oduhjprl3RjM71oGDHweI12v/ye\njl0qhqdNkNwnGjkCAwEAAaNFMEMwHQYDVR0OBBYEFOWdWTCCR1jMrPoIVDaGezq1\nBE3wMBIGA1UdEwEB/wQIMAYBAf8CAQMwDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3\nDQEBBQUAA4IBAQCFDF2O5G9RaEIFoN27TyclhAO992T9Ldcw46QQF+vaKSm2eT92\n9hkTI7gQCvlYpNRhcL0EYWoSihfVCr3FvDB81ukMJY2GQE/szKN+OMY3EU/t3Wgx\njkzSswF07r51XgdIGn9w/xZchMB5hbgF/X++ZRGjD8ACtPhSNzkE1akxehi/oCr0\nEpn3o0WC4zxe9Z2etciefC7IpJ5OCBRLbf1wbWsaY71k5h+3zvDyny67G7fyUIhz\nksLi4xaNmjICq44Y3ekQEe5+NauQrz4wlHrQMz2nZQ/1/I6eYs9HRCwBXbsdtTLS\nR9I4LtD+gdwyah617jzV/OeBHRnDJELqYzmp\n-----END CERTIFICATE-----\n",
+              "hpkp_pin": "Y9mvm0exBk1JoQ57f9Vm28jKo5lFm/woKcVxrYxu80o=",
+              "subject": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+              "issuer": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+              "serialNumber": "33554617",
+              "notBefore": "2000-05-12 18:46:00",
+              "notAfter": "2025-05-12 23:59:00",
+              "signatureAlgorithm": "sha1",
+              "publicKey": {
+                "algorithm": "RSA",
+                "size": "2048",
+                "exponent": "65537"
+              }
+            }
+          ],
+          "verify_string": "ok"
+        }
+      ],
+      "path_validation_error_list": [],
+      "ocsp_response": {
+        "responseStatus": "successful",
+        "version": "1",
+        "responseType": "Basic OCSP Response",
+        "responderID": "3E742D1FCF4575047E3FC0A2873E4C43835113C6",
+        "producedAt": "Feb 13 18:40:33 2020 GMT",
+        "responses": [
+          {
+            "certID": {
+              "hashAlgorithm": "sha1",
+              "issuerNameHash": "2B0413693DF1D33D7E89CBA055CF204F9C158C9D",
+              "issuerKeyHash": "3E742D1FCF4575047E3FC0A2873E4C43835113C6",
+              "serialNumber": "0877EC5537FD06B52F1FCB959EE22FF1"
+            },
+            "certStatus": "good",
+            "thisUpdate": "Feb 13 18:40:33 2020 GMT",
+            "nextUpdate": "Feb 20 17:55:33 2020 GMT"
+          }
+        ]
+      },
+      "verified_certificate_chain": [
+        {
+          "as_pem": "-----BEGIN CERTIFICATE-----\nMIIE4zCCBImgAwIBAgIQCHfsVTf9BrUvH8uVnuIv8TAKBggqhkjOPQQDAjBvMQsw\nCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28x\nGTAXBgNVBAoTEENsb3VkRmxhcmUsIEluYy4xIDAeBgNVBAMTF0Nsb3VkRmxhcmUg\nSW5jIEVDQyBDQS0yMB4XDTIwMDEzMDAwMDAwMFoXDTIwMTAwOTEyMDAwMFowbTEL\nMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2Nv\nMRkwFwYDVQQKExBDbG91ZGZsYXJlLCBJbmMuMR4wHAYDVQQDExVzbmkuY2xvdWRm\nbGFyZXNzbC5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASe8WZxKR+W4Rng\nSdm9YK+P21ARfqFz8pdW2kx90f5CWPNIBgjhepWj86YvLFaZnpskqMTGzOKb533R\n1IMTYmtbo4IDBzCCAwMwHwYDVR0jBBgwFoAUPnQtH89FdQR+P8Cihz5MQ4NRE8Yw\nHQYDVR0OBBYEFE0Olba6PZvLYPk7SQ6oAy+FTGirMDoGA1UdEQQzMDGCDCouYm9y\neXNlay5ldYIVc25pLmNsb3VkZmxhcmVzc2wuY29tggpib3J5c2VrLmV1MA4GA1Ud\nDwEB/wQEAwIHgDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIweQYDVR0f\nBHIwcDA2oDSgMoYwaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0Nsb3VkRmxhcmVJ\nbmNFQ0NDQTIuY3JsMDagNKAyhjBodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vQ2xv\ndWRGbGFyZUluY0VDQ0NBMi5jcmwwTAYDVR0gBEUwQzA3BglghkgBhv1sAQEwKjAo\nBggrBgEFBQcCARYcaHR0cHM6Ly93d3cuZGlnaWNlcnQuY29tL0NQUzAIBgZngQwB\nAgIwdgYIKwYBBQUHAQEEajBoMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdp\nY2VydC5jb20wQAYIKwYBBQUHMAKGNGh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNv\nbS9DbG91ZEZsYXJlSW5jRUNDQ0EtMi5jcnQwDAYDVR0TAQH/BAIwADCCAQUGCisG\nAQQB1nkCBAIEgfYEgfMA8QB3ALvZ37wfinG1k5Qjl6qSe0c4V5UKq1LoGpCWZDaO\nHtGFAAABb/R9TPQAAAQDAEgwRgIhANeUGX2fm+4zDRgKDyDYLEy948PjPDtXMBA3\nZKGPSUU9AiEAqptnsbnM5KZ2bYBxALjnR3k2hazRDVaM06eUiRetK5AAdgBep3P5\n31bA57U2SH3QSeAyepGaDIShEhKEGHWWgXFFWAAAAW/0fUyZAAAEAwBHMEUCIQCW\nuL4l8MMsaNO9o3kl+lxlNakLReJErx1/3aKNLwP/ZQIgWHbqHI+ZcKBAUukz0FEy\nYGS69lB2B/X0A5gQ+bbmQdMwCgYIKoZIzj0EAwIDSAAwRQIhANJhswKqbY1FSsIy\nWcLAvH3c+j18s92/QukBahyMHaBtAiAdbVfUDrIOoXd6j1NaFXK2jGabwjOl2+Km\nwISZkAe6kA==\n-----END CERTIFICATE-----\n",
+          "hpkp_pin": "w3CFyTvRgyoBFemN2XIkI+6fE/dJXG7Rj2YOWpeSv9M=",
+          "subject": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=Cloudflare, Inc., commonName=sni.cloudflaressl.com",
+          "issuer": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=CloudFlare, Inc., commonName=CloudFlare Inc ECC CA-2",
+          "serialNumber": "11256500692832812426706043555859804145",
+          "notBefore": "2020-01-30 00:00:00",
+          "notAfter": "2020-10-09 12:00:00",
+          "signatureAlgorithm": "sha256",
+          "publicKey": {
+            "algorithm": "EllipticCurve",
+            "size": "256",
+            "curve": "secp256r1"
+          },
+          "subjectAlternativeName": {
+            "DNS": [
+              "*.borysek.eu",
+              "sni.cloudflaressl.com",
+              "borysek.eu"
+            ]
+          }
+        },
+        {
+          "as_pem": "-----BEGIN CERTIFICATE-----\nMIIDozCCAougAwIBAgIQD/PmFjmqPRoSZfQfizTltjANBgkqhkiG9w0BAQsFADBa\nMQswCQYDVQQGEwJJRTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJl\nclRydXN0MSIwIAYDVQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTE1\nMTAxNDEyMDAwMFoXDTIwMTAwOTEyMDAwMFowbzELMAkGA1UEBhMCVVMxCzAJBgNV\nBAgTAkNBMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBDbG91ZEZs\nYXJlLCBJbmMuMSAwHgYDVQQDExdDbG91ZEZsYXJlIEluYyBFQ0MgQ0EtMjBZMBMG\nByqGSM49AgEGCCqGSM49AwEHA0IABNFW9Jy25DGg9aRSz+Oaeob/8oayXsy1WcwR\nx07dZP1VnGDjoEvZeFT/SFC6ouGhWHWPx2A3RBZNVZns7tQzeiOjggEZMIIBFTAS\nBgNVHRMBAf8ECDAGAQH/AgEAMA4GA1UdDwEB/wQEAwIBhjA0BggrBgEFBQcBAQQo\nMCYwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTA6BgNVHR8E\nMzAxMC+gLaArhilodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vT21uaXJvb3QyMDI1\nLmNybDA9BgNVHSAENjA0MDIGBFUdIAAwKjAoBggrBgEFBQcCARYcaHR0cHM6Ly93\nd3cuZGlnaWNlcnQuY29tL0NQUzAdBgNVHQ4EFgQUPnQtH89FdQR+P8Cihz5MQ4NR\nE8YwHwYDVR0jBBgwFoAU5Z1ZMIJHWMys+ghUNoZ7OrUETfAwDQYJKoZIhvcNAQEL\nBQADggEBADhfp//8hfJzMuTVo4mZlmCvMsEDs2Xfvh4DyqXthbKPr0uMc48qjKkA\nDgEkF/fsUoV2yOUcecrDF4dQtgQzNp4qnhgXljISr0PMVxje28fYiCWD5coGJTH9\nvV1IO1EB3SwUx8FgUemVAdiyM1YOR2aNbM2v+YXZ6xxHR4g06PD6wqtPaU4JWdRX\nxszByOPmGcFYOFLi4oOF3iI03D+m968kvOBvwKtoLVLHawVXLEIbLUiHAwyQq0hI\nqSi+NIr7uu30YJkdFXgRqtltU39pKLy3ayB2f6BVA3F59WensKAKF1eyAKmtz/9n\njD4m5ackvMJvEOiJxnCl0h+A7Q0/JxM=\n-----END CERTIFICATE-----\n",
+          "hpkp_pin": "3kcNJzkUJ1RqMXJzFX4Zxux5WfETK+uL6Viq9lJNn4o=",
+          "subject": "countryName=US, stateOrProvinceName=CA, localityName=San Francisco, organizationName=CloudFlare, Inc., commonName=CloudFlare Inc ECC CA-2",
+          "issuer": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+          "serialNumber": "21204814788472567899750642361434432950",
+          "notBefore": "2015-10-14 12:00:00",
+          "notAfter": "2020-10-09 12:00:00",
+          "signatureAlgorithm": "sha256",
+          "publicKey": {
+            "algorithm": "EllipticCurve",
+            "size": "256",
+            "curve": "secp256r1"
+          }
+        },
+        {
+          "as_pem": "-----BEGIN CERTIFICATE-----\nMIIDdzCCAl+gAwIBAgIEAgAAuTANBgkqhkiG9w0BAQUFADBaMQswCQYDVQQGEwJJ\nRTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJlclRydXN0MSIwIAYD\nVQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTAwMDUxMjE4NDYwMFoX\nDTI1MDUxMjIzNTkwMFowWjELMAkGA1UEBhMCSUUxEjAQBgNVBAoTCUJhbHRpbW9y\nZTETMBEGA1UECxMKQ3liZXJUcnVzdDEiMCAGA1UEAxMZQmFsdGltb3JlIEN5YmVy\nVHJ1c3QgUm9vdDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKMEuyKr\nmD1X6CZymrV51Cni4eiVgLGw41uOKymaZN+hXe2wCQVt2yguzmKiYv60iNoS6zjr\nIZ3AQSsBUnuId9Mcj8e6uYi1agnnc+gRQKfRzMpijS3ljwumUNKoUMMo6vWrJYeK\nmpYcqWe4PwzV9/lSEy/CG9VwcPCPwBLKBsua4dnKM3p31vjsufFoREJIE9LAwqSu\nXmD+tqYF/LTdB1kC1FkYmGP1pWPgkAx9XbIGevOF6uvUA65ehD5f/xXtabz5OTZy\ndc93Uk3zyZAsuT3lySNTPx8kmCFcB5kpvcY67Oduhjprl3RjM71oGDHweI12v/ye\njl0qhqdNkNwnGjkCAwEAAaNFMEMwHQYDVR0OBBYEFOWdWTCCR1jMrPoIVDaGezq1\nBE3wMBIGA1UdEwEB/wQIMAYBAf8CAQMwDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3\nDQEBBQUAA4IBAQCFDF2O5G9RaEIFoN27TyclhAO992T9Ldcw46QQF+vaKSm2eT92\n9hkTI7gQCvlYpNRhcL0EYWoSihfVCr3FvDB81ukMJY2GQE/szKN+OMY3EU/t3Wgx\njkzSswF07r51XgdIGn9w/xZchMB5hbgF/X++ZRGjD8ACtPhSNzkE1akxehi/oCr0\nEpn3o0WC4zxe9Z2etciefC7IpJ5OCBRLbf1wbWsaY71k5h+3zvDyny67G7fyUIhz\nksLi4xaNmjICq44Y3ekQEe5+NauQrz4wlHrQMz2nZQ/1/I6eYs9HRCwBXbsdtTLS\nR9I4LtD+gdwyah617jzV/OeBHRnDJELqYzmp\n-----END CERTIFICATE-----\n",
+          "hpkp_pin": "Y9mvm0exBk1JoQ57f9Vm28jKo5lFm/woKcVxrYxu80o=",
+          "subject": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+          "issuer": "countryName=IE, organizationName=Baltimore, organizationalUnitName=CyberTrust, commonName=Baltimore CyberTrust Root",
+          "serialNumber": "33554617",
+          "notBefore": "2000-05-12 18:46:00",
+          "notAfter": "2025-05-12 23:59:00",
+          "signatureAlgorithm": "sha1",
+          "publicKey": {
+            "algorithm": "RSA",
+            "size": "2048",
+            "exponent": "65537"
+          }
+        }
+      ],
+      "leaf_certificate_subject_matches_hostname": true,
+      "leaf_certificate_is_ev": false,
+      "leaf_certificate_has_must_staple_extension": false,
+      "leaf_certificate_signed_certificate_timestamps_count": 2,
+      "received_chain_contains_anchor_certificate": false,
+      "received_chain_has_valid_order": true,
+      "verified_chain_has_sha1_signature": false,
+      "verified_chain_has_legacy_symantec_anchor": false,
+      "ocsp_response_status": "SUCCESSFUL",
+      "ocsp_response_is_trusted": true
+    },
+    "TLSV1 Cipher Suites": {
+      "preferred_cipher": {
+        "openssl_name": "ECDHE-ECDSA-AES128-SHA",
+        "ssl_version": "TLSV1",
+        "is_anonymous": false,
+        "key_size": 128,
+        "post_handshake_response": ""
+      },
+      "accepted_cipher_list": [
+        {
+          "openssl_name": "ECDHE-ECDSA-AES256-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "key_size": 256,
+          "post_handshake_response": ""
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES128-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "key_size": 128,
+          "post_handshake_response": ""
+        }
+      ],
+      "rejected_cipher_list": [
+        {
+          "openssl_name": "SEED-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "RC4-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "RC4-MD5",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "NULL-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "NULL-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "NULL-MD5",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "IDEA-CBC-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DES-CBC-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "CAMELLIA256-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "CAMELLIA128-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AES256-GCM-SHA384",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "AES256-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "AES256-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AES128-GCM-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "AES128-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "AES128-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DES-CBC3-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-RC4-MD5",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-RC2-CBC-MD5",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-DES-CBC-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AECDH-RC4-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AECDH-NULL-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AECDH-AES256-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AECDH-AES128-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AECDH-DES-CBC3-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-RC4-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-NULL-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES256-SHA384",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES256-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES128-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES128-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-RC4-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-NULL-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES256-SHA384",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES256-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES128-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES128-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-RC4-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-NULL-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES256-SHA384",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES256-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES128-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES128-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-RC4-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-NULL-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES256-SHA384",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES128-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-SEED-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-RC4-MD5",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-DES-CBC-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-CAMELLIA256-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-CAMELLIA128-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ADH-AES256-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ADH-AES256-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ADH-AES128-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ADH-AES128-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-DES-CBC3-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-ADH-RC4-MD5",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-ADH-DES-CBC-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-SEED-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-DES-CBC-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-CAMELLIA256-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-CAMELLIA128-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-RSA-AES256-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-RSA-AES256-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-RSA-AES128-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-RSA-AES128-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-SEED-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-DES-CBC-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-CAMELLIA256-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-CAMELLIA128-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-DSS-AES256-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-DSS-AES256-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-DSS-AES128-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-DSS-AES128-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-DES-CBC3-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-SEED-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EDH-RSA-DES-CBC-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-CAMELLIA256-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-CAMELLIA128-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES256-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES256-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES128-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES128-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EDH-RSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-EDH-RSA-DES-CBC-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-SEED-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EDH-DSS-DES-CBC-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-CAMELLIA256-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-CAMELLIA128-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES256-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES256-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES128-SHA256",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES128-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EDH-DSS-DES-CBC3-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-EDH-DSS-DES-CBC-SHA",
+          "ssl_version": "TLSV1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        }
+      ],
+      "errored_cipher_list": []
+    },
+    "ROBOT Attack": {
+      "robot_result_enum": "NOT_VULNERABLE_RSA_NOT_SUPPORTED"
+    },
+    "Downgrade Attacks": {
+      "supports_fallback_scsv": true
+    },
+    "SSLV2 Cipher Suites": {
+      "preferred_cipher": null,
+      "accepted_cipher_list": [],
+      "rejected_cipher_list": [
+        {
+          "openssl_name": "RC4-MD5",
+          "ssl_version": "SSLV2",
+          "is_anonymous": false,
+          "handshake_error_message": "TCP / Received FIN"
+        },
+        {
+          "openssl_name": "EXP-RC4-MD5",
+          "ssl_version": "SSLV2",
+          "is_anonymous": false,
+          "handshake_error_message": "TCP / Received FIN"
+        },
+        {
+          "openssl_name": "RC2-CBC-MD5",
+          "ssl_version": "SSLV2",
+          "is_anonymous": false,
+          "handshake_error_message": "TCP / Received FIN"
+        },
+        {
+          "openssl_name": "EXP-RC2-CBC-MD5",
+          "ssl_version": "SSLV2",
+          "is_anonymous": false,
+          "handshake_error_message": "TCP / Received FIN"
+        },
+        {
+          "openssl_name": "IDEA-CBC-MD5",
+          "ssl_version": "SSLV2",
+          "is_anonymous": false,
+          "handshake_error_message": "TCP / Received FIN"
+        },
+        {
+          "openssl_name": "DES-CBC-MD5",
+          "ssl_version": "SSLV2",
+          "is_anonymous": false,
+          "handshake_error_message": "TCP / Received FIN"
+        },
+        {
+          "openssl_name": "DES-CBC3-MD5",
+          "ssl_version": "SSLV2",
+          "is_anonymous": false,
+          "handshake_error_message": "TCP / Received FIN"
+        }
+      ],
+      "errored_cipher_list": []
+    },
+    "TLSV1_1 Cipher Suites": {
+      "preferred_cipher": {
+        "openssl_name": "ECDHE-ECDSA-AES128-SHA",
+        "ssl_version": "TLSV1_1",
+        "is_anonymous": false,
+        "key_size": 128,
+        "post_handshake_response": ""
+      },
+      "accepted_cipher_list": [
+        {
+          "openssl_name": "ECDHE-ECDSA-AES256-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "key_size": 256,
+          "post_handshake_response": ""
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES128-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "key_size": 128,
+          "post_handshake_response": ""
+        }
+      ],
+      "rejected_cipher_list": [
+        {
+          "openssl_name": "SEED-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "RC4-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "RC4-MD5",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "NULL-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "NULL-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "NULL-MD5",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "IDEA-CBC-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DES-CBC-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "CAMELLIA256-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "CAMELLIA128-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "AES256-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "AES256-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "AES128-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "AES128-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DES-CBC3-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-RC4-MD5",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-RC2-CBC-MD5",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-DES-CBC-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AECDH-RC4-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AECDH-NULL-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AECDH-AES256-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AECDH-AES128-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "AECDH-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-RC4-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-NULL-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES256-SHA384",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES256-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES128-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES128-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-RSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-RC4-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-NULL-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES256-SHA384",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES256-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES128-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES128-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-RC4-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-NULL-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES256-SHA384",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES256-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES128-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES128-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-RC4-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-NULL-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES256-SHA384",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES128-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-SEED-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-RC4-MD5",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-DES-CBC-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-CAMELLIA256-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-CAMELLIA128-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ADH-AES256-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ADH-AES256-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ADH-AES128-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ADH-AES128-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "ADH-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-ADH-RC4-MD5",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-ADH-DES-CBC-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-SEED-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-DES-CBC-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-CAMELLIA256-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-CAMELLIA128-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-RSA-AES256-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-RSA-AES256-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-RSA-AES128-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-RSA-AES128-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-RSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-SEED-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-DES-CBC-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-CAMELLIA256-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-CAMELLIA128-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-DSS-AES256-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-DSS-AES256-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-DSS-AES128-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-DSS-AES128-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DH-DSS-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-SEED-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EDH-RSA-DES-CBC-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-CAMELLIA256-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-CAMELLIA128-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES256-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES256-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES128-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES128-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EDH-RSA-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-EDH-RSA-DES-CBC-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-SEED-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EDH-DSS-DES-CBC-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-CAMELLIA256-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-CAMELLIA128-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES256-GCM-SHA384",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES256-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES256-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES128-GCM-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES128-SHA256",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES128-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EDH-DSS-DES-CBC3-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        },
+        {
+          "openssl_name": "EXP-EDH-DSS-DES-CBC-SHA",
+          "ssl_version": "TLSV1_1",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Alert: handshake failure"
+        }
+      ],
+      "errored_cipher_list": []
+    },
+    "SSLV3 Cipher Suites": {
+      "preferred_cipher": null,
+      "accepted_cipher_list": [],
+      "rejected_cipher_list": [
+        {
+          "openssl_name": "SEED-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "RC4-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "RC4-MD5",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "NULL-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "NULL-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "NULL-MD5",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "IDEA-CBC-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DES-CBC-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "CAMELLIA256-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "CAMELLIA128-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "AES256-GCM-SHA384",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "AES256-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "AES256-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "AES128-GCM-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "AES128-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "AES128-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DES-CBC3-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "EXP-RC4-MD5",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "EXP-RC2-CBC-MD5",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "EXP-DES-CBC-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "AECDH-RC4-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "AECDH-NULL-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "AECDH-AES256-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "AECDH-AES128-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "AECDH-DES-CBC3-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDH-RSA-RC4-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDH-RSA-NULL-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES256-GCM-SHA384",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES256-SHA384",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES256-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES128-GCM-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES128-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-RSA-AES128-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDH-RSA-DES-CBC3-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-RC4-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-NULL-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES256-GCM-SHA384",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES256-SHA384",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES256-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES128-GCM-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES128-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-AES128-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDH-ECDSA-DES-CBC3-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-RC4-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-NULL-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES256-GCM-SHA384",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES256-SHA384",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES256-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES128-GCM-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES128-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-AES128-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDHE-RSA-DES-CBC3-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-RC4-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-NULL-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES256-GCM-SHA384",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES256-SHA384",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES256-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES128-GCM-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES128-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-AES128-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ECDHE-ECDSA-DES-CBC3-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ADH-SEED-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ADH-RC4-MD5",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ADH-DES-CBC-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ADH-CAMELLIA256-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ADH-CAMELLIA128-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ADH-AES256-GCM-SHA384",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ADH-AES256-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ADH-AES256-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ADH-AES128-GCM-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ADH-AES128-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "ADH-AES128-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "ADH-DES-CBC3-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "EXP-ADH-RC4-MD5",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "EXP-ADH-DES-CBC-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": true,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DH-RSA-SEED-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DH-RSA-DES-CBC-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DH-RSA-CAMELLIA256-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DH-RSA-CAMELLIA128-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DH-RSA-AES256-GCM-SHA384",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-RSA-AES256-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-RSA-AES256-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DH-RSA-AES128-GCM-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-RSA-AES128-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-RSA-AES128-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DH-RSA-DES-CBC3-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DH-DSS-SEED-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DH-DSS-DES-CBC-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DH-DSS-CAMELLIA256-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DH-DSS-CAMELLIA128-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DH-DSS-AES256-GCM-SHA384",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-DSS-AES256-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-DSS-AES256-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DH-DSS-AES128-GCM-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-DSS-AES128-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DH-DSS-AES128-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DH-DSS-DES-CBC3-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DHE-RSA-SEED-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "EDH-RSA-DES-CBC-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DHE-RSA-CAMELLIA256-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DHE-RSA-CAMELLIA128-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES256-GCM-SHA384",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES256-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES256-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES128-GCM-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES128-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-RSA-AES128-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "EDH-RSA-DES-CBC3-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "EXP-EDH-RSA-DES-CBC-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DHE-DSS-SEED-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "EDH-DSS-DES-CBC-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DHE-DSS-CAMELLIA256-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DHE-DSS-CAMELLIA128-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES256-GCM-SHA384",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES256-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES256-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES128-GCM-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES128-SHA256",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / No ciphers available"
+        },
+        {
+          "openssl_name": "DHE-DSS-AES128-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "EDH-DSS-DES-CBC3-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        },
+        {
+          "openssl_name": "EXP-EDH-DSS-DES-CBC-SHA",
+          "ssl_version": "SSLV3",
+          "is_anonymous": false,
+          "handshake_error_message": "TLS / Wrong version number"
+        }
+      ],
+      "errored_cipher_list": []
+    }
+  }
+}

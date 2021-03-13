@@ -223,13 +223,6 @@ def test_sslyze_simplify(scan_result=1):
     return json.dumps(json.loads(a), indent=3), 200
 
 
-@bp.route('/test_sslyze_parsing/', methods=['GET'])
-def test_sslyze_parsing():
-    import app.tests.sslyze_parse_test as sslyze_parse_test
-    sslyze_parse_test.try_to_insert_all_scan_results()
-    return "done", 200
-
-
 @bp.route('/test_grading/<int:scan_result_id>', methods=['GET'])
 def test_grading(scan_result_id):
     import app.utils.sslyze.grade_scan_result as grade_scan_result
