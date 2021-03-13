@@ -1,3 +1,8 @@
+import config
+
+# Setting env variables using mock env is too late, config already has it's ENVs loaded. This is a hack, but works.
+config.SensorCollector.SEND_RESULTS_TO_LOCAL_DB = True
+
 import os
 import json
 import pytest
