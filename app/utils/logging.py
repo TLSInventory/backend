@@ -12,10 +12,14 @@ logger.add(LogConfig.log_folder + "{time}.log",
 
 
 @functools.lru_cache(maxsize=1)
-def get_version_from_file():
-    with open("version.txt", "r") as f:
-        version_txt: str = f.read()
-        return version_txt
+def get_version_from_file() -> str:
+    try:
+        with open("version.txt", "r") as f:
+            version_txt: str = f.read()
+            return version_txt.strip()
+    except FileNotFoundError as e:
+        logger.warning(f'LG0003 Cannot find version file.')
+    return '0.0.0'
 
 
 logger.info(f'LG0001 New instance of app. Version {get_version_from_file()}')
