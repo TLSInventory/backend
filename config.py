@@ -162,3 +162,7 @@ class MailConfig(object):
 
 class DebugConfig(object):
     delay_on_jwt_refresh_endpoint = os.environ.get("DEBUG_DELAY_ON_JWT_REFRESH_ENDPOINT", False)
+
+
+class TestConfig(object):
+    local_only = bool(os.environ.get("TESTS_LOCAL_ONLY", True))

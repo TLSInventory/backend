@@ -117,3 +117,4 @@ setuptools
 packaging
 
 pytest-flask
+pytest-httpserver

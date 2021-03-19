@@ -44,9 +44,6 @@ class ScanResult:
             "msg": self.msg
         }
 
-    def make_json(self):
-        return self.make_json()
-
     def make_json_string(self):
         # this string doesn't look nice, but is valid because newlines are escaped
         # app.utils.files.write_to_file("tmp/dump.json", jsons.dump(self.make_dict()))
@@ -54,7 +51,7 @@ class ScanResult:
         return jsons.dump(self.make_dict())
 
     def __repr__(self):
-        return self.make_json()
+        return self.make_json_string()
 
 
 def scan_result_to_dicts(scan_result):
@@ -149,7 +146,7 @@ def scan_domain(target: object_models.TargetWithExtra) -> ScanResult:
 
 
 def scan_domain_to_json(target: object_models.TargetWithExtra) -> str:
-    return scan_domain(target).make_json()
+    return scan_domain(target).make_json_string()
 
 
 def scan_domains_to_json(targets: List[object_models.TargetWithExtra]) -> List[str]:

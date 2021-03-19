@@ -35,9 +35,10 @@ from app.utils.time_helper import time_source, datetime_to_timestamp
 
 
 @bp.route('/sslyze_get_direct_scan/<string:domain>')
-def debug_sslyze_get_direct_scan(domain):
-    ntwe = object_models.TargetWithExtra(db_models.Target(hostname=domain))
-    res = sslyze_scanner.scan_to_json(ntwe)
+@bp.route('/sslyze_get_direct_scan/<string:domain>/<int:port>')
+def debug_sslyze_get_direct_scan(domain, port=443):
+    ntwe = object_models.TargetWithExtra(db_models.Target(hostname=domain, port=port))
+    res = sslyze_scanner.scan_domain_to_json(ntwe)
     return res
 
 
@@ -221,13 +222,6 @@ def test_sslyze_simplify(scan_result=1):
     a = db_schemas.ScanResultsSimplifiedSchema().dumps(res_simplified)
 
     return json.dumps(json.loads(a), indent=3), 200
-
-
-@bp.route('/test_sslyze_parsing/', methods=['GET'])
-def test_sslyze_parsing():
-    import app.tests.sslyze_parse_test as sslyze_parse_test
-    sslyze_parse_test.try_to_insert_all_scan_results()
-    return "done", 200
 
 
 @bp.route('/test_grading/<int:scan_result_id>', methods=['GET'])
