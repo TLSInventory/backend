@@ -3,6 +3,10 @@ from datetime import datetime, timedelta
 from app.utils.time_helper import time_source
 from flask import url_for
 
+# TimeHelper is no longer supported. Use freezer from pytest-freezegun instead.
+
+@pytest.mark.skipif(time_source.is_mocking_forced_disabled(),
+                  reason="Time mocking using time helper is forced disabled, because it's depricated.")
 class TestSuiteTimeHelper:
     ALLOWED_TIME_DIFF = timedelta(seconds=1)
 
@@ -59,15 +63,15 @@ class TestSuiteTimeHelperThroughAPI:
     def url_current_timestamp(self):
         return url_for("apiDebug.current_timestamp")
 
-    def test_current_timestamp_through_api(self):
-        res  = self.client.get(self.url_current_timestamp())
-        assert res.status_code == 200
-        assert int(res.data) < self.MAX_EXPECTED_TEST_DURATION  # pytest sets time to UNIX 0
+    def test_current_timestamp_through_api(self, freezer):
+        times = [
+            datetime.now() - timedelta(seconds=100),
+            datetime.now(),
+            datetime.now() + timedelta(seconds=100)
+        ]
 
-        mock_time = datetime.fromtimestamp(self.MAX_EXPECTED_TEST_DURATION + 100)
-        time_source.mock(True)
-        time_source.set_time(mock_time)
-        res = self.client.get(self.url_current_timestamp())
-        assert res.status_code == 200
-        assert int(res.data) == self.MAX_EXPECTED_TEST_DURATION + 100
-
+        for time in times:
+            freezer.move_to(time)
+            res = self.client.get(self.url_current_timestamp())
+            assert res.status_code == 200
+            assert int(res.data) == int(time.timestamp())

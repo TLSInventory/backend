@@ -15,6 +15,11 @@ def timestamp_to_datetime(x: int) -> datetime:
 
 class TimeHelper:
     """
+    DEPRECATED: This module was used for tests, but we've switched to pytest-freezegun.
+    All references to this module will be later removed, for now the mocking functionality is disabled.
+
+    ---
+
     Instance of this class should serve as a single source of truth for time in the whole application.
     It allows dynamic mocking of time, which is especially useful in tests of scheduler functions.
     """
@@ -22,10 +27,14 @@ class TimeHelper:
     def __init__(self):
         self.__mock: bool = False
         self.__mocked_time: datetime = datetime.fromtimestamp(0)
+        self.__force_disable_mocking: bool = True
 
     def mock(self, status: Optional[bool] = None) -> bool:
         if status is not None and self.__mock != status:
             # todo: consider adding logger.warning for situation when time mocking is enabled in production
+            if self.is_mocking_forced_disabled():
+                logger.error("Time mocking is forced disabled. Call to enable it was canceled.")
+                return self.__mock
             self.__mock = status
             logger.debug(f"Time mocking {'enabled' if status else 'disabled'}")
 
@@ -47,6 +56,9 @@ class TimeHelper:
 
     def timestamp(self) -> int:
         return datetime_to_timestamp(self.time())
+
+    def is_mocking_forced_disabled(self):
+        return self.__force_disable_mocking
 
 
 time_source = TimeHelper()
