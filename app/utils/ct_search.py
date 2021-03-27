@@ -16,7 +16,7 @@ print(get_subdomains_from_ct("borysek.eu"))
 # This is based on my old PoC for certificate transparency search.
 # https://github.com/BorysekOndrej/certificate-transparency-search/blob/master/python/cts.py
 # The version bellow does not have all the functionality of the PoC, because it doesn't need it.
-def get_subdomains_from_ct(domain: str) -> List[str]:
+def get_subdomains_from_ct(domain: object) -> List[str]:  # changed return type
     # This is wrapper for future expansion
     if not ImportConfig.crt_sh:
         logger.info("DN0001 Crt.sh is disabled in the config file")
@@ -25,7 +25,7 @@ def get_subdomains_from_ct(domain: str) -> List[str]:
     identities_and_ids = get_identities_and_ids(resp)
     identities = [x for x in identities_and_ids]
     subdomains = [x for x in identities if x.endswith(domain)]
-    return subdomains
+    return list(filter(lambda subdomain: "@" not in subdomain, subdomains))
 
 
 def crt_sh(domain) -> Dict:

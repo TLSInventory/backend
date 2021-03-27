@@ -28,7 +28,7 @@ cors = CORS(resources={r"/api/*": {"origins": ["http://bakalarka3.borysek:8080",
 
 
 def create_app():
-    import app.utils.logging
+    import app.utils.logging_util
 
     app_new = Flask(__name__, instance_relative_config=True)
     app_new.config.from_object(config.FlaskConfig)

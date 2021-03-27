@@ -11,7 +11,7 @@ def generic_get_create_edit_from_data(schema: db_schemas.SQLAlchemyAutoSchema, d
                                       get_only=False) -> Optional[db_models.Base]:
     # Warning: Unless get_only=True, this function overwrites attributes in DB to default used in schema load,
     # if the attributes are not specified in data.
-    # Warning: This overwrites excluded filds, most commonly ID.
+    # Warning: This overwrites excluded fields, most commonly ID.
     schema_instance = schema()
     res_transient = schema_instance.load(data, transient=True)  # this validates input
     return generic_get_create_edit_from_transient(schema, res_transient, transient_only, get_only)
