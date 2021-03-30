@@ -22,8 +22,8 @@ db = SQLAlchemy()
 ma = Marshmallow()
 migrate = Migrate()
 
-cors = CORS(resources={r"/api/*": {"origins": ["http://bakalarka3.borysek:8080",
-                                               "http://bakalarka3.borysek:5000"]}},
+cors = CORS(resources={r"/api/*": {"origins": ["http://tlsinventory.test:8080",
+                                               "http://tlsinventory.test:5000"]}},
             supports_credentials=True)
 
 
