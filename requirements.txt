@@ -50,4 +50,3 @@ packaging
 pytest-flask
 pytest-httpserver
 pytest-freezegun
-graphviz
