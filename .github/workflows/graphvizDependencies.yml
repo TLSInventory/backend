@@ -1,0 +1,53 @@
+name: graphvizDependencies
+
+
+on: [push, pull_request_target]
+
+jobs:
+  graphviz-dependencies:
+    name: Graphviz dependencies
+   
+    # always run on push events, but only run on pull_request_target event when pull request pulls from fork repository
+    # for pull requests within the same repository, the pull event is sufficient
+    if: >
+      github.event_name == 'push' ||
+      github.event_name == 'pull_request_target' && github.event.pull_request.head.repo.full_name != github.repository
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.7]
+
+    runs-on: ${{ matrix.os }}
+    
+    env:
+      OS: ${{ matrix.os }}
+      PYTHON: ${{ matrix.python-version }}
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install graphviz system package
+      run: sudo apt-get install graphviz
+
+    - name: Install graphviz python package
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install --user graphviz
+
+    - name: Graph dependencies
+      run: |
+        chmod +x ./tests/imports/gather_and_parse_imports.sh
+        ./tests/imports/gather_and_parse_imports.sh
+
+    - name: Upload dependency graphs
+      uses: actions/upload-artifact@v2
+      with:
+        name: Dependency graphs (Python ${{ matrix.python-version }})
+        path: tmp/imports.gv.*.pdf
