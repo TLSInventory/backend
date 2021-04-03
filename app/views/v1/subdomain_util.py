@@ -1,13 +1,7 @@
-# TODO:
-# pamatat si subdomeny v databazi, kazdu chvilu sa bude volat ct search
-# db_models.Target, scanOrder a vlastna tabulka v databazi
-# api_target -> vyclenit co potrebujem aj tu do separatnej metody
-# get_target_id_if_user_can_see_it -> vrati Target z db_models, pouzitie rovnake ako v api_target
-
-# testy spravit podla tests/scan_scheduler_test.py
 import json
 
-from flask import request
+import flask_jwt_extended
+from flask import request, url_for
 
 import app.utils.authentication_utils as authentication_utils
 import app.actions as actions
@@ -18,10 +12,11 @@ from app.actions.add_targets import add_targets
 
 
 @bp.route(
-    "/add_subdomain/<int:target_id>",
+    "/add_subdomains/<int:target_id>",
     methods=["POST", "DELETE"]
 )
-def add_subdomains(target_id: int):
+@flask_jwt_extended.jwt_required
+def api_add_subdomains(target_id: int):
     user_id = authentication_utils.get_user_id_from_current_jwt()
     target = actions.get_target_from_id_if_user_can_see(target_id, user_id)
     data = json.loads(request.data)
@@ -29,7 +24,11 @@ def add_subdomains(target_id: int):
     if target is None:
         return "You do not have permission to track this target.", 400
 
-    subdomains = get_subdomains_from_ct(target.hostname)
+    subdomains = set(get_subdomains_from_ct(target.hostname))
+
+    # tracked_subdomains = retrieve existing subdomains from DB
+
+    # subdomains = subdomians - set(tracked_subdomains)
 
     subdomain_ids = add_targets(subdomains, user_id, data)
 
