@@ -11,6 +11,8 @@ import app.utils.sslyze.simplify_result as sslyze_result_simplify
 
 from app.utils.notifications.user_preferences import get_effective_notification_settings, mail_add
 
+from app.actions.add_targets import add_targets
+
 from app.utils.notifications.actions import set_notification_settings_raw_multiple_target_ids
 
 from . import bp
@@ -118,8 +120,9 @@ def api_target():
     target_hostnames = list(filter(lambda x: len(x), target_hostnames))
     target_hostnames = list(set(target_hostnames))
 
-    target_ids = set()
+    target_ids = add_targets(target_hostnames, data)
 
+    """
     for target_hostname in target_hostnames:
         new_target_def = copy.deepcopy(data["target"])
         new_target_def["hostname"] = target_hostname
@@ -135,6 +138,7 @@ def api_target():
 
     if data.get("notifications"):
         set_notification_settings_raw_multiple_target_ids(user_id, target_ids, data.get("notifications"))
+    """
 
     return f'Inserted {len(target_ids)} targets', 200
     # return api_target_by_id(target.id)  # todo: reenable this
