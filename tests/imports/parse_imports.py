@@ -2,6 +2,7 @@
 
 from pprint import pprint
 from graphviz import Digraph
+from typing import List
 
 import random
 
@@ -45,12 +46,7 @@ def get_filename_and_import_name(line: str):
     return filename, import_name 
 
 
-def main():
-    lines = []
-
-    with open(INPUT_FILE, 'r') as f:
-        lines = f.readlines()
-
+def process_the_names(lines: List[str]) -> dict:
     a = list(filter(lambda x: "import app" in x or "from app" in x ,lines))
     b = {}
     for x in a:
@@ -62,12 +58,13 @@ def main():
         b[file_name].add(import_name)
         # print(file_name, import_name, sep="\t")
 
-    pprint(b)
+    return b
 
+def create_graph(b: dict, output_filename: str):
     dot = Digraph()
 
     for filename in b:
-        dot.node(file_name, file_name)
+        dot.node(filename, filename)
 
     for filename in b:
         color = random.choice(SVG_COLORS)
@@ -75,9 +72,18 @@ def main():
             print(filename, import_name)
             a = dot.edge(filename, import_name, color=color)
 
-    dot.render(OUTPUT_FILE, view=False)
+    dot.render(output_filename, view=False)
 
-    print(f"Check the output in {OUTPUT_FILE}.pdf")
+    print(f"Check the output in {output_filename}.pdf")
+
+
+def main():
+    with open(INPUT_FILE, 'r') as f:
+        lines = f.readlines()
+
+    b = process_the_names(lines)
+    pprint(b)
+    create_graph(b, OUTPUT_FILE)
 
 
 if __name__ == "__main__":
