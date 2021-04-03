@@ -7,7 +7,7 @@ import app.db_schemas as db_schemas
 
 
 def add_targets(hostnames: List[str], user_id, data):
-    ids = {}
+    ids = set()
 
     for hostname in hostnames:
         new_target_def = copy.deepcopy(data["target"])
