@@ -120,7 +120,7 @@ def api_target():
     target_hostnames = list(filter(lambda x: len(x), target_hostnames))
     target_hostnames = list(set(target_hostnames))
 
-    target_ids = add_targets(target_hostnames, data)
+    target_ids = add_targets(target_hostnames, user_id, data)
 
     return f'Inserted {len(target_ids)} targets', 200
     # return api_target_by_id(target.id)  # todo: reenable this

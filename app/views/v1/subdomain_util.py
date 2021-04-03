@@ -12,6 +12,7 @@ from flask import request
 import app.utils.authentication_utils as authentication_utils
 import app.actions as actions
 
+from . import bp
 from app.utils.ct_search import get_subdomains_from_ct
 from app.actions.add_targets import add_targets
 
@@ -30,7 +31,7 @@ def add_subdomains(target_id: int):
 
     subdomains = get_subdomains_from_ct(target.hostname)
 
-    subdomain_ids = add_targets(subdomains, data)
+    subdomain_ids = add_targets(subdomains, user_id, data)
 
     return f"Successfully added {len(subdomain_ids)} subdomains.", 200
 

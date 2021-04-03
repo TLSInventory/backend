@@ -6,7 +6,7 @@ import app.utils.db.advanced as db_utils_advanced
 import app.db_schemas as db_schemas
 
 
-def add_targets(hostnames: List[str], data):
+def add_targets(hostnames: List[str], user_id, data):
     ids = {}
 
     for hostname in hostnames:
