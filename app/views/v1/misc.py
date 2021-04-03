@@ -122,24 +122,6 @@ def api_target():
 
     target_ids = add_targets(target_hostnames, data)
 
-    """
-    for target_hostname in target_hostnames:
-        new_target_def = copy.deepcopy(data["target"])
-        new_target_def["hostname"] = target_hostname
-
-        target = db_utils_advanced.generic_get_create_edit_from_data(db_schemas.TargetSchema, new_target_def)
-
-        target_ids.add(target.id)
-
-        if data.get("scanOrder"):
-            scan_order_def = db_utils.merge_dict_with_copy_and_overwrite(data.get("scanOrder", {}),
-                                                                         {"target_id": target.id, "user_id": user_id})
-            db_utils_advanced.generic_get_create_edit_from_data(db_schemas.ScanOrderSchema, scan_order_def)
-
-    if data.get("notifications"):
-        set_notification_settings_raw_multiple_target_ids(user_id, target_ids, data.get("notifications"))
-    """
-
     return f'Inserted {len(target_ids)} targets', 200
     # return api_target_by_id(target.id)  # todo: reenable this
 
