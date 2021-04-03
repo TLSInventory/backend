@@ -36,20 +36,17 @@ jobs:
     - name: Install graphviz system package
       run: sudo apt-get install graphviz
 
-    - name: Install dependencies
+    - name: Install graphviz python package
       run: |
         python -m pip install --upgrade pip
         python -m pip install --user graphviz
 
-    - name: Chmod +x the script
-      run: |
-        "chmod +x tests/imports/gather_and_parse_imports.sh"
-
     - name: Graph dependencies
       run: |
-        "./tests/imports/gather_and_parse_imports.sh"
+        chmod +x ./tests/imports/gather_and_parse_imports.sh
+        ./tests/imports/gather_and_parse_imports.sh
 
-    - name: Upload Unit Test Results
+    - name: Upload dependency graphs
       uses: actions/upload-artifact@v2
       with:
         name: Unit Test Results (Python ${{ matrix.python-version }})
