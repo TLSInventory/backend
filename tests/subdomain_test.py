@@ -26,7 +26,7 @@ class TestSuiteAddSubdomains:
         assert self.client.post(url_for("apiV1.api_login"), json=self.__login_data_from_register(self.__register_data1())).status_code == 200
         assert self.client.get(url_for("apiDebug.debugSetAccessCookie")).status_code == 200
 
-    def __target_add_data(self, hostname:str = "is.muni.cz", ip: Optional[str]=None):
+    def __target_add_data(self, hostname:str = "example.com", ip: Optional[str]=None):
         return {
             "target": {"id": None, "hostname": hostname, "port": None, "ip_address": ip, "protocol": "HTTPS"},
             "scanOrder": {"periodicity": 43200, "active": None}
@@ -41,6 +41,6 @@ class TestSuiteAddSubdomains:
     def test_add_subdomains(self):
         self.__do_authentication()
         self.__add_target(self.__target_add_data())
-        # res = self.client.post(url_for("apiV1.api_add_subdomains/1"))
+        # res = self.client.post(url_for("apiV1.api_add_subdomains", target_id=1))
         _, res = api_add_subdomains(1)
         assert res == 200
