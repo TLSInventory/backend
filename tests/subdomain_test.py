@@ -33,7 +33,8 @@ class TestSuiteAddSubdomains:
          }
 
     def __add_target(self, json_data):
-        # adding a target without IP will result in DNS query on every enque for scan
+        # adding a target without IP will result
+        # in DNS query on every enque for scan
         res = self.client.put(url_for("apiV1.api_target"), json=json_data)
         assert res.status_code == 200
         return res
@@ -41,6 +42,7 @@ class TestSuiteAddSubdomains:
     def test_add_subdomains(self):
         self.__do_authentication()
         self.__add_target(self.__target_add_data())
-        # res = self.client.post(url_for("apiV1.api_add_subdomains", target_id=1))
-        _, res = api_add_subdomains(1)
+        _, _, res = api_add_subdomains(1)
+        _, amount, res = api_add_subdomains(1)
+        assert amount == 0
         assert res == 200
