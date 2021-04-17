@@ -31,15 +31,18 @@ def api_add_subdomains(target_id: int):
     fetched_subdomains = set(get_subdomains_from_ct(target.hostname))
     tracked_subdomains = get_tracked_subdomains_by_hostname(target.hostname)
 
-    subdomains = fetched_subdomains / tracked_subdomains
+    subdomains = fetched_subdomains - tracked_subdomains
+
+    amount_of_subdomains = len(subdomains)
 
     subdomain_ids = add_targets(subdomains, user_id, data)
 
-    return f"Successfully added {len(subdomain_ids)} subdomains.", 200
+    return f"Successfully added {len(subdomain_ids)} subdomains.", amount_of_subdomains, 200
 
 
 def get_tracked_subdomains_by_hostname(hostname: str) -> Set[str]:
-    out = db_models.db.session.query(db_models.Target).filter(
+    db_response = db_models.db.session.query(db_models.Target).filter(
         db_models.Target.hostname.like(f"%{hostname}")
     ).all()
-    return set(out)
+
+    return set(map(lambda target: target.hostname, db_response))
