@@ -14,7 +14,6 @@ from app.utils.ct_search import get_subdomains_from_ct
 from app.actions.add_targets import add_targets
 
 
-
 @bp.route(
     "/api_add_subdomains/<int:target_id>",
     methods=["POST", "DELETE"]
@@ -29,7 +28,10 @@ def api_add_subdomains(target_id: int):
         return "You do not have permission to track this target.", 400
 
     fetched_subdomains = set(get_subdomains_from_ct(target.hostname))
-    tracked_subdomains = get_tracked_subdomains_by_hostname(target.hostname)
+    tracked_subdomains = get_tracked_subdomains_by_hostname(
+        target.hostname,
+        user_id
+    )
 
     subdomains = fetched_subdomains - tracked_subdomains
 
@@ -40,9 +42,14 @@ def api_add_subdomains(target_id: int):
     return f"Successfully added {len(subdomain_ids)} subdomains.", amount_of_subdomains, 200
 
 
-def get_tracked_subdomains_by_hostname(hostname: str) -> Set[str]:
-    db_response = db_models.db.session.query(db_models.Target).filter(
-        db_models.Target.hostname.like(f"%{hostname}")
-    ).all()
+def get_tracked_subdomains_by_hostname(hostname: str, user_id: int)\
+        -> Set[str]:
+    # wait for review from Ondra
+    # assumes there is a relationship between Target and ScanOrder
+    db_response = db_models.db.session.query(db_models.Target) \
+        .outerjoin(db_models.ScanOrder) \
+        .filter(db_models.ScanOrder.user_id == user_id) \
+        .filter(db_models.Target.hostname.like(f"%{hostname}")) \
+        .all()
 
     return set(map(lambda target: target.hostname, db_response))
