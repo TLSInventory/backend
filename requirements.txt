@@ -3,6 +3,7 @@ nassl==2.2.0
 path>=12.0.0
 pyOpenSSL
 cryptography
+cffi
 
 dnspython
 
