@@ -35,6 +35,11 @@ For information how to deploy this application check the [Docker repository](htt
 Exactly Python 3.7.x is required until we upgrade to SSLyze 3.*
 Python packages are listed in file `requirements.txt`.
 
+```bash
+python3.7 -m venv .venv
+source .venv/bin/activate
+python3.7 -m pip install -r requirements.txt
+```
 
 #### Integration (main development) branch
 

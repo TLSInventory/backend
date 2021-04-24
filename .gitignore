@@ -10,6 +10,7 @@ test.json
 /.venvLinux/
 .run/
 tests/artifacts
+/.venv*
 
 # Created by https://www.gitignore.io/api/git,pycharm,visualstudio,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=git,pycharm,visualstudio,visualstudiocode
