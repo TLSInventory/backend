@@ -38,6 +38,8 @@ Flask-Restless
 Flask-SQLAlchemy
 Flask-WTF
 
+supervisor
+
 pytest
 py
 pip
