@@ -7,7 +7,7 @@ Flask-JWT-Extended < 4.0.0
 
 # Version (mostly fixed) to avoid breaking changes (for example Flask 2.0)
 
-pyOpenSSL==19.1.0
+pyOpenSSL
 cryptography
 cffi==1.14.4
 
