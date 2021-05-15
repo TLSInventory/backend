@@ -50,3 +50,5 @@ packaging
 pytest-flask
 pytest-httpserver
 pytest-freezegun
+
+tldextract
