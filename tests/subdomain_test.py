@@ -6,7 +6,12 @@ from flask import url_for
 from app.views.v1.subdomain_util import api_add_subdomains
 
 
-class ModuleTester:
+def pytest_configure():
+    pytest.first_batch = 0
+
+
+@pytest.mark.usefixtures('client_class')
+class TestSubdomainSuite():
 
     def register_data1(self):
         return {
@@ -38,31 +43,23 @@ class ModuleTester:
         assert res.status_code == 200
         return res
 
-
-def pytest_configure():
-    pytest.first_batch = 0
-
-
-@pytest.mark.usefixtures('client_class')
-class TestSubdomainSuite(ModuleTester):
-
     def test_add_subdomains(self):
-        super().do_authentication()
-        super().add_target(super().target_add_data())
+        self.do_authentication()
+        self.add_target(self.target_add_data())
         _, fb, res = api_add_subdomains(1)
         assert res == 200
         pytest.first_batch = fb
 
     def test_same_subdomain_different_user(self):
-        super().do_authentication()
-        super().add_target(super().target_add_data())
+        self.do_authentication()
+        self.add_target(self.target_add_data())
         _, fb, res = api_add_subdomains(1)
         assert res == 200
         assert fb == pytest.first_batch
 
     def test_repeatedly_add_subdomains(self):
-        super().do_authentication()
-        super().add_target(super().target_add_data())
+        self.do_authentication()
+        self.add_target(self.target_add_data())
         _, _, res = api_add_subdomains(1)
         assert res == 200
         _, added, res = api_add_subdomains(1)
