@@ -5,11 +5,16 @@ import app.utils.db.basic as db_utils
 import app.utils.db.advanced as db_utils_advanced
 import app.db_schemas as db_schemas
 
+import tldextract
+
 
 def add_targets(hostnames: List[str], user_id, data):
     ids = set()
 
     for hostname in hostnames:
+        if is_tld(hostname):
+            continue
+
         new_target_def = copy.deepcopy(data["target"])
         new_target_def["hostname"] = hostname
 
@@ -32,3 +37,7 @@ def add_targets(hostnames: List[str], user_id, data):
             )
 
     return ids
+
+
+def is_tld(hostname: str):
+    return hostname == str(tldextract.extract(hostname))
