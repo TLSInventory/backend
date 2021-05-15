@@ -27,6 +27,20 @@ class TestSubdomainSuite:
             'email': 'general@kenobi.sw'
         }
 
+    def register_data3(self):
+        return {
+            'username': 'm',
+            'password': 'k',
+            'email': 'm@k.com'
+        }
+
+    def register_data4(self):
+        return {
+            'username': 'abc',
+            'password': 'xyz',
+            'email': 'abc@xyz.com'
+        }
+
     def login_data_from_register(self, registration_data: dict):
         answer = registration_data.copy()
         del answer['email']
@@ -53,6 +67,7 @@ class TestSubdomainSuite:
     def test_add_subdomains(self):
         self.do_authentication(self.register_data1)
         self.add_target(self.target_add_data())
+        self.add_target(self.target_add_data(hostname="borysek.net"))  # for further testing, so I know the ID
         _, fb, res = api_add_subdomains(1)
         assert res == 200
         pytest.first_batch = fb
@@ -65,10 +80,16 @@ class TestSubdomainSuite:
         assert fb == pytest.first_batch
 
     def test_repeatedly_add_subdomains(self):
-        self.do_authentication(self.register_data1)
+        self.do_authentication(self.register_data3)
         self.add_target(self.target_add_data())
         _, _, res = api_add_subdomains(1)
         assert res == 200
         _, added, res = api_add_subdomains(1)
         assert res == 200
         assert added == 0
+
+    def test_add_untracked(self):
+        self.do_authentication(self.register_data4)
+        self.add_target(self.target_add_data()) # mandatory, else NoJWTException is raised, should be fixed
+        _, _, res = api_add_subdomains(2)
+        assert res == 400
