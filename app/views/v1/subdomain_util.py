@@ -15,6 +15,9 @@ from app.actions.add_targets import add_targets
 
 
 def add_subdomains(target_id: int, user_id: int, data) -> Tuple[str, int, int]:
+    # new table with primary key (user_id, target_id) -> periodically rescan
+    # SSCT do configu, aby sa nastavila periodicita
+    # filtorvat podla najstarsieho timestamp
     target = actions.get_target_from_id_if_user_can_see(target_id, user_id)
 
     if target is None:

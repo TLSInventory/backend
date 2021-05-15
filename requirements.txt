@@ -58,4 +58,4 @@ pytest-flask==1.1.0
 pytest-httpserver==1.0.0
 pytest-freezegun==0.4.2
 
-tldextract
+tldextract==3.1.0
