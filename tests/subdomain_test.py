@@ -11,7 +11,7 @@ def pytest_configure():
 
 
 @pytest.mark.usefixtures('client_class')
-class TestSubdomainSuite():
+class TestSubdomainSuite:
 
     def register_data1(self):
         return {
@@ -20,14 +20,21 @@ class TestSubdomainSuite():
             'email': 'dolor@sit.amet'
         }
 
+    def register_data2(self):
+        return {
+            'username': 'hello',
+            'password': 'there',
+            'email': 'general@kenobi.sw'
+        }
+
     def login_data_from_register(self, registration_data: dict):
         answer = registration_data.copy()
         del answer['email']
         return answer
 
-    def do_authentication(self):
-        assert self.client.post(url_for("apiV1.api_register"), json=self.register_data1()).status_code == 200
-        assert self.client.post(url_for("apiV1.api_login"), json=self.login_data_from_register(self.register_data1())).status_code == 200
+    def do_authentication(self, register_method):
+        assert self.client.post(url_for("apiV1.api_register"), json=register_method()).status_code == 200
+        assert self.client.post(url_for("apiV1.api_login"), json=self.login_data_from_register(register_method())).status_code == 200
         assert self.client.get(url_for("apiDebug.debugSetAccessCookie")).status_code == 200
 
     def target_add_data(self, hostname:str = "example.com", ip: Optional[str]=None):
@@ -44,21 +51,21 @@ class TestSubdomainSuite():
         return res
 
     def test_add_subdomains(self):
-        self.do_authentication()
+        self.do_authentication(self.register_data1)
         self.add_target(self.target_add_data())
         _, fb, res = api_add_subdomains(1)
         assert res == 200
         pytest.first_batch = fb
 
     def test_same_subdomain_different_user(self):
-        self.do_authentication()
+        self.do_authentication(self.register_data2)
         self.add_target(self.target_add_data())
         _, fb, res = api_add_subdomains(1)
         assert res == 200
         assert fb == pytest.first_batch
 
     def test_repeatedly_add_subdomains(self):
-        self.do_authentication()
+        self.do_authentication(self.register_data1)
         self.add_target(self.target_add_data())
         _, _, res = api_add_subdomains(1)
         assert res == 200
