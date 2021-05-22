@@ -13,11 +13,34 @@ from . import bp
 from app.utils.ct_search import get_subdomains_from_ct
 from app.actions.add_targets import add_targets
 
+from time import time
+
+BATCH_SIZE = 10  # set appropriate amount
+RESCAN_INTERVAL = 62400  # to check target once a day
+
+
+@bp.route("/rescan_subdomains", methods=["GET"])  # is ok?
+@flask_jwt_extended.jwt_required
+def api_cron_rescan_subdomains() -> None:
+    rescan_subdomains()
+
+
+def rescan_subdomains() -> int:
+    targets_to_rescan = (
+        db_models.db.session.query(db_models.SubdomainRescanTarget)
+        .order_by(db_models.SubdomainRescanTarget.subdomain_last_scan.asc())
+        .limit(BATCH_SIZE).all()
+    )
+    for target in targets_to_rescan:
+        if time() - target.subdomain_last_scan < RESCAN_INTERVAL:
+            continue
+        add_subdomains(target.subdomain_scan_target_id, target.subdomain_scan_user_id)
+        target.subdomain_last_scan = int(time())  # should work, check
+        db_models.db.session.commit()
+    return len(targets_to_rescan)  # for testing
+
 
 def add_subdomains(target_id: int, user_id: int, data) -> Tuple[str, int, int]:
-    # new table with primary key (user_id, target_id) -> periodically rescan
-    # SSCT do configu, aby sa nastavila periodicita
-    # filtorvat podla najstarsieho timestamp
     target = actions.get_target_from_id_if_user_can_see(target_id, user_id)
 
     if target is None:
@@ -34,6 +57,21 @@ def add_subdomains(target_id: int, user_id: int, data) -> Tuple[str, int, int]:
                     "protocol": "HTTPS",
                 },
             }
+    if (
+            db_models.db.session.
+            query(db_models.SubdomainRescanTarget).
+            filter(db_models.SubdomainRescanTarget.subdomain_scan_target_id == target_id).
+            filter(db_models.SubdomainRescanTarget.subdomain_scan_user_id == user_id).
+            all()
+            == []
+    ):
+        new = db_models.SubdomainRescanTarget()
+        new.subdomain_scan_target_id = target_id
+        new.subdomain_scan_user_id = user_id
+        new.subdomain_last_scan = int(time())
+        db_models.db.session.add(new)
+        db_models.db.session.commit()
+        # db_utils.actions_on_modification(new) ?
 
     subdomains = cron_subdomain_lookup(target, user_id)
     subdomain_ids = add_targets(list(subdomains), user_id, data)
