@@ -916,3 +916,12 @@ class PlainTextNotification(Base):
     notification_id = db.Column(db.String, unique=True)  # notification_id should be globally unique, not only in channel
     msg = db.Column(db.JSON)
 
+
+class SubdomainRescanTarget(Base, UniqueModel):
+    __tablename__ = 'subdomainrescan'
+
+    subdomain_scan_target_id = db.Column(db.Integer, primary_key=True)
+    subdomain_scan_user_id = db.Column(db.Integer, primary_key=True)
+    subdomain_last_scan = db.Column(db.Integer)
+
+
