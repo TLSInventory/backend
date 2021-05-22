@@ -3,7 +3,7 @@ from typing import Optional
 import pytest
 from flask import url_for
 
-from app.views.v1.subdomain_util import api_add_subdomains
+from app.views.v1.subdomain_util import *
 
 
 def pytest_configure():
@@ -39,6 +39,13 @@ class TestSubdomainSuite:
             'username': 'abc',
             'password': 'xyz',
             'email': 'abc@xyz.com'
+        }
+
+    def register_data5(self):
+        return {
+            'username': 'xyz',
+            'password': 'abc',
+            'email': 'xyz@abc.com'
         }
 
     def login_data_from_register(self, registration_data: dict):
@@ -93,3 +100,20 @@ class TestSubdomainSuite:
         self.add_target(self.target_add_data()) # mandatory, else NoJWTException is raised, should be fixed
         _, _, res = api_add_subdomains(2)
         assert res == 400
+
+    def test_rescan_subdomains_empty(self):
+        self.do_authentication(self.register_data5)
+        # self.add_target(self.target_add_data())
+        # self.add_target(self.target_add_data(hostname="borysek.net"))
+        res = rescan_subdomains()
+        assert res == 0
+
+    def test_rescan_subdomains(self):
+        self.do_authentication(self.register_data5)
+        self.add_target(self.target_add_data())
+        self.add_target(self.target_add_data(hostname="borysek.net"))
+        api_add_subdomains(1)
+        api_add_subdomains(2)
+        res = rescan_subdomains()
+        assert res == 2
+
