@@ -6,26 +6,15 @@ from datetime import datetime, timedelta
 from flask import url_for
 from config import SchedulerConfig
 
+from tests.auth_test import login, register
 
 @pytest.mark.usefixtures('client_class')
 class TestSuiteScanScheduler:
     SMALL_OFFSET = timedelta(seconds=10)  # seconds
 
-    def __register_data1(self):
-        return {
-            'username': 'lorem',
-            'password': 'ipsum',
-            'email': 'dolor@sit.amet'
-        }
-
-    def __login_data_from_register(self, registration_data: dict):
-        answer = registration_data.copy()
-        del answer['email']
-        return answer
-
+    @register
+    @login
     def __do_authentication(self):
-        assert self.client.post(url_for("apiV1.api_register"), json=self.__register_data1()).status_code == 200
-        assert self.client.post(url_for("apiV1.api_login"), json=self.__login_data_from_register(self.__register_data1())).status_code == 200
         assert self.client.get(url_for("apiDebug.debugSetAccessCookie")).status_code == 200
 
     def __target_add_data(self, hostname:str ="example.com", ip: Optional[str]=None):
