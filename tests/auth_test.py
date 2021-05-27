@@ -24,15 +24,11 @@ class TestSuiteConfig:
         'email': 'dolor@sit.amet'
     }
 
-    login_data1 = {
-        'username': 'lorem',
-        'password': 'ipsum',
-    }
-
-    login_data2 = {
-        'username': 'lorem2',
-        'password': 'ipsum',
-    }
+    @staticmethod
+    def login_data_from_register(registration_data: dict):
+        answer = registration_data.copy()
+        del answer['email']
+        return answer
 
 
 def register(func):
@@ -44,7 +40,7 @@ def register(func):
 
 def login(func):
     def wrapper(self):
-        assert self.client.post(TestSuiteConfig.url_login(), json=TestSuiteConfig.login_data1).status_code == 200
+        assert self.client.post(TestSuiteConfig.url_login(), json=TestSuiteConfig.login_data_from_register(TestSuiteConfig.register_data1)).status_code == 200
         func(self)
     return wrapper
 
@@ -64,7 +60,7 @@ class TestSuiteAuth:
         assert self.client.post(TestSuiteConfig.url_login()).status_code == 400
 
     def test_login_bad_auth(self):
-        assert self.client.post(TestSuiteConfig.url_login(), json=TestSuiteConfig.login_data1).status_code == 401
+        assert self.client.post(TestSuiteConfig.url_login(), json=TestSuiteConfig.login_data_from_register(TestSuiteConfig.register_data1)).status_code == 401
 
     @register
     def test_register_one(self):
@@ -87,7 +83,7 @@ class TestSuiteAuth:
 
     @register_and_login
     def test_login_with_unregistered_user(self):
-        assert self.client.post(TestSuiteConfig.url_login(), json=TestSuiteConfig.login_data2).status_code == 401
+        assert self.client.post(TestSuiteConfig.url_login(), json=TestSuiteConfig.login_data_from_register(TestSuiteConfig.register_data2)).status_code == 401
 
 
 # app_inst = app_test_instance()
