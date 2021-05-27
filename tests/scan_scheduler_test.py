@@ -9,6 +9,13 @@ from config import SchedulerConfig
 from tests.auth_test import login, register
 
 
+def target_add_data(hostname: str = "example.com", ip: Optional[str] = None, port: Optional[int] = None):
+    return {
+        "target": {"id": None, "hostname": hostname, "port": port, "ip_address": ip, "protocol": "HTTPS"},
+        "scanOrder": {"periodicity": 43200, "active": None}
+    }
+
+
 @pytest.mark.usefixtures('client_class')
 class TestSuiteScanScheduler:
     SMALL_OFFSET = timedelta(seconds=10)  # seconds
@@ -17,13 +24,6 @@ class TestSuiteScanScheduler:
     @login
     def __do_authentication(self):
         assert self.client.get(url_for("apiDebug.debugSetAccessCookie")).status_code == 200
-
-    @staticmethod
-    def __target_add_data(hostname: str = "example.com", ip: Optional[str] = None, port: Optional[int] = None):
-        return {
-            "target": {"id": None, "hostname": hostname, "port": port, "ip_address": ip, "protocol": "HTTPS"},
-            "scanOrder": {"periodicity": 43200, "active": None}
-         }
 
     def __add_target(self, json_data):
         # adding a target without IP will result in DNS query on every enque for scan
@@ -44,7 +44,7 @@ class TestSuiteScanScheduler:
         self.__do_authentication()
 
         ip = "127.0.0.1" if static_ip else None
-        self.__add_target(self.__target_add_data(ip=ip))
+        self.__add_target(target_add_data(ip=ip))
 
         freezer.move_to(datetime.now() + timedelta(seconds=SchedulerConfig.max_first_scan_delay) + self.SMALL_OFFSET)
 
@@ -55,7 +55,7 @@ class TestSuiteScanScheduler:
     def test_requeuing_after_min_separation(self, freezer):
         self.__do_authentication()
 
-        self.__add_target(self.__target_add_data(ip="127.0.0.1"))
+        self.__add_target(target_add_data(ip="127.0.0.1"))
         freezer.move_to(datetime.now() + timedelta(seconds=SchedulerConfig.max_first_scan_delay) + self.SMALL_OFFSET)
 
         # Scan should be requeued if it did not finish and some time has passed
@@ -70,7 +70,7 @@ class TestSuiteScanScheduler:
     def test_not_requeuing_right_away(self, freezer):
         self.__do_authentication()
 
-        self.__add_target(self.__target_add_data(ip="127.0.0.1"))
+        self.__add_target(target_add_data(ip="127.0.0.1"))
         freezer.move_to(datetime.now() + timedelta(seconds=SchedulerConfig.max_first_scan_delay) + self.SMALL_OFFSET)
 
         # First batch should get the target
