@@ -8,6 +8,7 @@ from config import SchedulerConfig
 
 from tests.auth_test import login, register
 
+
 @pytest.mark.usefixtures('client_class')
 class TestSuiteScanScheduler:
     SMALL_OFFSET = timedelta(seconds=10)  # seconds
@@ -17,9 +18,10 @@ class TestSuiteScanScheduler:
     def __do_authentication(self):
         assert self.client.get(url_for("apiDebug.debugSetAccessCookie")).status_code == 200
 
-    def __target_add_data(self, hostname:str ="example.com", ip: Optional[str]=None):
+    @staticmethod
+    def __target_add_data(hostname: str = "example.com", ip: Optional[str] = None, port: Optional[int] = None):
         return {
-            "target": {"id": None, "hostname": hostname, "port": None, "ip_address": ip, "protocol": "HTTPS"},
+            "target": {"id": None, "hostname": hostname, "port": port, "ip_address": ip, "protocol": "HTTPS"},
             "scanOrder": {"periodicity": 43200, "active": None}
          }
 
