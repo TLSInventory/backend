@@ -7,7 +7,7 @@ import app.object_models as object_models
 import app.utils.sslyze.scanner as sslyze_scanner
 import os
 
-from config import SslyzeConfig, SensorCollector
+from config import SensorCollector
 
 
 def file_module_string_from_path():

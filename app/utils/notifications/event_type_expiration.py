@@ -1,7 +1,6 @@
 import datetime
 from typing import Dict, Tuple, Set, List, Optional
 
-import flask
 from loguru import logger
 
 import app.db_models as db_models
