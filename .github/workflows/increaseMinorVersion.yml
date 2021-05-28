@@ -1,0 +1,45 @@
+name: addVersion
+
+
+on:
+  push:
+    branches:
+      - 'integration'
+
+jobs:
+  job1:
+    name: Add version to file
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+
+    - name: Increse the minor version in the version.txt file
+      run: python3 .github/helpers/increaseMinorVersion.py
+      
+    - id: version-number-step
+      name: Store version number to the steps output variable
+      run: echo "::set-output name=version-number::$(cat version.txt)"
+
+    - name: Setup git user
+      run: |
+          git config user.name github-actions
+          git config user.email BorysekOndrej@users.noreply.github.com
+
+    - name: Add file to git
+      run: git add version.txt
+
+    - name: Debug - git status
+      run: git status
+
+    - name: Commit changes if there are any
+      run: git diff-index --quiet HEAD || git commit -m "Update the version.txt file to version ${{ steps.version-number-step.outputs.version-number }}"
+
+    - name: Push changes
+      run: git push
