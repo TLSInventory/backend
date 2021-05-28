@@ -1,6 +1,4 @@
 import datetime
-import json
-from typing import List
 
 import jsons
 from sqlalchemy.orm.exc import NoResultFound
