@@ -55,7 +55,7 @@ def rescan_subdomains() -> int:
     return len(targets_to_rescan)  # for testing
 
 
-def add_subdomains(target_id: int, user_id: int, data) -> Tuple[str, int, int]:
+def add_subdomains(target_id: int, user_id: int, data=None) -> Tuple[str, int, int]:
     target = actions.get_target_from_id_if_user_can_see(target_id, user_id)
 
     if target is None:
