@@ -62,16 +62,7 @@ def add_subdomains(target_id: int, user_id: int, data) -> Tuple[str, int, int]:
         return "You do not have permission to track this target.", 0, 400
 
     if data is None:  # dummy data for searching and enqueuing new subdomains
-        data = {
-                "scanOrder": {"active": None, "periodicity": 43200},
-                "target": {
-                    "hostname": f"{target.hostname}",
-                    "id": None,
-                    "ip_address": None,
-                    "port": None,
-                    "protocol": "HTTPS",
-                },
-            }
+        data = get_dummy_target_data(target.hostname)
 
     existing_subdomain_rescan_target = db_models.db.session. \
         query(db_models.SubdomainRescanTarget). \
@@ -123,3 +114,17 @@ def subdomain_lookup(target: db_models.Target, user_id: int) -> Set[str]:
     tracked_subdomains = get_tracked_subdomains_by_hostname(target.hostname, user_id)
     all_subdomains = set(get_subdomains_from_ct(target.hostname))
     return all_subdomains - tracked_subdomains
+
+
+def get_dummy_target_data(hostname: str):
+    dummy_data = {
+        "scanOrder": {"active": None, "periodicity": 43200},
+        "target": {
+            "hostname": f"{hostname}",
+            "id": None,
+            "ip_address": None,
+            "port": None,
+            "protocol": "HTTPS",
+        },
+    }
+    return dummy_data
