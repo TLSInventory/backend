@@ -3,7 +3,6 @@ import json
 import jsons
 from typing import Optional
 
-from config import SlackConfig
 from app.utils.notifications.actions import set_notification_settings_raw_single_target
 from app.utils.notifications.user_preferences import get_effective_notification_settings, \
     get_effective_active_notification_settings, load_preferences_from_string, \

@@ -1,12 +1,10 @@
 import json
 
 import jsons
-import sslyze
 from sslyze import __version__ as sslyze_version
 
 from sslyze.concurrent_scanner import SynchronousScanner, ConcurrentScanner, PluginRaisedExceptionScanResult
 from sslyze.server_connectivity_tester import ServerConnectivityTester, ServerConnectivityError
-from sslyze.plugins.plugins_repository import PluginsRepository
 from sslyze.cli.json_output import _CustomJsonEncoder
 
 from loguru import logger

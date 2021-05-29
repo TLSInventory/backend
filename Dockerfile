@@ -1,18 +1,20 @@
 FROM ubuntu:18.04
 
-MAINTAINER Ondrej Borysek "tlsinventory@borysek.net"
+LABEL maintainer="tlsinventory@borysek.net" 
 
 RUN apt-get update -y && \
     apt-get install -y python3.7 python3.7-dev python3-pip git openssh-server cron
 
-# Invalidate cache from this point onwards when integration branch HEAD changes.
-ADD https://api.github.com/repos/TLSInventory/backend/git/refs/heads/integration branch_version.json
+# Todo: this docker makes the container from github master, not from local. Change that.
 
-RUN git clone https://github.com/TLSInventory/backend.git /app/bakalarka3
+# Invalidate cache from this point onwards when master branch HEAD changes.
+ADD https://api.github.com/repos/TLSInventory/backend/git/refs/heads/master branch_version.json
 
-WORKDIR /app/bakalarka3
+RUN git clone https://github.com/TLSInventory/backend.git /app/tlsinventory-backend
 
-RUN git checkout integration
+WORKDIR /app/tlsinventory-backend
+
+RUN git checkout master
 RUN mkdir db tmp log
 RUN python3.7 -m pip install -r requirements.txt
 
@@ -21,12 +23,6 @@ COPY crontab /etc/cron.d/tlsinventory
 RUN chmod 0744 /etc/cron.d/tlsinventory
 RUN crontab /etc/cron.d/tlsinventory
 
-
-# https://stackoverflow.com/a/39278224
-# The following is used to invalidate caching when branch changes and then only doing changes.
-# ADD https://api.github.com/repos/BorysekOndrej/bakalarka3/git/refs/heads/integration branch_version.json
-# RUN git checkout integration && git pull
-# RUN python3.7 -m pip install -r requirements.txt
 
 ENTRYPOINT [ "python3.7", "start.py" ]
 # 

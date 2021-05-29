@@ -3,62 +3,96 @@ import pytest
 from flask import url_for
 
 
+class TestSuiteConfig:
+    @staticmethod
+    def url_login():
+        return url_for("apiV1.api_login")
+
+    @staticmethod
+    def url_register():
+        return url_for("apiV1.api_register")
+
+    register_data1 = {
+        'username': 'lorem',
+        'password': 'ipsum',
+        'email': 'dolor@sit.amet'
+    }
+
+    register_data2 = {
+        'username': 'lorem2',
+        'password': 'ipsum',
+        'email': 'dolor@sit.amet'
+    }
+
+    @staticmethod
+    def login_data_from_register(registration_data: dict):
+        answer = registration_data.copy()
+        del answer['email']
+        return answer
+
+
+def register(func):
+    def wrapper(self):
+        assert self.client.post(TestSuiteConfig.url_register(), json=TestSuiteConfig.register_data1).status_code == 200
+        func(self)
+    return wrapper
+
+
+def login(func):
+    def wrapper(self):
+        assert self.client.post(
+            TestSuiteConfig.url_login(),
+            json=TestSuiteConfig.login_data_from_register(TestSuiteConfig.register_data1)
+        ).status_code == 200
+        func(self)
+    return wrapper
+
+
+def register_and_login(func):
+    @register
+    @login
+    def wrapper(self):
+        func(self)
+    return wrapper
+
+
 @pytest.mark.usefixtures('client_class')
 class TestSuiteAuth:
 
-    def register_data1(self):
-        return {
-            'username': 'lorem',
-            'password': 'ipsum',
-            'email': 'dolor@sit.amet'
-        }
-
-    def register_data2(self):
-        return {
-            'username': 'lorem2',
-            'password': 'ipsum',
-            'email': 'dolor@sit.amet'
-        }
-
-    def login_data1(self):
-        return {
-            'username': 'lorem',
-            'password': 'ipsum',
-        }
-
-    def login_data2(self):
-        return {
-            'username': 'lorem2',
-            'password': 'ipsum',
-        }
-
-    def url_login(self):
-        return url_for("apiV1.api_login")
-
-    def url_register(self):
-        return url_for("apiV1.api_register")
-
     def test_login_no_auth(self):
-        assert self.client.post(self.url_login()).status_code == 400
+        assert self.client.post(TestSuiteConfig.url_login()).status_code == 400
 
     def test_login_bad_auth(self):
-        assert self.client.post(self.url_login(), json=self.login_data1()).status_code == 401
+        assert self.client.post(
+            TestSuiteConfig.url_login(),
+            json=TestSuiteConfig.login_data_from_register(TestSuiteConfig.register_data1)
+        ).status_code == 401
 
+    @register
     def test_register_one(self):
-        assert self.client.post(self.url_register(), json=self.register_data1()).status_code == 200
+        # asserts in the decorator itself
+        pass
 
+    @register
     def test_register_two(self):
-        assert self.client.post(self.url_register(), json=self.register_data1()).status_code == 200
-        assert self.client.post(self.url_register(), json=self.register_data2()).status_code == 200
+        # asserts in the decorator itself
+        assert self.client.post(TestSuiteConfig.url_register(), json=TestSuiteConfig.register_data2).status_code == 200
 
+    @register
     def test_register_duplicate(self):
-        assert self.client.post(self.url_register(), json=self.register_data1()).status_code == 200
-        assert self.client.post(self.url_register(), json=self.register_data1()).status_code == 400
+        assert self.client.post(TestSuiteConfig.url_register(), json=TestSuiteConfig.register_data1).status_code == 400
 
+    @register_and_login
     def test_register_login(self):
-        assert self.client.post(self.url_register(), json=self.register_data1()).status_code == 200
-        assert self.client.post(self.url_login(), json=self.login_data1()).status_code == 200
-        assert self.client.post(self.url_login(), json=self.login_data2()).status_code == 401
+        # asserts in the decorator itself
+        pass
+
+    @register_and_login
+    def test_login_with_unregistered_user(self):
+        assert self.client.post(
+            TestSuiteConfig.url_login(),
+            json=TestSuiteConfig.login_data_from_register(TestSuiteConfig.register_data2)
+        ).status_code == 401
 
 
 # app_inst = app_test_instance()

@@ -720,7 +720,7 @@ class ScanResults(Base, UniqueModel):
 
 class ScanResultsHistory(Base, UniqueModel):
     __tablename__ = 'scanresultshistory'
-    __uniqueColumns__ = ['target_id', 'scanresult_id']
+    __uniqueColumns__ = ['target_id', 'scanresult_id', 'timestamp']
     __table_args__ = (db.UniqueConstraint(*__uniqueColumns__, name=f'_uq_{__tablename__}'),)
 
     id = db.Column(db.Integer, primary_key=True)
