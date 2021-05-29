@@ -333,3 +333,13 @@ class ConnectionStatusOverridesSchema(SQLAlchemyAutoSchema):
 
     target = Nested(TargetSchema)
     user = Nested(UserSchema)
+
+
+class SubdomainRescanTargetSchema(SQLAlchemyAutoSchema):
+    class Meta(BaseSchema.Meta):
+        model = db_models.SubdomainRescanTarget
+
+        exclude = ()
+        include_relationships = False
+        include_fk = True
+

@@ -124,6 +124,11 @@ class SslyzeConfig(object):
     number_of_batches_per_request_for_multiple_batches = int(os.environ.get('NUMBER_OF_BATCHES', str(10)))
 
 
+class SubdomainRescanConfig(object):
+    SUBDOMAIN_BATCH_SIZE = 10  # set appropriate amount
+    SUBDOMAIN_RESCAN_INTERVAL = 60 * 60 * 24  # to check target once a day
+
+
 class CacheConfig(object):
     enabled = bool(os.environ.get('CACHE_ENABLE', False)) and FlaskConfig.REDIS_ENABLED
 
