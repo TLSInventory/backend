@@ -19,10 +19,23 @@ from app.utils.time_helper import time_source
 
 import config
 
+from loguru import logger
+
 
 @bp.route("/rescan_subdomains", methods=["GET"])  # is ok?
-@flask_jwt_extended.jwt_required
-def api_cron_rescan_subdomains() -> None:
+@bp.route('/rescan_subdomains/<string:sensor_key>', methods=['GET'])
+def api_cron_rescan_subdomains(sensor_key: str) -> None:
+    # currently using sensor key - should be ok, ask Ondra
+    # maybe good idea to pull local auth somewhere else
+    valid_access = False
+    if config.SensorCollector.KEY and sensor_key:
+        valid_access = config.SensorCollector.KEY == sensor_key
+    if config.SensorCollector.KEY_SKIP_FOR_LOCALHOST and request.remote_addr == '127.0.0.1':
+        valid_access = True
+    if not valid_access:
+        logger.warning(
+            f'DN0006 Request to rescan subdomains: unauthorized: key: {sensor_key}, IP: {request.remote_addr}')
+        return
     rescan_subdomains()
 
 

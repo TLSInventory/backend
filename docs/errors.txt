@@ -97,6 +97,7 @@ DN0002 Request for quick/basic search failed /backend/app/utils/ct_search.py
 DN0003 200 OK but no data from crt.sh /backend/app/utils/ct_search.py
 DN0004 DNS resolution failed /backend/app/utils/dns_utils.py
 DN0005 Attempt to track TLD /backend/app/actions/add_targets.py
+DN0006 Unauthorized request to rescan subdomains
 
 ~ LOGGER ~
 LG0001 New instance of app /backend/app/utils/logging.py
