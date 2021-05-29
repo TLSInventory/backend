@@ -15,8 +15,6 @@ from app.actions.add_targets import add_targets
 
 from app.utils.time_helper import time_source
 
-# from config import FlaskConfig
-
 import config
 
 from loguru import logger
@@ -40,15 +38,17 @@ def api_cron_rescan_subdomains(sensor_key: str) -> None:
 
 
 def rescan_subdomains() -> int:
+    current_time = time_source.timestamp()
     targets_to_rescan = (
         db_models.db.session.query(db_models.SubdomainRescanTarget)
+        .filter(
+            current_time - db_models.SubdomainRescanTarget.subdomain_last_scan <
+            config.SubdomainRescanConfig.SUBDOMAIN_RESCAN_INTERVAL
+        )
         .order_by(db_models.SubdomainRescanTarget.subdomain_last_scan.asc())
         .limit(config.SubdomainRescanConfig.SUBDOMAIN_BATCH_SIZE).all()
     )
     for target in targets_to_rescan:
-        if time_source.timestamp() - target.subdomain_last_scan < \
-                config.SubdomainRescanConfig.SUBDOMAIN_RESCAN_INTERVAL:
-            continue
         add_subdomains(target.subdomain_scan_target_id, target.subdomain_scan_user_id)
         target.subdomain_last_scan = time_source.timestamp()
         db_models.db.session.commit()
