@@ -42,7 +42,7 @@ def rescan_subdomains() -> int:
     targets_to_rescan = (
         db_models.db.session.query(db_models.SubdomainRescanTarget)
         .filter(
-            current_time - db_models.SubdomainRescanTarget.subdomain_last_scan <
+            current_time - db_models.SubdomainRescanTarget.subdomain_last_scan >=
             config.SubdomainRescanConfig.SUBDOMAIN_RESCAN_INTERVAL
         )
         .order_by(db_models.SubdomainRescanTarget.subdomain_last_scan.asc())
