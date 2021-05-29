@@ -13,7 +13,7 @@ from . import bp
 from app.utils.ct_search import get_subdomains_from_ct
 from app.actions.add_targets import add_targets
 
-from time import time
+from app.utils.time_helper import time_source
 
 BATCH_SIZE = 10  # set appropriate amount
 RESCAN_INTERVAL = 62400  # to check target once a day
@@ -32,10 +32,10 @@ def rescan_subdomains() -> int:
         .limit(BATCH_SIZE).all()
     )
     for target in targets_to_rescan:
-        if time() - target.subdomain_last_scan < RESCAN_INTERVAL:
+        if time_source() - target.subdomain_last_scan < RESCAN_INTERVAL:
             continue
         add_subdomains(target.subdomain_scan_target_id, target.subdomain_scan_user_id)
-        target.subdomain_last_scan = int(time())  # should work, check
+        target.subdomain_last_scan = int(time_source())
         db_models.db.session.commit()
     return len(targets_to_rescan)  # for testing
 
@@ -66,14 +66,16 @@ def add_subdomains(target_id: int, user_id: int, data) -> Tuple[str, int, int]:
             == []
     ):
         new = db_models.SubdomainRescanTarget()
+
         new.subdomain_scan_target_id = target_id
         new.subdomain_scan_user_id = user_id
-        new.subdomain_last_scan = int(time())
+        new.subdomain_last_scan = int(time_source())
+
         db_models.db.session.add(new)
         db_models.db.session.commit()
         # db_utils.actions_on_modification(new) ?
 
-    subdomains = cron_subdomain_lookup(target, user_id)
+    subdomains = subdomain_lookup(target, user_id)
     subdomain_ids = add_targets(list(subdomains), user_id, data)
 
     return f"Successfully added {len(subdomain_ids)} subdomains", len(subdomain_ids), 200
@@ -103,7 +105,7 @@ def get_tracked_subdomains_by_hostname(
     return set(map(lambda target: target.hostname, db_response))
 
 
-def cron_subdomain_lookup(target: db_models.Target, user_id: int) -> Set[str]:
+def subdomain_lookup(target: db_models.Target, user_id: int) -> Set[str]:
     tracked_subdomains = get_tracked_subdomains_by_hostname(target.hostname, user_id)
     all_subdomains = set(get_subdomains_from_ct(target.hostname))
     return all_subdomains - tracked_subdomains
