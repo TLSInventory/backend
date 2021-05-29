@@ -72,14 +72,14 @@ def add_subdomains(target_id: int, user_id: int, data) -> Tuple[str, int, int]:
                     "protocol": "HTTPS",
                 },
             }
-    if (
-            db_models.db.session.
-            query(db_models.SubdomainRescanTarget).
-            filter(db_models.SubdomainRescanTarget.subdomain_scan_target_id == target_id).
-            filter(db_models.SubdomainRescanTarget.subdomain_scan_user_id == user_id).
-            all()
-            == []
-    ):
+
+    existing_subdomain_rescan_target = db_models.db.session. \
+        query(db_models.SubdomainRescanTarget). \
+        filter(db_models.SubdomainRescanTarget.subdomain_scan_target_id == target_id). \
+        filter(db_models.SubdomainRescanTarget.subdomain_scan_user_id == user_id). \
+        all()
+
+    if not existing_subdomain_rescan_target:
         new = db_models.SubdomainRescanTarget()
 
         new.subdomain_scan_target_id = target_id
@@ -88,7 +88,6 @@ def add_subdomains(target_id: int, user_id: int, data) -> Tuple[str, int, int]:
 
         db_models.db.session.add(new)
         db_models.db.session.commit()
-        # db_utils.actions_on_modification(new) ?
 
     subdomains = subdomain_lookup(target, user_id)
     subdomain_ids = add_targets(list(subdomains), user_id, data)
