@@ -115,5 +115,5 @@ class TestSubdomainSuite:
         api_add_subdomains(1)
         api_add_subdomains(2)
         res = rescan_subdomains()
-        assert res == 2
+        assert res == 0
 
