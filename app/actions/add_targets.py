@@ -7,13 +7,15 @@ import app.db_schemas as db_schemas
 
 import tldextract
 
+from loguru import logger
+
 
 def add_targets(hostnames: List[str], user_id, data):
     ids = set()
 
     for hostname in hostnames:
         if is_tld(hostname):
-            # log this
+            logger.warning("DN0005 Attempt to track TLD")
             continue
 
         new_target_def = copy.deepcopy(data["target"])
