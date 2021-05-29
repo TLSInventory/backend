@@ -46,11 +46,11 @@ def rescan_subdomains() -> int:
         .limit(config.SubdomainRescanConfig.SUBDOMAIN_BATCH_SIZE).all()
     )
     for target in targets_to_rescan:
-        if time_source() - target.subdomain_last_scan < \
+        if time_source.timestamp() - target.subdomain_last_scan < \
                 config.SubdomainRescanConfig.SUBDOMAIN_RESCAN_INTERVAL:
             continue
         add_subdomains(target.subdomain_scan_target_id, target.subdomain_scan_user_id)
-        target.subdomain_last_scan = int(time_source())
+        target.subdomain_last_scan = time_source.timestamp()
         db_models.db.session.commit()
     return len(targets_to_rescan)  # for testing
 
@@ -75,7 +75,7 @@ def add_subdomains(target_id: int, user_id: int, data) -> Tuple[str, int, int]:
 
         new.subdomain_scan_target_id = target_id
         new.subdomain_scan_user_id = user_id
-        new.subdomain_last_scan = int(time_source())
+        new.subdomain_last_scan = time_source.timestamp()
 
         db_models.db.session.add(new)
         db_models.db.session.commit()
