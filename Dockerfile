@@ -24,6 +24,6 @@ RUN chmod 0744 /etc/cron.d/tlsinventory
 RUN crontab /etc/cron.d/tlsinventory
 
 
-ENTRYPOINT [ "python3.7", "start.py" ]
+ENTRYPOINT [ "/bin/sh", "-c", "/app/tlsinventory-backend/start.sh" ]
 # 
 # CMD [ "app.py" ]
