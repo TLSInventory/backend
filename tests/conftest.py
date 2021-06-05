@@ -40,8 +40,7 @@ def app(request):
     # print(db_filename)
     config.FlaskConfig.SQLALCHEMY_DATABASE_URI = 'sqlite:///' + db_filename
 
-    app = app2.create_app()
-    # app.run(host='127.0.0.1', port=5042)
+    app = app2.create_app(force_create_db=True)
 
     yield app
 

@@ -27,7 +27,7 @@ cors = CORS(resources={r"/api/*": {"origins": ["http://tlsinventory.test:8080",
             supports_credentials=True)
 
 
-def create_app():
+def create_app(force_create_db=False):
     import app.utils.logging_util
 
     app_new = Flask(__name__, instance_relative_config=True)
@@ -40,13 +40,6 @@ def create_app():
                                              default_timeout=config.SslyzeConfig.background_worker_timeout)
 
     db.init_app(app_new)
-
-    # https://github.com/miguelgrinberg/Flask-Migrate/issues/61#issuecomment-208131722
-    with app_new.app_context():
-        if db.engine.url.drivername == 'sqlite':
-            migrate.init_app(app_new, db, render_as_batch=True, compare_type=True)
-        else:
-            migrate.init_app(app_new, db)
 
     ma.init_app(app_new)
     jwt_instance.init_app(app_new)
@@ -68,9 +61,18 @@ def create_app():
             app_new.config.from_object(rq_dashboard.default_settings)
             app_new.register_blueprint(rq_dashboard.blueprint, url_prefix='/debug/rq_dashboard/')
 
-        logger.info("DB0007 Before DB create")
-        db.create_all()
-        logger.info("DB0008 After DB create")
+        # DB creation is no longer done inside this script, and should be done using Alembic.
+        # For example: export FLASK_APP=start.py && flask db upgrade
+        # The exception are the tests.
+        if force_create_db:
+            db.create_all()
+
+        # https://github.com/miguelgrinberg/Flask-Migrate/issues/61#issuecomment-208131722
+        with app_new.app_context():
+            if db.engine.url.drivername == 'sqlite':
+                migrate.init_app(app_new, db, render_as_batch=True, compare_type=True)
+            else:
+                migrate.init_app(app_new, db)
 
         return app_new
 
