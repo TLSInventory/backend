@@ -8,14 +8,16 @@ RUN apt-get update -y && \
 # Todo: this docker makes the container from github master, not from local. Change that.
 
 # Invalidate cache from this point onwards when master branch HEAD changes.
-ADD https://api.github.com/repos/TLSInventory/backend/git/refs/heads/master branch_version.json
+# ADD https://api.github.com/repos/TLSInventory/backend/git/refs/heads/master branch_version.json
 
-RUN git clone https://github.com/TLSInventory/backend.git /app/tlsinventory-backend
+# RUN git clone https://github.com/TLSInventory/backend.git /app/tlsinventory-backend
 
 WORKDIR /app/tlsinventory-backend
 
-RUN git checkout master
-RUN mkdir db tmp log
+COPY ./ .
+
+# RUN git checkout master
+RUN mkdir -p db tmp log
 RUN python3.7 -m pip install -r requirements.txt
 
 # Add cron for the most basic of automatic triggering.
