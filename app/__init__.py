@@ -34,6 +34,7 @@ def create_app(force_create_db=False):
     app_new.config.from_object(config.FlaskConfig)
 
     if config.FlaskConfig.REDIS_ENABLED:
+        logger.debug("RD0010 Flask is enabled - connecting to queue")
         app_new.redis = Redis.from_url(config.FlaskConfig.REDIS_URL)
         app_new.sslyze_task_queue = rq.Queue('sslyze-tasks',
                                              connection=app_new.redis,
