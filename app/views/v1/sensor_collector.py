@@ -97,6 +97,7 @@ def api_sslyze_import_scan_results(sensor_key=None):
     return "ok", 200
 
 
+@bp.route('/notifications/send_for_period', methods=['GET'])
 @bp.route('/notifications/send_for_period/<string:sensor_key>', methods=['GET'])
 def api_send_notifications_for_period(sensor_key=None):
     valid_access = False

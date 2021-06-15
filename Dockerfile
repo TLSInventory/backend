@@ -19,4 +19,4 @@ RUN chmod 0744 /etc/cron.d/tlsinventory
 RUN crontab /etc/cron.d/tlsinventory
 
 
-ENTRYPOINT [ "/bin/sh", "-c", "/app/tlsinventory-backend/start.sh" ]
+ENTRYPOINT [ "/bin/sh", "-c", "cron && /app/tlsinventory-backend/start.sh" ]
