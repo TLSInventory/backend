@@ -54,7 +54,7 @@ pyparsing
 setuptools
 packaging
 
-pytest-flask==1.1.0
+pytest-flask==1.2.0
 pytest-httpserver==1.0.0
 pytest-freezegun==0.4.2
 
