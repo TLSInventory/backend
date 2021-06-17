@@ -12,7 +12,6 @@ import app.object_models as object_models
 import app.utils.sslyze.simplify_result as sslyze_result_simplify
 from config import SslyzeConfig
 
-from sqlalchemy.exc import IntegrityError
 import json
 import datetime
 
@@ -23,24 +22,6 @@ import app.utils.files as files
 from app.utils.time_helper import time_source, datetime_to_timestamp
 
 still_to_parse_test = True
-
-
-def try_to_add(obj):
-    try:
-        app.db.add(obj)
-        app.db.commit()
-    except IntegrityError as _:
-        logger.error("DB0005 IntegrityError on inserting object (possible duplicity): " + str(obj))
-        app.db.rollback()
-
-
-def basic_db_fill_test():
-    logger.debug("DB Basic fill test started")
-
-    # scan_result = ScanResult(scanTargetID=1, scanType="TEST-TYPE", duration=0, status=404, result="TEST-RESULT")
-    # try_to_add(scan_result)
-
-    logger.debug("DB Basic fill test finished")
 
 
 def parse_cipher_suite(scan_result, plugin_title):
