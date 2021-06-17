@@ -60,8 +60,6 @@ def app(request):
         os.unlink(db_filename)
 
 
-# todo: add fixture with registration, login and set_cookie
-
 @pytest.mark.usefixtures('client_class')
 class TestSuiteExample:
 

@@ -56,6 +56,13 @@ def register_and_login(func):
     return wrapper
 
 
+def set_debug_access_cookie(func):
+    def wrapper(self):
+        assert self.client.get(url_for("apiDebug.debugSetAccessCookie")).status_code == 200
+        func(self)
+    return wrapper
+
+
 @pytest.mark.usefixtures('client_class')
 class TestSuiteAuth:
 

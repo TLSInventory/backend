@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from flask import url_for
 from config import SchedulerConfig
 
-from tests.auth_test import login, register
+from tests.auth_test import login, register, set_debug_access_cookie
 
 
 def target_add_data(hostname: str = "example.com", ip: Optional[str] = None, port: Optional[int] = None):
@@ -22,8 +22,9 @@ class TestSuiteScanScheduler:
 
     @register
     @login
+    @set_debug_access_cookie
     def __do_authentication(self):
-        assert self.client.get(url_for("apiDebug.debugSetAccessCookie")).status_code == 200
+        pass
 
     def __add_target(self, json_data):
         # adding a target without IP will result in DNS query on every enque for scan

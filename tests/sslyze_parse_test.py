@@ -11,7 +11,7 @@ from flask import url_for
 
 from app.utils.files import read_from_file
 import tests.conftest
-from tests.auth_test import login, register
+from tests.auth_test import login, register, set_debug_access_cookie
 from tests.scan_scheduler_test import target_add_data
 import app.db_models as db_models
 
@@ -46,6 +46,7 @@ class TestSuiteSSLyzeParse:
     @login
     def test_parse_two_related_scans(self):
         assert self.client.get(url_for("apiDebug.debugSetAccessCookie")).status_code == 200
+    @set_debug_access_cookie
 
         filename = "local_scan.json"
         result_string = read_from_file(f'{path_to_scan_results}/{filename}')
