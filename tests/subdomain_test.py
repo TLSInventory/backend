@@ -27,27 +27,6 @@ class TestSubdomainSuite:
             'email': 'general@kenobi.sw'
         }
 
-    def register_data3(self):
-        return {
-            'username': 'm',
-            'password': 'k',
-            'email': 'm@k.com'
-        }
-
-    def register_data4(self):
-        return {
-            'username': 'abc',
-            'password': 'xyz',
-            'email': 'abc@xyz.com'
-        }
-
-    def register_data5(self):
-        return {
-            'username': 'xyz',
-            'password': 'abc',
-            'email': 'xyz@abc.com'
-        }
-
     def login_data_from_register(self, registration_data: dict):
         answer = registration_data.copy()
         del answer['email']
@@ -80,6 +59,7 @@ class TestSubdomainSuite:
         pytest.first_batch = fb
 
     def test_same_subdomain_different_user(self):
+        self.test_add_subdomains()  # Each test runs isolated, unless explicitly invoked. I.e. testing different username on it's own doesn't make much sense, unless you also re-register the first user.
         self.do_authentication(self.register_data2)
         self.add_target(self.target_add_data())
         _, fb, res = api_add_subdomains(1)
@@ -87,7 +67,7 @@ class TestSubdomainSuite:
         assert fb == pytest.first_batch
 
     def test_repeatedly_add_subdomains(self):
-        self.do_authentication(self.register_data3)
+        self.do_authentication(self.register_data1)
         self.add_target(self.target_add_data())
         _, _, res = api_add_subdomains(1)
         assert res == 200
@@ -96,20 +76,20 @@ class TestSubdomainSuite:
         assert added == 0
 
     def test_add_untracked(self):
-        self.do_authentication(self.register_data4)
+        self.do_authentication(self.register_data1)
         self.add_target(self.target_add_data()) # mandatory, else NoJWTException is raised, should be fixed
         _, _, res = api_add_subdomains(2)
         assert res == 400
 
     def test_rescan_subdomains_empty(self):
-        self.do_authentication(self.register_data5)
+        self.do_authentication(self.register_data1)
         # self.add_target(self.target_add_data())
         # self.add_target(self.target_add_data(hostname="borysek.net"))
         res = rescan_subdomains()
         assert res == 0
 
     def test_rescan_subdomains(self):
-        self.do_authentication(self.register_data5)
+        self.do_authentication(self.register_data1)
         self.add_target(self.target_add_data())
         self.add_target(self.target_add_data(hostname="borysek.net"))
         api_add_subdomains(1)
