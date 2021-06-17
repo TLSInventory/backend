@@ -15,11 +15,12 @@ from tests.auth_test import login, register, set_debug_access_cookie
 from tests.scan_scheduler_test import target_add_data
 import app.db_models as db_models
 
-cur_dir = os.path.dirname(os.path.realpath(__file__))
+CUR_DIR = os.path.dirname(os.path.realpath(__file__))
 
-path_to_scan_results = f'{cur_dir}/data/scan_results'
+PATH_TO_SCAN_RESULTS = f'{CUR_DIR}/data/scan_results'
 
-target_from_local_test_data_file = {
+LOCAL_TEST_DATA_FILENAME = 'local_scan.json'
+TARGET_FROM_LOCAL_TEST_DATA_FILE = {
     "hostname": "localhost",
     # "ip_address": "127.0.0.1",
     "port": 35051
@@ -29,48 +30,53 @@ target_from_local_test_data_file = {
 @pytest.mark.usefixtures('client_class')
 class TestSuiteSSLyzeParse:
 
-    @pytest.mark.parametrize("filename", os.listdir(path_to_scan_results),)
+    @pytest.mark.parametrize("filename", os.listdir(PATH_TO_SCAN_RESULTS), )
     def test_parse_single_sslyze_scan_from_file(self, filename):
-        result_string = read_from_file(f'{path_to_scan_results}/{filename}')
+        # This test doesn't save some things to DB. It's testing the parsing itself, not whether the result is correctly persisted.
+        a = self.load_result_file_to_dict(filename)
+        self.parse_scan_multiple_times(a, 1)
+
+    def test_parsing_and_saving_to_db(self):
+        self.parse_and_save_to_database_x_times(1)
+
+    def test_parsing_and_saving_multiple_results_of_same_target(self):
+        self.parse_and_save_to_database_x_times(2)
+
+    # --- HELPER METHODS ---
+
+    def parse_and_save_to_database_x_times(self, save_x_times: int = 1):
+        a = self.load_result_file_to_dict(LOCAL_TEST_DATA_FILENAME)
+        self.add_target_from_scan_file()
+        self.parse_scan_multiple_times(a, save_x_times)
+
+        res = db_models.db.session.query(db_models.ScanResultsHistory).all()
+        assert len(res) == save_x_times
+
+    @staticmethod
+    def load_result_file_to_dict(filename: str) -> dict:
+        result_string = read_from_file(f'{PATH_TO_SCAN_RESULTS}/{filename}')
         a = {
             "results_attached": True,
             "results": [json.loads(result_string)]
         }
-
-        response = self.client.post(url_for("apiV1.api_sslyze_import_scan_results"),
-                                json=a
-                                )
-        assert response.status_code == 200
+        return a
 
     @register
     @login
-    def test_parse_two_related_scans(self):
-        assert self.client.get(url_for("apiDebug.debugSetAccessCookie")).status_code == 200
     @set_debug_access_cookie
-
-        filename = "local_scan.json"
-        result_string = read_from_file(f'{path_to_scan_results}/{filename}')
-        a = {
-            "results_attached": True,
-            "results": [json.loads(result_string)]
-        }
-
+    def add_target_from_scan_file(self):
         response = self.client.put(
             url_for("apiV1.api_target"),
             json=target_add_data(
-                hostname=target_from_local_test_data_file["hostname"],
+                hostname=TARGET_FROM_LOCAL_TEST_DATA_FILE["hostname"],
                 # ip=target_from_local_test_data_file["ip_address"],
-                port=target_from_local_test_data_file["port"]
+                port=TARGET_FROM_LOCAL_TEST_DATA_FILE["port"]
               )
         )
         assert response.status_code == 200
 
-        response = self.client.post(url_for("apiV1.api_sslyze_import_scan_results"), json=a)
-        assert response.status_code == 200
-
-        response = self.client.post(url_for("apiV1.api_sslyze_import_scan_results"), json=a)
-        assert response.status_code == 200
-
-        res = db_models.db.session.query(db_models.ScanResultsHistory).all()
-        assert len(res) == 2
+    def parse_scan_multiple_times(self, a: dict, insert_n_times: int = 1):
+        for i in range(insert_n_times):
+            response = self.client.post(url_for("apiV1.api_sslyze_import_scan_results"), json=a)
+            assert response.status_code == 200
 
