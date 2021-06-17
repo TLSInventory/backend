@@ -13,15 +13,15 @@ class AuthTestSuiteConfig:
         return url_for("apiV1.api_register")
 
     register_data1 = {
-        'username': 'lorem',
-        'password': 'ipsum',
-        'email': 'dolor@sit.amet'
+        'username': 'user1',
+        'password': 'pass1',
+        'email': 'user1@org1.example'
     }
 
     register_data2 = {
-        'username': 'lorem2',
-        'password': 'ipsum',
-        'email': 'dolor@sit.amet'
+        'username': 'user2',
+        'password': 'pass2',
+        'email': 'user2@org2.example'
     }
 
     @staticmethod
