@@ -31,19 +31,27 @@ class AuthTestSuiteConfig:
         return answer
 
 
+def register_direct(client):
+    assert client.post(AuthTestSuiteConfig.url_register(), json=AuthTestSuiteConfig.register_data1).status_code == 200
+
+
 def register(func):
     def wrapper(self):
-        assert self.client.post(AuthTestSuiteConfig.url_register(), json=AuthTestSuiteConfig.register_data1).status_code == 200
+        register_direct(self.client)
         func(self)
     return wrapper
 
 
+def login_direct(client):
+    assert client.post(
+        AuthTestSuiteConfig.url_login(),
+        json=AuthTestSuiteConfig.login_data_from_register(AuthTestSuiteConfig.register_data1)
+    ).status_code == 200
+
+
 def login(func):
     def wrapper(self):
-        assert self.client.post(
-            AuthTestSuiteConfig.url_login(),
-            json=AuthTestSuiteConfig.login_data_from_register(AuthTestSuiteConfig.register_data1)
-        ).status_code == 200
+        login_direct(self.client)
         func(self)
     return wrapper
 
@@ -56,9 +64,13 @@ def register_and_login(func):
     return wrapper
 
 
+def access_cookie_direct(client):
+    assert client.get(url_for("apiDebug.debugSetAccessCookie")).status_code == 200
+
+
 def set_debug_access_cookie(func):
     def wrapper(self):
-        assert self.client.get(url_for("apiDebug.debugSetAccessCookie")).status_code == 200
+        access_cookie_direct(self.client)
         func(self)
     return wrapper
 

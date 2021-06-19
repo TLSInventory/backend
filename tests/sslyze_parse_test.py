@@ -12,7 +12,7 @@ from datetime import timedelta, datetime
 
 from app.utils.files import read_from_file
 import tests.conftest
-from tests.auth_test import login, register, set_debug_access_cookie
+from tests.auth_test import login_direct, register_direct, access_cookie_direct
 from tests.scan_scheduler_test import target_add_data
 import app.db_models as db_models
 
@@ -35,20 +35,26 @@ class TestSuiteSSLyzeParse:
     def test_parse_single_sslyze_scan_from_file(self, freezer, filename):
         # This test doesn't save some things to DB. It's testing the parsing itself, not whether the result is correctly persisted.
         data = self.load_result_file_to_dict(filename)
-        self.parse_scan_multiple_times(freezer, data=data, insert_n_times=1)
+        self.parse_scan_multiple_times(self.client, freezer, data=data, insert_n_times=1)
 
     def test_parsing_and_saving_to_db(self, freezer):
-        self.parse_and_save_to_database_x_times(freezer, 1)
+        self.parse_and_save_to_database_x_times(self.client, freezer, 1)
 
     def test_parsing_and_saving_multiple_results_of_same_target(self, freezer):
-        self.parse_and_save_to_database_x_times(freezer, 2)
+        self.parse_and_save_to_database_x_times(self.client, freezer, 2)
 
     # --- HELPER METHODS ---
 
-    def parse_and_save_to_database_x_times(self, freezer, save_x_times: int = 1):
-        data = self.load_result_file_to_dict(LOCAL_TEST_DATA_FILENAME)
-        self.add_target_from_scan_file()
-        self.parse_scan_multiple_times(freezer, data=data, insert_n_times=save_x_times)
+    @staticmethod
+    def parse_and_save_to_database_x_times(client, freezer, save_x_times: int = 1):
+        data = TestSuiteSSLyzeParse.load_result_file_to_dict(LOCAL_TEST_DATA_FILENAME)
+
+        register_direct(client)
+        login_direct(client)
+        access_cookie_direct(client)
+
+        TestSuiteSSLyzeParse.add_target_from_scan_file(client)
+        TestSuiteSSLyzeParse.parse_scan_multiple_times(client, freezer, data=data, insert_n_times=save_x_times)
 
         res = db_models.db.session.query(db_models.ScanResultsHistory).all()
         assert len(res) == save_x_times
@@ -62,11 +68,9 @@ class TestSuiteSSLyzeParse:
         }
         return a
 
-    @register
-    @login
-    @set_debug_access_cookie
-    def add_target_from_scan_file(self):
-        response = self.client.put(
+    @staticmethod
+    def add_target_from_scan_file(client):
+        response = client.put(
             url_for("apiV1.api_target"),
             json=target_add_data(
                 hostname=TARGET_FROM_LOCAL_TEST_DATA_FILE["hostname"],
@@ -76,11 +80,12 @@ class TestSuiteSSLyzeParse:
         )
         assert response.status_code == 200
 
-    def parse_scan_multiple_times(self, freezer, data: dict, insert_n_times: int = 1):
+    @staticmethod
+    def parse_scan_multiple_times(client, freezer, data: dict, insert_n_times: int = 1):
         dt = datetime.now()
         for i in range(insert_n_times):
             freezer.move_to(dt)
-            response = self.client.post(url_for("apiV1.api_sslyze_import_scan_results"), json=data)
+            response = client.post(url_for("apiV1.api_sslyze_import_scan_results"), json=data)
             assert response.status_code == 200
             dt += timedelta(seconds=1)
 
