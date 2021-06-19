@@ -57,6 +57,7 @@ packaging
 pytest-flask==1.2.0
 pytest-httpserver==1.0.0
 pytest-freezegun==0.4.2
+pytest-timeout==1.4.2
 
 tldextract==3.1.0
 
