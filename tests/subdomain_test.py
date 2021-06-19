@@ -2,6 +2,8 @@ from typing import Optional
 
 import pytest
 from flask import url_for
+
+from config import TestConfig
 from tests.auth_test import AuthTestSuiteConfig
 
 from app.views.v1.subdomain_util import *
@@ -11,6 +13,7 @@ def pytest_configure():
     pytest.first_batch = 0
 
 
+@pytest.mark.skipif(TestConfig.local_only, reason="Adding subdomains would require connections to crt.sh")
 @pytest.mark.usefixtures('client_class')
 class TestSubdomainSuite:
 
