@@ -437,4 +437,6 @@ def test_jsons():
 
 @bp.route('/get_uuid', methods=['GET'])
 def view_request_uuid():
+    logger.debug("UUID test 1")
+    logger.debug("UUID test 2")
     return get_request_uuid()

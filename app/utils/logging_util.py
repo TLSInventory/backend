@@ -1,14 +1,20 @@
 import functools
 import logging
 from loguru import logger
+
+import app.utils.http_request_util as http_request_util
 from config import LogConfig
 
 # If any problems with log rotation or compression appear, it might be related to the following issue:
 # https://github.com/Delgan/loguru/issues/229
 
 logger.add(LogConfig.log_folder + "{time}.log",
+           format="{time:YYYY-MM-DD HH:mm:ss.SSS} | {level} | {name}:{function}:{line} | {extra[request_id]} | {message}\n",  # todo: add version
+           enqueue=True,
+           # serialize=True,
            backtrace=True, diagnose=True, level='DEBUG',
            compression='gz', rotation="00:00", retention="35 days")
+logger.configure(patcher=lambda record: record["extra"].update(request_id=http_request_util.get_request_uuid()))
 
 
 @functools.lru_cache(maxsize=1)
