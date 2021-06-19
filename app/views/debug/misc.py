@@ -8,7 +8,7 @@ from flask import redirect
 
 import app.utils.randomCodes as randomCodes
 from config import FlaskConfig, SlackConfig, MailConfig, SensorCollector
-from app.utils.http_request_util import get_client_ip, limiter
+from app.utils.http_request_util import get_client_ip, limiter, get_request_uuid
 from app.utils.notifications.user_preferences import mail_add, mail_delete, list_connections_of_type, \
     get_effective_notification_settings, NotificationChannelOverride
 
@@ -433,3 +433,8 @@ def current_app():
 def test_jsons():
     data = jsons.loads(request.data, NotificationChannelOverride)
     return jsons.dumps(data), 200
+
+
+@bp.route('/get_uuid', methods=['GET'])
+def view_request_uuid():
+    return get_request_uuid()

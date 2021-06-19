@@ -52,3 +52,10 @@ def get_web_ui_address():
     if config.ServerLocation.WEB_FULL_URL:
         return config.ServerLocation.WEB_FULL_URL
     return flask.url_for("otherRoutes.site_base_url", _external=True)  # this is fallback
+
+
+def get_request_uuid() -> str:
+    try:
+        return str(flask.request.request_id)
+    except Exception:
+        return "No-request-ID"
