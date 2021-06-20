@@ -46,14 +46,18 @@ class TestSuiteSSLyzeParse:
     # --- HELPER METHODS ---
 
     @staticmethod
-    def parse_and_save_to_database_x_times(client, freezer, save_x_times: int = 1):
-        data = TestSuiteSSLyzeParse.load_result_file_to_dict(LOCAL_TEST_DATA_FILENAME)
+    def parse_and_save_to_database_x_times(client, freezer, save_x_times: int = 1, filename=None):
+        if filename is None:
+            filename = LOCAL_TEST_DATA_FILENAME
+        data = TestSuiteSSLyzeParse.load_result_file_to_dict(filename)
 
         register_direct(client)
         login_direct(client)
         access_cookie_direct(client)
 
-        TestSuiteSSLyzeParse.add_target_from_scan_file(client)
+        TestSuiteSSLyzeParse.add_target_from_scan_file(client,
+                                                       hostname=data["results"][0]["target"]["target_definition"]["hostname"],
+                                                       port=data["results"][0]["target"]["target_definition"]["port"])
         TestSuiteSSLyzeParse.parse_scan_multiple_times(client, freezer, data=data, insert_n_times=save_x_times)
 
         res = db_models.db.session.query(db_models.ScanResultsHistory).all()
@@ -69,13 +73,18 @@ class TestSuiteSSLyzeParse:
         return a
 
     @staticmethod
-    def add_target_from_scan_file(client):
+    def add_target_from_scan_file(client, hostname=None, port=None):
+        if hostname is None:
+            hostname = TARGET_FROM_LOCAL_TEST_DATA_FILE["hostname"]
+        if port is None:
+            port = TARGET_FROM_LOCAL_TEST_DATA_FILE["port"]
+
         response = client.put(
             url_for("apiV1.api_target"),
             json=target_add_data(
-                hostname=TARGET_FROM_LOCAL_TEST_DATA_FILE["hostname"],
+                hostname=hostname,
                 # ip=target_from_local_test_data_file["ip_address"],
-                port=TARGET_FROM_LOCAL_TEST_DATA_FILE["port"]
+                port=port,
               )
         )
         assert response.status_code == 200
