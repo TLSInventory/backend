@@ -41,6 +41,11 @@ source .venv/bin/activate
 python3.7 -m pip install -r requirements.txt
 ```
 
+
+#### Development
+
+For information about development practices see file [Development.md](Development.md)
+
 #### Integration (main development) branch
 
 ![Test status: integration](https://img.shields.io/github/workflow/status/TLSInventory/backend/requirements-and-pytest/integration)

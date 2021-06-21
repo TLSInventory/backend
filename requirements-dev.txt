@@ -1,1 +1,3 @@
-graphviz
+graphviz    # used for graphing of internal dependencies, in a Github action
+yappi       # used for better profiling
+pytest-profiling    # used for profiler output, both in text form and in SVG
