@@ -5,6 +5,7 @@ import pytest
 from functools import reduce
 
 import app.actions
+import app.utils.files
 import config
 from loguru import logger
 
@@ -21,6 +22,7 @@ FULL_SCAN_LOCAL_TEST_FILENAME = "example.com.json"
 
 @pytest.mark.usefixtures('client_class')
 class TestSuiteAPIDataRetrieval:
+    app.utils.files.create_folder_if_doesnt_exist("tmp")
 
     @classmethod
     def teardown_class(cls):
