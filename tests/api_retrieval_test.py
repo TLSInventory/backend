@@ -1,3 +1,4 @@
+from datetime import datetime
 import sqlalchemy.orm
 from flask import url_for
 import pytest
@@ -10,12 +11,17 @@ import app.db_models as db_models
 from tests.auth_test import register_direct, login_direct, access_cookie_direct
 import tests.sslyze_parse_test as sslyze_parse_test
 
+config.TestConfig.force_database_connection_string = "../db/test2a.db"
 # config.TestConfig.force_create_tmp_db = True  # todo: This does not get resetted, not even at the end of the test suite.
 FULL_SCAN_LOCAL_TEST_FILENAME = "example.com.json"
 
 
 @pytest.mark.usefixtures('client_class')
 class TestSuiteAPIDataRetrieval:
+
+    @classmethod
+    def teardown_class(cls):
+        config.TestConfig.force_database_connection_string = None
 
     @staticmethod
     def __do_authentication(client):
@@ -52,12 +58,20 @@ class TestSuiteAPIDataRetrieval:
 
         logger.debug("Saving to DB complete, starting retrieval.")
 
-    def test_get_history_on_new_db(self, freezer):
-        self.fill_new_db(freezer, 1000)
+    @staticmethod
+    def freeze_time_from_latest_scan_in_db(freezer):
+        latest_scan_result = db_models.ScanResultsHistory.query.order_by(sqlalchemy.desc(db_models.ScanResultsHistory.timestamp)).first()
+        freezer.move_to(datetime.fromtimestamp(latest_scan_result.timestamp + 1))
+
+    def test_get_history(self, freezer):
+        if config.TestConfig.force_database_connection_string is None:
+            self.fill_new_db(freezer, 1000)
+
+        self.freeze_time_from_latest_scan_in_db(freezer)
+
+        login_direct(self.client)
+        access_cookie_direct(self.client)
 
         self.get_history_and_save_json_to_file("tmp/test5b.json")
-
-        # res = app.actions.get_scan_history(1, 30)
-        # logger.debug(len(res))
         logger.debug("END")
 

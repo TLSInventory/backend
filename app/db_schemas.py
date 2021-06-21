@@ -4,11 +4,12 @@ from marshmallow_enum import EnumField
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, SQLAlchemySchema, auto_field
 from marshmallow_sqlalchemy.fields import Nested
 import sslyze.ssl_settings
+from typing import List
 
 import app.db_models as db_models
 
 
-def get_array_reschemed(model_cls, schema_cls, ids: str, many: bool = True):
+def get_array_reschemed(model_cls: db_models.UniqueModel, schema_cls, ids: str, many: bool = True) -> dict:
     schema = schema_cls(many=many)
     json_dict = schema.dump(model_cls.select_from_list(ids))
     return json_dict
