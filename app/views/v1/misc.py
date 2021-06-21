@@ -299,6 +299,7 @@ def api_scan_result_history_choose_schema(user_id=None, x_days=30, schema_simpli
     if res is None:
         return "[]", 200
 
+    logger.debug("START serialization")
 
     schema_target = db_schemas.TargetSchema()
     if schema_simplified is None:
@@ -317,7 +318,10 @@ def api_scan_result_history_choose_schema(user_id=None, x_days=30, schema_simpli
         new_dict["result_simplified"] = schema_simplified.dump(x.ScanResultsSimplified)
         res_arr.append(new_dict)
 
-    return json.dumps(res_arr, indent=3), 200
+    logger.debug("MID serialization")
+    ret = json.dumps(res_arr, indent=3)
+    logger.debug("END serialization")
+    return ret, 200
 
 
 @bp.route('/ct_get_subdomains/<string:domain>')

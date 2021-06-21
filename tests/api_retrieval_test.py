@@ -14,7 +14,7 @@ from tests.auth_test import register_direct, login_direct, access_cookie_direct
 import tests.sslyze_parse_test as sslyze_parse_test
 import app.utils.db.basic as db_utils
 
-config.TestConfig.force_database_connection_string = "../db/test2a.db"
+# config.TestConfig.force_database_connection_string = "../db/test2a.db"
 # config.TestConfig.force_create_tmp_db = True  # todo: This does not get resetted, not even at the end of the test suite.
 FULL_SCAN_LOCAL_TEST_FILENAME = "example.com.json"
 
