@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Type
 
 import app
 import app.db_models as db_models
@@ -7,7 +7,7 @@ from app.utils.db.basic import get_or_create_or_update_by_unique
 from loguru import logger
 
 
-def generic_get_create_edit_from_data(schema: db_schemas.SQLAlchemyAutoSchema, data: dict, transient_only=False,
+def generic_get_create_edit_from_data(schema: Type[db_schemas.SQLAlchemyAutoSchema], data: dict, transient_only=False,
                                       get_only=False) -> Optional[db_models.Base]:
     # Warning: Unless get_only=True, this function overwrites attributes in DB to default used in schema load,
     # if the attributes are not specified in data.
@@ -17,8 +17,8 @@ def generic_get_create_edit_from_data(schema: db_schemas.SQLAlchemyAutoSchema, d
     return generic_get_create_edit_from_transient(schema, res_transient, transient_only, get_only)
 
 
-def generic_get_create_edit_from_transient(schema: db_schemas.SQLAlchemyAutoSchema,
-                                           model_transient: db_models.Base,
+def generic_get_create_edit_from_transient(schema: Type[db_schemas.SQLAlchemyAutoSchema],
+                                           model_transient: Type[db_models.Base],
                                            transient_only=False,
                                            get_only=False) -> Optional[db_models.Base]:
     # Warning: Unless get_only=True, this function overwrites attributes in DB to default used in schema load,
@@ -31,7 +31,7 @@ def generic_get_create_edit_from_transient(schema: db_schemas.SQLAlchemyAutoSche
     return get_or_create_or_update_by_unique(schema.Meta.model, res_dict, get_only=get_only)
 
 
-def generic_delete_from_data(schema: db_schemas.SQLAlchemyAutoSchema, data: dict) -> db_models.Base:
+def generic_delete_from_data(schema: Type[db_schemas.SQLAlchemyAutoSchema], data: dict) -> db_models.Base:
     res = generic_get_create_edit_from_data(schema, data, get_only=True)
     try:
         app.db.session.delete(res)
