@@ -34,7 +34,8 @@ class TestSuiteAPIDataRetrieval:
 
     @staticmethod
     def url_get_history():
-        return url_for("apiV1.api_scan_result_history")
+        # return url_for("apiV1.api_scan_result_history_with_certs")
+        return url_for("apiV1.api_scan_result_history_without_certs")
 
     def get_history_and_save_json_to_file(self, filename: str):
         targets = self.client.get(self.url_get_history())

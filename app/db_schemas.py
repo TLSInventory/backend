@@ -4,12 +4,12 @@ from marshmallow_enum import EnumField
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, SQLAlchemySchema, auto_field
 from marshmallow_sqlalchemy.fields import Nested
 import sslyze.ssl_settings
-from typing import List
+from typing import List, Type
 
 import app.db_models as db_models
 
 
-def get_array_reschemed(model_cls: db_models.UniqueModel, schema_cls, ids: str, many: bool = True) -> dict:
+def get_array_reschemed(model_cls: Type[db_models.UniqueModel], schema_cls, ids: str, many: bool = True) -> dict:
     schema = schema_cls(many=many)
     json_dict = schema.dump(model_cls.select_from_list(ids))
     return json_dict
@@ -306,6 +306,14 @@ class ScanResultsSimplifiedSchema(SQLAlchemyAutoSchema):
             return []  # todo: there was a problem here. Check if it can be solved on lower level.
         return get_array_reschemed(db_models.CertificateChain, CertificateChainSchema,
                                    obj.verified_certificate_chains_lists_ids)
+
+
+class ScanResultsSimplifiedWithoutCertsSchema(SQLAlchemyAutoSchema):
+    class Meta(BaseSchema.Meta):
+        model = db_models.ScanResultsSimplified
+        include_relationships = False
+        include_fk = True
+        exclude = ()
 
 
 class SlackConnectionsSchema(SQLAlchemyAutoSchema):

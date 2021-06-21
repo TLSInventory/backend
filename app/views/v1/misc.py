@@ -277,7 +277,20 @@ def api_get_basic_cert_info_for_target(target_id):
 @bp.route('/scan_result_history', methods=['GET'])
 @bp.route('/scan_result_history/<int:x_days>', methods=['GET'])
 @flask_jwt_extended.jwt_required
-def api_scan_result_history(user_id=None, x_days=30):
+def api_scan_result_history_with_certs(user_id=None, x_days=30):
+    schema_simplified = db_schemas.ScanResultsSimplifiedSchema()
+    return api_scan_result_history_choose_schema(user_id, x_days, schema_simplified)
+
+
+@bp.route('/scan_result_history_without_certs', methods=['GET'])
+@bp.route('/scan_result_history_without_certs/<int:x_days>', methods=['GET'])
+@flask_jwt_extended.jwt_required
+def api_scan_result_history_without_certs(user_id=None, x_days=30):
+    schema_simplified = db_schemas.ScanResultsSimplifiedWithoutCertsSchema()
+    return api_scan_result_history_choose_schema(user_id, x_days, schema_simplified)
+
+
+def api_scan_result_history_choose_schema(user_id=None, x_days=30, schema_simplified=None):
     if user_id is None:
         user_id = authentication_utils.get_user_id_from_current_jwt()
 
@@ -288,7 +301,8 @@ def api_scan_result_history(user_id=None, x_days=30):
 
 
     schema_target = db_schemas.TargetSchema()
-    schema_simplified = db_schemas.ScanResultsSimplifiedSchema()
+    if schema_simplified is None:
+        schema_simplified = db_schemas.ScanResultsSimplifiedSchema()
 
     res_arr = []
     for x in res:
