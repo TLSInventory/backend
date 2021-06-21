@@ -2,14 +2,17 @@ from datetime import datetime
 import sqlalchemy.orm
 from flask import url_for
 import pytest
+from functools import reduce
 
 import app.actions
 import config
 from loguru import logger
 
 import app.db_models as db_models
+import app.db_schemas as db_schemas
 from tests.auth_test import register_direct, login_direct, access_cookie_direct
 import tests.sslyze_parse_test as sslyze_parse_test
+import app.utils.db.basic as db_utils
 
 config.TestConfig.force_database_connection_string = "../db/test2a.db"
 # config.TestConfig.force_create_tmp_db = True  # todo: This does not get resetted, not even at the end of the test suite.
@@ -75,3 +78,32 @@ class TestSuiteAPIDataRetrieval:
         self.get_history_and_save_json_to_file("tmp/test5b.json")
         logger.debug("END")
 
+    @pytest.mark.skip(reason="Work in progress")
+    def test_direct_access_to_certificate_chains(self):
+        res = app.actions.get_scan_history(1, 1)
+        # b = db_schemas.TargetSchema().dump(list(map(lambda x: x.Target, res)), many=True)
+
+        # res = res[:10]
+        # logger.debug(res)
+
+        ans1a = map(lambda x: x.ScanResultsSimplified, res)
+        ans1b = map(lambda x: x.verified_certificate_chains_lists_ids if x else None, ans1a)
+        ans2 = map(lambda x: db_utils.split_array_to_tuple(x) if x else None, ans1b)
+        ans2b = list(ans2)
+
+        ans3 = filter(lambda x: x, ans2b)
+        ans4 = reduce(lambda x, y: x + y, ans3, ())
+        ans4b = set(ans4)
+
+        logger.debug(ans4b)
+
+        res = db_models.db.session.query(db_models.CertificateChain) \
+            .filter(db_models.CertificateChain.id.in_(list(ans4b))) \
+            .all()
+
+        # logger.debug(res)
+        logger.debug("SQL Complete")
+
+        c = db_schemas.CertificateChainSchema().dumps(res, many=True)
+        with open("tmp/test5c.json", "w") as f:
+            f.write(c)
