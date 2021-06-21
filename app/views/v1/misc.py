@@ -286,6 +286,10 @@ def api_scan_result_history(user_id=None, x_days=30):
     if res is None:
         return "[]", 200
 
+
+    schema_target = db_schemas.TargetSchema()
+    schema_simplified = db_schemas.ScanResultsSimplifiedSchema()
+
     res_arr = []
     for x in res:
         new_dict = {
@@ -295,9 +299,8 @@ def api_scan_result_history(user_id=None, x_days=30):
         }
         if x.ScanResultsHistory:
             new_dict["timestamp"] = x.ScanResultsHistory.timestamp
-        new_dict["target"] = json.loads(db_schemas.TargetSchema().dumps(x.Target))
-        new_dict["result_simplified"] = json.loads(
-            db_schemas.ScanResultsSimplifiedSchema().dumps(x.ScanResultsSimplified))
+        new_dict["target"] = schema_target.dump(x.Target)
+        new_dict["result_simplified"] = schema_simplified.dump(x.ScanResultsSimplified)
         res_arr.append(new_dict)
 
     return json.dumps(res_arr, indent=3), 200
