@@ -29,7 +29,7 @@ import app.db_models as db_models
 import app.utils.authentication_utils as authentication_utils
 import app.actions as actions
 import app.actions.sensor_collector as sensor_collector
-import app.views.v1.notification_settings as slack_url_to_oauth
+import app.views.v1.notification_settings as notification_settings
 import app.utils.randomCodes as randomCodes
 from app.utils.time_helper import time_source, datetime_to_timestamp, timestamp_to_datetime
 from config import SlackConfig
@@ -332,7 +332,8 @@ def api_ct_get_subdomains(domain):
 @bp.route("/slack/begin_auth_redirect", methods=["GET"])
 @flask_jwt_extended.jwt_required
 def slack_redirect_to_oauth():
-    url, _ = slack_url_to_oauth()
+    # This endpoint is useless for the official web frontend, but might be interesting for a CLI client.
+    url, _ = notification_settings.slack_url_to_oauth()
     return redirect(url, code=302)
 
 
