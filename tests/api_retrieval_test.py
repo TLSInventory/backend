@@ -1,3 +1,5 @@
+from itertools import chain
+from typing import List
 from datetime import datetime
 import sqlalchemy.orm
 from flask import url_for
@@ -81,32 +83,63 @@ class TestSuiteAPIDataRetrieval:
         self.get_history_and_save_json_to_file("tmp/test5b.json")
         logger.debug("END")
 
-    @pytest.mark.skip(reason="Work in progress")
-    def test_direct_access_to_certificate_chains(self):
-        res = app.actions.get_scan_history(1, 1)
-        # b = db_schemas.TargetSchema().dump(list(map(lambda x: x.Target, res)), many=True)
-
-        # res = res[:10]
-        # logger.debug(res)
+    @staticmethod
+    def get_certificate_chains() -> List[db_models.CertificateChain]:
+        res = app.actions.get_scan_history(1, 30)
 
         ans1a = map(lambda x: x.ScanResultsSimplified, res)
+
         ans1b = map(lambda x: x.verified_certificate_chains_lists_ids if x else None, ans1a)
-        ans2 = map(lambda x: db_utils.split_array_to_tuple(x) if x else None, ans1b)
+        ans1c = map(lambda x: x.received_certificate_chain_list_id if x else None, ans1a)
+
+        ans1d = chain(ans1b, ans1c)
+
+        ans2 = map(lambda x: db_utils.split_array_to_tuple(x) if x else None, ans1d)
         ans2b = list(ans2)
 
         ans3 = filter(lambda x: x, ans2b)
         ans4 = reduce(lambda x, y: x + y, ans3, ())
         ans4b = set(ans4)
 
-        logger.debug(ans4b)
-
         res = db_models.db.session.query(db_models.CertificateChain) \
             .filter(db_models.CertificateChain.id.in_(list(ans4b))) \
             .all()
 
-        # logger.debug(res)
-        logger.debug("SQL Complete")
+        return res
 
-        c = db_schemas.CertificateChainSchema().dumps(res, many=True)
+    @staticmethod
+    def get_certificates(chains: List[db_models.CertificateChain]) -> List[db_models.Certificate]:
+        ans1a = map(lambda x: db_utils.split_array_to_tuple(x.chain), chains)
+        ans2b = list(ans1a)
+        ans3 = filter(lambda x: x, ans2b)
+        ans4 = reduce(lambda x, y: x + y, ans3, ())
+        ans4b = set(ans4)
+
+        res = db_models.db.session.query(db_models.Certificate) \
+            .filter(db_models.Certificate.id.in_(list(ans4b))) \
+            .all()
+
+        return res
+
+    # @pytest.mark.skip(reason="Work in progress")
+    def test_direct_access_to_certificate_chains(self, freezer):
+        self.freeze_time_from_latest_scan_in_db(freezer)
+
+        logger.debug("Start getting chains")
+        res_chains = self.get_certificate_chains()
+
+        logger.debug("Start serializing chains")
+        c = db_schemas.CertificateChainSchemaWithoutCertificates().dumps(res_chains, many=True)
         with open("tmp/test5c.json", "w") as f:
             f.write(c)
+
+        logger.debug("Start getting certificates")
+        res_certs = self.get_certificates(res_chains)
+
+        logger.debug("Start serializing certificates")
+        d = db_schemas.CertificateSchema().dumps(res_certs, many=True)
+        with open("tmp/test5d.json", "w") as f:
+            f.write(d)
+
+        logger.debug("Done")
+

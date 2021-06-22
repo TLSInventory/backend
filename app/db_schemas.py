@@ -61,6 +61,9 @@ class TrustStoreSchema(SQLAlchemyAutoSchema):
 class CertificateSchema(SQLAlchemyAutoSchema):
     class Meta(BaseSchema.Meta):
         model = db_models.Certificate
+        exclude = ()
+
+    id = auto_field(dump_only=True)
 
 
 class ServerInfoSchema(SQLAlchemyAutoSchema):
@@ -153,6 +156,14 @@ class CertificateChainSchema(SQLAlchemyAutoSchema):
     @staticmethod
     def get_chain(obj):
         return get_array_reschemed(db_models.Certificate, CertificateSchema, obj.chain)
+
+
+class CertificateChainSchemaWithoutCertificates(SQLAlchemyAutoSchema):
+    class Meta(BaseSchema.Meta):
+        model = db_models.CertificateChain
+        exclude = ()
+
+    id = auto_field(dump_only=True)
 
 
 class HTTPSecurityHeadersSchema(SQLAlchemyAutoSchema):
