@@ -1,5 +1,6 @@
 import enum
-from typing import Tuple, Optional, Dict
+from functools import reduce
+from typing import Tuple, Optional, Dict, List, Type
 
 from loguru import logger
 from sqlalchemy.exc import IntegrityError
@@ -147,3 +148,18 @@ def scan_order_minimal_recalculate(target_id: int):
 def set_attr_if_none(x: Dict, attr_name: str, default_val):
     if x.get(attr_name, None) is None:
         x[attr_name] = default_val
+
+
+def arr_of_stringarrs_to_arr_of_objects(list_of_string_arrs: List[str], result_db_model: Type['db_models.UniqueModel']) -> List['db_models.UniqueModel']:
+
+    arr_of_tuples = map(lambda x: split_array_to_tuple(x) if x else None, list_of_string_arrs)
+    arr_of_non_empty_tuples = filter(lambda x: x, arr_of_tuples)
+    arr_of_ids = reduce(lambda x, y: x + y, arr_of_non_empty_tuples, ())
+    deduplicated_ids = set(arr_of_ids)
+
+    res = db_models.db.session.query(result_db_model) \
+        .filter(result_db_model.id.in_(list(deduplicated_ids))) \
+        .all()
+
+    return res
+

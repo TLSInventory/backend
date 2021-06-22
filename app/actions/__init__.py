@@ -1,12 +1,14 @@
 import datetime
 import json
 from typing import Optional, List, Dict, Tuple
+from itertools import chain
 
 import app.scan_scheduler as scan_scheduler
 from app import db_models, db_schemas, logger
 import app.object_models as object_models
 import app.utils.sslyze.scanner as sslyze_scanner
 import app.utils.sslyze.parse_result as sslyze_parse_result
+import app.utils.db.basic as db_utils
 from app.utils.time_helper import time_source, datetime_to_timestamp
 
 from . import sensor_collector
@@ -117,3 +119,27 @@ def get_scan_history(user_id: int, x_days: int = 30):  # -> Optional[Tuple[db_mo
         .all()
 
     return res
+
+
+def get_certificate_chains(user_id: int, x_days: int = 30) -> List[db_models.CertificateChain]:
+    res: List[db_models.ScanResultsHistory] = get_scan_history(user_id, x_days)
+
+    ans1a = map(lambda x: x.ScanResultsSimplified if x else None, res)
+
+    ans1b = map(lambda x: x.verified_certificate_chains_lists_ids if x else None, ans1a)
+    ans1c = map(lambda x: x.received_certificate_chain_list_id if x else None, ans1a)
+    ans1d = chain(ans1b, ans1c)
+
+    return db_utils.arr_of_stringarrs_to_arr_of_objects(
+        list(ans1d),
+        db_models.CertificateChain
+    )
+
+
+def get_certificates(chains: List[db_models.CertificateChain]) -> List[db_models.Certificate]:
+    ans1a = map(lambda x: x.chain if x else None, chains)
+
+    return db_utils.arr_of_stringarrs_to_arr_of_objects(
+        list(ans1a),
+        db_models.Certificate
+    )
