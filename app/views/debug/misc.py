@@ -3,6 +3,7 @@ import json
 import random
 
 import flask
+import flask_jwt_extended.exceptions
 import jsons
 from flask import redirect
 
@@ -165,8 +166,12 @@ def loginSetRefreshCookie():
 
 
 @bp.route('/setAccessCookie', methods=['GET'])
-@flask_jwt_extended.jwt_refresh_token_required
 def debugSetAccessCookie():
+    try:
+        flask_jwt_extended.verify_jwt_refresh_token_in_request()
+    except flask_jwt_extended.exceptions.NoAuthorizationError as e:
+        raise flask_jwt_extended.exceptions.NoAuthorizationError(e.args[0] + ";\n Also note that refresh cookie is not directly usable here by design - it's limited to a specific path.")
+
     current_user = flask_jwt_extended.get_jwt_identity()
     access_token = flask_jwt_extended.create_access_token(identity=current_user, expires_delta=datetime.timedelta(days=1))
     response_object = jsonify({})
