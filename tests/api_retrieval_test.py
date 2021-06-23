@@ -31,12 +31,6 @@ class TestSuiteAPIDataRetrieval:
         config.TestConfig.force_database_connection_string = None
 
     @staticmethod
-    def __do_authentication(client):
-        register_direct(client)
-        login_direct(client)
-        access_cookie_direct(client)
-
-    @staticmethod
     def url_get_history():
         # return url_for("apiV1.api_scan_result_history_with_certs")
         return url_for("apiV1.api_scan_result_history_without_certs")
@@ -64,7 +58,10 @@ class TestSuiteAPIDataRetrieval:
 
         db_models.db.session.commit()
 
-        register_direct(self.client)
+        try:
+            register_direct(self.client)
+        except AssertionError:
+            logger.warning("Registration failed. Maybe some previous registration happened? Trying to continue. ")
         logger.debug("Saving to DB complete, starting retrieval.")
 
     @staticmethod
