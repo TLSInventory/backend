@@ -5,6 +5,7 @@ from typing import List
 
 from flask import redirect
 
+import app.db_schemas
 import app.object_models as object_models
 import app.utils.ct_search as ct_search
 import app.utils.sslyze.simplify_result as sslyze_result_simplify
@@ -332,8 +333,9 @@ def api_get_users_certificate_chains(user_id=None, x_days=30):
         user_id = authentication_utils.get_user_id_from_current_jwt()
 
     res = actions.get_certificate_chains(user_id, x_days)
-    res_as_string = db_schemas.CertificateChainSchemaWithoutCertificates().dumps(res, many=True)
-    return res_as_string, 200
+    res_dicts: List[dict] = db_schemas.CertificateChainSchemaWithoutCertificates().dump(res, many=True)
+    res_dict_of_dicts = app.db_schemas.convert_arr_of_dicts_to_dict_of_dicts(res_dicts)
+    return jsonify(res_dict_of_dicts)
 
 
 @bp.route('/certificates', methods=['GET'])
@@ -350,8 +352,9 @@ def api_get_users_certificates(user_id=None, x_days=30):
     res_certs = actions.get_certificates(res_chains)
 
     # logger.debug("Start serializing certificates")
-    res_certs_as_string = db_schemas.CertificateSchema().dumps(res_certs, many=True)
-    return res_certs_as_string, 200
+    res_dicts: List[dict] = db_schemas.CertificateSchema().dump(res_certs, many=True)
+    res_dict_of_dicts = app.db_schemas.convert_arr_of_dicts_to_dict_of_dicts(res_dicts)
+    return jsonify(res_dict_of_dicts)
 
 
 @bp.route('/ct_get_subdomains/<string:domain>')

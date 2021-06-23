@@ -7,13 +7,12 @@ import app.scan_scheduler as scan_scheduler
 from app import db_models, db_schemas, logger
 import app.object_models as object_models
 import app.utils.sslyze.scanner as sslyze_scanner
-import app.utils.sslyze.parse_result as sslyze_parse_result
 import app.utils.db.basic as db_utils
 from app.utils.time_helper import time_source, datetime_to_timestamp
 
 from . import sensor_collector
 
-from config import FlaskConfig, SslyzeConfig, SensorCollector
+from config import SensorCollector
 
 
 def get_target_definition_by_ids(target_ids: List[int], user_id: int) -> bool:

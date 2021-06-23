@@ -64,6 +64,7 @@ class TestSuiteAPIDataRetrieval:
 
         db_models.db.session.commit()
 
+        register_direct(self.client)
         logger.debug("Saving to DB complete, starting retrieval.")
 
     @staticmethod
@@ -105,6 +106,27 @@ class TestSuiteAPIDataRetrieval:
         d = db_schemas.CertificateSchema().dumps(res_certs, many=True)
         with open("tmp/test5d.json", "w") as f:
             f.write(d)
+
+        logger.debug("Done")
+
+    def test_slow_endpoints(self, freezer):
+        if config.TestConfig.force_database_connection_string is None:
+            self.fill_new_db(freezer, 1000)
+
+        self.freeze_time_from_latest_scan_in_db(freezer)
+
+        login_direct(self.client)
+        access_cookie_direct(self.client)
+
+        chains = self.client.get(url_for("apiV1.api_get_users_certificate_chains"))
+        assert chains.status_code == 200
+        logger.debug(f"Chains len: {len(chains.json)}")
+        assert len(chains.json)
+
+        certificates = self.client.get(url_for("apiV1.api_get_users_certificates"))
+        assert certificates.status_code == 200
+        logger.debug(f"Certificates len: {len(certificates.json)}")
+        assert len(chains.json)
 
         logger.debug("Done")
 

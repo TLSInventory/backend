@@ -4,9 +4,10 @@ from marshmallow_enum import EnumField
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, SQLAlchemySchema, auto_field
 from marshmallow_sqlalchemy.fields import Nested
 import sslyze.ssl_settings
-from typing import List, Type
+from typing import List, Type, Dict
 
 import app.db_models as db_models
+import app.utils.db.basic
 
 
 def get_array_reschemed(model_cls: Type[db_models.UniqueModel], schema_cls, ids: str, many: bool = True) -> dict:
@@ -164,6 +165,12 @@ class CertificateChainSchemaWithoutCertificates(SQLAlchemyAutoSchema):
         exclude = ()
 
     id = auto_field(dump_only=True)
+
+    chain = fields.Method("chain_to_propper_arr", dump_only=True)
+
+    @staticmethod
+    def chain_to_propper_arr(obj):
+        return app.utils.db.basic.split_array_to_tuple(obj.chain)
 
 
 class HTTPSecurityHeadersSchema(SQLAlchemyAutoSchema):
@@ -363,3 +370,9 @@ class SubdomainRescanTargetSchema(SQLAlchemyAutoSchema):
         include_relationships = False
         include_fk = True
 
+
+def convert_arr_of_dicts_to_dict_of_dicts(arr_of_dicts: List[dict]) -> Dict[int, dict]:
+    dict_of_dict = {}
+    for x in arr_of_dicts:
+        dict_of_dict[x["id"]] = x
+    return dict_of_dict
