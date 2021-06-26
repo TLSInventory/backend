@@ -35,7 +35,7 @@ def get_one_or_create(model,
 def get_one_or_create_from_object(obj: app.db.Model) -> Tuple[app.db.Model, bool]:  # todo: remove this function
     logger.critical("Deprecated: This function should no longer be used anywhere")
     kwargs = {x: vars(obj)[x] for x in vars(obj) if not x.startswith("_")}
-    b = type(obj)
+    # b = type(obj)
     return get_one_or_create(type(obj), **kwargs)
 
 
