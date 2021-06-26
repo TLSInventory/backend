@@ -114,6 +114,7 @@ class GradeResult(object):
 
     def calculate_headers(self):
         sec_header: db_models.HTTPSecurityHeaders = self.scan_result.http_security_headers
+        certificate: db_models.Certificate = None
 
         if sec_header.strict_transport_security_header and \
                 sec_header.public_key_pins_header:
@@ -126,6 +127,7 @@ class GradeResult(object):
 
     def calculate_cipher_length(self):
         # need additional info (type eg. -> how to retrieve)
+        # info in <Certificate> class - accessible from ScanResult?
         pass
 
     def calculate_renegotiation(self):
