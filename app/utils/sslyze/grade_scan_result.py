@@ -153,4 +153,3 @@ class GradeResult(object):
         if (self.partial_simplified.tlsv13_working_weak_ciphers_count == 0
                 and self.partial_simplified.tlsv12_working_weak_ciphers_count == 0):
             self._format_msg_and_cap(Grades.B, "doesn't support either TLS 1.2 or TLS 1.3")
-        if self.scan_result
