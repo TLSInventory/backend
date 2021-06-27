@@ -69,8 +69,7 @@ class TestSuiteAPIDataRetrieval:
         latest_scan_result = db_models.ScanResultsHistory.query.order_by(sqlalchemy.desc(db_models.ScanResultsHistory.timestamp)).first()
         freezer.move_to(datetime.fromtimestamp(latest_scan_result.timestamp + 1))
 
-    @pytest.mark.skip(reason="This test is disabled until we stabilize the v2 API.")
-    def test_get_history(self, freezer):
+    def setup_environment(self, freezer):
         if config.TestConfig.force_database_connection_string is None:
             self.fill_new_db(freezer, 1000)
 
@@ -79,14 +78,16 @@ class TestSuiteAPIDataRetrieval:
         login_direct(self.client)
         access_cookie_direct(self.client)
 
+
+    @pytest.mark.skip(reason="This test is disabled until we stabilize the v2 API.")
+    def test_get_history(self, freezer):
+        self.setup_environment(freezer)
+
         self.get_history_and_save_json_to_file("tmp/test5b.json")
         logger.debug("END")
 
     def test_direct_access_to_certificate_chains(self, freezer):
-        if config.TestConfig.force_database_connection_string is None:
-            self.fill_new_db(freezer, 1000)
-
-        self.freeze_time_from_latest_scan_in_db(freezer)
+        self.setup_environment(freezer)
 
         logger.debug("Start getting chains")
         res_chains = app.actions.get_certificate_chains(1)
@@ -107,13 +108,7 @@ class TestSuiteAPIDataRetrieval:
         logger.debug("Done")
 
     def test_slow_endpoints(self, freezer):
-        if config.TestConfig.force_database_connection_string is None:
-            self.fill_new_db(freezer, 1000)
-
-        self.freeze_time_from_latest_scan_in_db(freezer)
-
-        login_direct(self.client)
-        access_cookie_direct(self.client)
+        self.setup_environment(freezer)
 
         chains = self.client.get(url_for("apiV1.api_get_users_certificate_chains"))
         assert chains.status_code == 200
