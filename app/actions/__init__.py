@@ -124,10 +124,11 @@ def get_certificate_chains(user_id: int, x_days: int = 30) -> List[db_models.Cer
     res: List[db_models.ScanResultsHistory] = get_scan_history(user_id, x_days)
 
     ans1a = map(lambda x: x.ScanResultsSimplified if x else None, res)
-    asn1b = list(ans1a)  # This is necessary, because we're going to need to iterate twice over the array.
+    ans1b = filter(lambda x: x, ans1a)
+    asn1c = list(ans1b)  # This is necessary, because we're going to need to iterate twice over the array.
 
-    ans2a = map(lambda x: x.verified_certificate_chains_lists_ids if x else None, asn1b)
-    ans2b = map(lambda x: str(x.received_certificate_chain_list_id) if x else None, asn1b)
+    ans2a = map(lambda x: x.verified_certificate_chains_lists_ids if x.verified_certificate_chains_lists_ids else None, asn1c)
+    ans2b = map(lambda x: str(x.received_certificate_chain_list_id) if x.received_certificate_chain_list_id else None, asn1c)
     ans2c = chain(ans2a, ans2b)
 
     ans2d = list(ans2c)

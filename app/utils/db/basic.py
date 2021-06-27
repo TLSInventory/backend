@@ -151,9 +151,8 @@ def set_attr_if_none(x: Dict, attr_name: str, default_val):
 
 
 def arr_of_stringarrs_to_arr_of_objects(list_of_string_arrs: List[str], result_db_model: Type['db_models.UniqueModel']) -> List['db_models.UniqueModel']:
-
-    arr_of_tuples = map(lambda x: split_array_to_tuple(x) if x else None, list_of_string_arrs)
-    arr_of_non_empty_tuples = filter(lambda x: x, arr_of_tuples)
+    arr_of_tuples = list(map(lambda x: split_array_to_tuple(x) if x else None, set(list_of_string_arrs)))
+    arr_of_non_empty_tuples = list(filter(lambda x: x, arr_of_tuples))
     arr_of_ids = reduce(lambda x, y: x + y, arr_of_non_empty_tuples, ())
     deduplicated_ids = set(arr_of_ids)
 
