@@ -84,7 +84,7 @@ class TestSuiteAPIDataRetrieval:
         self.setup_environment(freezer)
 
         logger.debug("Started")
-        chains = self.client.get(url_for("apiV1.api_get_users_certificate_chains"))
+        chains = self.client.get(url_for("apiV2.api_get_users_certificate_chains"))
         assert chains.status_code == 200
         logger.debug(f"Chains len: {len(chains.json)}")
         assert len(chains.json)
@@ -100,7 +100,7 @@ class TestSuiteAPIDataRetrieval:
         logger.debug("Started")
         app.actions.get_certificate_chains(1, 30)
 
-        certificates = self.client.get(url_for("apiV1.api_get_users_certificates"))
+        certificates = self.client.get(url_for("apiV2.api_get_users_certificates"))
         assert certificates.status_code == 200
         logger.debug(f"Certificates len: {len(certificates.json)}")
         assert len(certificates.json)

@@ -325,38 +325,6 @@ def api_scan_result_history_choose_schema(user_id=None, x_days=30, schema_simpli
     return ret, 200
 
 
-@bp.route('/certificate_chains', methods=['GET'])
-@bp.route('/certificate_chains/<int:x_days>', methods=['GET'])
-@flask_jwt_extended.jwt_required
-def api_get_users_certificate_chains(user_id=None, x_days=30):
-    if user_id is None:
-        user_id = authentication_utils.get_user_id_from_current_jwt()
-
-    res = actions.get_certificate_chains(user_id, x_days)
-    res_dicts: List[dict] = db_schemas.CertificateChainSchemaWithoutCertificates().dump(res, many=True)
-    res_dict_of_dicts = app.db_schemas.convert_arr_of_dicts_to_dict_of_dicts(res_dicts)
-    return jsonify(res_dict_of_dicts)
-
-
-@bp.route('/certificates', methods=['GET'])
-@bp.route('/certificates/<int:x_days>', methods=['GET'])
-@flask_jwt_extended.jwt_required
-def api_get_users_certificates(user_id=None, x_days=30):
-    if user_id is None:
-        user_id = authentication_utils.get_user_id_from_current_jwt()
-
-    # logger.debug("Start getting certificate chains")
-    res_chains = actions.get_certificate_chains(user_id, x_days)
-
-    # logger.debug("Start getting certificates")
-    res_certs = actions.get_certificates(res_chains)
-
-    # logger.debug("Start serializing certificates")
-    res_dicts: List[dict] = db_schemas.CertificateSchema().dump(res_certs, many=True)
-    res_dict_of_dicts = app.db_schemas.convert_arr_of_dicts_to_dict_of_dicts(res_dicts)
-    return jsonify(res_dict_of_dicts)
-
-
 @bp.route('/ct_get_subdomains/<string:domain>')
 def api_ct_get_subdomains(domain):
     return jsonify({"hostname": domain, "result": ct_search.get_subdomains_from_ct(domain)})
