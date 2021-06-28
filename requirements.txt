@@ -44,21 +44,6 @@ Flask-WTF==0.14.3
 
 supervisor==4.2.1
 
-pytest==6.2.1
-py==1.10.0  # todo: remove
-pip
-wheel
-pluggy
-iniconfig
-pyparsing
-setuptools
-packaging
-
-pytest-flask==1.2.0
-pytest-httpserver==1.0.0
-pytest-freezegun==0.4.2
-pytest-timeout==1.4.2
-
 tldextract==3.1.0
 
 gunicorn[gevent]==20.1.0

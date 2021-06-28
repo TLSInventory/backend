@@ -3,7 +3,7 @@
 This document notes some usefull aproaches for development and debugging.
 
 ```bash
-sudo apt-get install python3.7-dev
+sudo apt-get install python3.7-dev graphviz
 python3.7 -m pip install -r requirements-dev.txt
 ```
 

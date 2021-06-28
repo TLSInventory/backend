@@ -1,3 +1,20 @@
+pytest==6.2.1
+py==1.10.0  # todo: remove
+pip
+wheel
+pluggy
+iniconfig
+pyparsing
+setuptools
+packaging
+
+pytest-flask==1.2.0
+pytest-httpserver==1.0.0
+pytest-freezegun==0.4.2
+pytest-timeout==1.4.2
+pytest-cov==2.12.1
+pytest-profiling==1.7.0
+
 graphviz    # used for graphing of internal dependencies, in a Github action
 yappi       # used for better profiling
 pytest-profiling    # used for profiler output, both in text form and in SVG

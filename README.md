@@ -39,6 +39,7 @@ Python packages are listed in file `requirements.txt`.
 python3.7 -m venv .venv
 source .venv/bin/activate
 python3.7 -m pip install -r requirements.txt
+# python3.7 -m pip install -r requirements-dev.txt # Run this if you want to run tests, or develop the source code.
 ```
 
 
