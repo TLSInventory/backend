@@ -106,11 +106,15 @@ def get_scan_history(user_id: int, x_days: int = 30):  # -> Optional[Tuple[db_mo
     start_timestamp = datetime_to_timestamp(start)
 
     res = db_models.db.session \
-        .query(db_models.ScanOrder, db_models.Target, db_models.ScanResultsHistory, db_models.ScanResultsSimplified) \
+        .query(db_models.ScanOrder, db_models.Target, db_models.ScanResultsHistory, db_models.ScanResultsSimplified, db_models.ServerInfo) \
         .outerjoin(db_models.ScanResultsHistory,
                    db_models.ScanResultsHistory.target_id == db_models.ScanOrder.target_id) \
         .outerjoin(db_models.ScanResultsSimplified,
                    db_models.ScanResultsHistory.scanresult_id == db_models.ScanResultsSimplified.scanresult_id) \
+        .outerjoin(db_models.ScanResults,
+                   db_models.ScanResultsHistory.scanresult_id == db_models.ScanResults.id) \
+        .outerjoin(db_models.ServerInfo,
+                   db_models.ScanResults.server_info_id == db_models.ServerInfo.id) \
         .filter(db_models.ScanOrder.target_id == db_models.Target.id) \
         .filter(db_models.ScanOrder.active == True) \
         .filter(db_models.ScanOrder.user_id == user_id) \

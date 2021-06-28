@@ -1,3 +1,4 @@
+from loguru import logger
 from marshmallow import fields, EXCLUDE
 from marshmallow.fields import Pluck
 from marshmallow_enum import EnumField
@@ -73,6 +74,13 @@ class ServerInfoSchema(SQLAlchemyAutoSchema):
         include_relationships = True
 
     openssl_cipher_string_supported = Nested(CipherSuiteSchema)
+
+
+class ServerInfoSchemaWithoutCiphers(SQLAlchemyAutoSchema):
+    class Meta(BaseSchema.Meta):
+        model = db_models.ServerInfo
+        include_relationships = True
+        exclude = ("openssl_cipher_string_supported", "id", )
 
 
 class RejectedCipherHandshakeErrorMessageSchema(SQLAlchemyAutoSchema):
@@ -374,5 +382,10 @@ class SubdomainRescanTargetSchema(SQLAlchemyAutoSchema):
 def convert_arr_of_dicts_to_dict_of_dicts(arr_of_dicts: List[dict]) -> Dict[int, dict]:
     dict_of_dict = {}
     for x in arr_of_dicts:
-        dict_of_dict[x["id"]] = x
+        try:
+            if x:
+                dict_of_dict[x["id"]] = x
+        except Exception as e:
+            logger.error(f"Existing object doesn't have id? | {e} | {x}")
+            raise
     return dict_of_dict

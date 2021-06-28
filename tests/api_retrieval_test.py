@@ -30,11 +30,6 @@ class TestSuiteAPIDataRetrieval:
     def teardown_class(cls):
         config.TestConfig.force_database_connection_string = None
 
-    @staticmethod
-    def url_get_history():
-        # return url_for("apiV1.api_scan_result_history_with_certs")
-        return url_for("apiV1.api_scan_result_history_without_certs")
-
     def fill_new_db(self, freezer, number_of_records=1000, filename=None):
         # filename = FULL_SCAN_LOCAL_TEST_FILENAME
         sslyze_parse_test.TestSuiteSSLyzeParse().parse_and_save_to_database_x_times(self.client, freezer, 1, filename)
@@ -72,11 +67,11 @@ class TestSuiteAPIDataRetrieval:
     def test_endpoint_history(self, freezer):
         self.setup_environment(freezer)
 
-        targets = self.client.get(self.url_get_history())
-        assert targets.status_code == 200
+        history = self.client.get(url_for("apiV1.api_scan_result_history_without_certs"))
+        assert history.status_code == 200
 
         with open("tmp/api_history.json", "wb") as f:
-            f.write(targets.data)
+            f.write(history.data)
 
         logger.debug("END")
 
@@ -98,7 +93,6 @@ class TestSuiteAPIDataRetrieval:
         self.setup_environment(freezer)
 
         logger.debug("Started")
-        app.actions.get_certificate_chains(1, 30)
 
         certificates = self.client.get(url_for("apiV2.api_get_users_certificates"))
         assert certificates.status_code == 200
@@ -109,3 +103,31 @@ class TestSuiteAPIDataRetrieval:
 
         with open("tmp/api_certificates.json", "wb") as f:
             f.write(certificates.data)
+
+    def test_endpoint_scan_results_simplified(self, freezer):
+        self.setup_environment(freezer)
+
+        logger.debug("Started")
+
+        scan_results_simplified = self.client.get(url_for("apiV2.api_get_users_scan_results_simplified"))
+        assert scan_results_simplified.status_code == 200
+        logger.debug(f"Certificates len: {len(scan_results_simplified.json)}")
+        assert len(scan_results_simplified.json)
+        assert isinstance(scan_results_simplified.json, dict)
+        logger.debug("Done")
+
+        with open("tmp/api_scan_results_simplified.json", "wb") as f:
+            f.write(scan_results_simplified.data)
+
+    def test_endpoint_history_v2(self, freezer):
+        self.setup_environment(freezer)
+
+        # res1 = app.actions.get_scan_history(1, 30)
+
+        history = self.client.get(url_for("apiV2.api_scan_result_history_without_certs"))
+        assert history.status_code == 200
+
+        with open("tmp/api_history_v2.json", "wb") as f:
+            f.write(history.data)
+
+        logger.debug("END")
