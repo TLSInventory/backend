@@ -45,6 +45,7 @@ def app(request):
         config.FlaskConfig.SQLALCHEMY_DATABASE_URI = 'sqlite:///' + db_filename
 
     app = app2.create_app(force_create_db=True)
+    app.config["JSONIFY_PRETTYPRINT_REGULAR"] = True
 
     yield app
 
