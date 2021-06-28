@@ -341,6 +341,17 @@ class ScanResultsSimplifiedWithoutCertsSchema(SQLAlchemyAutoSchema):
         include_fk = True
         exclude = ()
 
+    id = fields.Method("fake_id", dump_only=True)
+    verified_certificate_chains_lists_ids = fields.Method("chains_to_proper_arr", dump_only=True)
+
+    @staticmethod
+    def chains_to_proper_arr(obj):
+        return app.utils.db.basic.split_array_to_tuple(obj.verified_certificate_chains_lists_ids)
+
+    @staticmethod
+    def fake_id(obj):
+        return obj.scanresult_id
+
 
 class SlackConnectionsSchema(SQLAlchemyAutoSchema):
     class Meta(BaseSchema.Meta):

@@ -51,7 +51,9 @@ def dict_filter_columns(columns_to_keep: list, obj: dict) -> dict:
     return {x: obj[x] for x in obj if x in columns_to_keep}
 
 
-def split_array_to_tuple(a: str) -> Tuple:
+def split_array_to_tuple(a: Optional[str]) -> Tuple:
+    if a is None:
+        return ()
     list_str = a[:].replace("[", "").replace("]", "")
     list1 = list_str.split(",")
     list2 = [x for x in list1 if len(x)]

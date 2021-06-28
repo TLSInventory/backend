@@ -91,3 +91,36 @@ def api_get_users_certificates(user_id=None, x_days=30):
     res_dicts: List[dict] = db_schemas.CertificateSchema().dump(res_certs, many=True)
     res_dict_of_dicts = app.db_schemas.convert_arr_of_dicts_to_dict_of_dicts(res_dicts)
     return jsonify(res_dict_of_dicts)
+
+
+@bp.route('/history/scan_results', methods=['GET'])
+@bp.route('/history/scan_results/<int:x_days>', methods=['GET'])
+@flask_jwt_extended.jwt_required
+def api_scan_results_history_v2(user_id=None, x_days=30):
+    if user_id is None:
+        user_id = authentication_utils.get_user_id_from_current_jwt()
+
+    a = api_scan_result_history_without_certs(user_id, x_days).json
+    b = api_get_users_scan_results_simplified(user_id, x_days).json
+    c = api_get_users_certificate_chains(user_id, x_days).json
+    d = api_get_users_certificates(user_id, x_days).json
+
+    for chain_key in c:
+        c[chain_key]["chain"] = [d[str(x)] for x in c[chain_key]["chain"]]
+
+    for scan_result_id in b:
+        b[scan_result_id]["received_certificate_chain_list"] = b[scan_result_id].get("received_certificate_chain_list_id", None)
+        b[scan_result_id]["verified_certificate_chains_list"] = [c[str(x)] for x in b[scan_result_id]["verified_certificate_chains_lists_ids"]]
+
+    for single_scan_attempt_id in a:
+        # logger.warning(a[single_scan_attempt_id])
+        a[single_scan_attempt_id]["scan_result"] = b[str(a[single_scan_attempt_id]["scan_result_id"])]
+        pass
+
+    # return jsonify({
+    #     "a": a,
+    #     "b": b,
+    #     # "c": c,
+    #     # "d": d
+    #     })
+    return jsonify(a)
