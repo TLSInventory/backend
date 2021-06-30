@@ -111,11 +111,9 @@ def api_scan_results_history_v2(user_id=None, x_days=30):
     for scan_result_id in b:
         b[scan_result_id]["received_certificate_chain_list"] = b[scan_result_id].get("received_certificate_chain_list_id", None)
         b[scan_result_id]["verified_certificate_chains_list"] = [c[str(x)] for x in b[scan_result_id]["verified_certificate_chains_lists_ids"]]
-
-    for single_scan_attempt_id in a:
-        # logger.warning(a[single_scan_attempt_id])
-        a[single_scan_attempt_id]["scan_result"] = b[str(a[single_scan_attempt_id]["scan_result_id"])]
-        pass
+    new_res = convert_scan_results_to_v1(a, b, c, d, e)
+    return json.dumps(sorted(new_res, key=lambda x: x["timestamp"]), indent=4, sort_keys=True), 200
+    # return jsonify(a)
 
     # return jsonify({
     #     "a": a,
