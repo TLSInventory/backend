@@ -113,6 +113,14 @@ class TestSuiteAuth:
             json=AuthTestSuiteConfig.login_data_from_register(AuthTestSuiteConfig.register_data2)
         ).status_code == 401
 
+    @register_and_login
+    @set_debug_access_cookie
+    def test_valid_jwt_allows_access(self):
+        assert self.client.get(url_for("apiDebug.jwt_inside_route")).status_code == 200
+
+    def test_invalid_jwt_disallows_access(self):
+        assert self.client.get(url_for("apiDebug.jwt_inside_route")).status_code == 401
+
 
 # app_inst = app_test_instance()
 
