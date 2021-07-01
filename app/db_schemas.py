@@ -174,7 +174,7 @@ class CertificateChainSchemaWithoutCertificates(SQLAlchemyAutoSchema):
 
     id = auto_field(dump_only=True)
 
-    chain = fields.Method("chain_to_propper_arr", dump_only=True)
+    chain_arr = fields.Method("chain_to_propper_arr", dump_only=True)
 
     @staticmethod
     def chain_to_propper_arr(obj):
@@ -342,7 +342,7 @@ class ScanResultsSimplifiedWithoutCertsSchema(SQLAlchemyAutoSchema):
         exclude = ()
 
     id = fields.Method("fake_id", dump_only=True)
-    verified_certificate_chains_lists_ids = fields.Method("chains_to_proper_arr", dump_only=True)
+    verified_certificate_chains_lists_ids_arr = fields.Method("chains_to_proper_arr", dump_only=True)
 
     @staticmethod
     def chains_to_proper_arr(obj):

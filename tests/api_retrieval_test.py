@@ -8,6 +8,7 @@ from functools import reduce
 
 import app.actions
 import app.utils.files
+import app.views.v2.scan_results
 import config
 from loguru import logger
 
@@ -68,6 +69,7 @@ class TestSuiteAPIDataRetrieval:
         self.setup_environment(freezer)
 
         history = self.client.get(url_for("apiV1.api_scan_result_history_without_certs"))
+        # history = app.views.v1.misc.api_scan_result_history_without_certs(1)
         assert history.status_code == 200
 
         with open("tmp/api_history.json", "wb") as f:
@@ -79,7 +81,7 @@ class TestSuiteAPIDataRetrieval:
         self.setup_environment(freezer)
 
         logger.debug("Started")
-        chains = self.client.get(url_for("apiV2.api_get_users_certificate_chains"))
+        chains = app.views.v2.scan_results.api_get_users_certificate_chains(1)
         assert chains.status_code == 200
         logger.debug(f"Chains len: {len(chains.json)}")
         assert len(chains.json)
@@ -94,7 +96,7 @@ class TestSuiteAPIDataRetrieval:
 
         logger.debug("Started")
 
-        certificates = self.client.get(url_for("apiV2.api_get_users_certificates"))
+        certificates = app.views.v2.scan_results.api_get_users_certificates(1)
         assert certificates.status_code == 200
         logger.debug(f"Certificates len: {len(certificates.json)}")
         assert len(certificates.json)
@@ -109,7 +111,7 @@ class TestSuiteAPIDataRetrieval:
 
         logger.debug("Started")
 
-        scan_results_simplified = self.client.get(url_for("apiV2.api_get_users_scan_results_simplified"))
+        scan_results_simplified = app.views.v2.scan_results.api_get_users_scan_results_simplified(1)
         assert scan_results_simplified.status_code == 200
         logger.debug(f"Certificates len: {len(scan_results_simplified.json)}")
         assert len(scan_results_simplified.json)
@@ -122,9 +124,19 @@ class TestSuiteAPIDataRetrieval:
     def test_endpoint_history_v2(self, freezer):
         self.setup_environment(freezer)
 
-        # res1 = app.actions.get_scan_history(1, 30)
+        history = app.views.v2.scan_results.api_scan_result_history_without_certs(1)
+        assert history.status_code == 200
 
-        history = self.client.get(url_for("apiV2.api_scan_result_history_without_certs"))
+        with open("tmp/api_history_v2.json", "wb") as f:
+            f.write(history.data)
+
+        logger.debug("END")
+
+    def test_endpoint_compatibilty_history_v2(self, freezer):
+        self.setup_environment(freezer)
+        # history = self.client.get(url_for("apiV2.api_scan_results_history_v2"))
+        history = app.views.v2.scan_results.api_scan_results_history_v2(1)
+
         assert history.status_code == 200
 
         with open("tmp/api_history_v2.json", "wb") as f:
