@@ -1,5 +1,5 @@
 from itertools import chain
-from typing import List, Type
+from typing import List, Type, Optional
 from datetime import datetime
 import sqlalchemy.orm
 from flask import url_for
@@ -52,6 +52,17 @@ class TestSuiteAPIDataRetrieval:
         logger.debug("Saving to DB complete, starting retrieval.")
 
     @staticmethod
+    def assert_json_response(res, tld_data_type: type, output_filename: Optional[str] = None):
+        assert res.status_code == 200
+        logger.debug(f"Number of items in res: {len(res.json)}")
+        assert len(res.json)
+        assert isinstance(res.json, tld_data_type)
+        logger.debug("Done")
+
+        with open(output_filename, "wb") as f:
+            f.write(res.data)
+
+    @staticmethod
     def freeze_time_from_latest_scan_in_db(freezer):
         latest_scan_result = db_models.ScanResultsHistory.query.order_by(sqlalchemy.desc(db_models.ScanResultsHistory.timestamp)).first()
         freezer.move_to(datetime.fromtimestamp(latest_scan_result.timestamp + 1))
@@ -67,79 +78,31 @@ class TestSuiteAPIDataRetrieval:
 
     def test_endpoint_history(self, freezer):
         self.setup_environment(freezer)
-
         history = self.client.get(url_for("apiV1.api_scan_result_history_without_certs"))
         # history = app.views.v1.misc.api_scan_result_history_without_certs(1)
-        assert history.status_code == 200
-
-        with open("tmp/api_history.json", "wb") as f:
-            f.write(history.data)
-
-        logger.debug("END")
+        self.assert_json_response(history, list, "tmp/api_history_v1.json")
 
     def test_endpoint_chains(self, freezer):
         self.setup_environment(freezer)
-
-        logger.debug("Started")
         chains = app.views.v2.scan_results.api_get_users_certificate_chains(1)
-        assert chains.status_code == 200
-        logger.debug(f"Chains len: {len(chains.json)}")
-        assert len(chains.json)
-        assert isinstance(chains.json, dict)
-        logger.debug("Done")
-
-        with open("tmp/api_chains.json", "wb") as f:
-            f.write(chains.data)
+        self.assert_json_response(chains, dict, "tmp/api_chains.json")
 
     def test_endpoint_certificates(self, freezer):
         self.setup_environment(freezer)
-
-        logger.debug("Started")
-
         certificates = app.views.v2.scan_results.api_get_users_certificates(1)
-        assert certificates.status_code == 200
-        logger.debug(f"Certificates len: {len(certificates.json)}")
-        assert len(certificates.json)
-        assert isinstance(certificates.json, dict)
-        logger.debug("Done")
-
-        with open("tmp/api_certificates.json", "wb") as f:
-            f.write(certificates.data)
+        self.assert_json_response(certificates, dict, "tmp/api_certificates.json")
 
     def test_endpoint_scan_results_simplified(self, freezer):
         self.setup_environment(freezer)
-
-        logger.debug("Started")
-
         scan_results_simplified = app.views.v2.scan_results.api_get_users_scan_results_simplified(1)
-        assert scan_results_simplified.status_code == 200
-        logger.debug(f"Certificates len: {len(scan_results_simplified.json)}")
-        assert len(scan_results_simplified.json)
-        assert isinstance(scan_results_simplified.json, dict)
-        logger.debug("Done")
-
-        with open("tmp/api_scan_results_simplified.json", "wb") as f:
-            f.write(scan_results_simplified.data)
+        self.assert_json_response(scan_results_simplified, dict, "tmp/api_scan_results_simplified.json")
 
     def test_endpoint_history_v2(self, freezer):
         self.setup_environment(freezer)
-
         history = app.views.v2.scan_results.api_scan_result_history_without_certs(1)
-        assert history.status_code == 200
+        self.assert_json_response(history, dict, "tmp/api_history_v2.json")
 
-        with open("tmp/api_history_v2.json", "wb") as f:
-            f.write(history.data)
-
-        logger.debug("END")
-
-    def test_endpoint_compatibilty_history_v2(self, freezer):
+    def test_endpoint_compatibility_history_v2(self, freezer):
         self.setup_environment(freezer)
-        # history = self.client.get(url_for("apiV2.api_scan_results_history_v2"))
         history = app.views.v2.scan_results.api_scan_results_history_v2(1)
-
-        assert history.status_code == 200
-
-        with open("tmp/api_history_v2.json", "wb") as f:
-            f.write(history.data)
-
-        logger.debug("END")
+        self.assert_json_response(history, list, "tmp/api_history_v2_backwards_compatible.json")
