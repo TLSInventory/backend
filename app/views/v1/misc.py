@@ -277,7 +277,6 @@ def api_get_basic_cert_info_for_target(target_id):
 
 @bp.route('/scan_result_history', methods=['GET'])
 @bp.route('/scan_result_history/<int:x_days>', methods=['GET'])
-@flask_jwt_extended.jwt_required
 def api_scan_result_history_with_certs(user_id=None, x_days=30):
     schema_simplified = db_schemas.ScanResultsSimplifiedSchema()
     return api_scan_result_history_choose_schema(user_id, x_days, schema_simplified)
@@ -285,7 +284,6 @@ def api_scan_result_history_with_certs(user_id=None, x_days=30):
 
 @bp.route('/scan_result_history_without_certs', methods=['GET'])
 @bp.route('/scan_result_history_without_certs/<int:x_days>', methods=['GET'])
-@flask_jwt_extended.jwt_required
 def api_scan_result_history_without_certs(user_id=None, x_days=30):
     schema_simplified = db_schemas.ScanResultsSimplifiedWithoutCertsSchema()
     return api_scan_result_history_choose_schema(user_id, x_days, schema_simplified)
@@ -319,10 +317,12 @@ def api_scan_result_history_choose_schema(user_id=None, x_days=30, schema_simpli
         new_dict["result_simplified"] = schema_simplified.dump(x.ScanResultsSimplified)
         res_arr.append(new_dict)
 
-    logger.debug("MID serialization")
-    ret = json.dumps(res_arr, indent=3)
-    logger.debug("END serialization")
-    return ret, 200
+    # logger.debug("MID serialization")
+    res_arr_sorted = sorted(res_arr, key=lambda x: x["timestamp"])
+    # ret = json.dumps(res_arr_sorted), indent=3, sort_keys=True)
+    # logger.debug("END serialization")
+    # return ret, 200
+    return jsonify(res_arr_sorted)
 
 
 @bp.route('/ct_get_subdomains/<string:domain>')

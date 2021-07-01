@@ -8,6 +8,7 @@ from functools import reduce
 
 import app.actions
 import app.utils.files
+import app.views.v1.misc
 import app.views.v2.scan_results
 import config
 from loguru import logger
@@ -78,8 +79,7 @@ class TestSuiteAPIDataRetrieval:
 
     def test_endpoint_history(self, freezer):
         self.setup_environment(freezer)
-        history = self.client.get(url_for("apiV1.api_scan_result_history_without_certs"))
-        # history = app.views.v1.misc.api_scan_result_history_without_certs(1)
+        history = app.views.v1.misc.api_scan_result_history_without_certs(1)
         self.assert_json_response(history, list, "tmp/api_history_v1.json")
 
     def test_endpoint_chains(self, freezer):
