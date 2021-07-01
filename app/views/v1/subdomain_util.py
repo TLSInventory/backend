@@ -89,7 +89,7 @@ def add_subdomains(target_id: int, user_id: int, data=None) -> Tuple[str, int, i
 @bp.route("/api_add_subdomains/<int:target_id>", methods=["POST", "DELETE"])
 @flask_jwt_extended.jwt_required
 def api_add_subdomains(target_id: int):
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
     data = json.loads(request.data)
 
     return add_subdomains(target_id, user_id, data)

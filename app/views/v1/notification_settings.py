@@ -25,7 +25,7 @@ from app.utils.time_helper import time_source, datetime_to_timestamp
 @bp.route("/slack/begin_auth", methods=["GET"])
 @flask_jwt_extended.jwt_required
 def slack_url_to_oauth():
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     db_code = randomCodes.create_and_save_random_code(activity=randomCodes.ActivityType.SLACK,
                                                       user_id=user_id,
@@ -42,7 +42,7 @@ def slack_url_to_oauth():
 @flask_jwt_extended.jwt_required
 def api_notification_settings_raw(user_id=None, target_id=None):
     if user_id is None:
-        user_id = authentication_utils.get_user_id_from_current_jwt()
+        user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     if target_id is not None and not actions.can_user_get_target_definition_by_id(target_id, user_id):
         return "Target either doesn't exist or user is not allowed to see it.", 401
@@ -66,7 +66,7 @@ def api_notification_settings_raw(user_id=None, target_id=None):
 @flask_jwt_extended.jwt_required
 def api_set_notification_settings_raw(user_id: Optional[int] = None, target_id: Optional[int] = None):
     if user_id is None:
-        user_id = authentication_utils.get_user_id_from_current_jwt()
+        user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     if target_id is not None and not actions.can_user_get_target_definition_by_id(target_id, user_id):
         return "Target either doesn't exist or user is not allowed to see it.", 401
@@ -85,7 +85,7 @@ def api_set_notification_settings_raw(user_id: Optional[int] = None, target_id: 
 @flask_jwt_extended.jwt_required
 def api_notification_settings(user_id=None, target_id=None):
     if user_id is None:
-        user_id = authentication_utils.get_user_id_from_current_jwt()
+        user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     if target_id is not None and not actions.can_user_get_target_definition_by_id(target_id, user_id):
         return "Target either doesn't exist or user is not allowed to see it.", 401
@@ -101,7 +101,7 @@ def api_notification_settings(user_id=None, target_id=None):
 @flask_jwt_extended.jwt_required
 def api_active_notification_settings(user_id=None, target_id=None):
     if user_id is None:
-        user_id = authentication_utils.get_user_id_from_current_jwt()
+        user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     if target_id is not None and not actions.can_user_get_target_definition_by_id(target_id, user_id):
         return "Target either doesn't exist or user is not allowed to see it.", 401
@@ -113,7 +113,7 @@ def api_active_notification_settings(user_id=None, target_id=None):
 @bp.route('/channel_connection/<string:channel_name>/<string:channel_id>', methods=['DELETE'])
 @flask_jwt_extended.jwt_required
 def api_channel_connection_delete(channel_name: str, channel_id: int):
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
     try:
         channel_db_model = CONNECTION_DB_MODELS_TYPES[channel_name]
     except KeyError:
@@ -135,7 +135,7 @@ def api_channel_connection_delete(channel_name: str, channel_id: int):
 @bp.route('/send_validation_email', methods=['POST'])
 @flask_jwt_extended.jwt_required
 def api_resend_validation_email():
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
     REQUEST_ERROR_MSG = "Request failed. Possible reasons:\n" \
                    "- Validation email to this email address was send less then 1 minute ago.\n"\
                    "- User did not register this email address, so there is nothing to validate.\n"

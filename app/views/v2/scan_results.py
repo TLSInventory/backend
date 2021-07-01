@@ -35,7 +35,7 @@ def get_user_targets_only(user_id: int) -> dict:
 @bp.route('/history/scans_timeline/<int:x_days>', methods=['GET'])
 def api_scan_result_history_without_certs(user_id=None, x_days=30):
     if user_id is None:
-        user_id = authentication_utils.get_user_id_from_current_jwt()
+        user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     res = actions.get_scan_history(user_id, x_days)
 
@@ -64,7 +64,7 @@ def api_scan_result_history_without_certs(user_id=None, x_days=30):
 @bp.route('/history/scan_results_simplified/<int:x_days>', methods=['GET'])
 def api_get_users_scan_results_simplified(user_id=None, x_days=30):
     if user_id is None:
-        user_id = authentication_utils.get_user_id_from_current_jwt()
+        user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     res = actions.get_scan_history(user_id, x_days)
 
@@ -82,7 +82,7 @@ def api_get_users_scan_results_simplified(user_id=None, x_days=30):
 @bp.route('/history/certificate_chains/<int:x_days>', methods=['GET'])
 def api_get_users_certificate_chains(user_id=None, x_days=30):
     if user_id is None:
-        user_id = authentication_utils.get_user_id_from_current_jwt()
+        user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     res = actions.get_certificate_chains(user_id, x_days)
     res_dicts: List[dict] = db_schemas.CertificateChainSchemaWithoutCertificates().dump(res, many=True)
@@ -94,7 +94,7 @@ def api_get_users_certificate_chains(user_id=None, x_days=30):
 @bp.route('/history/certificates/<int:x_days>', methods=['GET'])
 def api_get_users_certificates(user_id=None, x_days=30):
     if user_id is None:
-        user_id = authentication_utils.get_user_id_from_current_jwt()
+        user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     # logger.debug("Start getting certificate chains")
     res_chains = actions.get_certificate_chains(user_id, x_days)
@@ -144,7 +144,7 @@ def convert_scan_results_to_v1(a, b, c, d, e) -> List[dict]:
 @bp.route('/history/scan_results/<int:x_days>', methods=['GET'])
 def api_scan_results_history_v2(user_id=None, x_days=30):
     if user_id is None:
-        user_id = authentication_utils.get_user_id_from_current_jwt()
+        user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     logger.debug("before API requests")
     a = api_scan_result_history_without_certs(user_id, x_days).json

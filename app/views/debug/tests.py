@@ -12,5 +12,5 @@ def current_timestamp():
 @bp.route('/test_jwt', methods=['GET'])
 def jwt_inside_route(user_id=None):
     if user_id is None:
-        user_id = app.utils.authentication_utils.get_user_id_from_current_jwt()
+        user_id = app.utils.authentication_utils.get_user_id_from_jwt_or_exception()
     return str(user_id), 200

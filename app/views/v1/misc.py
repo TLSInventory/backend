@@ -48,7 +48,7 @@ def get_target_id(target_def=None):
     target = db_utils_advanced.generic_get_create_edit_from_data(db_schemas.TargetSchema, data, get_only=True)
     if not target:
         return "fail", 400
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     # validate that the user entered the target definition at least once. Protection against enumaration attack.
     if not actions.can_user_get_target_definition_by_id(target.id, user_id):
@@ -59,7 +59,7 @@ def get_target_id(target_def=None):
 @bp.route('/target/<int:target_id>', methods=['GET', 'DELETE'])
 @flask_jwt_extended.jwt_required
 def api_target_by_id(target_id: int):
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     target = actions.get_target_from_id_if_user_can_see(target_id, user_id)
     if target is None:
@@ -109,7 +109,7 @@ def additional_channel_email_actions(email_pref: dict, user_id: int) -> bool:
 @bp.route('/target', methods=['PUT', 'PATCH'])
 @flask_jwt_extended.jwt_required
 def api_target():
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     data = json.loads(request.data)
     data["target"]["protocol"] = data.get("protocol", "HTTPS").replace("TlsWrappedProtocolEnum.",
@@ -145,7 +145,7 @@ def api_add_scan_order():
 @bp.route('/enable_target_scan/<int:target_id>', methods=['GET'])
 @flask_jwt_extended.jwt_required
 def api_enable_target_scan(target_id: int):
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     target = actions.get_target_from_id_if_user_can_see(target_id, user_id)
     if target is None:
@@ -165,7 +165,7 @@ def api_enable_target_scan(target_id: int):
 @bp.route('/get_user_targets')
 @flask_jwt_extended.jwt_required
 def api_get_user_targets():
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     # todo: the following search only looks at targets, which have scan result. This might be considered a bug. Fix?
 
@@ -229,7 +229,7 @@ def api_sslyze_scan_targets():
 @bp.route('/get_result_for_target/<int:target_id>', methods=['GET'])
 @flask_jwt_extended.jwt_required
 def api_get_result_for_target(target_id):
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     res_or_none = actions.get_last_scan_and_result(target_id, user_id)
     if res_or_none is None:
@@ -251,7 +251,7 @@ def api_get_result_for_target(target_id):
 @bp.route('/get_basic_cert_info_for_target/<int:target_id>', methods=['GET'])
 @flask_jwt_extended.jwt_required
 def api_get_basic_cert_info_for_target(target_id):
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     last_scan, scan_result = actions.get_last_scan_and_result(target_id, user_id)
     last_scan: db_models.LastScan
@@ -291,7 +291,7 @@ def api_scan_result_history_without_certs(user_id=None, x_days=30):
 
 def api_scan_result_history_choose_schema(user_id=None, x_days=30, schema_simplified=None):
     if user_id is None:
-        user_id = authentication_utils.get_user_id_from_current_jwt()
+        user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     res = actions.get_scan_history(user_id, x_days)
 
@@ -354,7 +354,7 @@ def slack_oauth_callback():
 
     user_id = None
     if SlackConfig.check_refresh_cookie_on_callback_endpoint:
-        user_id = authentication_utils.get_user_id_from_current_jwt()
+        user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     auth_code = request.args['code']
     db_code = request.args['state']
