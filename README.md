@@ -7,14 +7,15 @@
 
 We aim to provide self-hosted tool that would allow for monitoring of (sub)domains for HTTPS certificate expiration, changes in TLS settings and notify in case of any problems or even proactively several days ahead, if technically possible.
 
-#### Current status
+### Current status
 
 We hope to (in due time) make this tool a worthy rival to ssllabs and to services that monitor websites for TLS problems. However, we're not there yet. We will for example need to
 
 - rework the API (users with too many (sub)domains are getting unusably big API responses - they might even timeout)
-- solve a few potential circular dependency problems
+    - _Update: We've created v2 endpoints for the most problematic endpoints - scan history. The new endpoints return ~2-60x smaller raw responses, and we've also enabled compression in nginx, so that mostly solves the problem of size. The newly structured endpoints are at at least 25x faster for large datasets. And even the new v2 endpoint that we've made backwards compatible to v1 is at least 5x faster._
 - speed-up the import of scan results
 - improve the test coverage
+    - _Update: In the past 6 months we've added at least some tests for most critical components, with the notable exception of notifications. There is still more room for improvement - we will probably do more tests when we document the API for Swagger._
 - significantly improve the frontend (web interface) - we are currently presenting only a small fraction of the information that is being collected
 
 We currently don't recommend using this project as the sole tool used for monitoring. Though adding it to your suite of tools might be a worthy inclusion (if you don't have too many (sub)domains (see bug above)).
@@ -43,7 +44,7 @@ python3.7 -m pip install -r requirements.txt
 ```
 
 
-#### Development
+## Development
 
 For information about development practices see file [Development.md](Development.md)
 
