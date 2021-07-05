@@ -88,5 +88,14 @@ class TestSubdomainSuite:
         api_add_subdomains(1)
 
         res_list = api_list_domain_monitoring()
-        logger.debug(res_list.json)
-        assert len(res_list.data)
+        assert len(res_list.json)
+
+    def test_remove_subdomain_monitoring(self):
+        self.do_authentication(AuthTestSuiteConfig.register_data1)
+        self.add_target(self.target_add_data(hostname="borysek.net"))
+        api_add_subdomains(1)
+        api_remove_subdomain_monitoring(1)
+
+        res_list = api_list_domain_monitoring()
+        assert len(res_list.json) == 0
+

@@ -88,13 +88,41 @@ def add_subdomains(target_id: int, user_id: int, data=None) -> Tuple[str, int, i
     return f"Successfully added {len(subdomain_ids)} subdomains", len(subdomain_ids), 200
 
 
-@bp.route("/subdomain_monitoring/add/<int:target_id>", methods=["POST", "DELETE"])
+def remove_subdomain_monitoring(target_id: int, user_id: int) -> Tuple[str, int, int]:
+    target = actions.get_target_from_id_if_user_can_see(target_id, user_id)
+
+    if target is None:
+        return "You do not have permission to track this target.", 0, 400
+
+    existing_subdomain_rescan_targets = db_models.db.session. \
+        query(db_models.SubdomainRescanTarget). \
+        filter(db_models.SubdomainRescanTarget.subdomain_scan_target_id == target_id). \
+        filter(db_models.SubdomainRescanTarget.subdomain_scan_user_id == user_id). \
+        all()
+
+    for x in existing_subdomain_rescan_targets:
+        db_models.db.session.delete(x)
+    db_models.db.session.commit()
+
+    if existing_subdomain_rescan_targets:
+        return f"Nothing to remove", 0, 200
+    return f"Removed monitoring for a domain", 1, 200
+
+
+@bp.route("/subdomain_monitoring/<int:target_id>", methods=["POST"])
 @flask_jwt_extended.jwt_required
 def api_add_subdomains(target_id: int):
     user_id = authentication_utils.get_user_id_from_jwt_or_exception()
     data = json.loads(request.data)
 
     return add_subdomains(target_id, user_id, data)
+
+
+@bp.route("/subdomain_monitoring/<int:target_id>", methods=["DELETE"])
+@flask_jwt_extended.jwt_required
+def api_remove_subdomain_monitoring(target_id: int):
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
+    return remove_subdomain_monitoring(target_id, user_id)
 
 
 def get_tracked_subdomains_by_hostname(
