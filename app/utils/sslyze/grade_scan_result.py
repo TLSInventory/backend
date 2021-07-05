@@ -6,7 +6,8 @@ from enum import Enum
 
 
 # The following grades are named correspondingly to defacto industry standard - SSLLabs
-# However the same configuration might not warrant same grade letter, the rules for determining it are not exactly same.
+# However the same configuration might not warrant same grade letter
+# because the rules for determining it are not exactly same.
 # https://github.com/ssllabs/research/wiki/SSL-Labs-Assessment-Policy-v2017
 class Grades(Enum):
     A_plus = 1
@@ -72,6 +73,9 @@ class GradeResult(object):
         self.calculate_renegotiation()
         self.calculate_headers()
 
+        # recieved_chain_list - info o certifikatoch
+        # zaujima ma hlavne leaf_certificate
+
     def get_result(self) -> Tuple[str, List[str]]:
         self._calculate()
         return self.grade_cap.name, self.grade_cap_reasons
@@ -103,7 +107,7 @@ class GradeResult(object):
         if self.scan_result.tlsv1:
             self._format_msg_and_cap(Grades.C, "supports TLS 1.0")  # marked as problem at ssl labs
         if self.scan_result.tlsv11:
-            self._format_msg_and_cap(Grades.B, "supports TLS 1.1")
+            self._format_msg_and_cap(Grades.C, "supports TLS 1.1")
         if self.scan_result.tlsv12:
             self._format_msg_and_cap(Grades.A, "supports TLS 1.2")
         if self.scan_result.tlsv13:
@@ -114,7 +118,7 @@ class GradeResult(object):
 
     def calculate_headers(self):
         sec_header: db_models.HTTPSecurityHeaders = self.scan_result.http_security_headers
-        certificate: db_models.Certificate = None
+        # certificate: db_models.Certificate = None
 
         if sec_header.strict_transport_security_header and \
                 sec_header.public_key_pins_header:
@@ -149,9 +153,9 @@ class GradeResult(object):
             self._format_msg_and_cap(Grades.B, "TLS 1.0 working ciphers")
         if self.partial_simplified.tlsv11_working_ciphers_count:
             self._format_msg_and_cap(Grades.B, "TLS 1.1 working ciphers")
-        # Ask here
+        # TODO
         if self.partial_simplified.tlsv11_working_weak_ciphers_count == 0:
             self._format_msg_and_cap(Grades.A, "doesn't support TLS 1.3")
-        if (self.partial_simplified.tlsv13_working_weak_ciphers_count == 0
-                and self.partial_simplified.tlsv12_working_weak_ciphers_count == 0):
+        if self.partial_simplified.tlsv13_working_weak_ciphers_count == 0 and \
+                self.partial_simplified.tlsv12_working_weak_ciphers_count == 0:
             self._format_msg_and_cap(Grades.B, "doesn't support either TLS 1.2 or TLS 1.3")
