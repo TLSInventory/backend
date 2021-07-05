@@ -72,14 +72,11 @@ class GradeResult(object):
         self.calculate_cipher_strength()
         self.calculate_renegotiation()
         self.calculate_headers()
-
-        # recieved_chain_list - info o certifikatoch
-        # zaujima ma hlavne leaf_certificate
+        self.calculate_vulnerabilities()
 
     def get_result(self) -> Tuple[str, List[str]]:
         self._calculate()
         return self.grade_cap.name, self.grade_cap_reasons
-
 
     def calculate_certificate(self):
         certificate = self.scan_result.certificate_information
@@ -97,7 +94,6 @@ class GradeResult(object):
             self._format_msg_and_cap(Grades.B, "invalid chain order")  # ask for severity
         if certificate.ocsp_response_is_trusted:
             self._format_msg_and_cap(Grades.A_plus, "OCSP trusted")
-
 
     def calculate_protocol(self):
         if self.scan_result.sslv2:
@@ -153,9 +149,21 @@ class GradeResult(object):
             self._format_msg_and_cap(Grades.B, "TLS 1.0 working ciphers")
         if self.partial_simplified.tlsv11_working_ciphers_count:
             self._format_msg_and_cap(Grades.B, "TLS 1.1 working ciphers")
-        # TODO
-        if self.partial_simplified.tlsv11_working_weak_ciphers_count == 0:
-            self._format_msg_and_cap(Grades.A, "doesn't support TLS 1.3")
-        if self.partial_simplified.tlsv13_working_weak_ciphers_count == 0 and \
-                self.partial_simplified.tlsv12_working_weak_ciphers_count == 0:
-            self._format_msg_and_cap(Grades.B, "doesn't support either TLS 1.2 or TLS 1.3")
+        if self.partial_simplified.tlsv11_working_weak_ciphers_count != 0:
+            self._format_msg_and_cap(Grades.C, "TLS 1.1 with weak ciphers")
+        if self.partial_simplified.tlsv12_working_weak_ciphers_count != 0:
+            self._format_msg_and_cap(Grades.C, "TLS 1.2 with weak ciphers")
+        if self.partial_simplified.tlsv13_working_weak_ciphers_count != 0:
+            self._format_msg_and_cap(Grades.C, "TLS 1.3 with weak ciphers")
+
+    def calculate_vulnerabilities(self):
+        if self.scan_result.openssl_ccs_injection.is_vulnerable_to_ccs_injection:
+            self._format_msg_and_cap(Grades.F, "Vulnerable to CSS injection")
+        if self.scan_result.openssl_heartbleed.is_vulnerable_to_heartbleed:
+            self._format_msg_and_cap(Grades.F, "Vulnerable to heartbleed")
+        if self.scan_result.downgrade_attacks.supports_fallback_scsv:
+            self._format_msg_and_cap(Grades.F, "Vulnerable to downgrade attacks")
+        if self.scan_result.robot_attack.robot_result_enum:
+            pass
+            # self._format_msg_and_cap(Grades.F, "Vulnerable to robot attacks")
+
