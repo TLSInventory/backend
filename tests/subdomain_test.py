@@ -82,3 +82,11 @@ class TestSubdomainSuite:
         res = rescan_subdomains()
         assert res == 0
 
+    def test_list_rescan_subdomain_orders(self):
+        self.do_authentication(AuthTestSuiteConfig.register_data1)
+        self.add_target(self.target_add_data(hostname="borysek.net"))
+        api_add_subdomains(1)
+
+        res_list = api_list_domain_monitoring()
+        logger.debug(res_list.json)
+        assert len(res_list.data)

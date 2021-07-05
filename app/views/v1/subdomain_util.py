@@ -1,10 +1,12 @@
-from typing import Set, Tuple
+from typing import Set, Tuple, Optional
 
 import json
 
+from flask import jsonify
 import flask_jwt_extended
 from flask import request, url_for
 
+import app.db_schemas as db_schemas
 import app.utils.authentication_utils as authentication_utils
 import app.actions as actions
 import app.db_models as db_models
@@ -20,8 +22,8 @@ import config
 from loguru import logger
 
 
-@bp.route("/rescan_subdomains", methods=["GET"])  # is ok?
-@bp.route('/rescan_subdomains/<string:sensor_key>', methods=['GET'])
+@bp.route("/subdomain_monitoring/rescan", methods=["GET"])  # is ok?
+@bp.route('/subdomain_monitoring/rescan/<string:sensor_key>', methods=['GET'])
 def api_cron_rescan_subdomains(sensor_key: str) -> None:
     # currently using sensor key - should be ok, ask Ondra
     # maybe good idea to pull local auth somewhere else
@@ -86,7 +88,7 @@ def add_subdomains(target_id: int, user_id: int, data=None) -> Tuple[str, int, i
     return f"Successfully added {len(subdomain_ids)} subdomains", len(subdomain_ids), 200
 
 
-@bp.route("/api_add_subdomains/<int:target_id>", methods=["POST", "DELETE"])
+@bp.route("/subdomain_monitoring/add/<int:target_id>", methods=["POST", "DELETE"])
 @flask_jwt_extended.jwt_required
 def api_add_subdomains(target_id: int):
     user_id = authentication_utils.get_user_id_from_jwt_or_exception()
@@ -128,3 +130,16 @@ def get_dummy_target_data(hostname: str):
         },
     }
     return dummy_data
+
+
+@bp.route("/subdomain_monitoring/list", methods=["GET"])
+@flask_jwt_extended.jwt_required
+def api_list_domain_monitoring(user_id: Optional[int] = None):
+    if user_id is None:
+        user_id = authentication_utils.get_user_id_from_jwt_or_exception()
+
+    res = db_models.db.session.query(db_models.SubdomainRescanTarget).\
+        filter(db_models.SubdomainRescanTarget.subdomain_scan_user_id == user_id).all()
+
+    res_dict = db_schemas.SubdomainRescanTargetSchema().dump(res, many=True)
+    return jsonify(res_dict)

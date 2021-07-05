@@ -385,7 +385,7 @@ class SubdomainRescanTargetSchema(SQLAlchemyAutoSchema):
     class Meta(BaseSchema.Meta):
         model = db_models.SubdomainRescanTarget
 
-        exclude = ()
+        exclude = ("subdomain_scan_user_id", )
         include_relationships = False
         include_fk = True
 
