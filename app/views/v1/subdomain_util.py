@@ -57,11 +57,11 @@ def rescan_subdomains() -> int:
     return len(targets_to_rescan)  # for testing
 
 
-def add_subdomains(target_id: int, user_id: int, data=None) -> Tuple[str, int, int]:
+def add_subdomains(target_id: int, user_id: int, data: dict = None) -> Tuple[str, int]:
     target = actions.get_target_from_id_if_user_can_see(target_id, user_id)
 
     if target is None:
-        return "You do not have permission to track this target.", 0, 400
+        return "You do not have permission to track this target.", 400
 
     if data is None:  # dummy data for searching and enqueuing new subdomains
         data = get_dummy_target_data(target.hostname)
@@ -85,14 +85,14 @@ def add_subdomains(target_id: int, user_id: int, data=None) -> Tuple[str, int, i
     subdomains = subdomain_lookup(target, user_id)
     subdomain_ids = add_targets(list(subdomains), user_id, data)
 
-    return f"Successfully added {len(subdomain_ids)} subdomains", len(subdomain_ids), 200
+    return f"Successfully added {len(subdomain_ids)} subdomains", 200
 
 
-def remove_subdomain_monitoring(target_id: int, user_id: int) -> Tuple[str, int, int]:
+def remove_subdomain_monitoring(target_id: int, user_id: int) -> Tuple[str, int]:
     target = actions.get_target_from_id_if_user_can_see(target_id, user_id)
 
     if target is None:
-        return "You do not have permission to track this target.", 0, 400
+        return "You do not have permission to track this target.", 400
 
     existing_subdomain_rescan_targets = db_models.db.session. \
         query(db_models.SubdomainRescanTarget). \
@@ -105,15 +105,15 @@ def remove_subdomain_monitoring(target_id: int, user_id: int) -> Tuple[str, int,
     db_models.db.session.commit()
 
     if existing_subdomain_rescan_targets:
-        return f"Nothing to remove", 0, 200
-    return f"Removed monitoring for a domain", 1, 200
+        return f"Removed monitoring for a domain", 200
+    return f"Nothing to remove", 200
 
 
 @bp.route("/subdomain_monitoring/<int:target_id>", methods=["POST"])
 @flask_jwt_extended.jwt_required
 def api_add_subdomains(target_id: int):
     user_id = authentication_utils.get_user_id_from_jwt_or_exception()
-    data = json.loads(request.data)
+    data = request.json
 
     return add_subdomains(target_id, user_id, data)
 
