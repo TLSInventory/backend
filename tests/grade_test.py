@@ -13,6 +13,10 @@ config.TestConfig.force_create_tmp_db = False
 @pytest.mark.usefixtures("client_class")
 class TestSuiteScanScheduler:
 
+    @classmethod
+    def teardown_class(cls):
+        config.TestConfig.force_database_connection_string = None
+
     def test_grading(self):
 
         print(f"db_path: {config.FlaskConfig.SQLALCHEMY_DATABASE_URI}")
@@ -41,5 +45,3 @@ class TestSuiteScanScheduler:
             print(f"grade: {grade_name}")
             # chain list obsahuje IDcka certifikatov, ktore si mozem nasplitovat
 
-
-config.TestConfig.force_database_connection_string = None
