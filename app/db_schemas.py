@@ -5,7 +5,7 @@ from marshmallow_enum import EnumField
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, SQLAlchemySchema, auto_field
 from marshmallow_sqlalchemy.fields import Nested
 import sslyze.ssl_settings
-from typing import List, Type, Dict
+from typing import List, Type, Dict, Optional
 
 import app.db_models as db_models
 import app.utils.db.basic
@@ -345,11 +345,15 @@ class ScanResultsSimplifiedWithoutCertsSchema(SQLAlchemyAutoSchema):
     verified_certificate_chains_lists_ids_arr = fields.Method("chains_to_proper_arr", dump_only=True)
 
     @staticmethod
-    def chains_to_proper_arr(obj):
+    def chains_to_proper_arr(obj) -> tuple:
+        if obj is None:
+            return ()
         return app.utils.db.basic.split_array_to_tuple(obj.verified_certificate_chains_lists_ids)
 
     @staticmethod
-    def fake_id(obj):
+    def fake_id(obj) -> Optional[int]:
+        if obj is None:
+            return None
         return obj.scanresult_id
 
 
