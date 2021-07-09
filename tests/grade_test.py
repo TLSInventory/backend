@@ -25,7 +25,8 @@ class TestSuiteScanScheduler:
 
         scan_results_simplified = db_models.db.session.query(
             db_models.ScanResultsSimplified
-        ).limit(10000).all()
+        ).all()
+            #.limit(10000).all()
 
         for scan_result_simplified in scan_results_simplified:
             scan_result = (
@@ -41,6 +42,7 @@ class TestSuiteScanScheduler:
             grades[grade_name] = grades.get(grade_name, 0) + 1
             for reason in reason_:
                 reasons[reason] = reasons.get(reason, 0) + 1
-            # chain list obsahuje IDcka certifikatov, ktore si mozem nasplitovat
         print(f"summary: {grades}")
-        print(f"reasons: {reasons}")
+        print("reasons")
+        for reason in reasons:
+            print(f"{reason}: {reasons[reason]}")
