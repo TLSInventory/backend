@@ -77,10 +77,16 @@ class TestSuiteAPIDataRetrieval:
         login_direct(self.client)
         access_cookie_direct(self.client)
 
-    def test_endpoint_history(self, freezer):
+    @pytest.mark.skip("This is the original API v1 history endpoint, but it's EXTREMELY slow. Initially I've made it 2x quicker, but it was still really slow. Therefore v2 was created and this is no longer used.")
+    def test_endpoint_history_with_certs(self, freezer):
+        self.setup_environment(freezer)
+        history = app.views.v1.misc.api_scan_result_history_with_certs(1)
+        self.assert_json_response(history, list, "tmp/api_history_v1_with_certs.json")
+
+    def test_endpoint_history_without_certs(self, freezer):
         self.setup_environment(freezer)
         history = app.views.v1.misc.api_scan_result_history_without_certs(1)
-        self.assert_json_response(history, list, "tmp/api_history_v1.json")
+        self.assert_json_response(history, list, "tmp/api_history_v1_without_certs.json")
 
     def test_endpoint_chains(self, freezer):
         self.setup_environment(freezer)
