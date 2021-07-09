@@ -5,9 +5,10 @@ import app.db_models as db_models
 from app.utils.sslyze.grade_scan_result import grade_scan_result, Grades
 
 # change default db
-config.TestConfig.force_database_connection_string = "test_db_sanitized.db"
+#config.TestConfig.force_database_connection_string = "test_db_sanitized.db"
 config.TestConfig.force_create_tmp_db = False
-# config.TestConfig.force_database_connection_string = "/Users/Mamo/Downloads/DBs-sanitized/2020-09-xx-benchmark-24-hours.db"
+config.TestConfig.force_database_connection_string = "/Users/Mamo/Downloads/DB/2021-06-22-production-sanitized.db"
+#config.TestConfig.force_database_connection_string = "/Users/Mamo/Downloads/DB/2020-09-xx-benchmark-24-hours.db"
 
 
 @pytest.mark.usefixtures("client_class")
@@ -19,29 +20,27 @@ class TestSuiteScanScheduler:
 
     def test_grading(self):
 
-        print(f"db_path: {config.FlaskConfig.SQLALCHEMY_DATABASE_URI}")
+        grades = {}
+        reasons = {}
 
         scan_results_simplified = db_models.db.session.query(
             db_models.ScanResultsSimplified
-        ).all()
-
-        tmp = db_models.db.session.query(db_models.Target).all()
-
-        print(f"tmp: {tmp}")
-
-        print(f"srs: {scan_results_simplified}")
+        ).limit(10000).all()
 
         for scan_result_simplified in scan_results_simplified:
             scan_result = (
                 db_models.db.session.query(db_models.ScanResults)
                 .filter(
-                    db_models.ScanResultsSimplified.scanresult_id
+                    db_models.ScanResults.id
                     == scan_result_simplified.scanresult_id
                 )
                 .all()
             )
             assert len(scan_result) == 1
-            grade_name, reason = grade_scan_result(scan_result[0], scan_result_simplified)
-            print(f"grade: {grade_name}")
+            grade_name, reason_ = grade_scan_result(scan_result[0], scan_result_simplified)
+            grades[grade_name] = grades.get(grade_name, 0) + 1
+            for reason in reason_:
+                reasons[reason] = reasons.get(reason, 0) + 1
             # chain list obsahuje IDcka certifikatov, ktore si mozem nasplitovat
-
+        print(f"summary: {grades}")
+        print(f"reasons: {reasons}")
