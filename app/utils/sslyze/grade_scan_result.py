@@ -9,6 +9,7 @@ from enum import Enum
 # However the same configuration might not warrant same grade letter
 # because the rules for determining it are not exactly same.
 # https://github.com/ssllabs/research/wiki/SSL-Labs-Assessment-Policy-v2017
+
 class Grades(Enum):
     A_plus = 1
     A = 2
@@ -20,15 +21,6 @@ class Grades(Enum):
     T = 8  # Not publicly trusted
     M = 9  # Not valid certificate.
     Some_scan_failed = 10
-
-class Thresholds:
-    A_plus = 90
-    A = 80
-    B = 65
-    C = 50
-    D = 35
-    E = 20
-    F = 0
 
 
 def grade_scan_result(
