@@ -1,14 +1,17 @@
+from loguru import logger
 from marshmallow import fields, EXCLUDE
 from marshmallow.fields import Pluck
 from marshmallow_enum import EnumField
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, SQLAlchemySchema, auto_field
 from marshmallow_sqlalchemy.fields import Nested
 import sslyze.ssl_settings
+from typing import List, Type, Dict
 
 import app.db_models as db_models
+import app.utils.db.basic
 
 
-def get_array_reschemed(model_cls, schema_cls, ids: str, many: bool = True):
+def get_array_reschemed(model_cls: Type[db_models.UniqueModel], schema_cls, ids: str, many: bool = True) -> dict:
     schema = schema_cls(many=many)
     json_dict = schema.dump(model_cls.select_from_list(ids))
     return json_dict
@@ -60,6 +63,9 @@ class TrustStoreSchema(SQLAlchemyAutoSchema):
 class CertificateSchema(SQLAlchemyAutoSchema):
     class Meta(BaseSchema.Meta):
         model = db_models.Certificate
+        exclude = ()
+
+    id = auto_field(dump_only=True)
 
 
 class ServerInfoSchema(SQLAlchemyAutoSchema):
@@ -68,6 +74,13 @@ class ServerInfoSchema(SQLAlchemyAutoSchema):
         include_relationships = True
 
     openssl_cipher_string_supported = Nested(CipherSuiteSchema)
+
+
+class ServerInfoSchemaWithoutCiphers(SQLAlchemyAutoSchema):
+    class Meta(BaseSchema.Meta):
+        model = db_models.ServerInfo
+        include_relationships = True
+        exclude = ("openssl_cipher_string_supported", "id", )
 
 
 class RejectedCipherHandshakeErrorMessageSchema(SQLAlchemyAutoSchema):
@@ -152,6 +165,20 @@ class CertificateChainSchema(SQLAlchemyAutoSchema):
     @staticmethod
     def get_chain(obj):
         return get_array_reschemed(db_models.Certificate, CertificateSchema, obj.chain)
+
+
+class CertificateChainSchemaWithoutCertificates(SQLAlchemyAutoSchema):
+    class Meta(BaseSchema.Meta):
+        model = db_models.CertificateChain
+        exclude = ()
+
+    id = auto_field(dump_only=True)
+
+    chain_arr = fields.Method("chain_to_propper_arr", dump_only=True)
+
+    @staticmethod
+    def chain_to_propper_arr(obj):
+        return app.utils.db.basic.split_array_to_tuple(obj.chain)
 
 
 class HTTPSecurityHeadersSchema(SQLAlchemyAutoSchema):
@@ -307,6 +334,25 @@ class ScanResultsSimplifiedSchema(SQLAlchemyAutoSchema):
                                    obj.verified_certificate_chains_lists_ids)
 
 
+class ScanResultsSimplifiedWithoutCertsSchema(SQLAlchemyAutoSchema):
+    class Meta(BaseSchema.Meta):
+        model = db_models.ScanResultsSimplified
+        include_relationships = False
+        include_fk = True
+        exclude = ()
+
+    id = fields.Method("fake_id", dump_only=True)
+    verified_certificate_chains_lists_ids_arr = fields.Method("chains_to_proper_arr", dump_only=True)
+
+    @staticmethod
+    def chains_to_proper_arr(obj):
+        return app.utils.db.basic.split_array_to_tuple(obj.verified_certificate_chains_lists_ids)
+
+    @staticmethod
+    def fake_id(obj):
+        return obj.scanresult_id
+
+
 class SlackConnectionsSchema(SQLAlchemyAutoSchema):
     class Meta(BaseSchema.Meta):
         model = db_models.SlackConnections
@@ -339,7 +385,18 @@ class SubdomainRescanTargetSchema(SQLAlchemyAutoSchema):
     class Meta(BaseSchema.Meta):
         model = db_models.SubdomainRescanTarget
 
-        exclude = ()
+        exclude = ("subdomain_scan_user_id", )
         include_relationships = False
         include_fk = True
 
+
+def convert_arr_of_dicts_to_dict_of_dicts(arr_of_dicts: List[dict]) -> Dict[int, dict]:
+    dict_of_dict = {}
+    for x in arr_of_dicts:
+        try:
+            if x:
+                dict_of_dict[x["id"]] = x
+        except Exception as e:
+            logger.error(f"Existing object doesn't have id? | {e} | {x}")
+            raise
+    return dict_of_dict

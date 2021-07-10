@@ -1,10 +1,12 @@
-from typing import Set, Tuple
+from typing import Set, Tuple, Optional
 
 import json
 
+from flask import jsonify
 import flask_jwt_extended
 from flask import request, url_for
 
+import app.db_schemas as db_schemas
 import app.utils.authentication_utils as authentication_utils
 import app.actions as actions
 import app.db_models as db_models
@@ -20,8 +22,8 @@ import config
 from loguru import logger
 
 
-@bp.route("/rescan_subdomains", methods=["GET"])  # is ok?
-@bp.route('/rescan_subdomains/<string:sensor_key>', methods=['GET'])
+@bp.route("/subdomain_monitoring/rescan", methods=["GET"])  # is ok?
+@bp.route('/subdomain_monitoring/rescan/<string:sensor_key>', methods=['GET'])
 def api_cron_rescan_subdomains(sensor_key: str) -> None:
     # currently using sensor key - should be ok, ask Ondra
     # maybe good idea to pull local auth somewhere else
@@ -55,11 +57,11 @@ def rescan_subdomains() -> int:
     return len(targets_to_rescan)  # for testing
 
 
-def add_subdomains(target_id: int, user_id: int, data=None) -> Tuple[str, int, int]:
+def add_subdomains(target_id: int, user_id: int, data: dict = None) -> Tuple[str, int]:
     target = actions.get_target_from_id_if_user_can_see(target_id, user_id)
 
     if target is None:
-        return "You do not have permission to track this target.", 0, 400
+        return "You do not have permission to track this target.", 400
 
     if data is None:  # dummy data for searching and enqueuing new subdomains
         data = get_dummy_target_data(target.hostname)
@@ -83,16 +85,44 @@ def add_subdomains(target_id: int, user_id: int, data=None) -> Tuple[str, int, i
     subdomains = subdomain_lookup(target, user_id)
     subdomain_ids = add_targets(list(subdomains), user_id, data)
 
-    return f"Successfully added {len(subdomain_ids)} subdomains", len(subdomain_ids), 200
+    return f"Successfully added {len(subdomain_ids)} subdomains", 200
 
 
-@bp.route("/api_add_subdomains/<int:target_id>", methods=["POST", "DELETE"])
+def remove_subdomain_monitoring(target_id: int, user_id: int) -> Tuple[str, int]:
+    target = actions.get_target_from_id_if_user_can_see(target_id, user_id)
+
+    if target is None:
+        return "You do not have permission to track this target.", 400
+
+    existing_subdomain_rescan_targets = db_models.db.session. \
+        query(db_models.SubdomainRescanTarget). \
+        filter(db_models.SubdomainRescanTarget.subdomain_scan_target_id == target_id). \
+        filter(db_models.SubdomainRescanTarget.subdomain_scan_user_id == user_id). \
+        all()
+
+    for x in existing_subdomain_rescan_targets:
+        db_models.db.session.delete(x)
+    db_models.db.session.commit()
+
+    if existing_subdomain_rescan_targets:
+        return f"Removed monitoring for a domain", 200
+    return f"Nothing to remove", 200
+
+
+@bp.route("/subdomain_monitoring/<int:target_id>", methods=["POST"])
 @flask_jwt_extended.jwt_required
 def api_add_subdomains(target_id: int):
-    user_id = authentication_utils.get_user_id_from_current_jwt()
-    data = json.loads(request.data)
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
+    data = request.json
 
     return add_subdomains(target_id, user_id, data)
+
+
+@bp.route("/subdomain_monitoring/<int:target_id>", methods=["DELETE"])
+@flask_jwt_extended.jwt_required
+def api_remove_subdomain_monitoring(target_id: int):
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
+    return remove_subdomain_monitoring(target_id, user_id)
 
 
 def get_tracked_subdomains_by_hostname(
@@ -128,3 +158,16 @@ def get_dummy_target_data(hostname: str):
         },
     }
     return dummy_data
+
+
+@bp.route("/subdomain_monitoring/list", methods=["GET"])
+@flask_jwt_extended.jwt_required
+def api_list_domain_monitoring(user_id: Optional[int] = None):
+    if user_id is None:
+        user_id = authentication_utils.get_user_id_from_jwt_or_exception()
+
+    res = db_models.db.session.query(db_models.SubdomainRescanTarget).\
+        filter(db_models.SubdomainRescanTarget.subdomain_scan_user_id == user_id).all()
+
+    res_dict = db_schemas.SubdomainRescanTargetSchema().dump(res, many=True)
+    return jsonify(res_dict)

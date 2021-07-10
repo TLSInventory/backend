@@ -35,18 +35,25 @@ def app(request):
     timestamp = int(datetime.datetime.now().timestamp())
     testname = request.node.name
 
-    # todo: maybe use in-memory DB
-    db_handle, db_filename = tempfile.mkstemp(prefix=f'tlsinventory_{timestamp}_{testname}_', suffix='.db')
-    # print(db_filename)
-    config.FlaskConfig.SQLALCHEMY_DATABASE_URI = 'sqlite:///' + db_filename
+    config.FlaskConfig.SQLALCHEMY_DATABASE_URI = 'sqlite:///' + ':memory:?cache=shared'
+
+    if config.TestConfig.force_database_connection_string:
+        config.FlaskConfig.SQLALCHEMY_DATABASE_URI = 'sqlite:///' + config.TestConfig.force_database_connection_string
+
+    if config.TestConfig.force_create_tmp_db:
+        db_handle, db_filename = tempfile.mkstemp(prefix=f'tlsinventory_{timestamp}_{testname}_', suffix='.db')
+        config.FlaskConfig.SQLALCHEMY_DATABASE_URI = 'sqlite:///' + db_filename
 
     app = app2.create_app(force_create_db=True)
+    app.config["JSONIFY_PRETTYPRINT_REGULAR"] = True
 
     yield app
 
-    os.close(db_handle)
+    delete_tmp_db = False
 
-    delete_tmp_db = True
+    if config.TestConfig.force_create_tmp_db:
+        os.close(db_handle)
+        delete_tmp_db = True
 
     # https://docs.pytest.org/en/latest/example/simple.html#making-test-result-information-available-in-fixtures
     if request.node.rep_setup.failed:
@@ -59,8 +66,6 @@ def app(request):
     if delete_tmp_db:
         os.unlink(db_filename)
 
-
-# todo: add fixture with registration, login and set_cookie
 
 @pytest.mark.usefixtures('client_class')
 class TestSuiteExample:

@@ -3,6 +3,9 @@ from typing import Optional
 import pytest
 from flask import url_for
 
+from config import TestConfig
+from tests.auth_test import AuthTestSuiteConfig
+
 from app.views.v1.subdomain_util import *
 
 
@@ -10,52 +13,13 @@ def pytest_configure():
     pytest.first_batch = 0
 
 
+@pytest.mark.skipif(TestConfig.local_only, reason="Adding subdomains would require connections to crt.sh")
 @pytest.mark.usefixtures('client_class')
 class TestSubdomainSuite:
 
-    def register_data1(self):
-        return {
-            'username': 'pls',
-            'password': 'addsubdomains',
-            'email': 'dolor@sit.amet'
-        }
-
-    def register_data2(self):
-        return {
-            'username': 'hello',
-            'password': 'there',
-            'email': 'general@kenobi.sw'
-        }
-
-    def register_data3(self):
-        return {
-            'username': 'm',
-            'password': 'k',
-            'email': 'm@k.com'
-        }
-
-    def register_data4(self):
-        return {
-            'username': 'abc',
-            'password': 'xyz',
-            'email': 'abc@xyz.com'
-        }
-
-    def register_data5(self):
-        return {
-            'username': 'xyz',
-            'password': 'abc',
-            'email': 'xyz@abc.com'
-        }
-
-    def login_data_from_register(self, registration_data: dict):
-        answer = registration_data.copy()
-        del answer['email']
-        return answer
-
-    def do_authentication(self, register_method):
-        assert self.client.post(url_for("apiV1.api_register"), json=register_method()).status_code == 200
-        assert self.client.post(url_for("apiV1.api_login"), json=self.login_data_from_register(register_method())).status_code == 200
+    def do_authentication(self, registration_data: dict):
+        assert self.client.post(url_for("apiV1.api_register"), json=registration_data).status_code == 200
+        assert self.client.post(url_for("apiV1.api_login"), json=AuthTestSuiteConfig.login_data_from_register(registration_data)).status_code == 200
         assert self.client.get(url_for("apiDebug.debugSetAccessCookie")).status_code == 200
 
     def target_add_data(self, hostname:str = "example.com", ip: Optional[str]=None):
@@ -72,7 +36,7 @@ class TestSubdomainSuite:
         return res
 
     def test_add_subdomains(self):
-        self.do_authentication(self.register_data1)
+        self.do_authentication(AuthTestSuiteConfig.register_data1)
         self.add_target(self.target_add_data())
         self.add_target(self.target_add_data(hostname="borysek.net"))  # for further testing, so I know the ID
         _, fb, res = api_add_subdomains(1)
@@ -80,14 +44,15 @@ class TestSubdomainSuite:
         pytest.first_batch = fb
 
     def test_same_subdomain_different_user(self):
-        self.do_authentication(self.register_data2)
+        self.test_add_subdomains()  # Each test runs isolated, unless explicitly invoked. I.e. testing different username on it's own doesn't make much sense, unless you also re-register the first user.
+        self.do_authentication(AuthTestSuiteConfig.register_data2)
         self.add_target(self.target_add_data())
         _, fb, res = api_add_subdomains(1)
         assert res == 200
         assert fb == pytest.first_batch
 
     def test_repeatedly_add_subdomains(self):
-        self.do_authentication(self.register_data3)
+        self.do_authentication(AuthTestSuiteConfig.register_data1)
         self.add_target(self.target_add_data())
         _, _, res = api_add_subdomains(1)
         assert res == 200
@@ -96,24 +61,41 @@ class TestSubdomainSuite:
         assert added == 0
 
     def test_add_untracked(self):
-        self.do_authentication(self.register_data4)
+        self.do_authentication(AuthTestSuiteConfig.register_data1)
         self.add_target(self.target_add_data()) # mandatory, else NoJWTException is raised, should be fixed
         _, _, res = api_add_subdomains(2)
         assert res == 400
 
     def test_rescan_subdomains_empty(self):
-        self.do_authentication(self.register_data5)
+        self.do_authentication(AuthTestSuiteConfig.register_data1)
         # self.add_target(self.target_add_data())
         # self.add_target(self.target_add_data(hostname="borysek.net"))
         res = rescan_subdomains()
         assert res == 0
 
     def test_rescan_subdomains(self):
-        self.do_authentication(self.register_data5)
+        self.do_authentication(AuthTestSuiteConfig.register_data1)
         self.add_target(self.target_add_data())
         self.add_target(self.target_add_data(hostname="borysek.net"))
         api_add_subdomains(1)
         api_add_subdomains(2)
         res = rescan_subdomains()
         assert res == 0
+
+    def test_list_rescan_subdomain_orders(self):
+        self.do_authentication(AuthTestSuiteConfig.register_data1)
+        self.add_target(self.target_add_data(hostname="borysek.net"))
+        api_add_subdomains(1)
+
+        res_list = api_list_domain_monitoring()
+        assert len(res_list.json)
+
+    def test_remove_subdomain_monitoring(self):
+        self.do_authentication(AuthTestSuiteConfig.register_data1)
+        self.add_target(self.target_add_data(hostname="borysek.net"))
+        api_add_subdomains(1)
+        api_remove_subdomain_monitoring(1)
+
+        res_list = api_list_domain_monitoring()
+        assert len(res_list.json) == 0
 

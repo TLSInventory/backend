@@ -40,13 +40,18 @@ def get_user_id_from_jwt(jwt) -> int:
     return jwt["id"]
 
 
-def get_user_id_from_current_jwt() -> Optional[int]:
+def try_to_get_user_id_from_current_jwt() -> Optional[int]:
     try:
-        user_jwt = flask_jwt_extended.get_jwt_identity()
-        user_id = get_user_id_from_jwt(user_jwt)
-        return user_id
+        return get_user_id_from_jwt_or_exception()
     except:
         return None
+
+
+def get_user_id_from_jwt_or_exception() -> int:
+    flask_jwt_extended.verify_jwt_in_request()  # This will throw exception if JWT is not valid.
+    user_jwt = flask_jwt_extended.get_jwt_identity()
+    user_id = get_user_id_from_jwt(user_jwt)
+    return user_id
 
 
 # based on explanation at https://stackoverflow.com/a/10724898/

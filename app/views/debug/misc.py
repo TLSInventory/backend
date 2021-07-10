@@ -3,12 +3,13 @@ import json
 import random
 
 import flask
+import flask_jwt_extended.exceptions
 import jsons
 from flask import redirect
 
 import app.utils.randomCodes as randomCodes
 from config import FlaskConfig, SlackConfig, MailConfig, SensorCollector
-from app.utils.http_request_util import get_client_ip, limiter
+from app.utils.http_request_util import get_client_ip, limiter, get_request_uuid
 from app.utils.notifications.user_preferences import mail_add, mail_delete, list_connections_of_type, \
     get_effective_notification_settings, NotificationChannelOverride
 
@@ -165,8 +166,12 @@ def loginSetRefreshCookie():
 
 
 @bp.route('/setAccessCookie', methods=['GET'])
-@flask_jwt_extended.jwt_refresh_token_required
 def debugSetAccessCookie():
+    try:
+        flask_jwt_extended.verify_jwt_refresh_token_in_request()
+    except flask_jwt_extended.exceptions.NoAuthorizationError as e:
+        raise flask_jwt_extended.exceptions.NoAuthorizationError(e.args[0] + ";\n Also note that refresh cookie is not directly usable here by design - it's limited to a specific path.")
+
     current_user = flask_jwt_extended.get_jwt_identity()
     access_token = flask_jwt_extended.create_access_token(identity=current_user, expires_delta=datetime.timedelta(days=1))
     response_object = jsonify({})
@@ -319,7 +324,7 @@ def slack_test():
 @bp.route('/mail_connections', methods=['GET'])
 @flask_jwt_extended.jwt_required
 def mail_connections():
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
     return jsonify(list_connections_of_type(db_models.MailConnections, user_id))
 
 
@@ -328,7 +333,7 @@ def mail_connections():
 @flask_jwt_extended.jwt_required
 def api_mail_add_or_delete():
     # this can add multiple emails at once
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
     if request.method == "POST":
         msg, status_code = mail_add(user_id, request.json.get('emails', ""))
     if request.method == "DELETE":
@@ -341,7 +346,7 @@ def api_mail_add_or_delete():
 @authentication_utils.jwt_refresh_token_if_check_enabled(MailConfig.check_refresh_cookie_on_validating_email)
 def mail_validate(db_code):
     # security: using the same trick as above, i.e. requiring valid refresh cookie. todo: maybe reconsider?
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     db_code_valid, res_or_error_msg = randomCodes.validate_code(db_code, randomCodes.ActivityType.MAIL_VALIDATION, user_id)
 
@@ -368,7 +373,7 @@ def mail_validate(db_code):
 @bp.route('/slack_connections/<string:team_id>/<string:channel_id>', methods=['DELETE'])
 @flask_jwt_extended.jwt_required
 def api_slack_connection_delete(team_id: str = None, channel_id: str = None):
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     slack_connection: db_models.SlackConnections = db_utils_advanced.generic_get_create_edit_from_data(
         db_schemas.SlackConnectionsSchema,
@@ -386,7 +391,7 @@ def api_slack_connection_delete(team_id: str = None, channel_id: str = None):
 @bp.route('/slack_connections', methods=['GET'])
 @flask_jwt_extended.jwt_required
 def api_slack_connections_get():
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
     return jsonify(list_connections_of_type(db_models.SlackConnections, user_id))
 
 
@@ -411,7 +416,7 @@ def debug_test_rate_limit_ip():
 @bp.route('/notification_connections/<string:target_id>', methods=['GET'])
 @flask_jwt_extended.jwt_required
 def show_notification_connections(target_id=None):
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
     connection_lists = get_effective_notification_settings(user_id, target_id)
     return jsonify(connection_lists)
 
@@ -433,3 +438,10 @@ def current_app():
 def test_jsons():
     data = jsons.loads(request.data, NotificationChannelOverride)
     return jsons.dumps(data), 200
+
+
+@bp.route('/get_uuid', methods=['GET'])
+def view_request_uuid():
+    logger.debug("UUID test 1")
+    logger.debug("UUID test 2")
+    return get_request_uuid()

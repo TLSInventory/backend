@@ -5,6 +5,7 @@ from typing import List
 
 from flask import redirect
 
+import app.db_schemas
 import app.object_models as object_models
 import app.utils.ct_search as ct_search
 import app.utils.sslyze.simplify_result as sslyze_result_simplify
@@ -29,7 +30,7 @@ import app.db_models as db_models
 import app.utils.authentication_utils as authentication_utils
 import app.actions as actions
 import app.actions.sensor_collector as sensor_collector
-import app.views.v1.notification_settings as slack_url_to_oauth
+import app.views.v1.notification_settings as notification_settings
 import app.utils.randomCodes as randomCodes
 from app.utils.time_helper import time_source, datetime_to_timestamp, timestamp_to_datetime
 from config import SlackConfig
@@ -47,7 +48,7 @@ def get_target_id(target_def=None):
     target = db_utils_advanced.generic_get_create_edit_from_data(db_schemas.TargetSchema, data, get_only=True)
     if not target:
         return "fail", 400
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     # validate that the user entered the target definition at least once. Protection against enumaration attack.
     if not actions.can_user_get_target_definition_by_id(target.id, user_id):
@@ -58,7 +59,7 @@ def get_target_id(target_def=None):
 @bp.route('/target/<int:target_id>', methods=['GET', 'DELETE'])
 @flask_jwt_extended.jwt_required
 def api_target_by_id(target_id: int):
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     target = actions.get_target_from_id_if_user_can_see(target_id, user_id)
     if target is None:
@@ -108,7 +109,7 @@ def additional_channel_email_actions(email_pref: dict, user_id: int) -> bool:
 @bp.route('/target', methods=['PUT', 'PATCH'])
 @flask_jwt_extended.jwt_required
 def api_target():
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     data = json.loads(request.data)
     data["target"]["protocol"] = data.get("protocol", "HTTPS").replace("TlsWrappedProtocolEnum.",
@@ -144,7 +145,7 @@ def api_add_scan_order():
 @bp.route('/enable_target_scan/<int:target_id>', methods=['GET'])
 @flask_jwt_extended.jwt_required
 def api_enable_target_scan(target_id: int):
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     target = actions.get_target_from_id_if_user_can_see(target_id, user_id)
     if target is None:
@@ -164,7 +165,7 @@ def api_enable_target_scan(target_id: int):
 @bp.route('/get_user_targets')
 @flask_jwt_extended.jwt_required
 def api_get_user_targets():
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     # todo: the following search only looks at targets, which have scan result. This might be considered a bug. Fix?
 
@@ -228,7 +229,7 @@ def api_sslyze_scan_targets():
 @bp.route('/get_result_for_target/<int:target_id>', methods=['GET'])
 @flask_jwt_extended.jwt_required
 def api_get_result_for_target(target_id):
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     res_or_none = actions.get_last_scan_and_result(target_id, user_id)
     if res_or_none is None:
@@ -250,7 +251,7 @@ def api_get_result_for_target(target_id):
 @bp.route('/get_basic_cert_info_for_target/<int:target_id>', methods=['GET'])
 @flask_jwt_extended.jwt_required
 def api_get_basic_cert_info_for_target(target_id):
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     last_scan, scan_result = actions.get_last_scan_and_result(target_id, user_id)
     last_scan: db_models.LastScan
@@ -276,15 +277,32 @@ def api_get_basic_cert_info_for_target(target_id):
 
 @bp.route('/scan_result_history', methods=['GET'])
 @bp.route('/scan_result_history/<int:x_days>', methods=['GET'])
-@flask_jwt_extended.jwt_required
-def api_scan_result_history(user_id=None, x_days=30):
+def api_scan_result_history_with_certs(user_id=None, x_days=30):
+    schema_simplified = db_schemas.ScanResultsSimplifiedSchema()
+    return api_scan_result_history_choose_schema(user_id, x_days, schema_simplified)
+
+
+@bp.route('/scan_result_history_without_certs', methods=['GET'])
+@bp.route('/scan_result_history_without_certs/<int:x_days>', methods=['GET'])
+def api_scan_result_history_without_certs(user_id=None, x_days=30):
+    schema_simplified = db_schemas.ScanResultsSimplifiedWithoutCertsSchema()
+    return api_scan_result_history_choose_schema(user_id, x_days, schema_simplified)
+
+
+def api_scan_result_history_choose_schema(user_id=None, x_days=30, schema_simplified=None):
     if user_id is None:
-        user_id = authentication_utils.get_user_id_from_current_jwt()
+        user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     res = actions.get_scan_history(user_id, x_days)
 
     if res is None:
         return "[]", 200
+
+    logger.debug("START serialization")
+
+    schema_target = db_schemas.TargetSchema()
+    if schema_simplified is None:
+        schema_simplified = db_schemas.ScanResultsSimplifiedSchema()
 
     res_arr = []
     for x in res:
@@ -295,12 +313,16 @@ def api_scan_result_history(user_id=None, x_days=30):
         }
         if x.ScanResultsHistory:
             new_dict["timestamp"] = x.ScanResultsHistory.timestamp
-        new_dict["target"] = json.loads(db_schemas.TargetSchema().dumps(x.Target))
-        new_dict["result_simplified"] = json.loads(
-            db_schemas.ScanResultsSimplifiedSchema().dumps(x.ScanResultsSimplified))
+        new_dict["target"] = schema_target.dump(x.Target)
+        new_dict["result_simplified"] = schema_simplified.dump(x.ScanResultsSimplified)
         res_arr.append(new_dict)
 
-    return json.dumps(res_arr, indent=3), 200
+    # logger.debug("MID serialization")
+    res_arr_sorted = sorted(res_arr, key=lambda x: x["timestamp"])
+    # ret = json.dumps(res_arr_sorted), indent=3, sort_keys=True)
+    # logger.debug("END serialization")
+    # return ret, 200
+    return jsonify(res_arr_sorted)
 
 
 @bp.route('/ct_get_subdomains/<string:domain>')
@@ -311,7 +333,8 @@ def api_ct_get_subdomains(domain):
 @bp.route("/slack/begin_auth_redirect", methods=["GET"])
 @flask_jwt_extended.jwt_required
 def slack_redirect_to_oauth():
-    url, _ = slack_url_to_oauth()
+    # This endpoint is useless for the official web frontend, but might be interesting for a CLI client.
+    url, _ = notification_settings.slack_url_to_oauth()
     return redirect(url, code=302)
 
 
@@ -331,7 +354,7 @@ def slack_oauth_callback():
 
     user_id = None
     if SlackConfig.check_refresh_cookie_on_callback_endpoint:
-        user_id = authentication_utils.get_user_id_from_current_jwt()
+        user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     auth_code = request.args['code']
     db_code = request.args['state']

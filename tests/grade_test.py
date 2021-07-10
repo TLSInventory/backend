@@ -1,92 +1,50 @@
-from typing import Optional
-
 import pytest
-from datetime import datetime, timedelta
-# from app.utils.time_helper import time_source
-from flask import url_for
-from config import SchedulerConfig
+import config
+import app.db_models as db_models
 
-from tests.auth_test import login, register
+from app.utils.sslyze.grade_scan_result import grade_scan_result, Grades
 
-
-def target_add_data(hostname: str = "example.com", ip: Optional[str] = None, port: Optional[int] = None):
-    return {
-        "target": {"id": None, "hostname": hostname, "port": port, "ip_address": ip, "protocol": "HTTPS"},
-        "scanOrder": {"periodicity": 43200, "active": None}
-    }
+# change default db
+#config.TestConfig.force_database_connection_string = "../../../Downloads/DB/2021-06-22-production-sanitized.db"
+config.TestConfig.force_database_connection_string = "../../../Downloads/DB/2020-09-xx-benchmark-24-hours.db"
 
 
-@pytest.mark.usefixtures('client_class')
+@pytest.mark.usefixtures("client_class")
 class TestSuiteScanScheduler:
-    SMALL_OFFSET = timedelta(seconds=10)  # seconds
 
-    @register
-    @login
-    def __do_authentication(self):
-        assert self.client.get(url_for("apiDebug.debugSetAccessCookie")).status_code == 200
+    @classmethod
+    def teardown_class(cls):
+        config.TestConfig.force_database_connection_string = None
 
-    def __add_target(self, json_data):
-        # adding a target without IP will result in DNS query on every enque for scan
-        res = self.client.put(url_for("apiV1.api_target"), json=json_data)
-        assert res.status_code == 200
-        return res
+    def test_grading(self):
 
-    def test_added_target_with_static_ip_appears_in_scheduler(self, freezer):
-        self.__add_target_and_check_presence_in_batch(freezer, True)
+        grades = {}
+        reasons = {}
 
-    @pytest.mark.skip(reason="Dnspython 2.0 has deprecated some functions. Fix later.")
-    def test_added_target_with_dns_appears_in_scheduler(self, freezer):
-        # this test needs working DNS for example.com
-        # todo: library dnspython updated and deprecated the way our DNS is handled.
-        self.__add_target_and_check_presence_in_batch(freezer, False)
+        scan_results_simplified = db_models.db.session.query(
+            db_models.ScanResultsSimplified
+        ).all()
 
-    def __add_target_and_check_presence_in_batch(self, freezer, static_ip=True):
-        self.__do_authentication()
-
-        ip = "127.0.0.1" if static_ip else None
-        self.__add_target(target_add_data(ip=ip))
-
-        freezer.move_to(datetime.now() + timedelta(seconds=SchedulerConfig.max_first_scan_delay) + self.SMALL_OFFSET)
-
-        res = self.client.get(url_for("apiV1.api_get_next_targets_batch"))
-        assert res.status_code == 200
-        assert len(res.json) > 0
-
-    def test_requeuing_after_min_separation(self, freezer):
-        self.__do_authentication()
-
-        self.__add_target(target_add_data(ip="127.0.0.1"))
-        freezer.move_to(datetime.now() + timedelta(seconds=SchedulerConfig.max_first_scan_delay) + self.SMALL_OFFSET)
-
-        # Scan should be requeued if it did not finish and some time has passed
-        for i in range(10):
-            freezer.move_to(
-                datetime.now() + timedelta(seconds=SchedulerConfig.enqueue_min_time) + self.SMALL_OFFSET
+        for scan_result_simplified in scan_results_simplified:
+            scan_result = (
+                db_models.db.session.query(db_models.ScanResults)
+                .filter(
+                    db_models.ScanResults.id
+                    == scan_result_simplified.scanresult_id
+                )
+                .all()
             )
-            res = self.client.get(url_for("apiV1.api_get_next_targets_batch"))
-            assert res.status_code == 200
-            assert len(res.json) > 0
 
-    def test_not_requeuing_right_away(self, freezer):
-        self.__do_authentication()
+            assert len(scan_result) == 1
 
-        self.__add_target(target_add_data(ip="127.0.0.1"))
-        freezer.move_to(datetime.now() + timedelta(seconds=SchedulerConfig.max_first_scan_delay) + self.SMALL_OFFSET)
+            grade_name, reason_ = grade_scan_result(scan_result[0], scan_result_simplified)
+            grades[grade_name] = grades.get(grade_name, 0) + 1
 
-        # First batch should get the target
-        res = self.client.get(url_for("apiV1.api_get_next_targets_batch"))
-        assert res.status_code == 200
-        assert len(res.json) > 0
+            for reason in reason_:
+                reasons[reason] = reasons.get(reason, 0) + 1
 
-        # The second batch shouldn't get the target, because it was enqueud recently
-        res = self.client.get(url_for("apiV1.api_get_next_targets_batch"))
-        assert res.status_code == 200
-        assert len(res.json) == 0
+        print(f"summary: {grades}")
+        print("reasons")
 
-
-
-
-
-
-
-
+        for reason in reasons:
+            print(f"{reason}: {reasons[reason]}")

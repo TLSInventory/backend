@@ -1,5 +1,6 @@
 import enum
-from typing import Tuple, Optional, Dict
+from functools import reduce
+from typing import Tuple, Optional, Dict, List, Type
 
 from loguru import logger
 from sqlalchemy.exc import IntegrityError
@@ -50,7 +51,9 @@ def dict_filter_columns(columns_to_keep: list, obj: dict) -> dict:
     return {x: obj[x] for x in obj if x in columns_to_keep}
 
 
-def split_array_to_tuple(a: str) -> Tuple:
+def split_array_to_tuple(a: Optional[str]) -> Tuple:
+    if a is None:
+        return ()
     list_str = a[:].replace("[", "").replace("]", "")
     list1 = list_str.split(",")
     list2 = [x for x in list1 if len(x)]
@@ -147,3 +150,35 @@ def scan_order_minimal_recalculate(target_id: int):
 def set_attr_if_none(x: Dict, attr_name: str, default_val):
     if x.get(attr_name, None) is None:
         x[attr_name] = default_val
+
+
+def arr_of_stringarrs_to_arr_of_objects(list_of_string_arrs: List[str], result_db_model: Type['db_models.UniqueModel']) -> List['db_models.UniqueModel']:
+    arr_of_tuples = list(map(lambda x: split_array_to_tuple(x) if x else None, set(list_of_string_arrs)))
+    arr_of_non_empty_tuples = list(filter(lambda x: x, arr_of_tuples))
+    arr_of_ids = reduce(lambda x, y: x + y, arr_of_non_empty_tuples, ())
+    deduplicated_ids = list(set(arr_of_ids))
+
+    # https://www.sqlite.org/limits.html - 9. Maximum Number Of Host Parameters In A Single SQL Statement
+
+    # ... the maximum value of a host parameter number is SQLITE_MAX_VARIABLE_NUMBER, which defaults to
+    # - 999 for SQLite versions prior to 3.32.0 (2020-05-22)
+    # - 32766 for SQLite versions after 3.32.0.
+
+    maximum_number_of_parameters_in_sql_query = 990
+
+    full_res = []
+
+    for i in range(len(deduplicated_ids)//maximum_number_of_parameters_in_sql_query+1):
+        low_id = i*maximum_number_of_parameters_in_sql_query
+        high_id = (i+1)*maximum_number_of_parameters_in_sql_query
+        ids_this_query = deduplicated_ids[low_id:high_id]
+        # logger.debug(len(ids_this_query))
+
+        res = db_models.db.session.query(result_db_model) \
+            .filter(result_db_model.id.in_(ids_this_query)) \
+            .all()
+
+        full_res += res
+
+    return full_res
+

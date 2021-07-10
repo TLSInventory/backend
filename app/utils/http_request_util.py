@@ -4,7 +4,7 @@ from flask_limiter import Limiter
 
 import config
 # from app.db_models import logger
-from app.utils.authentication_utils import get_user_id_from_current_jwt
+from app.utils.authentication_utils import get_user_id_from_jwt_or_exception, try_to_get_user_id_from_current_jwt
 
 HTTP_HEADER_CLOUDFLARE_IP_HEADER = 'CF-Connecting-IP'
 HTTP_HEADER_X_REAL_IP = 'X-Real-IP'
@@ -35,7 +35,7 @@ def get_client_ip():
 
 
 def rate_limit_key():
-    user_id = get_user_id_from_current_jwt()
+    user_id = try_to_get_user_id_from_current_jwt()
     key = f'client_ip:{get_client_ip()}'
     if user_id:
         key = f'user_id:{user_id}'
@@ -52,3 +52,10 @@ def get_web_ui_address():
     if config.ServerLocation.WEB_FULL_URL:
         return config.ServerLocation.WEB_FULL_URL
     return flask.url_for("otherRoutes.site_base_url", _external=True)  # this is fallback
+
+
+def get_request_uuid() -> str:
+    try:
+        return str(flask.request.request_id)
+    except Exception:
+        return "No-request-ID"

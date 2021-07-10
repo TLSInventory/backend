@@ -153,7 +153,7 @@ def api_change_password():
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
 
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     old_password = request.json.get('old_password', None)
     new_password = request.json.get('new_password', None)
@@ -177,7 +177,7 @@ def api_change_password():
 @bp.route('/user', methods=['GET'])
 @flask_jwt_extended.jwt_required
 def api_get_user_profile():
-    user_id = authentication_utils.get_user_id_from_current_jwt()
+    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
 
     res: db_models.User = db_models.db.session \
         .query(db_models.User) \

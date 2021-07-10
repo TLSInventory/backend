@@ -1,2 +1,3 @@
- * * * * * wget -O /dev/null -o /dev/null http://127.0.0.1:5000/api/v1/notifications/send_for_period/$SENSOR_COLLECTOR_KEY
- * * * * * wget -O /dev/null -o /dev/null http://127.0.0.1:5000/api/v1/sslyze_scan_due_targets_multiple_batches/$SENSOR_COLLECTOR_KEY
+ * * * * * wget -O /dev/null -o /dev/null http://127.0.0.1:5000/api/v1/notifications/send_for_period
+ * * * * * wget -O /dev/null -o /dev/null http://127.0.0.1:5000/api/v1/sslyze_scan_due_targets_multiple_batches
+ * * * * * wget -O /dev/null -o /dev/null http://127.0.0.1:5000/api/v1/subdomain_monitoring/rescan

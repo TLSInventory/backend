@@ -3,7 +3,7 @@ import json
 import tests.conftest
 import pytest
 from flask import url_for
-from tests.auth_test import login, register
+from tests.auth_test import login, register, set_debug_access_cookie
 
 @pytest.mark.usefixtures('client_class')
 class TestSuiteCriticalPath:
@@ -29,14 +29,10 @@ class TestSuiteCriticalPath:
     def url_list_targets(self):
         return url_for("apiV1.api_get_user_targets")
 
-    def url_access_cookie(self):
-        return url_for("apiDebug.debugSetAccessCookie")
-
     @register
     @login
+    @set_debug_access_cookie
     def test_critical_path1(self):
-        assert self.client.get(self.url_access_cookie()).status_code == 200
-
         # todo: the target_data should be sufficient, but currently only targets with scan_order are being returned. fix that
         # assert self.client.put(self.url_add_target(), json=self.target_data()).status_code == 200
         assert self.client.put(self.url_add_target(), json=self.target_add_data()).status_code == 200

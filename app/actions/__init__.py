@@ -1,17 +1,18 @@
 import datetime
 import json
 from typing import Optional, List, Dict, Tuple
+from itertools import chain
 
 import app.scan_scheduler as scan_scheduler
 from app import db_models, db_schemas, logger
 import app.object_models as object_models
 import app.utils.sslyze.scanner as sslyze_scanner
-import app.utils.sslyze.parse_result as sslyze_parse_result
+import app.utils.db.basic as db_utils
 from app.utils.time_helper import time_source, datetime_to_timestamp
 
 from . import sensor_collector
 
-from config import FlaskConfig, SslyzeConfig, SensorCollector
+from config import SensorCollector
 
 
 def get_target_definition_by_ids(target_ids: List[int], user_id: int) -> bool:
@@ -105,11 +106,15 @@ def get_scan_history(user_id: int, x_days: int = 30):  # -> Optional[Tuple[db_mo
     start_timestamp = datetime_to_timestamp(start)
 
     res = db_models.db.session \
-        .query(db_models.ScanOrder, db_models.Target, db_models.ScanResultsHistory, db_models.ScanResultsSimplified) \
+        .query(db_models.ScanOrder, db_models.Target, db_models.ScanResultsHistory, db_models.ScanResultsSimplified, db_models.ServerInfo) \
         .outerjoin(db_models.ScanResultsHistory,
                    db_models.ScanResultsHistory.target_id == db_models.ScanOrder.target_id) \
         .outerjoin(db_models.ScanResultsSimplified,
                    db_models.ScanResultsHistory.scanresult_id == db_models.ScanResultsSimplified.scanresult_id) \
+        .outerjoin(db_models.ScanResults,
+                   db_models.ScanResultsHistory.scanresult_id == db_models.ScanResults.id) \
+        .outerjoin(db_models.ServerInfo,
+                   db_models.ScanResults.server_info_id == db_models.ServerInfo.id) \
         .filter(db_models.ScanOrder.target_id == db_models.Target.id) \
         .filter(db_models.ScanOrder.active == True) \
         .filter(db_models.ScanOrder.user_id == user_id) \
@@ -117,3 +122,31 @@ def get_scan_history(user_id: int, x_days: int = 30):  # -> Optional[Tuple[db_mo
         .all()
 
     return res
+
+
+def get_certificate_chains(user_id: int, x_days: int = 30) -> List[db_models.CertificateChain]:
+    res: List[db_models.ScanResultsHistory] = get_scan_history(user_id, x_days)
+
+    ans1a = map(lambda x: x.ScanResultsSimplified if x else None, res)
+    ans1b = filter(lambda x: x, ans1a)
+    asn1c = list(ans1b)  # This is necessary, because we're going to need to iterate twice over the array.
+
+    ans2a = map(lambda x: x.verified_certificate_chains_lists_ids if x.verified_certificate_chains_lists_ids else None, asn1c)
+    ans2b = map(lambda x: str(x.received_certificate_chain_list_id) if x.received_certificate_chain_list_id else None, asn1c)
+    ans2c = chain(ans2a, ans2b)
+
+    ans2d = list(ans2c)
+
+    return db_utils.arr_of_stringarrs_to_arr_of_objects(
+        ans2d,
+        db_models.CertificateChain
+    )
+
+
+def get_certificates(chains: List[db_models.CertificateChain]) -> List[db_models.Certificate]:
+    ans1a = map(lambda x: x.chain if x else None, chains)
+
+    return db_utils.arr_of_stringarrs_to_arr_of_objects(
+        list(ans1a),
+        db_models.Certificate
+    )

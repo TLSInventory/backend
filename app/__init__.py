@@ -1,3 +1,5 @@
+import flask
+from uuid import uuid4
 from loguru import logger
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -52,6 +54,9 @@ def create_app(force_create_db=False):
         from app.views.v1 import bp as api_v1
         app_new.register_blueprint(api_v1, url_prefix='/api/v1')
 
+        from app.views.v2 import bp as api_v2
+        app_new.register_blueprint(api_v2, url_prefix='/api/v2')
+
         from app.views.debug import bp as api_debug
         app_new.register_blueprint(api_debug, url_prefix='/api/debug')
 
@@ -61,6 +66,10 @@ def create_app(force_create_db=False):
         if config.FlaskConfig.REDIS_ENABLED:
             app_new.config.from_object(rq_dashboard.default_settings)
             app_new.register_blueprint(rq_dashboard.blueprint, url_prefix='/debug/rq_dashboard/')
+
+        @app_new.before_request
+        def before_request():
+            flask.request.request_id = uuid4()
 
         # DB creation is no longer done inside this script, and should be done using Alembic.
         # For example: export FLASK_APP=start.py && flask db upgrade

@@ -1,5 +1,6 @@
 import datetime
 # import functools
+import functools
 import random
 from loguru import logger
 
@@ -24,6 +25,7 @@ Base = db.Model
 
 class NumericTimestamp(TypeDecorator):
     impl = db.Integer
+    cache_ok = True
 
     def __init__(self):
         TypeDecorator.__init__(self)

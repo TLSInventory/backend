@@ -3,14 +3,7 @@ FROM ubuntu:18.04
 LABEL maintainer="tlsinventory@borysek.net" 
 
 RUN apt-get update -y && \
-    apt-get install -y python3.7 python3.7-dev python3-pip git openssh-server cron
-
-# Todo: this docker makes the container from github master, not from local. Change that.
-
-# Invalidate cache from this point onwards when master branch HEAD changes.
-# ADD https://api.github.com/repos/TLSInventory/backend/git/refs/heads/master branch_version.json
-
-# RUN git clone https://github.com/TLSInventory/backend.git /app/tlsinventory-backend
+    apt-get install -y python3.7 python3.7-dev python3-pip git openssh-server cron nano
 
 WORKDIR /app/tlsinventory-backend
 
@@ -26,6 +19,4 @@ RUN chmod 0744 /etc/cron.d/tlsinventory
 RUN crontab /etc/cron.d/tlsinventory
 
 
-ENTRYPOINT [ "/bin/sh", "-c", "/app/tlsinventory-backend/start.sh" ]
-# 
-# CMD [ "app.py" ]
+ENTRYPOINT [ "/bin/sh", "-c", "cron && /app/tlsinventory-backend/start.sh" ]

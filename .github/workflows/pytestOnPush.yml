@@ -35,10 +35,12 @@ jobs:
     
     - name: Install dependencies
       run: |
+        sudo apt-get update && sudo apt-get install graphviz
         python -m pip install --upgrade pip
         # pip install flake8
         pip install pytest pytest-cov
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
     
     # - name: Lint with flake8
     #   run: |
@@ -49,7 +51,7 @@ jobs:
     
     - name: Test with pytest
       run: |
-        pytest --cov=./ --cov-report=xml --junit-xml pytest.xml tests/*
+        pytest --cov=./ --cov-report=xml --junit-xml pytest.xml --profile-svg tests/*
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
@@ -71,6 +73,13 @@ jobs:
         name: Unit Test Results (Python ${{ matrix.python-version }})
         path: pytest.xml
 
+    - name: Upload profiling result
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: Profiling result
+        path: prof/combined.svg
+
   publish-test-results:
     name: "Publish Unit Tests Results"
     needs: build-and-test
@@ -85,8 +94,7 @@ jobs:
           path: artifacts
 
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1.7
+        uses: EnricoMi/publish-unit-test-result-action@v1.18
         with:
           check_name: Unit Test Results
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           files: ./**/pytest.xml

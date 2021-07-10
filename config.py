@@ -1,6 +1,7 @@
 import datetime
 import logging
 import os
+from typing import Optional
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -171,3 +172,7 @@ class DebugConfig(object):
 
 class TestConfig(object):
     local_only = bool(os.environ.get("TESTS_LOCAL_ONLY", True))
+    force_database_connection_string: Optional[str] = None
+    force_create_tmp_db: bool = False  # Setting this will disregard force_database_connection_string
+
+
