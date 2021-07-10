@@ -17,9 +17,6 @@ class TestSuiteScanScheduler:
         config.TestConfig.force_database_connection_string = None
 
     def test_grading(self):
-        # this is only meant as observational tool, not for pipeline tests
-        # comment the line below to see results
-        return
 
         grades = {}
         reasons = {}
