@@ -8,8 +8,10 @@ from app.utils.sslyze.grade_scan_result import grade_scan_result, Grades
 config.TestConfig.force_database_connection_string = "../../../Downloads/DB/2021-06-22-production-sanitized.db"
 # config.TestConfig.force_database_connection_string = "../../../Downloads/DB/2020-09-xx-benchmark-24-hours.db"
 
+skip_grading = True
 
 @pytest.mark.usefixtures("client_class")
+@pytest.mark.skipif(skip_grading, reason="This is not primarily pipeline test and can be skipped to reduce test duration")
 class TestSuiteScanScheduler:
 
     @classmethod
