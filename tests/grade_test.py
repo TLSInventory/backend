@@ -5,8 +5,8 @@ import app.db_models as db_models
 from app.utils.sslyze.grade_scan_result import grade_scan_result, Grades
 
 # change default db
-# config.TestConfig.force_database_connection_string = "../../../Downloads/DB/2021-06-22-production-sanitized.db"
-# config.TestConfig.force_database_connection_string = "../../../Downloads/DB/2020-09-xx-benchmark-24-hours.db"
+#config.TestConfig.force_database_connection_string = "../../../Downloads/DB/2021-06-22-production-sanitized.db"
+config.TestConfig.force_database_connection_string = "../../../Downloads/DB/2020-09-xx-benchmark-24-hours.db"
 
 
 @pytest.mark.usefixtures("client_class")
