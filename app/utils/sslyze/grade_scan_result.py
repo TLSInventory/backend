@@ -135,11 +135,11 @@ class GradeResult(object):
             self._format_msg_and_cap(Grades.F, "supports client renegotiation, but is not secure")
 
     def calculate_cipher_strength(self):
-        if self.partial_simplified.tlsv13_working_weak_ciphers_count is not None:
+        if self.partial_simplified.tlsv13_working_weak_ciphers_count not in (None, 0):
             self._format_msg_and_cap(Grades.A, "has TLS 1.3 with weak ciphers")
-        if self.partial_simplified.tlsv12_working_weak_ciphers_count is not None:
+        if self.partial_simplified.tlsv12_working_weak_ciphers_count not in (None, 0):
             self._format_msg_and_cap(Grades.A, "has TLS 1.2 with weak ciphers")
-        elif self.partial_simplified.tlsv11_working_weak_ciphers_count is not None:
+        elif self.partial_simplified.tlsv11_working_weak_ciphers_count not in (None, 0):
             self._format_msg_and_cap(Grades.B, "has TLS 1.1 with weak ciphers")
 
     def calculate_vulnerabilities(self):
