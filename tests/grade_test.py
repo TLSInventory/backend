@@ -34,12 +34,17 @@ class TestSuiteScanScheduler:
                 )
                 .all()
             )
+
             assert len(scan_result) == 1
+
             grade_name, reason_ = grade_scan_result(scan_result[0], scan_result_simplified)
             grades[grade_name] = grades.get(grade_name, 0) + 1
+
             for reason in reason_:
                 reasons[reason] = reasons.get(reason, 0) + 1
+
         print(f"summary: {grades}")
         print("reasons")
+
         for reason in reasons:
             print(f"{reason}: {reasons[reason]}")
