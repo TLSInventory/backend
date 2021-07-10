@@ -26,18 +26,11 @@ class TestSuiteScanScheduler:
         ).all()
 
         for scan_result_simplified in scan_results_simplified:
-            scan_result = (
-                db_models.db.session.query(db_models.ScanResults)
-                .filter(
-                    db_models.ScanResults.id
-                    == scan_result_simplified.scanresult_id
-                )
-                .all()
-            )
+            scan_result = db_models.db.session.query(db_models.ScanResults) \
+                .get(scan_result_simplified.scanresult_id)
 
-            assert len(scan_result) == 1
+            grade_name, reason_ = grade_scan_result(scan_result, scan_result_simplified)
 
-            grade_name, reason_ = grade_scan_result(scan_result[0], scan_result_simplified)
             grades[grade_name] = grades.get(grade_name, 0) + 1
 
             for reason in reason_:
