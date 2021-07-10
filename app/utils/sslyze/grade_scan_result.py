@@ -24,11 +24,12 @@ class Grades(Enum):
 
 
 def grade_scan_result(
-        scan_result: db_models.ScanResults,
+    scan_result: db_models.ScanResults,
     partial_simplified: db_models.ScanResultsSimplified,
 ) -> Tuple[str, List[str]]:
-    tmp = GradeResult(scan_result, partial_simplified)
-    return tmp.get_result()
+    #tmp = GradeResult(scan_result, partial_simplified)
+    #return tmp.get_result()
+    return GradeResult(scan_result, partial_simplified).get_result()
 
 
 class GradeResult(object):
