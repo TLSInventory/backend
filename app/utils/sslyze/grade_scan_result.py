@@ -171,4 +171,5 @@ class GradeResult(object):
         elif key_size >= 1024:
             self._format_msg_and_cap(Grades.B, f"has leaf certificate key size of {key_size} bits")
         else:
-            self._format_msg_and_cap(Grades.C, f"has leaf certificate key size of {key_size} bits")
+            # https://github.com/ssllabs/research/wiki/SSL-Server-Rating-Guide#changes (21 January 2014)
+            self._format_msg_and_cap(Grades.F, f"has leaf certificate key size of {key_size} bits")
