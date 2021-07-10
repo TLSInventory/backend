@@ -5,7 +5,7 @@ import app.db_models as db_models
 from app.utils.sslyze.grade_scan_result import grade_scan_result, Grades
 
 # change default db
-# config.TestConfig.force_database_connection_string = "../../../Downloads/DB/2021-06-22-production-sanitized.db"
+config.TestConfig.force_database_connection_string = "../../../Downloads/DB/2021-06-22-production-sanitized.db"
 # config.TestConfig.force_database_connection_string = "../../../Downloads/DB/2020-09-xx-benchmark-24-hours.db"
 
 
@@ -21,11 +21,10 @@ class TestSuiteScanScheduler:
         grades = {}
         reasons = {}
 
-        scan_results_simplified = db_models.db.session.query(
-            db_models.ScanResultsSimplified
-        ).all()
+        scan_results_simplified = db_models.db.session.query(db_models.ScanResultsSimplified).all()
 
         for scan_result_simplified in scan_results_simplified:
+
             scan_result = db_models.db.session.query(db_models.ScanResults) \
                 .get(scan_result_simplified.scanresult_id)
 
@@ -37,7 +36,7 @@ class TestSuiteScanScheduler:
                 reasons[reason] = reasons.get(reason, 0) + 1
 
         print(f"summary: {grades}")
-        print("reasons")
 
+        print("reasons")
         for reason in reasons:
             print(f"{reason}: {reasons[reason]}")

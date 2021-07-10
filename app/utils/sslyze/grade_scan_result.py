@@ -1,7 +1,8 @@
-from typing import Tuple, List, Set
+from typing import Tuple, List
 
 import app.db_models as db_models
-from loguru import logger
+
+from app.utils.db.basic import arr_of_stringarrs_to_arr_of_objects
 from enum import Enum
 
 
@@ -72,8 +73,14 @@ class GradeResult(object):
         self.calculate_renegotiation()
         self.calculate_headers()
         self.calculate_vulnerabilities()
-        # calculate_key_exchange
-        # calculate_cipher_length
+        self.calculate_key_length()
+
+        # key si ze je v bitoch - kontroluje sa iba listovy
+        # capovat iba ak certificate.received_chain_has_valid_order
+        # pozriet sa na verified chain
+        # odstranint errory
+        # 
+
 
     def get_result(self) -> Tuple[str, List[str]]:
         self._calculate()
@@ -82,7 +89,6 @@ class GradeResult(object):
     def calculate_certificate(self):
         certificate = self.scan_result.certificate_information
         if certificate is None:
-            logger.error("SC0012 ScanResult has no certificate info object associated")
             return
         if not certificate.leaf_certificate_has_must_staple_extension:
             self._format_msg_and_cap(Grades.A, "has no must have staple extensions")
@@ -116,7 +122,6 @@ class GradeResult(object):
     def calculate_headers(self):
         sec_header: db_models.HTTPSecurityHeaders = self.scan_result.http_security_headers
         if sec_header is None:
-            logger.error("SC0013 ScanResult has no http security headers object associated")
             return
         if sec_header.strict_transport_security_header and \
                 sec_header.public_key_pins_header:
@@ -127,7 +132,6 @@ class GradeResult(object):
     def calculate_renegotiation(self):
         renegotiation = self.scan_result.session_renegotiation
         if renegotiation is None:
-            logger.error("SC0014 ScanResult has no renegotiation object associated")
             return
         if renegotiation.supports_secure_renegotiation:
             self._format_msg_and_cap(Grades.A_plus, "supports secure client renegotiation")
@@ -149,3 +153,27 @@ class GradeResult(object):
             self._format_msg_and_cap(Grades.F, "Vulnerable to heartbleed")
         if self.scan_result.downgrade_attacks is not None and not self.scan_result.downgrade_attacks.supports_fallback_scsv:
             self._format_msg_and_cap(Grades.F, "Vulnerable to downgrade attacks")
+
+    def calculate_key_length(self):
+        ids = self.partial_simplified.verified_certificate_chains_lists_ids
+        certificates = arr_of_stringarrs_to_arr_of_objects([ids], db_models.Certificate)
+
+        if certificates is None or not certificates:
+            return
+
+        leaf_cert: db_models.Certificate = certificates[-1]
+        key_size = leaf_cert.publicKey_size
+
+        if key_size >= 4096:
+            self._format_msg_and_cap(Grades.A_plus, f"has leaf certificate key size of {key_size} bits")
+        elif key_size >= 2048:
+            self._format_msg_and_cap(Grades.A, f"has leaf certificate key size of {key_size} bits")
+        elif key_size >= 1024:
+            self._format_msg_and_cap(Grades.B, f"has leaf certificate key size of {key_size} bits")
+        else:
+            self._format_msg_and_cap(Grades.C, f"has leaf certificate key size of {key_size} bits")
+
+
+
+
+
