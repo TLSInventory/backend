@@ -82,7 +82,13 @@ SC0010 Get due targets (rescan)
     /backend/app/scan_scheduler.py
 SC0011 STH got enqueued twice for the same scan batch
     /backend/app/scan_scheduler.py
-    
+SC0012 ScanResult has no certificate info object associated
+    /backend/app/utils/sslyze/grade_scan_result.py
+SC0013 ScanResult has no http security headers object associated
+    /backend/app/utils/sslyze/grade_scan_result.py
+SC0014 SC0014 ScanResult has no renegotiation object associated
+    /backend/app/utils/sslyze/grade_scan_result.py
+
 ~ NETWORK ~
 NT0001 Cannot establish connectivity to target /backend/app/utils/sslyze/scanner.py
 NT0002 Unknown exception in establishing connection to target /backend/app/utils/sslyze/scanner.py

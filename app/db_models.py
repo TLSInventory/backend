@@ -712,6 +712,7 @@ class ScanResults(Base, UniqueModel):
     tls_12_session_resumption_support = db.relationship("TLS12SessionResumptionSupport")
     http_security_headers = db.relationship("HTTPSecurityHeaders")
     certificate_information = db.relationship("CertificateInformation")
+
     sslv2 = db.relationship("CipherSuiteScanResult", foreign_keys=[sslv2_id])
     sslv3 = db.relationship("CipherSuiteScanResult", foreign_keys=[sslv3_id])
     tlsv1 = db.relationship("CipherSuiteScanResult", foreign_keys=[tlsv1_id])
