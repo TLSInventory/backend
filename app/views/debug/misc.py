@@ -1,6 +1,7 @@
 import datetime
 import json
 import random
+from typing import Optional
 
 import flask
 import flask_jwt_extended.exceptions
@@ -346,7 +347,7 @@ def api_mail_add_or_delete():
 @authentication_utils.jwt_refresh_token_if_check_enabled(MailConfig.check_refresh_cookie_on_validating_email)
 def mail_validate(db_code):
     # security: using the same trick as above, i.e. requiring valid refresh cookie. todo: maybe reconsider?
-    user_id = authentication_utils.get_user_id_from_jwt_or_exception()
+    user_id: Optional[int] = authentication_utils.try_to_get_user_id_from_current_jwt()
 
     db_code_valid, res_or_error_msg = randomCodes.validate_code(db_code, randomCodes.ActivityType.MAIL_VALIDATION, user_id)
 

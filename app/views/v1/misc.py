@@ -1,7 +1,7 @@
 import copy
 import json
 import random
-from typing import List
+from typing import List, Optional
 
 from flask import redirect
 
@@ -352,9 +352,7 @@ def slack_oauth_callback():
     #  Current behaviour: The slack_redirect_to_oauth and slack_oauth_callback need to be initiated by the same user.
     #                     The slack_oauth_callback expects refresh token in cookie, can be disabled in config.
 
-    user_id = None
-    if SlackConfig.check_refresh_cookie_on_callback_endpoint:
-        user_id = authentication_utils.get_user_id_from_jwt_or_exception()
+    user_id: Optional[int] = authentication_utils.try_to_get_user_id_from_current_jwt()
 
     auth_code = request.args['code']
     db_code = request.args['state']

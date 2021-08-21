@@ -43,3 +43,9 @@ jobs:
 
     - name: Push changes
       run: git push
+
+    - name: Invoke Docker Build and Publish
+      uses: benc-uk/workflow-dispatch@v1
+      with:
+        workflow: Docker Build and Publish
+        token: ${{ secrets.BOT_GITHUB_PAT }}
