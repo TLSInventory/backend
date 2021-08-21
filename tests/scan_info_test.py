@@ -3,7 +3,7 @@ import config
 import app.db_models as db_models
 
 
-from app.views.v2.scan_info_utils import get_general_scan_info, get_user_scan_info
+from app.views.v2.scan_info import get_general_scan_info, get_user_scan_info
 from flask import url_for
 
 
