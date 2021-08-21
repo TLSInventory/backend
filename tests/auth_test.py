@@ -1,6 +1,7 @@
 import tests.conftest
 import pytest
 from flask import url_for
+import copy
 
 
 class AuthTestSuiteConfig:
@@ -15,13 +16,15 @@ class AuthTestSuiteConfig:
     register_data1 = {
         'username': 'user1',
         'password': 'pass1',
-        'email': 'user1@org1.example'
+        'email': 'user1@org1.example',
+        'privacy_policy': True,
     }
 
     register_data2 = {
         'username': 'user2',
         'password': 'pass2',
-        'email': 'user2@org2.example'
+        'email': 'user2@org2.example',
+        'privacy_policy': True,
     }
 
     @staticmethod
@@ -121,6 +124,10 @@ class TestSuiteAuth:
     def test_invalid_jwt_disallows_access(self):
         assert self.client.get(url_for("apiDebug.jwt_inside_route")).status_code == 401
 
+    def test_privacy_policy_not_accepted(self):
+        registration_data = copy.deepcopy(AuthTestSuiteConfig.register_data1)
+        registration_data.pop("privacy_policy")
+        assert self.client.post(AuthTestSuiteConfig.url_register(), json=registration_data).status_code == 400
 
 # app_inst = app_test_instance()
 

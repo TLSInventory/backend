@@ -3,6 +3,8 @@ import random
 import jsons
 from typing import Tuple
 
+import marshmallow
+
 import app.utils.notifications.user_preferences
 import app.utils.randomCodes as randomCodes
 
@@ -96,7 +98,10 @@ def api_register():
     data["main_api_key"] = "API-546654-" + str(random.randrange(10000))  # todo
     logger.warning(f"EX0002 {data}")
 
-    schema = db_schemas.UserSchema(session=db_models.db)
+    if not data.get("privacy_policy", False):
+        return jsonify({"msg": "Privacy policy needs to be accepted."}), 400
+
+    schema = db_schemas.UserSchema(session=db_models.db, unknown=marshmallow.EXCLUDE)
     new_user = schema.load(data)  # this wouldn't work straight away, for example password_hash wouldn't work
 
     mail_obj = db_models.MailConnections()
