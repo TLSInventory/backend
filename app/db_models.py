@@ -926,5 +926,3 @@ class SubdomainRescanTarget(Base, UniqueModel):
     subdomain_scan_target_id = db.Column(db.Integer, primary_key=True)
     subdomain_scan_user_id = db.Column(db.Integer, primary_key=True)
     subdomain_last_scan = db.Column(NumericTimestamp)
-
-
