@@ -11,6 +11,7 @@ COPY ./ .
 
 # RUN git checkout master
 RUN mkdir -p db tmp log
+RUN python3.7 -m pip install --upgrade pip
 RUN python3.7 -m pip install -r requirements.txt
 
 # Add cron for the most basic of automatic triggering.
