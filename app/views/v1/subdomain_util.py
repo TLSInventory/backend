@@ -22,11 +22,9 @@ import config
 from loguru import logger
 
 
-@bp.route("/subdomain_monitoring/rescan", methods=["GET"])  # is ok?
+@bp.route("/subdomain_monitoring/rescan", methods=["GET"])
 @bp.route('/subdomain_monitoring/rescan/<string:sensor_key>', methods=['GET'])
-def api_cron_rescan_subdomains(sensor_key: str) -> None:
-    # currently using sensor key - should be ok, ask Ondra
-    # maybe good idea to pull local auth somewhere else
+def api_cron_rescan_subdomains(sensor_key: str = None) -> None:
     valid_access = False
     if config.SensorCollector.KEY and sensor_key:
         valid_access = config.SensorCollector.KEY == sensor_key
