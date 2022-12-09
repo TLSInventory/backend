@@ -1,0 +1,12 @@
+.git
+.idea
+.pytest_cache
+.run
+.venvWindows
+.venv
+__pycache__
+tmp/*
+db/*
+log/*
+tests/artifacts/*
+tests/log/*
