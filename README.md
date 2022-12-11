@@ -3,22 +3,22 @@
 ![Test status: master](https://img.shields.io/github/workflow/status/TLSInventory/backend/requirements-and-pytest/master)
 [![codecov](https://codecov.io/gh/TLSInventory/backend/branch/master/graph/badge.svg?token=6VJCYR33LN)](https://codecov.io/gh/TLSInventory/backend)
 ![Python versions](https://img.shields.io/badge/Python%20versions-3.7-green)
-![Alpha status](https://img.shields.io/badge/-Alpha-orange)
 
 We aim to provide self-hosted tool that would allow for monitoring of (sub)domains for HTTPS certificate expiration, changes in TLS settings and notify in case of any problems or even proactively several days ahead, if technically possible.
 
-### Current status
+# Is TLSInventory right for me?
 
-We hope to (in due time) make this tool a worthy rival to ssllabs and to services that monitor websites for TLS problems. However, we're not there yet. We will for example need to
+Fairly recently the TLS configuration monitoring has become standard and many other projects are better suited for some specific use-cases:
 
-- rework the API (users with too many (sub)domains are getting unusably big API responses - they might even timeout)
-    - _Update: We've created v2 endpoints for the most problematic endpoints - scan history. The new endpoints return ~2-60x smaller raw responses, and we've also enabled compression in nginx, so that mostly solves the problem of size. The newly structured endpoints are at at least 25x faster for large datasets. And even the new v2 endpoint that we've made backwards compatible to v1 is at least 5x faster._
-- speed-up the import of scan results
-- improve the test coverage
-    - _Update: In the past 6 months we've added at least some tests for most critical components, with the notable exception of notifications. There is still more room for improvement - we will probably do more tests when we document the API for Swagger._
-- significantly improve the frontend (web interface) - we are currently presenting only a small fraction of the information that is being collected
+- System administrator (warning about upcoming certificate expiration) - e.g. [Uptime Kuma](https://github.com/louislam/uptime-kuma)
+- Detailed TLS monitoring with output to JSON (including "grade") - [SSLyze](https://github.com/nabla-c0d3/sslyze) (since version 5.0)
 
-We currently don't recommend using this project as the sole tool used for monitoring. Though adding it to your suite of tools might be a worthy inclusion (if you don't have too many (sub)domains (see bug above)).
+### We still have some unique features
+
+- Extremely efficient data storage for large volume of scans
+    - Scanning 1 million domains using SSLyze takes ~250 GB, TLSInventory deduplicates that data to ~50 GB
+    - Running the same scan twice, SSLyze would have ~500 GB, TLSInventory ~50.7 GB.
+- Data can be queried using SQL!
 
 If you are only interested in backend and are not afraid to interact with SQLite database, it can be a great tool for research purposeses as it can acquire complete TLS configuration for tens of thousands of websites per day and very efficiently store it in SQL database.
 
@@ -33,7 +33,7 @@ For information how to deploy this application check the [Docker repository](htt
 
 #### Requirements 
 
-Exactly Python 3.7.x is required until we upgrade to SSLyze 3.*
+Exactly Python 3.7.x is required - a limitation due to a dependency on SSLyze v2.6.
 Python packages are listed in file `requirements.txt`.
 
 ```bash
