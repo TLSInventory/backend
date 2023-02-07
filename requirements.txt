@@ -10,7 +10,7 @@ itsdangerous<2.0
 Flask<2.0
 MarkupSafe==2.0.1
 aiohttp==3.5.4
-cryptography==2.5 # from sslyze
+cryptography==39.0.1 # from sslyze
 
 # Version (mostly fixed) to avoid breaking changes (for example Flask 2.0)
 
